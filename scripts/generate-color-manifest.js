@@ -66,6 +66,9 @@ const CORE_CSS_PATH = "build/tier_1_core/css/variables.css";
 const THEME_CSS_PATHS = {
 	green: "build/tier_1_green/css/variables.css",
 	gold: "build/tier_1_gold/css/variables.css",
+	// Internal-only Storybook chrome theme -- see build-tokens.js's THEMES
+	// entry and internal/StorybookDS/*.stories.jsx.
+	storybook_ds: "build/tier_1_storybook_ds/css/variables.css",
 };
 const OUT_DIR = "tokens/generated";
 const OUT_PATH = `${OUT_DIR}/color-manifest.json`;
@@ -237,6 +240,7 @@ const manifest = {
 	tier2ThemeDiffs: {
 		green: buildTier2ThemeDiff(THEME_CSS_PATHS.green),
 		gold: buildTier2ThemeDiff(THEME_CSS_PATHS.gold),
+		storybook_ds: buildTier2ThemeDiff(THEME_CSS_PATHS.storybook_ds),
 	},
 };
 

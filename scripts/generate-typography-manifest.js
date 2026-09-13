@@ -170,6 +170,9 @@ const CORE_CSS_PATH = "build/tier_1_core/css/variables.css";
 const THEME_CSS_PATHS = {
 	green: "build/tier_1_green/css/variables.css",
 	gold: "build/tier_1_gold/css/variables.css",
+	// Internal-only Storybook chrome theme -- see build-tokens.js's THEMES
+	// entry and internal/StorybookDS/*.stories.jsx.
+	storybook_ds: "build/tier_1_storybook_ds/css/variables.css",
 };
 const OUT_DIR = "tokens/generated";
 const OUT_PATH = `${OUT_DIR}/typography-manifest.json`;
@@ -325,6 +328,7 @@ const manifest = {
 	fontWeightThemeDiffs: {
 		green: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.green),
 		gold: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.gold),
+		storybook_ds: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.storybook_ds),
 	},
 	compositeStyles: buildCompositeStyles(allNames),
 };

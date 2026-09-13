@@ -2,9 +2,29 @@
  * Mirrors ap_ds_storybook's .storybook/main.js: stories live next to their
  * components, staticDirs serves the generated token CSS so preview.jsx can
  * import it directly.
+ *
+ * INTERNAL-ONLY STORIES: package.json's "build-storybook" script is
+ * `npm run build && storybook build` -- npm sets `npm_lifecycle_event` to
+ * the currently-running script's name for that whole shell invocation
+ * (including "storybook build", spawned as its child process via `&&`),
+ * so it reliably reads "build-storybook" there and "storybook" during
+ * `npm run storybook` (dev). internal/[star][star]/[star].stories.jsx (see
+ * internal/StorybookDS/) lives OUTSIDE components/, so it's never swept
+ * up by the main glob below -- it's only added to `stories` at all when
+ * NOT running the public build, which is what `npm run deploy-storybook`
+ * publishes. This makes it structurally impossible for an internal-only
+ * story to end up in storybook-static/ or gh-pages, rather than relying
+ * on remembering not to deploy while one exists.
  */
+const isPublicBuild = process.env.npm_lifecycle_event === "build-storybook";
+
+const stories = ["../components/**/*.stories.@(js|jsx)"];
+if (!isPublicBuild) {
+	stories.push("../internal/**/*.stories.@(js|jsx)");
+}
+
 const config = {
-	stories: ["../components/**/*.stories.@(js|jsx)"],
+	stories,
 	addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
 	framework: {
 		name: "@storybook/react-vite",

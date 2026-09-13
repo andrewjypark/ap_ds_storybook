@@ -1,0 +1,49 @@
+/**
+ * Archivo SemiExpanded (tier_1_storybook_ds's font3) -- self-hosted
+ * @font-face declarations, same pattern as inter.css/ibm-plex-mono.css.
+ * Unlike Inter/IBM Plex Mono, this one WAS already installed locally
+ * (~/Library/Fonts/Archivo_SemiExpanded-*.ttf), which is exactly the
+ * kind of thing that makes a rendering bug invisible on the one machine
+ * that happens to have the font installed while breaking for anyone
+ * else (including a deployed site) -- same class of problem novela.css
+ * originally fixed, so this gets self-hosted too rather than left as a
+ * latent gap. Converted to .woff2 via fontTools, same as the others.
+ *
+ * WEIGHTS: matches the four numeric font-weight values font3 is
+ * actually used at across this project's font_weights_font_3 scale
+ * (100/300/400/500 -- see tokens.json's
+ * tier_1_storybook_ds.font_weights_font_3), not Archivo SemiExpanded's
+ * own full weight range.
+ */
+
+@font-face {
+	font-family: "Archivo SemiExpanded";
+	src: url("./Archivo_SemiExpanded-Thin.woff2") format("woff2");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Archivo SemiExpanded";
+	src: url("./Archivo_SemiExpanded-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Archivo SemiExpanded";
+	src: url("./Archivo_SemiExpanded-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Archivo SemiExpanded";
+	src: url("./Archivo_SemiExpanded-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}

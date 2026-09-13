@@ -254,6 +254,20 @@ const THEMES = [
 	{ name: "tier_1_core", sets: [], attrValue: "core", selector: ":root" },
 	{ name: "tier_1_green", sets: ["tier_1_green"], attrValue: "green", selector: '[data-theme="green"]' },
 	{ name: "tier_1_gold", sets: ["tier_1_gold"], attrValue: "gold", selector: '[data-theme="gold"]' },
+	// Internal-only: styles Storybook's own manager chrome (sidebar,
+	// headings, toolbar), not a real product theme. Deliberately NOT
+	// referenced by any $themes entry in Token Studio and not part of the
+	// public storySort tree -- see internal/StorybookDS/*.stories.jsx,
+	// which are excluded from `npm run build-storybook`/deploy (gated in
+	// .storybook/main.js) while still resolving through this exact same
+	// theme cross-product pipeline as Green/Gold, so its values are always
+	// the real, live-computed ones rather than hand-copied.
+	{
+		name: "tier_1_storybook_ds",
+		sets: ["tier_1_storybook_ds"],
+		attrValue: "storybook_ds",
+		selector: '[data-theme="storybook_ds"]',
+	},
 ];
 
 const VIEWPORTS = [

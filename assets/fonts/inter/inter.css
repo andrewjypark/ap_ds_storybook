@@ -1,0 +1,50 @@
+/**
+ * Inter (tier_1_storybook_ds's font1) -- self-hosted @font-face
+ * declarations, same reasoning/pattern as novela.css, twk-lausanne.css,
+ * etc: bundle the actual font files and declare them via @font-face with
+ * url() sources ONLY -- no local("Inter") fallback -- so rendering never
+ * depends on whether a viewer happens to have Inter installed as a
+ * system font. Inter isn't installed on this machine at all (unlike the
+ * project's other fonts, which were converted from files already in
+ * ~/Library/Fonts), so these four static weights were downloaded
+ * directly from Inter's own official repo (rsms/inter, docs/font-files/,
+ * OFL-licensed) -- already .woff2, no conversion needed.
+ *
+ * WEIGHTS: matches the four numeric font-weight values font1 is actually
+ * used at across this project's font_weights_font_1 scale (200/300/400/
+ * 500 -- see tokens.json's tier_1_storybook_ds.font_weights_font_1 and
+ * its Core-relative aliases into fontWeights_choices_text), not Inter's
+ * own full 9-weight range.
+ */
+
+@font-face {
+	font-family: "Inter";
+	src: url("./Inter-ExtraLight.woff2") format("woff2");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Inter";
+	src: url("./Inter-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Inter";
+	src: url("./Inter-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Inter";
+	src: url("./Inter-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}

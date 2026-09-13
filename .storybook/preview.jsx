@@ -8,6 +8,13 @@ import "../assets/fonts/basier-square-mono/basier-square-mono.css";
 import "../assets/fonts/nudica/nudica.css";
 import "../assets/fonts/quablo/quablo.css";
 import "../assets/fonts/bricolage-grotesque/bricolage-grotesque.css";
+// tier_1_storybook_ds's font1/font2/font3 -- internal-only theme (see
+// internal/StorybookDS/*.stories.jsx), imported globally here same as
+// every other font so it's available wherever `--ap-font-families-*`
+// resolves to it, not just on the internal pages themselves.
+import "../assets/fonts/inter/inter.css";
+import "../assets/fonts/ibm-plex-mono/ibm-plex-mono.css";
+import "../assets/fonts/archivo-semiexpanded/archivo-semiexpanded.css";
 import "../build/all-combinations/css/variables.css";
 import { TokenPreviewContext } from "../components/TokenPreviewContext.jsx";
 
