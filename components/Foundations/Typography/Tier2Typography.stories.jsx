@@ -10,7 +10,7 @@ import { CompositeStyles } from "./CompositeStyles.jsx";
  * and Gold reuse this exact same page, pinned to their own theme.
  */
 export default {
-	title: "Tokens/Tier 2: Semantic/Tier 2 - Core/Typography",
+	title: "Tier 2: Semantic Tokens/Tier 2 - Core/Typography",
 	parameters: {
 		layout: "padded",
 		docs: {

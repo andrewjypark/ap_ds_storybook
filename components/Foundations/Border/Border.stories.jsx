@@ -6,7 +6,7 @@ import { BorderScale } from "./BorderScale.jsx";
  * separate Green or Gold Tier 1 page -- this Core page covers all three.
  */
 export default {
-	title: "Tokens/Tier 1: Definitions/Tier 1 - Core/Border",
+	title: "Tier 1: Global Tokens/Tier 1 - Core/Border",
 };
 
 export const Border = { render: () => <BorderScale /> };

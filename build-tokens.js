@@ -216,14 +216,23 @@ const SETS_DIR = "tokens/sets";
 const raw = JSON.parse(fs.readFileSync("tokens.json", "utf-8"));
 
 fs.mkdirSync(SETS_DIR, { recursive: true });
+// `name` may contain a "/" (Token Studio set names can be nested, e.g.
+// "tier_3/buttons") -- mkdir the destination's own directory (not just
+// SETS_DIR itself) before writing, or a nested name's write throws ENOENT.
 function writeSet(name) {
 	const dest = `${SETS_DIR}/${name}.json`;
+	fs.mkdirSync(dest.slice(0, dest.lastIndexOf("/")), { recursive: true });
 	fs.writeFileSync(dest, JSON.stringify(raw[name] ?? {}, null, 2) + "\n");
 	return dest;
 }
 
-// Always-present base: shared primitives + tier-2 usage tokens.
-const BASE_SOURCE = [writeSet("tier_1_core"), writeSet("tier_2")];
+// Always-present base: shared primitives + tier-2 usage tokens + the Tier 3
+// button tokens ("tier_3/buttons" in Token Studio). Buttons have no
+// Core/Green/Gold theming yet (single mode, same as tier_2), so -- like
+// tier_2 -- they belong in every build rather than in THEMES/VIEWPORTS
+// below. Revisit once buttons get real per-theme color values (see the
+// project doc's Figma button audit for the open question).
+const BASE_SOURCE = [writeSet("tier_1_core"), writeSet("tier_2"), writeSet("tier_3/buttons")];
 
 /**
  * To add a new theme or viewport later:

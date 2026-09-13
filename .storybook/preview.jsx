@@ -92,30 +92,38 @@ const preview = {
 		},
 		options: {
 			storySort: {
-				// Mirrors Tier 1's own tree: Core first, then the two themes
-				// as their own pinned-theme pages -- for BOTH Tier 1:
-				// Definitions and Tier 2: Semantic. Tier 2 originally had no
-				// "Core" entry (only Green Tier 2/Gold Tier 2 existed,
-				// mirroring ap_ds_storybook not having a "Core Tier 2"), but
-				// that left the full, undiffed semantic list with nowhere to
-				// render -- Core is the base every theme diffs against, so
-				// it needs a page here just like Tier 1's does.
+				// Tier 1 and Tier 2 were originally nested under a shared
+				// "Tokens" group; ungrouped so each tier is its own top-level
+				// sidebar entry, a peer of Tier 3 rather than a child of a
+				// wrapper group. Mirrors Tier 1's own tree: Core first, then
+				// the two themes as their own pinned-theme pages -- for BOTH
+				// Tier 1: Global Tokens and Tier 2: Semantic Tokens. Tier 2
+				// originally had no "Core" entry (only Green Tier 2/Gold Tier 2
+				// existed, mirroring ap_ds_storybook not having a "Core Tier
+				// 2"), but that left the full, undiffed semantic list with
+				// nowhere to render -- Core is the base every theme diffs
+				// against, so it needs a page here just like Tier 1's does.
 				order: [
-					"Tokens",
+					"Tier 1: Global Tokens",
 					[
-						"Tier 1: Definitions",
-						[
-							// Pin Tier 1 - Core's own children too: without this, Color/
-							// Typography/Border fall back to alphabetical order (Border,
-							// Color, Typography), which is why Border used to show up first.
-							"Tier 1 - Core",
-							["Color", "Typography", "Border"],
-							"Tier 1 - Green",
-							"Tier 1 - Gold",
-						],
-						"Tier 2: Semantic",
-						["Tier 2 - Core", "Tier 2 - Green", "Tier 2 - Gold"],
+						// Pin Tier 1 - Core's own children too: without this, Color/
+						// Typography/Border fall back to alphabetical order (Border,
+						// Color, Typography), which is why Border used to show up first.
+						"Tier 1 - Core",
+						["Color", "Typography", "Border"],
+						"Tier 1 - Green",
+						"Tier 1 - Gold",
 					],
+					"Tier 2: Semantic Tokens",
+					["Tier 2 - Core", "Tier 2 - Green", "Tier 2 - Gold"],
+					// Tier 3: real, usable components (not token-definition pages) --
+					// see Button.stories.jsx. Previously nested under a shared
+					// "Components" group; now its own top-level entry with Button
+					// nested inside it. "Playground" is a planned follow-up page,
+					// not built yet (see the project doc's "Storybook presentation
+					// for Tier 3 buttons" section).
+					"Tier 3: Components",
+					["Button", ["Variations", "Playground"]],
 				],
 			},
 		},

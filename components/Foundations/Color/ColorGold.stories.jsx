@@ -5,7 +5,7 @@ import { makeTier1ColorStories } from "./tier1ColorStories.jsx";
  * and Gold Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tokens/Tier 1: Definitions/Tier 1 - Gold/Color",
+	title: "Tier 1: Global Tokens/Tier 1 - Gold/Color",
 	parameters: { layout: "padded" },
 };
 

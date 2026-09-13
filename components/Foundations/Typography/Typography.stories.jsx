@@ -10,7 +10,7 @@ import { FontFamilyScale } from "./FontFamilyScale.jsx";
  * Tier 1 and Gold Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tokens/Tier 1: Definitions/Tier 1 - Core/Typography",
+	title: "Tier 1: Global Tokens/Tier 1 - Core/Typography",
 	parameters: {
 		docs: {
 			description: {

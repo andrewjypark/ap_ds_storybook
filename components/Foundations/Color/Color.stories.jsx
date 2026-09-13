@@ -5,16 +5,13 @@ import { makeTier1ColorStories } from "./tier1ColorStories.jsx";
  * and Gold Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tokens/Tier 1: Definitions/Tier 1 - Core/Color",
-	parameters: {
-		layout: "padded",
-		docs: {
-			description: {
-				component:
-					"Live-computed color tokens for the Core theme. See 'Tier 1 - Green' / 'Tier 1 - Gold' for the same tokens pinned to those themes, or use the Theme toolbar dropdown to compare on this page directly.",
-			},
-		},
-	},
+	title: "Tier 1: Global Tokens/Tier 1 - Core/Color",
+	// No explicit docs.description.component override here -- falls back to
+	// the leading JSDoc comment above, same as ColorGreen.stories.jsx and
+	// ColorGold.stories.jsx already do. Previously had its own override text
+	// ("Live-computed color tokens for the Core theme...") that had drifted
+	// out of sync with the Green/Gold copy and was no longer accurate.
+	parameters: { layout: "padded" },
 };
 
 const stories = makeTier1ColorStories("core");

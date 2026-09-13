@@ -1,0 +1,172 @@
+.ap-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.375rem;
+	border-style: solid;
+	cursor: pointer;
+	box-sizing: border-box;
+	white-space: nowrap;
+	background: var(--btn-bg-default);
+	border-color: var(--btn-border-default);
+	color: var(--btn-text-default);
+}
+
+/* Real interaction -- skipped whenever a docs-only forceState is present
+   (see Button.jsx), so a swatch pinned to "hover" can't be knocked back to
+   its real default state by the reader's mouse leaving the element. */
+.ap-button:hover:not(:disabled):not([data-force-state]) {
+	background: var(--btn-bg-hover);
+	border-color: var(--btn-border-hover);
+	color: var(--btn-text-hover);
+}
+.ap-button:active:not(:disabled):not([data-force-state]) {
+	background: var(--btn-bg-active);
+	border-color: var(--btn-border-active);
+	color: var(--btn-text-active);
+}
+.ap-button:disabled {
+	background: var(--btn-bg-disabled);
+	border-color: var(--btn-border-disabled);
+	color: var(--btn-text-disabled);
+	cursor: not-allowed;
+}
+
+/* Docs-only: render a static state swatch without needing a real mouse
+   interaction (see Button.jsx's `forceState` prop doc comment). */
+.ap-button[data-force-state="hover"] {
+	background: var(--btn-bg-hover);
+	border-color: var(--btn-border-hover);
+	color: var(--btn-text-hover);
+}
+.ap-button[data-force-state="active"] {
+	background: var(--btn-bg-active);
+	border-color: var(--btn-border-active);
+	color: var(--btn-text-active);
+}
+.ap-button[data-force-state="disabled"] {
+	background: var(--btn-bg-disabled);
+	border-color: var(--btn-border-disabled);
+	color: var(--btn-text-disabled);
+	cursor: not-allowed;
+}
+
+.ap-button-label {
+	display: inline-block;
+}
+
+/* ---- Variations page layout ---- */
+
+.ap-button-section {
+	margin-bottom: 3rem;
+}
+
+.ap-button-section-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 0 0 0.5rem;
+}
+
+.ap-button-section-body {
+	display: flex;
+	gap: 2rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-button-section-copy {
+	flex: 1 1 260px;
+	min-width: 220px;
+	max-width: 420px;
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.ap-button-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-button-section-copy ul {
+	margin: 0.5rem 0 0;
+	padding-left: 1.1rem;
+}
+
+.ap-button-section-copy li {
+	margin-bottom: 0.5rem;
+}
+
+.ap-button-section-copy .ap-button-note {
+	margin-top: 0.75rem;
+	font-style: italic;
+	opacity: 0.8;
+}
+
+.ap-button-swatch-group {
+	flex: 2 1 420px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+.ap-button-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	min-width: 160px;
+}
+
+.ap-button-swatch-example {
+	display: flex;
+	align-items: center;
+	min-height: 3rem;
+}
+
+.ap-button-swatch-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	opacity: 0.7;
+}
+
+/* ---- Token readout (label / var name / value), same visual language as
+   Typography's composite-style-card readout row ---- */
+
+.ap-button-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.7rem;
+}
+
+.ap-button-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-button-readout-label {
+	opacity: 0.6;
+	min-width: 3.5rem;
+}
+
+.ap-button-readout-var {
+	opacity: 0.85;
+}
+
+.ap-button-readout-sep {
+	opacity: 0.4;
+}
+
+.ap-button-readout-value {
+	font-weight: 600;
+}
