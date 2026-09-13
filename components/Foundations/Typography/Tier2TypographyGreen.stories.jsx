@@ -10,7 +10,7 @@ import { CompositeStyles } from "./CompositeStyles.jsx";
  * FontFamilyScale.
  */
 export default {
-	title: "Tier 2: Semantic Tokens/Tier 2 - Green/Typography",
+	title: "Tier 2: Semantic Tokens/Tier 2 - Green_Theme/Typography",
 	parameters: {
 		layout: "padded",
 		docs: {

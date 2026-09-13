@@ -111,11 +111,11 @@ const preview = {
 						// Color, Typography), which is why Border used to show up first.
 						"Tier 1 - Core",
 						["Color", "Typography", "Border"],
-						"Tier 1 - Green",
-						"Tier 1 - Gold",
+						"Tier 1 - Green Theme",
+						"Tier 1 - Gold Theme",
 					],
 					"Tier 2: Semantic Tokens",
-					["Tier 2 - Core", "Tier 2 - Green", "Tier 2 - Gold"],
+					["Tier 2 - Core", "Tier 2 - Green Theme", "Tier 2 - Gold Theme"],
 					// Tier 3: real, usable components (not token-definition pages) --
 					// see Button.stories.jsx. Previously nested under a shared
 					// "Components" group; now its own top-level entry with Button

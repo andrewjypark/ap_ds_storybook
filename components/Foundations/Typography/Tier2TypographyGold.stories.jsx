@@ -7,7 +7,7 @@ import { CompositeStyles } from "./CompositeStyles.jsx";
  * compute here.
  */
 export default {
-	title: "Tier 2: Semantic Tokens/Tier 2 - Gold/Typography",
+	title: "Tier 2: Semantic Tokens/Tier 2 - Gold_Theme/Typography",
 	parameters: {
 		layout: "padded",
 		docs: {
