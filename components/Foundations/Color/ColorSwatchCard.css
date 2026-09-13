@@ -24,7 +24,7 @@
 	font-size: 0.75rem;
 	font-weight: 600;
 	text-transform: capitalize;
-	color: #737373;
+	color: var(--ap-tier-2-color-content-subtle);
 	margin-bottom: 0.5rem;
 }
 

@@ -100,7 +100,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	color: #1a1a1a;
+	color: var(--ap-tier-2-color-content-default);
 	transition: transform 0.15s ease;
 }
 

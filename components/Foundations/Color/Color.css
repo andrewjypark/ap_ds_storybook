@@ -10,12 +10,12 @@
 	   shorthand already sets them (and would just be overridden). */
 	font: var(--ap-tier-2-typography-title-default);
 	margin: 0 0 1rem;
-	color: #1a1a1a;
+	color: var(--ap-tier-2-color-content-default);
 }
 
 .ap-color-section__empty {
 	font-size: 13px;
-	color: #737373;
+	color: var(--ap-tier-2-color-content-subtle);
 	font-style: italic;
 	margin: 0;
 }
@@ -50,7 +50,7 @@
 	font-size: 0.75rem;
 	font-weight: 600;
 	text-transform: capitalize;
-	color: #737373;
+	color: var(--ap-tier-2-color-content-subtle);
 	/* margin-bottom: 0.5rem; */
 }
 
@@ -114,12 +114,12 @@
 }
 
 .ap-color-label-value {
-	color: #737373;
+	color: var(--ap-tier-2-color-content-subtle);
 }
 
 .ap-color-label-var {
 	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 	font-size: 0.75rem;
-	color: #8a8a8a;
+	color: var(--ap-tier-2-color-content-subtle);
 	white-space: nowrap;
 }
