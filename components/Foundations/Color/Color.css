@@ -4,8 +4,11 @@
 }
 
 .ap-color-section__title {
-	font-size: 18px;
-	font-weight: 700;
+	/* Test run: driven by the real Tier 2 composite typography token
+	   instead of hand-typed font-size/font-weight -- see the project doc
+	   for context. font-size/font-weight are dropped since the `font`
+	   shorthand already sets them (and would just be overridden). */
+	font: var(--ap-tier-2-typography-title-default);
 	margin: 0 0 1rem;
 	color: #1a1a1a;
 }

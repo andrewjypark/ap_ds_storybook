@@ -12,7 +12,21 @@ export function ColorScaleSection({ scale }) {
 	if (!scale) return null;
 	return (
 		<section className="ap-color-section">
-			<h3 className="ap-color-section__title">{scale.title}</h3>
+			{/* Test run: force this heading to resolve storybook_ds's Tier 2
+			    Title composite specifically, regardless of which theme this
+			    page/story is otherwise pinned to. CSS custom properties
+			    inherit down the tree, but a rule matching an element
+			    directly (this [data-theme][data-viewport] pair) wins over
+			    whatever it would've inherited from an ancestor -- so only
+			    this title switches to storybook_ds; the color swatches
+			    below still correctly show the ambient page's own theme. */}
+			<h3
+				className="ap-color-section__title"
+				data-theme="storybook_ds"
+				data-viewport="desktop"
+			>
+				{scale.title}
+			</h3>
 			<div className="ap-color-token-group">
 				{scale.families.map((family) => (
 					<ColorPalette key={family.name} label={family.name} items={family.items} />
