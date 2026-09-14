@@ -36,9 +36,18 @@ export function LetterSpacingCard({ label, cssVar }) {
 
 	return (
 		<div className="ap-type-token-swatch" ref={ref}>
-			<div className="ap-token-key">{label}</div>
-			<div className="ap-token-value">{liveValue || "…"}</div>
-			<div className="ap-type-token-var">{cssVar}</div>
+			{/* Readout text pinned to storybook_ds -- same pattern as
+			    FontSizeCard.jsx/ColorPalette.jsx. The specimen below keeps
+			    its own ref and no data-theme. */}
+			<div className="ap-token-key" data-theme="storybook_ds" data-viewport="desktop">
+				{label}
+			</div>
+			<div className="ap-token-value" data-theme="storybook_ds" data-viewport="desktop">
+				{liveValue || "…"}
+			</div>
+			<div className="ap-type-token-var" data-theme="storybook_ds" data-viewport="desktop">
+				{cssVar}
+			</div>
 			<div
 				className="ap-type-token-sample"
 				style={{

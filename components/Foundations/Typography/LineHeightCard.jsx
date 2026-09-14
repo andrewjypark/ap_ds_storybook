@@ -31,12 +31,20 @@ export function LineHeightCard({ font, headingName, cssVar }) {
 
 	return (
 		<div className="ap-type-token-swatch" ref={lineHeightRef}>
-			<div className="ap-type-token-heading-name">{headingName}</div>
-			<div className="ap-type-token-header">
+			{/* Readout text pinned to storybook_ds -- see FontSizeCard.jsx/
+			    ColorPalette.jsx for the same pattern. The specimen below
+			    keeps its own separate fontSizeRef and no data-theme, so it
+			    stays on this page's real theme. */}
+			<div className="ap-type-token-heading-name" data-theme="storybook_ds" data-viewport="desktop">
+				{headingName}
+			</div>
+			<div className="ap-type-token-header" data-theme="storybook_ds" data-viewport="desktop">
 				<span className="ap-type-token-label">{liveLineHeight || "…"}</span>
 				<span className="ap-type-token-var">{cssVar}</span>
 			</div>
-			<div className="ap-type-token-var">on {fontSizeVar} ({liveFontSize || "…"})</div>
+			<div className="ap-type-token-var" data-theme="storybook_ds" data-viewport="desktop">
+				on {fontSizeVar} ({liveFontSize || "…"})
+			</div>
 			<div
 				ref={fontSizeRef}
 				className="ap-type-token-sample ap-type-token-sample--leading"

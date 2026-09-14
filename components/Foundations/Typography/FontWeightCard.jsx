@@ -15,8 +15,13 @@ export function FontWeightCard({ tokenKey, cssVar }) {
 
 	return (
 		<div className="ap-type-token-swatch" ref={ref}>
-			<div className="ap-type-token-heading-name">{tokenKey}</div>
-			<div className="ap-type-token-header">
+			{/* No specimen on this card (see file header comment), so both
+			    text rows get the storybook_ds pin -- still not on the
+			    ref-bearing root, same reasoning as the other cards. */}
+			<div className="ap-type-token-heading-name" data-theme="storybook_ds" data-viewport="desktop">
+				{tokenKey}
+			</div>
+			<div className="ap-type-token-header" data-theme="storybook_ds" data-viewport="desktop">
 				<span className="ap-type-token-label">{liveValue || "…"}</span>
 				<span className="ap-type-token-var">{cssVar}</span>
 			</div>

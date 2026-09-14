@@ -46,10 +46,7 @@
 }
 
 .ap-color-palette-label {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 0.75rem;
-	font-weight: 600;
-	text-transform: capitalize;
+	font: var(--ap-tier-2-typography-label-xs);
 	color: var(--ap-tier-2-color-content-subtle);
 	/* margin-bottom: 0.5rem; */
 }
@@ -103,23 +100,23 @@
 }
 
 .ap-color-label-text {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 0.875rem;
-	white-space: nowrap;
+	display:flex;
+	flex-direction: row;
+	gap:.375rem;
 }
 
 .ap-color-label-step {
-	font-weight: 700;
-	margin-right: 0.375rem;
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	color: var(--ap-tier-2-color-content-default);
+
 }
 
 .ap-color-label-value {
+	font: var(--ap-tier-2-typography-body-sm);
 	color: var(--ap-tier-2-color-content-subtle);
 }
 
 .ap-color-label-var {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 0.75rem;
+	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-subtle);
-	white-space: nowrap;
 }

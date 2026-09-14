@@ -37,7 +37,13 @@ export function CompositeStyleCard({ itemKey, cssVar }) {
 
 	return (
 		<div className="ap-type-composite-card" ref={ref}>
-			<div className="ap-type-token-heading-name">{itemKey}</div>
+			{/* Readout heading pinned to storybook_ds -- same pattern as
+			    the other Typography cards. The sample below keeps its own
+			    ref and no data-theme, so it stays on this page's real
+			    theme's font. */}
+			<div className="ap-type-token-heading-name" data-theme="storybook_ds" data-viewport="desktop">
+				{itemKey}
+			</div>
 			<div
 				className="ap-type-composite-sample"
 				style={{
@@ -49,7 +55,7 @@ export function CompositeStyleCard({ itemKey, cssVar }) {
 			>
 				{SAMPLE_TEXT}
 			</div>
-			<div className="ap-type-composite-readout-row">
+			<div className="ap-type-composite-readout-row" data-theme="storybook_ds" data-viewport="desktop">
 				<span className="ap-type-composite-readout-label">font:</span>
 				<span className="ap-type-composite-readout-var">{cssVar}</span>
 				<span className="ap-type-composite-readout-sep">|</span>

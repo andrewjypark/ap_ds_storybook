@@ -20,14 +20,31 @@ import "./Color.css";
 export function ColorPalette({ label, items }) {
 	return (
 		<div className="ap-color-palette">
-			<div className="ap-color-palette-label">{label}</div>
+			{/* Text info (family label) pinned to storybook_ds -- see the
+			    data-theme/data-viewport pair on .ap-color-label-column
+			    below for why this is scoped here rather than per-leaf. */}
+			<div className="ap-color-palette-label" data-theme="storybook_ds" data-viewport="desktop">
+				{label}
+			</div>
 			<div className="ap-color-palette-body">
 				<div className="ap-color-tile-column">
 					{items.map((item) => (
 						<ColorTile key={item.cssVar} cssVar={item.cssVar} />
 					))}
 				</div>
-				<div className="ap-color-label-column">
+				{/* One pair of attributes here covers every ColorLabel below
+				    (step/hex value + CSS var name) via normal CSS custom
+				    property inheritance -- no need to touch ColorLabel or
+				    put the attributes on each item individually. The tile
+				    column above is untouched, so the actual swatch color
+				    keeps resolving against this page's real theme (e.g.
+				    Core) -- storybook_ds doesn't override these raw color
+				    tokens anyway (verified: identical hex in both builds),
+				    so this only affects which theme's FONT tokens these
+				    text nodes will pick up once storybook_ds fonts are
+				    applied to .ap-color-label-text/-var, not which color
+				    values are displayed. */}
+				<div className="ap-color-label-column" data-theme="storybook_ds" data-viewport="desktop">
 					{items.map((item) => (
 						<ColorLabel key={item.cssVar} cssVar={item.cssVar} step={item.step} />
 					))}

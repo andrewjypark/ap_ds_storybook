@@ -27,8 +27,14 @@ export function FontFamilyCard({ font, cssVar }) {
 
 	return (
 		<div className="ap-type-token-swatch" ref={ref}>
-			<div className="ap-type-token-heading-name">{font}</div>
-			<div className="ap-type-token-header">
+			{/* Readout text pinned to storybook_ds -- same pattern as
+			    FontSizeCard.jsx/ColorPalette.jsx. The specimen below keeps
+			    its own ref and no data-theme, so it keeps rendering in
+			    this page's real font family. */}
+			<div className="ap-type-token-heading-name" data-theme="storybook_ds" data-viewport="desktop">
+				{font}
+			</div>
+			<div className="ap-type-token-header" data-theme="storybook_ds" data-viewport="desktop">
 				<span className="ap-type-token-label">{liveValue || "…"}</span>
 				<span className="ap-type-token-var">{cssVar}</span>
 			</div>
