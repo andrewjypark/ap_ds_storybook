@@ -52,13 +52,12 @@
 }
 
 .ap-type-viewport-toggle-button {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 0.8125rem;
-	font-weight: 600;
+	font: var(--ap-tier-2-typography-body-sm);
+	letter-spacing: .4px;
 	color: var(--ap-tier-2-color-content-subtle);
-	background: #fff;
+	background: var(----ap-color-neutral-white);
 	border: none;
-	border-right: 1px solid #d4d4d4;
+	border-right: 1px solid var(--ap-tier-2-color-border-default);
 	padding: 0.4rem 0.9rem;
 	cursor: pointer;
 }
@@ -91,8 +90,7 @@
 }
 
 .ap-type-font-group-title {
-	font-size: 1.125rem;
-	font-weight: 700;
+	font: var(--ap-tier-2-typography-label-default);
 	color: var(--ap-tier-2-color-content-default);
 }
 
@@ -100,8 +98,25 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	width: 14px;
+	height:14px;
+	flex-shrink: 0;
 	color: var(--ap-tier-2-color-content-default);
 	transition: transform 0.15s ease;
+}
+
+/* The chevron SVGs (FontSizeFontGroup.jsx/LineHeightFontGroup.jsx/
+   CompositeStyleGroup.jsx) all hardcode width="12" height="12" as SVG
+   attributes -- CSS always wins over an SVG presentation attribute in the
+   cascade, so this rule overrides them without touching any of the three
+   duplicated icon components. The svg's viewBox (0 0 12 12) still defines
+   its internal coordinate system/aspect ratio, so scaling it to 100% of
+   the container just scales the whole icon proportionally -- resize
+   .ap-type-font-group-chevron above (16px here) and the SVG follows
+   automatically, no per-component changes needed. */
+.ap-type-font-group-chevron svg {
+	width: 100%;
+	height: 100%;
 }
 
 /* Collapsed state points UP (rotate 180deg from the default down-facing
@@ -125,6 +140,12 @@
 	min-width: 12rem;
 }
 
+.ap-type-token-header-group {
+	display: flex;
+	flex-direction: column;
+	gap:2px;
+}
+
 /* The heading-level name (e.g. "h1", "h2-lg") -- sits above the
    size/var row, unlike ap_ds_storybook's cards which have no equivalent
    grouping concept. font-family is set explicitly here (not just
@@ -133,9 +154,7 @@
    .ap-type-token-group instead, which doesn't set a font-family --
    without it those labels fall back to the browser's default serif. */
 .ap-type-token-heading-name {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 1rem;
-	font-weight: 500;
+	font: var(--ap-font1-heading-5-bold);
 	color: var(--ap-tier-2-color-content-default);
 } 
 
@@ -147,16 +166,14 @@
 }
 
 .ap-type-token-label {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 0.8rem;
-	font-weight: 600;
-	color: var(--ap-tier-2-color-content-subtle);
+	/* font: var(--ap-tier-2-typography-body-small-strong); */
+	font: var(--ap-tier-2-typography-body-xs);
+	color: var(--ap-tier-2-color-content-default);
 	white-space: nowrap;
 }
 
 .ap-type-token-var {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 0.8rem;
+	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-subtle);
 	white-space: nowrap;
 }
@@ -168,16 +185,12 @@
    border-specific class name. Rules are identical to Border's on
    purpose -- keep the two in sync if either changes. */
 .ap-token-key {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 1.25rem;
-	font-weight: 700;
+	font: var(--ap-font1-heading-5-lg-bold);
 	color: var(--ap-tier-2-color-content-default);
-	white-space: nowrap;
 }
 
 .ap-token-value {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 1rem;
+	font: var(--ap-tier-2-typography-body-lg);
 	color: var(--ap-tier-2-color-content-subtle);
 }
 
@@ -256,29 +269,22 @@
 }
 
 .ap-type-composite-readout-label {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 0.8rem;
-	font-weight: 400;
+	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-default);
 	white-space: nowrap;
 }
 
 .ap-type-composite-readout-var {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 0.8rem;
+	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-subtle);
-	white-space: nowrap;
 }
 
 .ap-type-composite-readout-sep {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 0.8rem;
+	font: var(--ap-font2-body-text-xs-regular);
 	color: #d4d4d4;
 }
 
 .ap-type-composite-readout-value {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 0.8rem;
-	font-weight: 400;
+	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-default);
 }

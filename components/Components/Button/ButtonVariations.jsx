@@ -13,8 +13,8 @@ import "./Button.css";
 function ButtonSwatch({ swatchLabel, rows, ...buttonProps }) {
 	const ref = useRef(null);
 	return (
-		<div className="ap-button-swatch">
-			<div className="ap-button-swatch-example">
+		<div className="ap-button-swatch" >
+			<div className="ap-button-swatch-example" data-theme="core" data-viewport="desktop">
 				<Button ref={ref} {...buttonProps} />
 			</div>
 			{swatchLabel && <div className="ap-button-swatch-label">{swatchLabel}</div>}
@@ -26,7 +26,7 @@ function ButtonSwatch({ swatchLabel, rows, ...buttonProps }) {
 function Section({ title, children }) {
 	return (
 		<section className="ap-button-section">
-			<h3 className="ap-button-section-title">{title}</h3>
+			<h3 className="ap-button-section-title" data-theme="storybook_ds" data-viewport="desktop">{title}</h3>
 			<div className="ap-button-section-body">{children}</div>
 		</section>
 	);
@@ -45,7 +45,7 @@ export function ButtonVariations() {
 	return (
 		<div>
 			<Section title="Size">
-				<div className="ap-button-section-copy">
+				<div className="ap-button-section-copy" data-theme="storybook_ds" data-viewport="desktop">
 					<p>
 						Control button size with the <code>size</code> prop.
 					</p>
@@ -61,11 +61,8 @@ export function ButtonVariations() {
 							<code>small</code> — fits into tighter UI elements like cards, table rows, and toolbars.
 						</li>
 					</ul>
-					<p className="ap-button-note">
-						No <code>tiny</code> step — the real Figma component's scale stops at Small.
-					</p>
 				</div>
-				<div className="ap-button-swatch-group">
+				<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
 					{SIZES.map((size) => (
 						<ButtonSwatch
 							key={size.key}
@@ -84,7 +81,7 @@ export function ButtonVariations() {
 			</Section>
 
 			<Section title="Priority">
-				<div className="ap-button-section-copy">
+				<div className="ap-button-section-copy" data-theme="storybook_ds" data-viewport="desktop">
 					<p>
 						Each button has a <code>priority</code> that signals its importance. Use it to create a clear visual
 						hierarchy across the actions on a page.
@@ -102,7 +99,7 @@ export function ButtonVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-button-swatch-group">
+				<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
 					{PRIORITIES.map((priority) => (
 						<ButtonSwatch
 							key={priority.key}
@@ -121,7 +118,7 @@ export function ButtonVariations() {
 			</Section>
 
 			<Section title="Border-Radius">
-				<div className="ap-button-section-copy">
+				<div className="ap-button-section-copy" data-theme="storybook_ds" data-viewport="desktop">
 					<p>
 						Control the corner treatment with the <code>radius</code> prop.
 					</p>
@@ -136,14 +133,8 @@ export function ButtonVariations() {
 							<code>lg</code> — fully rounded (pill-shaped); use for a softer, more casual brand moment.
 						</li>
 					</ul>
-					<p className="ap-button-note">
-						<code>sm</code> aliases to a real Tier 1 radius primitive (<code>border/radius/4</code>);{" "}
-						<code>lg</code> aliases to the Tier 1 "round" primitive — both go through the button-semantic layer
-						now (this was a gap in the earlier Figma audit; fixed in <code>tokens.json</code>, not yet re-bound
-						on the live Figma component).
-					</p>
 				</div>
-				<div className="ap-button-swatch-group">
+				<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
 					{RADII.map((radius) => (
 						<ButtonSwatch
 							key={radius.key}
@@ -158,7 +149,7 @@ export function ButtonVariations() {
 			</Section>
 
 			<Section title="Icons">
-				<div className="ap-button-section-copy">
+				<div className="ap-button-section-copy" data-theme="storybook_ds" data-viewport="desktop">
 					<p>
 						Buttons can show an icon on the left, right, both, or neither via the <code>showLeftIcon</code> /{" "}
 						<code>showRightIcon</code> booleans, independent of <code>showText</code>.
@@ -177,7 +168,7 @@ export function ButtonVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-button-swatch-group">
+				<div className="ap-button-swatch-group"  data-theme="storybook_ds" data-viewport="desktop">
 					<ButtonSwatch
 						swatchLabel="Text only"
 						priority="primary"
@@ -229,18 +220,14 @@ export function ButtonVariations() {
 			</Section>
 
 			<Section title="States">
-				<div className="ap-button-section-copy">
+				<div className="ap-button-section-copy" data-theme="storybook_ds" data-viewport="desktop">
 					<p>
 						Not a prop a user picks directly — shown here so it's clear Hover and Clicked have their own
 						token values (not just a brightness tweak) and to confirm what Disabled looks like. Held on one
 						representative button (Primary / Medium) rather than crossed with every other variant.
 					</p>
-					<p className="ap-button-note">
-						Figma's "Clicked" variant is this project's <code>active</code> state — same word Dev Mode's own
-						generated CSS var name uses.
-					</p>
 				</div>
-				<div className="ap-button-swatch-group">
+				<div className="ap-button-swatch-group"  data-theme="storybook_ds" data-viewport="desktop">
 					{STATES.map((state) => (
 						<ButtonSwatch
 							key={state.key}

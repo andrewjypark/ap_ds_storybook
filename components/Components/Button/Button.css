@@ -2,7 +2,11 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.375rem;
+	/* Figma's root frame has itemSpacing: 0 at every size (confirmed on
+	   the live "Button w Icon_052126" component, 2026-09-15) -- visual
+	   spacing between icon/text comes from .ap-button-text-container's
+	   own horizontal padding below, not a flex gap here. */
+	gap: 0;
 	border-style: solid;
 	cursor: pointer;
 	box-sizing: border-box;
@@ -55,6 +59,45 @@
 	display: inline-block;
 }
 
+/* Matches Figma's "button_text_container" layer -- a fixed-height row
+   with its own horizontal padding, set independently from the button's
+   outer padding on .ap-button itself. Width still hugs the label (Figma:
+   layoutSizingHorizontal HUG), so short/long labels don't get clipped or
+   over-padded. See Button.jsx and the project doc's button
+   layer-structure audit (2026-09-15). */
+.ap-button-text-container {
+	display: inline-flex;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+/* Matches Figma's "left_button_icon_container" / "right_button_icon_
+   container" layers -- a fixed-size slot (independent of the icon
+   glyph's own drawn size) that centers the icon inside it. */
+.ap-button-icon-container {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	box-sizing: border-box;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+/* The icon SVG hardcodes width/height="16" (see Icon.jsx) -- CSS always
+   wins over an SVG presentation attribute (same technique used for the
+   Typography font-group chevrons), so this resizes it to match the
+   container's width (the icon containers are narrower than they are
+   tall -- see the audit -- so sizing off height would stretch the icon
+   into a non-square shape). aspect-ratio keeps it square regardless of
+   the container's own, taller height; align-items on the container
+   above centers it vertically inside that extra height. */
+.ap-button-icon-container svg {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1;
+}
+
 /* ---- Variations page layout ---- */
 
 .ap-button-section {
@@ -62,24 +105,27 @@
 }
 
 .ap-button-section-title {
-	font-size: 1.25rem;
-	font-weight: 600;
-	margin: 0 0 0.5rem;
+	font:var(--ap-tier-2-typography-label-xs);
+
 }
 
 .ap-button-section-body {
 	display: flex;
-	gap: 2rem;
+	gap: 2.5rem;
 	align-items: flex-start;
 	flex-wrap: wrap;
 }
 
 .ap-button-section-copy {
-	flex: 1 1 260px;
-	min-width: 220px;
-	max-width: 420px;
-	font-size: 0.9rem;
-	line-height: 1.5;
+	/* flex-basis 40% + max-width cap, not a plain width -- with
+	   .ap-button-section-body's gap:2rem, a plain width:40%/60% split
+	   overflows the row (40% + 60% + 2rem > 100%) and forces an early
+	   wrap. flex-basis lets the flex algorithm account for the gap when
+	   sizing, and flex-grow:0 keeps this column from stretching past its
+	   basis/cap even when there's extra free space. */
+	flex: 0 1 40%;
+	max-width: 450px;
+	font:var(--ap-tier-2-typography-body-sm);
 }
 
 .ap-button-section-copy code {
@@ -105,13 +151,30 @@
 }
 
 .ap-button-swatch-group {
-	flex: 2 1 420px;
+	/* Grows to fill whatever space .ap-button-section-copy doesn't use
+	   (its 40% flex-basis capped at 370px), instead of a fixed 60% that
+	   would either overflow (with the row's gap:2rem) or leave a gap
+	   once .ap-button-section-copy hits its max-width. */
+	flex: 1 1 0%;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem;
 	padding: 1.25rem;
 	border: 1px solid rgba(127, 127, 127, 0.25);
 	border-radius: 8px;
+}
+
+/* Tablet and below (991px, per Andrew: 768px and down is "mobile",
+   991px and down is "tablet" -- matches the .storybook/preview.css
+   comment convention of naming breakpoints by the viewport they target)
+   -- stack copy and the swatch group into their own full-width rows
+   instead of sitting side by side. */
+@media (max-width: 991px) {
+	.ap-button-section-copy,
+	.ap-button-swatch-group {
+		flex: 1 1 100%;
+		max-width: none;
+	}
 }
 
 .ap-button-swatch {
@@ -129,11 +192,8 @@
 }
 
 .ap-button-swatch-label {
-	font-size: 0.75rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.03em;
-	opacity: 0.7;
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
 }
 
 /* ---- Token readout (label / var name / value), same visual language as
@@ -143,8 +203,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.15rem;
-	font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-	font-size: 0.7rem;
+	font: var(--ap-font2-body-text-xs-regular);
 }
 
 .ap-button-readout-row {
@@ -154,19 +213,46 @@
 	white-space: nowrap;
 }
 
+/* Wraps the var/sep/value trio as a unit, separate from the fixed-width
+   label -- long custom property names (e.g.
+   --ap-button-color-secondary-default-background) plus their value can
+   run wider than the available row, so this lets that group drop the
+   value (or sep+value) to a second line instead of overflowing. */
+.ap-button-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
 .ap-button-readout-label {
-	opacity: 0.6;
+	color: var(--ap-tier-2-color-content-default);
 	min-width: 3.5rem;
 }
 
 .ap-button-readout-var {
-	opacity: 0.85;
+	color: var(--ap-tier-2-color-content-subtle);
+	/* .ap-button-readout-row (an ancestor) sets white-space: nowrap, which
+	   is inherited here -- override it so this span can wrap at all.
+	   overflow-wrap/word-break then let it break mid-word (long custom
+	   property names have no spaces to wrap at otherwise). min-width: 0
+	   is the actual fix that makes wrapping kick in: this span is a flex
+	   item of .ap-button-readout-row-info, and flex items default to
+	   min-width: auto, which refuses to shrink narrower than the text's
+	   own unbroken width -- without this override the overflow-wrap
+	   rule never gets a chance to apply. */
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
 }
 
 .ap-button-readout-sep {
-	opacity: 0.4;
+	color: var(--ap-tier-2-color-content-subtle);
 }
 
 .ap-button-readout-value {
-	font-weight: 600;
+	font: var(--ap-font2-body-text-xs-regular);
+
+	color: var(--ap-tier-2-color-content-default);
 }

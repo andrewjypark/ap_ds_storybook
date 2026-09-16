@@ -19,7 +19,7 @@ export function ColorSwatchCard({ cssVar, name }) {
 				ref={ref}
 				style={{ backgroundColor: `var(${cssVar})` }}
 			/>
-			<div className="ap-color-swatch-card-info">
+			<div className="ap-color-swatch-card-info" data-theme="storybook_ds" data-viewport="desktop">
 				<div className="ap-color-swatch-card-header">
 					<span className="ap-color-swatch-card-name">{name}</span>
 					<span className="ap-color-swatch-card-hex">{liveValue || "…"}</span>

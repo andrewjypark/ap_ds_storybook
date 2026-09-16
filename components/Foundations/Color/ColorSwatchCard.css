@@ -11,6 +11,7 @@
 .ap-color-swatch-card-group {
 	display: flex;
 	flex-direction: column;
+	gap:20px;
 }
 
 /* Same properties as ap_ds_storybook's .color-palette-label (12px/600,
@@ -20,12 +21,9 @@
    provides that spacing via its own flex `gap` instead). Tier 2's card
    list isn't wrapped in .ap-color-palette, so it needs the margin here. */
 .ap-color-swatch-card-label {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-size: 0.75rem;
-	font-weight: 600;
-	text-transform: capitalize;
+	font: var(--ap-tier-2-typography-label-xs);
 	color: var(--ap-tier-2-color-content-subtle);
-	margin-bottom: 0.5rem;
+	/* margin-bottom: 0.5rem; */
 }
 
 .ap-color-swatch-card-list {
@@ -66,7 +64,7 @@
 .ap-color-swatch-card-info {
 	display: flex;
 	flex-direction: column;
-	gap: 0.35rem;
+	gap: .2rem;
 	padding: 0 0.5rem;
 	min-width: 0;
 }
@@ -80,28 +78,18 @@
 }
 
 .ap-color-swatch-card-name {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-weight: 500;
-	font-size: 0.875rem;
-	line-height: normal;
-	letter-spacing: normal;
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	color: var(--ap-tier-2-color-content-default);
+
 }
 
 .ap-color-swatch-card-hex {
-	font-family: -apple-system, system-ui, sans-serif;
-	font-weight: 400;
-	font-size: 0.875rem;
-	line-height: normal;
-	letter-spacing: normal;
-	color: var(--ap-color-neutral-600, #3d4247);
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-subtle);
+
 }
 
 .ap-color-swatch-card-var {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-weight: 400;
-	font-size: 0.75rem;
-	line-height: normal;
-	letter-spacing: normal;
-	color: var(--ap-color-neutral-500, #64696f);
-	word-break: break-all;
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-subtle);
 }

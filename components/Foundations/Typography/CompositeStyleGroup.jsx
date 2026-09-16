@@ -25,9 +25,16 @@ export function CompositeStyleGroup({ groupName, items }) {
 
 	return (
 		<div className="ap-type-font-group">
+			{/* One pair of attributes on the button covers both the group
+			    title and the chevron -- neither is a font specimen, and
+			    the card grid with the real specimens sits as a SIBLING
+			    below (inside {expanded && (...)}), not a descendant of
+			    this button, so it's untouched. */}
 			<button
 				type="button"
 				className="ap-type-font-group-header"
+				data-theme="storybook_ds"
+				data-viewport="desktop"
 				onClick={() => setExpanded((prev) => !prev)}
 				aria-expanded={expanded}
 			>

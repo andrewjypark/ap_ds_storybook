@@ -70,15 +70,59 @@ export const Button = React.forwardRef(function Button(
 				borderRadius: `var(${buttonVar.radius(radius)})`,
 				borderWidth: `var(${buttonVar.borderWidth(1)})`,
 				minWidth: `var(${buttonVar.minWidth(size)})`,
-				paddingBlock: `var(${buttonVar.padding(size)})`,
-				paddingInline: `var(${buttonVar.textPaddingHorizontal(size)})`,
+				// Figma's root frame pads all four sides equally with the
+				// SAME value (see the button layer-structure audit) -- the
+				// old code split this into paddingBlock/paddingInline using
+				// two DIFFERENT tokens, which conflated the root's own
+				// padding with button_text_container's separate inner
+				// padding. Uniform padding here; the text container below
+				// now owns its own horizontal inset.
+				padding: `var(${buttonVar.padding(size)})`,
 				font: `var(${buttonVar.text(size)})`,
 			}}
 			{...rest}
 		>
-			{showLeftIcon && <Icon size={14} />}
-			{showText && <span className="ap-button-label">{children}</span>}
-			{showRightIcon && <Icon size={14} />}
+			{/* left_button_icon_container / right_button_icon_container from
+			    Figma -- previously collapsed into a bare <Icon>, so the
+			    fixed per-size icon slot (width/height, independent of the
+			    icon glyph's own drawn size) had nowhere to live. */}
+			{showLeftIcon && (
+				<span
+					className="ap-button-icon-container"
+					style={{
+						width: `var(${buttonVar.iconWidth(size)})`,
+						height: `var(${buttonVar.iconHeight(size)})`,
+					}}
+				>
+					<Icon />
+				</span>
+			)}
+			{/* button_text_container from Figma -- a fixed-height row with
+			    its own horizontal padding, independent from the button's
+			    outer padding above. Previously collapsed into a bare
+			    <span className="ap-button-label">. */}
+			{showText && (
+				<span
+					className="ap-button-text-container"
+					style={{
+						height: `var(${buttonVar.textContainerHeight(size)})`,
+						paddingInline: `var(${buttonVar.textPaddingHorizontal(size)})`,
+					}}
+				>
+					<span className="ap-button-label">{children}</span>
+				</span>
+			)}
+			{showRightIcon && (
+				<span
+					className="ap-button-icon-container"
+					style={{
+						width: `var(${buttonVar.iconWidth(size)})`,
+						height: `var(${buttonVar.iconHeight(size)})`,
+					}}
+				>
+					<Icon />
+				</span>
+			)}
 		</button>
 	);
 });

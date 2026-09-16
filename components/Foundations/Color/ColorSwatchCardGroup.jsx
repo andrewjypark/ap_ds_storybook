@@ -11,7 +11,7 @@ import "./ColorSwatchCard.css";
 export function ColorSwatchCardGroup({ label, items }) {
 	return (
 		<div className="ap-color-swatch-card-group">
-			{label ? <div className="ap-color-swatch-card-label">{label}</div> : null}
+			{label ? <div className="ap-color-swatch-card-label" data-theme="storybook_ds" data-viewport="desktop">{label}</div> : null}
 			<div className="ap-color-swatch-card-list">
 				{items.map((item) => (
 					<ColorSwatchCard key={item.cssVar} cssVar={item.cssVar} name={item.label} />

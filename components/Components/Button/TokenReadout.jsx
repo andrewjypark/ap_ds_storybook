@@ -46,9 +46,11 @@ export function TokenReadout({ targetRef, rows }) {
 			{rows.map((row) => (
 				<div className="ap-button-readout-row" key={row.cssVar}>
 					<span className="ap-button-readout-label">{row.label}</span>
-					<span className="ap-button-readout-var">{row.cssVar}</span>
-					<span className="ap-button-readout-sep">|</span>
-					<span className="ap-button-readout-value">{values[row.cssVar] || "…"}</span>
+					<div className="ap-button-readout-row-info">
+						<span className="ap-button-readout-var">{row.cssVar}</span>
+						<span className="ap-button-readout-sep">|</span>
+						<span className="ap-button-readout-value">{values[row.cssVar] || "…"}</span>
+					</div>
 				</div>
 			))}
 		</div>

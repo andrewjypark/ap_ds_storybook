@@ -38,12 +38,14 @@ export function LineHeightCard({ font, headingName, cssVar }) {
 			<div className="ap-type-token-heading-name" data-theme="storybook_ds" data-viewport="desktop">
 				{headingName}
 			</div>
-			<div className="ap-type-token-header" data-theme="storybook_ds" data-viewport="desktop">
-				<span className="ap-type-token-label">{liveLineHeight || "…"}</span>
-				<span className="ap-type-token-var">{cssVar}</span>
-			</div>
-			<div className="ap-type-token-var" data-theme="storybook_ds" data-viewport="desktop">
-				on {fontSizeVar} ({liveFontSize || "…"})
+			<div className="ap-type-token-header-group" data-theme="storybook_ds" data-viewport="desktop">
+				<div className="ap-type-token-header" data-theme="storybook_ds" data-viewport="desktop">
+					<span className="ap-type-token-label">{liveLineHeight || "…"}</span>
+					<span className="ap-type-token-var">{cssVar}</span>
+				</div>
+				<div className="ap-type-token-var" data-theme="storybook_ds" data-viewport="desktop">
+					on {fontSizeVar} ({liveFontSize || "…"})
+				</div>
 			</div>
 			<div
 				ref={fontSizeRef}

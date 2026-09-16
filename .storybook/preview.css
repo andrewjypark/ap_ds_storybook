@@ -1,0 +1,22 @@
+/*
+ * Padding for the top-level canvas wrapper every story renders inside
+ * (see withTokenAttributes in preview.jsx) -- moved out of an inline
+ * style into a real class so it can be overridden by a media query.
+ * Inline styles win over any plain CSS selector regardless of
+ * specificity, so `style={{ padding: "1.5rem" }}` could never be
+ * narrowed down for small viewports without either !important or, as
+ * done here, dropping the inline style in favor of a class.
+ *
+ * Breakpoint: 768px and below is "mobile" per Andrew's own cutoff --
+ * matches the point where cramped 1.5rem side padding starts eating too
+ * much of the available width on a phone-sized screen.
+ */
+.ap-storybook-canvas {
+	padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+	.ap-storybook-canvas {
+		padding: 0.5rem;
+	}
+}

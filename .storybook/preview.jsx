@@ -16,6 +16,7 @@ import "../assets/fonts/inter/inter.css";
 import "../assets/fonts/ibm-plex-mono/ibm-plex-mono.css";
 import "../assets/fonts/archivo-semiexpanded/archivo-semiexpanded.css";
 import "../build/all-combinations/css/variables.css";
+import "./preview.css";
 import { TokenPreviewContext } from "../components/TokenPreviewContext.jsx";
 
 /**
@@ -60,7 +61,11 @@ const withTokenAttributes = (Story, context) => {
 	const viewport = "desktop";
 	return (
 		<TokenPreviewContext.Provider value={{ theme, viewport }}>
-			<div data-theme={theme} data-viewport={viewport} style={{ padding: "1.5rem" }}>
+			{/* .ap-storybook-canvas (./preview.css) carries this wrapper's
+			    padding -- 1.5rem by default, 0.5rem at <=768px via a media
+			    query -- as a real class instead of an inline style, since an
+			    inline style can't be narrowed by a media query. */}
+			<div data-theme={theme} data-viewport={viewport} className="ap-storybook-canvas">
 				<Story />
 			</div>
 		</TokenPreviewContext.Provider>
