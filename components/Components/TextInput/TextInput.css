@@ -1,0 +1,266 @@
+.ap-text-input {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+	width: 300px;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.ap-text-input-title-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	font: var(--ap-text-input-label-text);
+	color: var(--ap-text-input-color-label);
+}
+
+.ap-text-input-title {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.ap-text-input-title-icon {
+	display: inline-flex;
+	color: var(--ap-text-input-color-description);
+}
+
+.ap-text-input-title-icon svg {
+	width: var(--ap-text-input-icon-field-title-width);
+	height: var(--ap-text-input-icon-field-title-height);
+}
+
+.ap-text-input-form-field {
+	display: flex;
+	align-items: center;
+	gap: var(--ap-text-input-gap);
+	padding: var(--ap-text-input-padding-vertical) var(--ap-text-input-padding-horizontal);
+	box-sizing: border-box;
+	border-style: solid;
+	border-width: var(--ap-text-input-border-width-default);
+	border-color: var(--ap-text-input-color-border-default);
+	border-radius: var(--ap-text-input-border-radius);
+	background: var(--ap-text-input-color-background);
+}
+
+/* Text Area's Form Field aligns its slots/prefix to the top instead of
+   centering, since the field itself grows taller than a single line
+   (matches the real Figma "State=*, Type=Text Area" variants). */
+.ap-text-input-form-field:has(textarea) {
+	align-items: flex-start;
+}
+
+.ap-text-input-field {
+	flex: 1 1 auto;
+	min-width: 0;
+	border: none;
+	outline: none;
+	background: transparent;
+	font: var(--ap-text-input-text);
+	color: var(--ap-text-input-color-text);
+	resize: none;
+}
+
+/* Textarea variant re-enables resizing (vertical only, matching Figma's
+   own corner-resize affordance on the "Text Area" type) -- off by
+   default above since a single-line <input> has nothing to resize. */
+textarea.ap-text-input-field {
+	resize: vertical;
+	min-height: 3.5rem;
+}
+
+.ap-text-input-field::placeholder {
+	color: var(--ap-text-input-color-description);
+	opacity: 1;
+}
+
+.ap-text-input-prefix {
+	font: var(--ap-text-input-text);
+	color: var(--ap-text-input-color-description);
+	white-space: nowrap;
+}
+
+.ap-text-input-slot-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: var(--ap-text-input-icon-slot-width);
+	height: var(--ap-text-input-icon-slot-height);
+	padding: 0;
+	border: none;
+	background: transparent;
+	color: var(--ap-text-input-color-description);
+	cursor: pointer;
+}
+
+.ap-text-input-slot-icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.ap-text-input-description {
+	font: var(--ap-text-input-label-text);
+	color: var(--ap-text-input-color-description);
+}
+
+/* ---- States ----
+   Precedence, low to high: base (Default) < real Active (:focus-within)
+   < real Filled (:has a value) < docs-only forceState swatches < Error
+   (real `error` prop OR forced) -- Error is declared last on purpose so
+   it always wins visually, even while a field is focused or has a value,
+   matching how validation errors normally stay visible while someone's
+   still typing to fix them. */
+
+.ap-text-input:not([data-force-state]):not([data-error]) .ap-text-input-form-field:focus-within {
+	border-color: var(--ap-text-input-color-border-active);
+	border-width: var(--ap-text-input-border-width-active);
+}
+
+.ap-text-input:not([data-force-state]):not([data-error])
+	.ap-text-input-form-field:has(.ap-text-input-field:not(:placeholder-shown)):not(:focus-within) {
+	border-color: var(--ap-text-input-color-border-filled);
+}
+
+/* Docs-only: render a static state swatch without needing real focus or a
+   real value typed in (see TextInput.jsx's `forceState` prop doc comment). */
+.ap-text-input[data-force-state="active"] .ap-text-input-form-field {
+	border-color: var(--ap-text-input-color-border-active);
+	border-width: var(--ap-text-input-border-width-active);
+}
+.ap-text-input[data-force-state="filled"] .ap-text-input-form-field {
+	border-color: var(--ap-text-input-color-border-filled);
+}
+
+.ap-text-input[data-force-state="error"] .ap-text-input-form-field,
+.ap-text-input[data-error] .ap-text-input-form-field {
+	border-color: var(--ap-text-input-color-border-error);
+	border-width: var(--ap-text-input-border-width-error);
+}
+
+/* ---- Variations page layout ----
+   Same copy/swatch-group pattern (and the same 991px tablet stacking
+   breakpoint) as Button.css's own Variations-page layout section --
+   kept as its own self-contained copy here rather than shared, matching
+   this codebase's one-CSS-file-per-component convention. */
+
+.ap-text-input-section {
+	margin-bottom: 3rem;
+}
+
+.ap-text-input-section-title {
+	font: var(--ap-tier-2-typography-label-xs);
+}
+
+.ap-text-input-section-body {
+	display: flex;
+	gap: 2.5rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-text-input-section-copy {
+	flex: 0 1 40%;
+	max-width: 450px;
+	font: var(--ap-tier-2-typography-body-sm);
+}
+
+.ap-text-input-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-text-input-section-copy ul {
+	margin: 0.5rem 0 0;
+	padding-left: 1.1rem;
+}
+
+.ap-text-input-section-copy li {
+	margin-bottom: 0.5rem;
+}
+
+.ap-text-input-section-copy .ap-text-input-note {
+	margin-top: 0.75rem;
+	font-style: italic;
+	opacity: 0.8;
+}
+
+.ap-text-input-swatch-group {
+	flex: 1 1 0%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+@media (max-width: 991px) {
+	.ap-text-input-section-copy,
+	.ap-text-input-swatch-group {
+		flex: 1 1 100%;
+		max-width: none;
+	}
+}
+
+.ap-text-input-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.ap-text-input-swatch-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* ---- Token readout (label / var name / value) -- same visual language
+   as Button's readout / Typography's composite-style-card readout row ---- */
+
+.ap-text-input-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font: var(--ap-font2-body-text-xs-regular);
+}
+
+.ap-text-input-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-text-input-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
+.ap-text-input-readout-label {
+	color: var(--ap-tier-2-color-content-default);
+	min-width: 3.5rem;
+}
+
+.ap-text-input-readout-var {
+	color: var(--ap-tier-2-color-content-subtle);
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
+
+.ap-text-input-readout-sep {
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-text-input-readout-value {
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-default);
+}

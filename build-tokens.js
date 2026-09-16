@@ -232,7 +232,14 @@ function writeSet(name) {
 // tier_2 -- they belong in every build rather than in THEMES/VIEWPORTS
 // below. Revisit once buttons get real per-theme color values (see the
 // project doc's Figma button audit for the open question).
-const BASE_SOURCE = [writeSet("tier_1_core"), writeSet("tier_2"), writeSet("tier_3/buttons")];
+const BASE_SOURCE = [
+	writeSet("tier_1_core"),
+	writeSet("tier_2"),
+	writeSet("tier_3/buttons"),
+	// Text Input has no Core/Green/Gold theming yet either (single mode,
+	// same reasoning as buttons above) -- belongs in every build.
+	writeSet("tier_3/text-input"),
+];
 
 /**
  * To add a new theme or viewport later:

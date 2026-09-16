@@ -1280,6 +1280,27 @@
   --ap-button-min-width-small: 32px;
   --ap-button-min-width-medium: 40px;
   --ap-button-min-width-large: 48px;
+  --ap-text-input-color-background: #ffffff;
+  --ap-text-input-color-border-default: #23272b;
+  --ap-text-input-color-border-active: #2c1a73;
+  --ap-text-input-color-border-filled: #23272b;
+  --ap-text-input-color-border-error: #660a00;
+  --ap-text-input-color-text: #23272b;
+  --ap-text-input-color-label: #23272b;
+  --ap-text-input-color-description: #64696f;
+  --ap-text-input-border-width-default: 0.5px;
+  --ap-text-input-border-width-active: 1px;
+  --ap-text-input-border-width-error: 1px;
+  --ap-text-input-border-radius: 3px;
+  --ap-text-input-padding-horizontal: 15px;
+  --ap-text-input-padding-vertical: 10px;
+  --ap-text-input-gap: 10px;
+  --ap-text-input-text: 300 14px/20px 'TWK Lausanne';
+  --ap-text-input-label-text: 300 12px/17px 'TWK Lausanne';
+  --ap-text-input-icon-field-title-width: 14px;
+  --ap-text-input-icon-field-title-height: 14px;
+  --ap-text-input-icon-slot-width: 22px;
+  --ap-text-input-icon-slot-height: 22px;
 }
 
 :root {
