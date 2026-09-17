@@ -1,18 +1,20 @@
 import React from "react";
-import { FaCirclePlus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 
 /**
- * Real icon for the button's default left/right icon slot -- the real
- * Figma component's icon slot is an instance-swappable Font Awesome
- * "circle-plus" (per the project doc's Figma button audit).
+ * Real icon for the button's default left/right icon slot.
  *
- * Project convention (see components/Components/Icon/ "About" section):
- * default to Font Awesome's REGULAR (outline) style, falling back to
- * SOLID only when Font Awesome Free doesn't ship a Regular cut of that
- * glyph. "circle-plus" is one of those exceptions -- react-icons/fa6 has
- * no `FaRegCirclePlus` (Regular only covers a fixed ~164-icon subset,
- * mostly "content" glyphs like star/heart/envelope, not UI-chrome icons
- * like this one) -- so this one is Solid out of necessity, not choice.
+ * The real Figma component's icon slot is instance-swappable and was
+ * originally documented (per the project doc's Figma button audit) as
+ * Font Awesome "circle-plus." We moved off that glyph deliberately: Font
+ * Awesome Free has no Regular/outline cut of circle-plus (or of
+ * square-plus, the next-closest shape), so any "add" icon built on a
+ * circle or square would be stuck Solid. The bare plus mark (`FaPlus`)
+ * has no background shape to fill or outline in the first place -- it's
+ * just the cross itself -- so it reads as a light/outline-weight icon
+ * without needing a "Regular" variant at all. There's no separate
+ * `FaRegPlus`; `FaPlus` is the only cut, and it's this project's default
+ * "add" icon going forward.
  *
  * .ap-button-icon-container's own CSS (Button.css) already forces the
  * rendered svg to 100% of its fixed-size container, so no size prop is
@@ -20,5 +22,5 @@ import { FaCirclePlus } from "react-icons/fa6";
  * (same reasoning as TextInput/Icon.jsx and CodeBlock.jsx's icons).
  */
 export function Icon() {
-	return <FaCirclePlus aria-hidden="true" focusable="false" />;
+	return <FaPlus aria-hidden="true" focusable="false" />;
 }

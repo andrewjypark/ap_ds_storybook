@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Plus icon options</title>
+<style>
+  :root {
+    --purple: #5b5fc0;
+    --ink: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: #fff;
+    margin: 0;
+    padding: 40px 32px;
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+  p.sub {
+    color: var(--muted);
+    margin: 0 0 32px;
+    font-size: 14px;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+  .row {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .glyph {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple);
+  }
+  .glyph svg { width: 48px; height: 48px; }
+  .label {
+    text-align: center;
+    font-size: 13px;
+  }
+  .label .name {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .label .style {
+    display: block;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .tag {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag.current { background: #eef2ff; color: var(--purple); }
+  .tag.proposed { background: #ecfdf3; color: #067647; }
+
+  h2 {
+    font-size: 15px;
+    margin: 0 0 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+  }
+  .btn-row { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+  .btn-card { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--purple);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .btn-caption { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+  <h1>Plus icon: Solid vs. outline options</h1>
+  <p class="sub">
+    Font Awesome Free has no outline ("Regular") cut of circle-plus — only Solid.
+    Here's the current icon next to the outline alternatives that do exist.
+  </p>
+
+  <div class="row">
+    <div class="card">
+      <div class="glyph">
+        <svg viewBox="0 0 512 512" fill="currentColor"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
+      </div>
+      <div class="label">
+        <span class="name">FaCirclePlus</span>
+        <span class="style">circle, filled</span>
+      </div>
+      <span class="tag current">current</span>
+    </div>
+
+    <div class="card">
+      <div class="glyph">
+        <svg viewBox="0 0 448 512" fill="currentColor"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
+      </div>
+      <div class="label">
+        <span class="name">FaSquarePlus</span>
+        <span class="style">square, filled</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="glyph">
+        <svg viewBox="0 0 448 512" fill="currentColor"><path d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
+      </div>
+      <div class="label">
+        <span class="name">FaRegSquarePlus</span>
+        <span class="style">square, outline</span>
+      </div>
+      <span class="tag proposed">outline option</span>
+    </div>
+  </div>
+
+  <h2>In context (approximate button styling)</h2>
+  <div class="btn-row">
+    <div class="btn-card">
+      <div class="btn">
+        <svg viewBox="0 0 512 512" fill="currentColor"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
+        Button
+      </div>
+      <span class="btn-caption">current — FaCirclePlus (solid)</span>
+    </div>
+    <div class="btn-card">
+      <div class="btn">
+        <svg viewBox="0 0 448 512" fill="currentColor"><path d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
+        Button
+      </div>
+      <span class="btn-caption">option — FaRegSquarePlus (outline)</span>
+    </div>
+  </div>
+
+</body>
+</html>

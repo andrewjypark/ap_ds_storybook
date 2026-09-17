@@ -295,8 +295,11 @@ export function IconVariations() {
 					<p>Real Font Awesome 6 icons already back other Tier 3 components' icon slots:</p>
 					<ul>
 						<li>
-							<strong>Button</strong> — its default left/right icon slot renders <code>FaCirclePlus</code>{" "}
-							(Solid — no Regular cut exists for circle-plus), matching the real Figma component's own icon
+							<strong>Button</strong> — its default left/right icon slot renders <code>FaPlus</code>, a
+							bare plus mark. The real Figma component's icon slot was originally documented as
+							circle-plus, but Font Awesome Free has no Regular cut of circle-plus or square-plus, so we
+							moved to the bare plus mark instead -- it has no background shape to fill or outline, so it
+							reads as outline-weight without needing a <code>FaReg</code> variant at all
 							(see <a href="?path=/docs/tier-3-components-button-variations--docs">Button → Variations</a>).
 						</li>
 						<li>
@@ -312,7 +315,7 @@ export function IconVariations() {
 				</div>
 				<div className="ap-icon-section-example">
 					<div className="ap-icon-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-						<IconSwatch swatchLabel="Button (default)" icon={FaCirclePlus} size="medium" />
+						<IconSwatch swatchLabel="Button (default)" icon={FaPlus} size="medium" />
 						<IconSwatch swatchLabel="Text Input (title)" icon={FaCircleInfo} size="small" />
 						<IconSwatch swatchLabel="Text Input (left slot)" icon={FaRegTrashCan} size="small" />
 						<IconSwatch swatchLabel="Text Input (right slot)" icon={FaRegPenToSquare} size="small" />
