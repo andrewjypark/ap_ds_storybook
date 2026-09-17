@@ -239,6 +239,13 @@ const BASE_SOURCE = [
 	// Text Input has no Core/Green/Gold theming yet either (single mode,
 	// same reasoning as buttons above) -- belongs in every build.
 	writeSet("tier_3/text-input"),
+	// Shared icon-size scale (small/medium/large) backing the new
+	// react-icons-based <Icon> component -- also un-themed, belongs in
+	// every build same as buttons/text-input above.
+	writeSet("tier_3/icon"),
+	// Segment Group has no Core/Green/Gold theming yet either (single mode,
+	// same reasoning as buttons/text-input above) -- belongs in every build.
+	writeSet("tier_3/segment-group"),
 ];
 
 /**

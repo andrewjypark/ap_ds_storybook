@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Button } from "./Button.jsx";
 import { TokenReadout } from "./TokenReadout.jsx";
+import { CodeBlock } from "../CodeBlock.jsx";
 import { SIZES, PRIORITIES, RADII, STATES, buttonVar } from "./buttonTokens.js";
 import "./Button.css";
 
@@ -40,6 +41,17 @@ function Section({ title, children }) {
  * presentation for Tier 3 buttons" section). A separate "Playground" page
  * (Storybook argTypes + Controls, per Andrew's other notes) is a follow-up,
  * not built here.
+ *
+ * Each section's swatch group is followed by a CodeBlock (see
+ * ../CodeBlock.jsx) -- a Copy button plus a Show code/Hide code toggle
+ * revealing the exact usage snippet for what's rendered above it, same
+ * pattern as the Wix reference page. The States section is the one
+ * exception: its code sample deliberately does NOT show the `forceState`
+ * prop used to render those swatches, since forceState is a docs-only
+ * escape hatch (see Button.jsx) and was never meant for real usage --
+ * showing it as copyable "real" code would be actively misleading. The
+ * real story for that section is that Hover/Clicked need no prop at all
+ * (they're just :hover/:active) and Disabled is the only one you set.
  */
 export function ButtonVariations() {
 	return (
@@ -62,21 +74,30 @@ export function ButtonVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					{SIZES.map((size) => (
-						<ButtonSwatch
-							key={size.key}
-							swatchLabel={size.label}
-							priority="primary"
-							size={size.key}
-							radius="sm"
-							rows={[
-								{ label: "min-width", cssVar: buttonVar.minWidth(size.key) },
-								{ label: "padding", cssVar: buttonVar.padding(size.key) },
-								{ label: "font", cssVar: buttonVar.text(size.key) },
-							]}
-						/>
-					))}
+				<div className="ap-button-section-example">
+					<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						{SIZES.map((size) => (
+							<ButtonSwatch
+								key={size.key}
+								swatchLabel={size.label}
+								priority="primary"
+								size={size.key}
+								radius="sm"
+								rows={[
+									{ label: "min-width", cssVar: buttonVar.minWidth(size.key) },
+									{ label: "padding", cssVar: buttonVar.padding(size.key) },
+									{ label: "font", cssVar: buttonVar.text(size.key) },
+								]}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={[
+							'<Button size="large">Button</Button>',
+							'<Button size="medium">Button</Button>',
+							'<Button size="small">Button</Button>',
+						].join("\n")}
+					/>
 				</div>
 			</Section>
 
@@ -99,21 +120,30 @@ export function ButtonVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					{PRIORITIES.map((priority) => (
-						<ButtonSwatch
-							key={priority.key}
-							swatchLabel={priority.label}
-							priority={priority.key}
-							size="medium"
-							radius="sm"
-							rows={[
-								{ label: "bg", cssVar: buttonVar.color(priority.key, "default", "background") },
-								{ label: "border", cssVar: buttonVar.color(priority.key, "default", "border") },
-								{ label: "text", cssVar: buttonVar.color(priority.key, "default", "text") },
-							]}
-						/>
-					))}
+				<div className="ap-button-section-example">
+					<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						{PRIORITIES.map((priority) => (
+							<ButtonSwatch
+								key={priority.key}
+								swatchLabel={priority.label}
+								priority={priority.key}
+								size="medium"
+								radius="sm"
+								rows={[
+									{ label: "bg", cssVar: buttonVar.color(priority.key, "default", "background") },
+									{ label: "border", cssVar: buttonVar.color(priority.key, "default", "border") },
+									{ label: "text", cssVar: buttonVar.color(priority.key, "default", "text") },
+								]}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={[
+							'<Button priority="primary">Primary</Button>',
+							'<Button priority="secondary">Secondary</Button>',
+							'<Button priority="ghost">Ghost</Button>',
+						].join("\n")}
+					/>
 				</div>
 			</Section>
 
@@ -134,17 +164,26 @@ export function ButtonVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					{RADII.map((radius) => (
-						<ButtonSwatch
-							key={radius.key}
-							swatchLabel={radius.label}
-							priority="primary"
-							size="medium"
-							radius={radius.key}
-							rows={[{ label: "radius", cssVar: buttonVar.radius(radius.key) }]}
-						/>
-					))}
+				<div className="ap-button-section-example">
+					<div className="ap-button-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						{RADII.map((radius) => (
+							<ButtonSwatch
+								key={radius.key}
+								swatchLabel={radius.label}
+								priority="primary"
+								size="medium"
+								radius={radius.key}
+								rows={[{ label: "radius", cssVar: buttonVar.radius(radius.key) }]}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={[
+							'<Button radius="none">Button</Button>',
+							'<Button radius="sm">Button</Button>',
+							'<Button radius="lg">Button</Button>',
+						].join("\n")}
+					/>
 				</div>
 			</Section>
 
@@ -168,53 +207,63 @@ export function ButtonVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-button-swatch-group"  data-theme="storybook_ds" data-viewport="desktop">
-					<ButtonSwatch
-						swatchLabel="Text only"
-						priority="primary"
-						size="medium"
-						radius="sm"
-						showText
-						rows={[
-							{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
-							{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
-						]}
-					/>
-					<ButtonSwatch
-						swatchLabel="Icon left + text"
-						priority="primary"
-						size="medium"
-						radius="sm"
-						showLeftIcon
-						showText
-						rows={[
-							{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
-							{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
-						]}
-					/>
-					<ButtonSwatch
-						swatchLabel="Icon right + text"
-						priority="primary"
-						size="medium"
-						radius="sm"
-						showRightIcon
-						showText
-						rows={[
-							{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
-							{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
-						]}
-					/>
-					<ButtonSwatch
-						swatchLabel="Icon only"
-						priority="primary"
-						size="medium"
-						radius="sm"
-						showLeftIcon
-						showText={false}
-						rows={[
-							{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
-							{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
-						]}
+				<div className="ap-button-section-example">
+					<div className="ap-button-swatch-group"  data-theme="storybook_ds" data-viewport="desktop">
+						<ButtonSwatch
+							swatchLabel="Text only"
+							priority="primary"
+							size="medium"
+							radius="sm"
+							showText
+							rows={[
+								{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
+								{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
+							]}
+						/>
+						<ButtonSwatch
+							swatchLabel="Icon left + text"
+							priority="primary"
+							size="medium"
+							radius="sm"
+							showLeftIcon
+							showText
+							rows={[
+								{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
+								{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
+							]}
+						/>
+						<ButtonSwatch
+							swatchLabel="Icon right + text"
+							priority="primary"
+							size="medium"
+							radius="sm"
+							showRightIcon
+							showText
+							rows={[
+								{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
+								{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
+							]}
+						/>
+						<ButtonSwatch
+							swatchLabel="Icon only"
+							priority="primary"
+							size="medium"
+							radius="sm"
+							showLeftIcon
+							showText={false}
+							rows={[
+								{ label: "icon w", cssVar: buttonVar.iconWidth("medium") },
+								{ label: "icon h", cssVar: buttonVar.iconHeight("medium") },
+							]}
+						/>
+					</div>
+					<CodeBlock
+						code={[
+							"<Button showText>Button</Button>",
+							"<Button showLeftIcon showText>Button</Button>",
+							"<Button showRightIcon showText>Button</Button>",
+							"<Button showLeftIcon showText={false}>Button</Button>",
+						].join("\n")}
 					/>
 				</div>
 			</Section>
@@ -227,23 +276,34 @@ export function ButtonVariations() {
 						representative button (Primary / Medium) rather than crossed with every other variant.
 					</p>
 				</div>
-				<div className="ap-button-swatch-group"  data-theme="storybook_ds" data-viewport="desktop">
-					{STATES.map((state) => (
-						<ButtonSwatch
-							key={state.key}
-							swatchLabel={state.label}
-							priority="primary"
-							size="medium"
-							radius="sm"
-							disabled={state.key === "disabled"}
-							forceState={state.key === "default" || state.key === "disabled" ? undefined : state.key}
-							rows={[
-								{ label: "bg", cssVar: buttonVar.color("primary", state.key, "background") },
-								{ label: "border", cssVar: buttonVar.color("primary", state.key, "border") },
-								{ label: "text", cssVar: buttonVar.color("primary", state.key, "text") },
-							]}
-						/>
-					))}
+				<div className="ap-button-section-example">
+					<div className="ap-button-swatch-group"  data-theme="storybook_ds" data-viewport="desktop">
+						{STATES.map((state) => (
+							<ButtonSwatch
+								key={state.key}
+								swatchLabel={state.label}
+								priority="primary"
+								size="medium"
+								radius="sm"
+								disabled={state.key === "disabled"}
+								forceState={state.key === "default" || state.key === "disabled" ? undefined : state.key}
+								rows={[
+									{ label: "bg", cssVar: buttonVar.color("primary", state.key, "background") },
+									{ label: "border", cssVar: buttonVar.color("primary", state.key, "border") },
+									{ label: "text", cssVar: buttonVar.color("primary", state.key, "text") },
+								]}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={[
+							"// Default, Hover, and Clicked apply automatically -- no prop needed",
+							'<Button priority="primary">Button</Button>',
+							"",
+							"// Disabled is the only state you set directly",
+							'<Button priority="primary" disabled>Button</Button>',
+						].join("\n")}
+					/>
 				</div>
 			</Section>
 		</div>

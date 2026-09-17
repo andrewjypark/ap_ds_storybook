@@ -1,26 +1,24 @@
 import React from "react";
+import { FaCirclePlus } from "react-icons/fa6";
 
 /**
- * Generic placeholder icon -- the real Figma component uses an
- * instance-swappable Font Awesome "circle-plus" slot (per Andrew: these
- * are just swappable vectors, not worth enumerating every icon option).
- * This stands in for "an icon is present" without depending on any icon
- * library or asset; swap for the real icon component/library once one is
- * wired into the codebase.
+ * Real icon for the button's default left/right icon slot -- the real
+ * Figma component's icon slot is an instance-swappable Font Awesome
+ * "circle-plus" (per the project doc's Figma button audit).
+ *
+ * Project convention (see components/Components/Icon/ "About" section):
+ * default to Font Awesome's REGULAR (outline) style, falling back to
+ * SOLID only when Font Awesome Free doesn't ship a Regular cut of that
+ * glyph. "circle-plus" is one of those exceptions -- react-icons/fa6 has
+ * no `FaRegCirclePlus` (Regular only covers a fixed ~164-icon subset,
+ * mostly "content" glyphs like star/heart/envelope, not UI-chrome icons
+ * like this one) -- so this one is Solid out of necessity, not choice.
+ *
+ * .ap-button-icon-container's own CSS (Button.css) already forces the
+ * rendered svg to 100% of its fixed-size container, so no size prop is
+ * needed here -- the container, not the icon, owns the sizing contract
+ * (same reasoning as TextInput/Icon.jsx and CodeBlock.jsx's icons).
  */
-export function Icon({ size = 16 }) {
-	return (
-		<svg
-			width={size}
-			height={size}
-			viewBox="0 0 16 16"
-			fill="none"
-			aria-hidden="true"
-			focusable="false"
-			style={{ flexShrink: 0 }}
-		>
-			<circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.3" />
-			<path d="M8 4.5v7M4.5 8h7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-		</svg>
-	);
+export function Icon() {
+	return <FaCirclePlus aria-hidden="true" focusable="false" />;
 }

@@ -1,0 +1,107 @@
+/*
+ * Shared "Show code" block styling (see CodeBlock.jsx for the component
+ * itself). Sits below a Variations page's swatch group, matching the
+ * Wix reference layout Andrew pointed at.
+ *
+ * Font: a fixed system monospace stack, not one of the project's own
+ * "--ap-font-families-*" tokens. Code panels conventionally use a plain
+ * monospace regardless of the active brand theme (this is true of the
+ * Wix reference itself) -- tying it to Core/Green/Gold's own font3
+ * would mean the CODE SAMPLE'S typeface changes when someone switches
+ * themes, which has nothing to do with what the sample is demonstrating.
+ *
+ * Syntax colors: a small fixed palette scoped to this component, not
+ * reused from tier_2's semantic utility colors (info/success/error).
+ * Those tokens mean product status, not code-token categories -- baking
+ * "attribute name" or "string literal" into e.g. the error-red token
+ * would be a false semantic link and would break the moment that color
+ * changes for an unrelated reason. Same approach most code viewers take
+ * (their syntax palette is independent of the host app's design tokens).
+ */
+
+.ap-code-block {
+	margin-top: 0.75rem;
+	width: 100%;
+}
+
+/*
+ * The classic CSS-only "animate to auto height" trick: a single-row
+ * grid whose row track is the thing that transitions, between 0fr (the
+ * row gets none of the available space -- effectively 0 height) and 1fr
+ * (the row gets exactly as much space as its content needs). Unlike
+ * `max-height`, this needs no guessed/measured pixel value, and unlike
+ * `height: auto`, `grid-template-rows` IS animatable. `.ap-code-block-
+ * collapse-inner`'s `overflow: hidden` clips the content while its row
+ * is shrinking/growing, and `min-height: 0` overrides grid items'
+ * default `min-height: auto`, which would otherwise refuse to let the
+ * row shrink past the content's own height.
+ */
+.ap-code-block-collapse {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.25s ease-out;
+}
+
+.ap-code-block-collapse.is-expanded {
+	grid-template-rows: 1fr;
+}
+
+.ap-code-block-collapse-inner {
+	overflow: hidden;
+	min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ap-code-block-collapse {
+		transition: none;
+	}
+}
+
+.ap-code-block-pre {
+	margin: 0 0 0.5rem;
+	padding: 1rem 1.25rem;
+	background: #f6f8fa;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+	overflow-x: auto;
+}
+
+.ap-code-block-pre code {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.8rem;
+	line-height: 1.6;
+	color: #24292f;
+	white-space: pre;
+}
+
+.ap-code-tok-tag {
+	color: #116329;
+}
+
+.ap-code-tok-attr {
+	color: #953800;
+}
+
+.ap-code-tok-str {
+	color: #0a3069;
+}
+
+.ap-code-tok-punct {
+	color: #24292f;
+}
+
+.ap-code-tok-cm {
+	color: #6e7781;
+	font-style: italic;
+}
+
+.ap-code-block-actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+/* The Copy / Show-code controls are real <Button>s (see CodeBlock.jsx)
+   -- small/ghost/sm, per Andrew -- so Button.css already owns their
+   look, hover, and icon sizing; nothing button-specific is needed here. */

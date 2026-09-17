@@ -1270,10 +1270,10 @@
   --ap-text-input-color-text: #23272b;
   --ap-text-input-color-label: #23272b;
   --ap-text-input-color-description: #64696f;
-  --ap-text-input-border-width-default: 0.5px;
+  --ap-text-input-border-width-default: 1px;
   --ap-text-input-border-width-active: 1px;
   --ap-text-input-border-width-error: 1px;
-  --ap-text-input-border-radius: 3px;
+  --ap-text-input-border-radius: 4px;
   --ap-text-input-padding-horizontal: 15px;
   --ap-text-input-padding-vertical: 10px;
   --ap-text-input-gap: 10px;
@@ -1283,6 +1283,24 @@
   --ap-text-input-icon-field-title-height: 14px;
   --ap-text-input-icon-slot-width: 22px;
   --ap-text-input-icon-slot-height: 22px;
+  --ap-icon-size-small: 16px;
+  --ap-icon-size-medium: 20px;
+  --ap-icon-size-large: 24px;
+  --ap-segment-group-color-background: #f6f7f9;
+  --ap-segment-group-color-field-title: #23272b;
+  --ap-segment-group-border-radius: 8px;
+  --ap-segment-group-padding: 6px;
+  --ap-segment-group-gap: 6px;
+  --ap-segment-group-field-title-gap: 8px;
+  --ap-segment-group-field-title-text: 300 12px/17px 'TWK Lausanne';
+  --ap-segment-color-background-hover: #e1e4e7;
+  --ap-segment-color-background-selected: #bfc4c8;
+  --ap-segment-color-text: #23272b;
+  --ap-segment-padding-horizontal: 12px;
+  --ap-segment-padding-vertical: 12px;
+  --ap-segment-text: 300 14px/20px 'TWK Lausanne';
+  --ap-segment-caption-text: 300 12px/17px 'TWK Lausanne';
+  --ap-segment-icon-caption-gap: 8px;
 }
 
 :root {

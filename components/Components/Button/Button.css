@@ -150,12 +150,22 @@
 	opacity: 0.8;
 }
 
-.ap-button-swatch-group {
-	/* Grows to fill whatever space .ap-button-section-copy doesn't use
-	   (its 40% flex-basis capped at 370px), instead of a fixed 60% that
-	   would either overflow (with the row's gap:2rem) or leave a gap
-	   once .ap-button-section-copy hits its max-width. */
+/*
+ * Wraps .ap-button-swatch-group AND the CodeBlock beneath it (see
+ * ButtonVariations.jsx) so they stack in the same right-hand column,
+ * matching the Wix reference (its Show-code toggle sits under the
+ * swatch group, not as its own third column). This wrapper -- not
+ * .ap-button-swatch-group itself -- is now the flex item that grows to
+ * fill whatever space .ap-button-section-copy doesn't use.
+ */
+.ap-button-section-example {
 	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ap-button-swatch-group {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem;
@@ -171,7 +181,7 @@
    instead of sitting side by side. */
 @media (max-width: 991px) {
 	.ap-button-section-copy,
-	.ap-button-swatch-group {
+	.ap-button-section-example {
 		flex: 1 1 100%;
 		max-width: none;
 	}

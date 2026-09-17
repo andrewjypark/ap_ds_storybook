@@ -10,6 +10,20 @@ import "./Button.css";
  *   size                                     -> Size
  *   radius                                   -> Border-Radius
  *   showLeftIcon / showRightIcon / showText  -> the three boolean props
+ *   leftIcon / rightIcon                     -> override the rendered icon
+ *                                                node (defaults to the
+ *                                                placeholder <Icon/>) --
+ *                                                matches Figma's real
+ *                                                instance-swap icon slot
+ *                                                (see the Figma button
+ *                                                audit: "two nested icon
+ *                                                slots... instance-swap");
+ *                                                added so CodeBlock.jsx's
+ *                                                Copy/Show-code buttons
+ *                                                could use their own icons
+ *                                                while still being real
+ *                                                <Button>s, not a one-off
+ *                                                CodeBlock-only prop.
  *   disabled                                 -> real HTML disabled (drives
  *                                                the Disabled state)
  *   forceState                               -> DOCS-ONLY escape hatch to
@@ -44,6 +58,8 @@ export const Button = React.forwardRef(function Button(
 		showLeftIcon = false,
 		showRightIcon = false,
 		showText = true,
+		leftIcon,
+		rightIcon,
 		disabled = false,
 		forceState,
 		children = "Button",
@@ -94,7 +110,7 @@ export const Button = React.forwardRef(function Button(
 						height: `var(${buttonVar.iconHeight(size)})`,
 					}}
 				>
-					<Icon />
+					{leftIcon || <Icon />}
 				</span>
 			)}
 			{/* button_text_container from Figma -- a fixed-height row with
@@ -120,7 +136,7 @@ export const Button = React.forwardRef(function Button(
 						height: `var(${buttonVar.iconHeight(size)})`,
 					}}
 				>
-					<Icon />
+					{rightIcon || <Icon />}
 				</span>
 			)}
 		</button>

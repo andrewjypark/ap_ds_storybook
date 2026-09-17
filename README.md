@@ -77,6 +77,8 @@ npm run build             # node build-tokens.js && node scripts/generate-color-
 npm run storybook          # builds tokens, then starts the Storybook dev server on :6006
 npm run build-storybook    # builds tokens, then produces a static storybook-static/ build
 npm run deploy-storybook   # publishes storybook-static/ to GitHub Pages (the gh-pages branch)
+
+npm run build-storybook && npm run deploy-storybook
 ```
 
 To add a new theme or viewport: add one entry to the `THEMES`/`VIEWPORTS` array at the top of `build-tokens.js` (name — matches the Token Studio set name — source set(s), CSS selector). Nothing else needs to change.

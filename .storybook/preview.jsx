@@ -135,7 +135,7 @@ const preview = {
 					// not built yet (see the project doc's "Storybook presentation
 					// for Tier 3 buttons" section).
 					"Tier 3: Components",
-					["Button", ["Variations", "Playground"]],
+					["Button", ["Variations", "Playground"], "Icon", ["Variations"], "Segment Group", ["Variations"]],
 				],
 			},
 		},

@@ -20,3 +20,50 @@
 		padding: 0.5rem;
 	}
 }
+
+/*
+ * Storybook's own Docs-page wrapper (the addon-docs "Docs" tab, not a
+ * story canvas -- see .ap-storybook-canvas above for that). `.sbdocs-
+ * wrapper` is addon-docs' own stable class name (unlike the emotion-
+ * generated hash class alongside it, e.g. `.css-8vrvo4`, which changes
+ * per build/content and isn't safe to target) -- kept fixed specifically
+ * so consumers can override it, per Storybook's own theming docs.
+ *
+ * Same 768px mobile cutoff as .ap-storybook-canvas above. Only the
+ * mobile override is added here (matching the value tested in devtools)
+ * -- desktop is left on Storybook's own built-in default rather than
+ * hand-copying a number that was never independently confirmed.
+ *
+ * Written as `div.sbdocs-wrapper`, not a bare class selector: this
+ * element also carries an Emotion-generated hash class (Storybook's
+ * own CSS-in-JS default styles), injected into the page via a runtime
+ * <style> tag AFTER this stylesheet loads. On an exact specificity tie
+ * (single class vs. single class) that later rule wins the cascade,
+ * silently no-op'ing our override -- confirmed happening on
+ * `.docs-story` below via devtools (rule shown struck through). Adding
+ * the element type bumps specificity just enough to win regardless of
+ * injection order, without needing `!important`.
+ */
+@media (max-width: 768px) {
+	div.sbdocs-wrapper {
+		padding: 4rem 20px;
+	}
+}
+
+/*
+ * `.docs-story` -- addon-docs' stable class for the story-preview box
+ * rendered inline on a Docs page (each story shown within the "Docs"
+ * tab, as opposed to a story viewed on its own "Canvas" tab -- that
+ * case is .ap-storybook-canvas above). Same stable-vs-hash distinction
+ * as .sbdocs-wrapper: the paired emotion hash (e.g. `.css-1cvjpgl`)
+ * isn't safe to target directly since it changes per build/content.
+ *
+ * Same 768px mobile cutoff as the rules above; assumed mobile-only same
+ * as the .sbdocs-wrapper change just above it -- flag if this one was
+ * actually meant for every viewport.
+ */
+@media (max-width: 768px) {
+	div.docs-story {
+		padding: 32px 0px;
+	}
+}

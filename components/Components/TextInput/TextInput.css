@@ -189,8 +189,14 @@ textarea.ap-text-input-field {
 	opacity: 0.8;
 }
 
-.ap-text-input-swatch-group {
+.ap-text-input-section-example {
 	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ap-text-input-swatch-group {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem;
@@ -201,7 +207,7 @@ textarea.ap-text-input-field {
 
 @media (max-width: 991px) {
 	.ap-text-input-section-copy,
-	.ap-text-input-swatch-group {
+	.ap-text-input-section-example {
 		flex: 1 1 100%;
 		max-width: none;
 	}

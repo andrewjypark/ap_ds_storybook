@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { TextInput } from "./TextInput.jsx";
 import { TokenReadout } from "./TokenReadout.jsx";
+import { CodeBlock } from "../CodeBlock.jsx";
 import { TYPES, STATES, textInputVar } from "./textInputTokens.js";
 import "./TextInput.css";
 
@@ -49,6 +50,14 @@ function Section({ title, children }) {
  * screenshot used as the format reference (not a feature reference -- see
  * the "Suggestions" section's note below on how much smaller this
  * component's surface area is today).
+ *
+ * Each section's swatch group is followed by a CodeBlock (see
+ * ../CodeBlock.jsx) -- same Copy / Show-code treatment as
+ * ButtonVariations.jsx. The States section again deliberately omits
+ * `forceState` from its copyable snippet, since it's a docs-only escape
+ * hatch (see TextInput.jsx) and never meant for real usage -- the real
+ * story is that Active and Filled both apply automatically, and Error is
+ * the only state you set directly.
  */
 export function TextInputVariations() {
 	return (
@@ -71,16 +80,25 @@ export function TextInputVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					{TYPES.map((t) => (
-						<TextInputSwatch
-							key={t.key}
-							swatchLabel={t.label}
-							type={t.key}
-							fieldTitleText="Field Title"
-							rows={[{ label: "font", cssVar: textInputVar.font() }]}
-						/>
-					))}
+				<div className="ap-text-input-section-example">
+					<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						{TYPES.map((t) => (
+							<TextInputSwatch
+								key={t.key}
+								swatchLabel={t.label}
+								type={t.key}
+								fieldTitleText="Field Title"
+								rows={[{ label: "font", cssVar: textInputVar.font() }]}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={[
+							'<TextInput type="text" />',
+							'<TextInput type="textarea" />',
+							'<TextInput type="url" />',
+						].join("\n")}
+					/>
 				</div>
 			</Section>
 
@@ -105,32 +123,47 @@ export function TextInputVariations() {
 						</li>
 					</ul>
 				</div>
-				<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					<TextInputSwatch
-						swatchLabel="Title only"
-						showFieldTitleSection
-						fieldTitleText="Field Title"
-						rows={[{ label: "label", cssVar: textInputVar.label() }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="Title + left icon"
-						showFieldTitleSection
-						showFieldTitleLeftIcon
-						fieldTitleText="Field Title"
-						rows={[{ label: "label", cssVar: textInputVar.label() }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="Title + right slot"
-						showFieldTitleSection
-						showFieldTitleRightSlot
-						fieldTitleRightSlot="Required"
-						fieldTitleText="Field Title"
-						rows={[{ label: "label", cssVar: textInputVar.label() }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="No title"
-						showFieldTitleSection={false}
-						rows={[{ label: "label", cssVar: textInputVar.label() }]}
+				<div className="ap-text-input-section-example">
+					<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						<TextInputSwatch
+							swatchLabel="Title only"
+							showFieldTitleSection
+							fieldTitleText="Field Title"
+							rows={[{ label: "label", cssVar: textInputVar.label() }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="Title + left icon"
+							showFieldTitleSection
+							showFieldTitleLeftIcon
+							fieldTitleText="Field Title"
+							rows={[{ label: "label", cssVar: textInputVar.label() }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="Title + right slot"
+							showFieldTitleSection
+							showFieldTitleRightSlot
+							fieldTitleRightSlot="Required"
+							fieldTitleText="Field Title"
+							rows={[{ label: "label", cssVar: textInputVar.label() }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="No title"
+							showFieldTitleSection={false}
+							rows={[{ label: "label", cssVar: textInputVar.label() }]}
+						/>
+					</div>
+					<CodeBlock
+						code={[
+							'<TextInput showFieldTitleSection fieldTitleText="Field Title" />',
+							'<TextInput showFieldTitleSection showFieldTitleLeftIcon fieldTitleText="Field Title" />',
+							'<TextInput',
+							'  showFieldTitleSection',
+							'  showFieldTitleRightSlot',
+							'  fieldTitleRightSlot="Required"',
+							'  fieldTitleText="Field Title"',
+							'/>',
+							'<TextInput showFieldTitleSection={false} />',
+						].join("\n")}
 					/>
 				</div>
 			</Section>
@@ -143,17 +176,25 @@ export function TextInputVariations() {
 						also where a validation message belongs when <code>error</code> is set.
 					</p>
 				</div>
-				<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					<TextInputSwatch
-						swatchLabel="Without description"
-						showDescriptionBelowInput={false}
-						rows={[{ label: "text", cssVar: textInputVar.labelFont() }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="With description"
-						showDescriptionBelowInput
-						descriptionText="Description below input"
-						rows={[{ label: "color", cssVar: textInputVar.description() }]}
+				<div className="ap-text-input-section-example">
+					<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						<TextInputSwatch
+							swatchLabel="Without description"
+							showDescriptionBelowInput={false}
+							rows={[{ label: "text", cssVar: textInputVar.labelFont() }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="With description"
+							showDescriptionBelowInput
+							descriptionText="Description below input"
+							rows={[{ label: "color", cssVar: textInputVar.description() }]}
+						/>
+					</div>
+					<CodeBlock
+						code={[
+							"<TextInput showDescriptionBelowInput={false} />",
+							'<TextInput showDescriptionBelowInput descriptionText="Description below input" />',
+						].join("\n")}
 					/>
 				</div>
 			</Section>
@@ -167,26 +208,36 @@ export function TextInputVariations() {
 						<code>rightSlotIcon</code> for what the real action needs (e.g. a real clear-value button).
 					</p>
 				</div>
-				<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					<TextInputSwatch
-						swatchLabel="No slots"
-						rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="Left slot"
-						showLeftSlot
-						rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="Right slot"
-						showRightSlot
-						rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
-					/>
-					<TextInputSwatch
-						swatchLabel="Both slots"
-						showLeftSlot
-						showRightSlot
-						rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
+				<div className="ap-text-input-section-example">
+					<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						<TextInputSwatch
+							swatchLabel="No slots"
+							rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="Left slot"
+							showLeftSlot
+							rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="Right slot"
+							showRightSlot
+							rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
+						/>
+						<TextInputSwatch
+							swatchLabel="Both slots"
+							showLeftSlot
+							showRightSlot
+							rows={[{ label: "icon size", cssVar: textInputVar.iconSlot("width") }]}
+						/>
+					</div>
+					<CodeBlock
+						code={[
+							"<TextInput />",
+							"<TextInput showLeftSlot />",
+							"<TextInput showRightSlot />",
+							"<TextInput showLeftSlot showRightSlot />",
+						].join("\n")}
 					/>
 				</div>
 			</Section>
@@ -201,19 +252,33 @@ export function TextInputVariations() {
 						needing to click in or type — never pass that prop in real usage.
 					</p>
 				</div>
-				<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
-					{STATES.map((state) => (
-						<TextInputSwatch
-							key={state.key}
-							swatchLabel={state.label}
-							forceState={state.key === "default" ? undefined : state.key}
-							error={state.key === "error"}
-							rows={[
-								{ label: "border", cssVar: textInputVar.border(state.key) },
-								{ label: "width", cssVar: textInputVar.borderWidth(state.key) },
-							]}
-						/>
-					))}
+				<div className="ap-text-input-section-example">
+					<div className="ap-text-input-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						{STATES.map((state) => (
+							<TextInputSwatch
+								key={state.key}
+								swatchLabel={state.label}
+								forceState={state.key === "default" ? undefined : state.key}
+								error={state.key === "error"}
+								rows={[
+									{ label: "border", cssVar: textInputVar.border(state.key) },
+									{ label: "width", cssVar: textInputVar.borderWidth(state.key) },
+								]}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={[
+							"// Default and Active apply automatically -- Active is just :focus-within",
+							"<TextInput />",
+							"",
+							"// Filled applies automatically once the field has a real value",
+							'<TextInput defaultValue="Some value" />',
+							"",
+							"// Error is the only state you set directly",
+							"<TextInput error />",
+						].join("\n")}
+					/>
 				</div>
 			</Section>
 		</div>
