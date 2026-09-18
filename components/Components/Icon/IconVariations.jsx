@@ -179,6 +179,9 @@ const GALLERY = [
 export function IconVariations() {
 	return (
 		<div>
+			<h3 className="ap-color-section__title" data-theme="storybook_ds" data-viewport="desktop">
+				Icon
+			</h3>
 			<Section title="About">
 				<div className="ap-icon-section-copy" data-theme="storybook_ds" data-viewport="desktop">
 					<p>
@@ -195,12 +198,15 @@ export function IconVariations() {
 					</p>
 				</div>
 				<div className="ap-icon-section-example">
+					<div className="ap-icon-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						<IconSwatch icon={FaRegCircleCheck} size="medium" />
+					</div>
 					<CodeBlock
 						code={[
-							'import { FaRegCirclePlus } from "react-icons/fa6";',
+							'import { FaRegCircleCheck } from "react-icons/fa6";',
 							'import { Icon } from "components/Components/Icon/Icon.jsx";',
 							"",
-							'<Icon icon={FaRegCirclePlus} size="medium" />',
+							'<Icon icon={FaRegCircleCheck} size="medium" />',
 						].join("\n")}
 					/>
 				</div>
@@ -262,10 +268,16 @@ export function IconVariations() {
 						<li>
 							<code>small</code> — dense UI: table rows, inline with small text, compact toolbars.
 						</li>
+						<li>
+							<code>xs</code> — smaller than small: a compact inline glyph sitting next to a label or caption
+							(e.g. Dropdown's field-title info icon).
+						</li>
 					</ul>
 					<p className="ap-icon-note">
 						This scale is separate from Button's and Text Input's own icon tokens, which stay bound to
 						their specific fixed slots — this one is for any other place an icon appears on its own.
+						Every step has 2px of padding around the glyph (see Icon.css), so it never fills its
+						container edge-to-edge.
 					</p>
 				</div>
 				<div className="ap-icon-section-example">
@@ -285,6 +297,7 @@ export function IconVariations() {
 							'<Icon icon={FaRegCircleCheck} size="large" />',
 							'<Icon icon={FaRegCircleCheck} size="medium" />',
 							'<Icon icon={FaRegCircleCheck} size="small" />',
+							'<Icon icon={FaRegCircleCheck} size="xs" />',
 						].join("\n")}
 					/>
 				</div>

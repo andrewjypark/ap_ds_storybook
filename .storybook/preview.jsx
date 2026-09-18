@@ -104,6 +104,21 @@ const preview = {
 		},
 		options: {
 			storySort: {
+				// Needed so the Tier 3 sibling order below actually works: every
+				// Tier 3 component now shares the exact same bare title ("Tier 3:
+				// Components"), so without includeNames the array-based sort
+				// algorithm treats their titles as identical and falls straight
+				// through to a stable/no-op comparison (raw file-discovery order,
+				// which happens to look alphabetical) -- it never even looks at
+				// each story's own name. includeNames appends each story's name
+				// as one more path segment before comparing, which is what makes
+				// the ["Button", "Icon", ...] list under "Tier 3: Components"
+				// below actually apply. Confirmed against Storybook's own
+				// storySort source (node_modules/storybook/dist/_browser-chunks
+				// -- search "STORY_KIND_PATH_SEPARATOR"); harmless for Tier 1/
+				// Tier 2 since their titles already fully disambiguate before
+				// name comparison would ever matter.
+				includeNames: true,
 				// Tier 1 and Tier 2 were originally nested under a shared
 				// "Tokens" group; ungrouped so each tier is its own top-level
 				// sidebar entry, a peer of Tier 3 rather than a child of a
@@ -149,13 +164,30 @@ const preview = {
 						],
 					],
 					// Tier 3: real, usable components (not token-definition pages) --
-					// see Button.stories.jsx. Previously nested under a shared
-					// "Components" group; now its own top-level entry with Button
-					// nested inside it. "Playground" is a planned follow-up page,
-					// not built yet (see the project doc's "Storybook presentation
-					// for Tier 3 buttons" section).
+					// see Button.stories.jsx. "Tier 3: Components" is a real root
+					// here (bold, same level/position as Tier 1/Tier 2) because no
+					// story's title is ever just that bare string -- every
+					// component's .stories.jsx instead shares the title
+					// "Tier 3: Components/Components" one level deeper (tags:
+					// ["!autodocs"] cancels the project-wide autodocs tag for that
+					// file, so no separate "Docs" entry is generated either) and
+					// exports one story named after itself -- that's what puts
+					// each component directly inside the one "Components" folder
+					// as its own flat, clickable page (no further sub-group, no
+					// Docs tab, no twisty of its own). Costs one extra click to
+					// open "Components" itself, in exchange for "Tier 3:
+					// Components" behaving like a proper root instead of an
+					// ordinary top-level item Storybook always renders above named
+					// roots regardless of storySort. Since every component shares
+					// one title, the ["Button", "Icon", ...] order below only
+					// takes effect because of includeNames: true above -- without
+					// it, storySort never even looks at each story's own name once
+					// their titles already match.
 					"Tier 3: Components",
-					["Button", ["Variations", "Playground"], "Icon", ["Variations"], "Segment Group", ["Variations"]],
+					[
+						"Components",
+						["Button", "Icon", "Segment Group", "Dropdown", "Text Input", "Modal"],
+					],
 				],
 			},
 		},

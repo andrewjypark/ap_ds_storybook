@@ -246,6 +246,14 @@ const BASE_SOURCE = [
 	// Segment Group has no Core/Green/Gold theming yet either (single mode,
 	// same reasoning as buttons/text-input above) -- belongs in every build.
 	writeSet("tier_3/segment-group"),
+	// Dropdown (menu row / menu / field) has no Core/Green/Gold theming yet
+	// either (single mode, same reasoning as buttons/text-input/segment-group
+	// above) -- belongs in every build.
+	writeSet("tier_3/dropdown"),
+	// Modal has no Core/Green/Gold theming yet either (single mode, same
+	// reasoning as buttons/text-input/segment-group/dropdown above) --
+	// belongs in every build.
+	writeSet("tier_3/modal"),
 ];
 
 /**

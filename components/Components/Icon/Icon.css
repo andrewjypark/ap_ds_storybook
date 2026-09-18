@@ -2,13 +2,21 @@
    technique as .ap-button-icon-container (Button.css) and
    .ap-text-input-slot-icon (TextInput.css). Sizing is set inline from
    --ap-icon-size-{size} (see Icon.jsx) rather than here, since the size
-   is chosen per-instance via a prop, not fixed per-component. */
+   is chosen per-instance via a prop, not fixed per-component.
+
+   2px padding on every step (xs/small/medium/large alike) insets the
+   glyph from the container's edges instead of letting it fill the box
+   edge-to-edge -- box-sizing: border-box keeps that padding inside the
+   fixed width/height rather than growing the box past it, and the child
+   svg's own width:100%/height:100% (below) resolves against the padding
+   box automatically, so no per-size math is needed here. */
 .ap-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
 	box-sizing: border-box;
+	padding: 0px;
 	color: currentColor;
 }
 
@@ -36,6 +44,18 @@
 
 .ap-icon-section {
 	margin-bottom: 3rem;
+}
+
+/* Page-level header (the component's own name, e.g. "Icon") -- same
+   class/attributes as Foundations/Color/Color.css's .ap-color-section__title,
+   copied here rather than imported cross-tier (same one-CSS-file-per-
+   component convention as every other rule in this file). Deliberately a
+   bigger Tier 2 Title style, distinct from .ap-icon-section-title below
+   (a smaller Label style used for each Section's own heading, e.g. "About"). */
+.ap-color-section__title {
+	font: var(--ap-tier-2-typography-title-default);
+	margin: 0 0 1rem;
+	color: var(--ap-tier-2-color-content-default);
 }
 
 .ap-icon-section-title {

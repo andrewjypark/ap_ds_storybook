@@ -1,0 +1,220 @@
+.ap-modal {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.ap-modal-header-section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	border-bottom-style: solid;
+	box-sizing: border-box;
+	flex-shrink: 0;
+}
+
+.ap-modal-header-title {
+	display: inline-block;
+}
+
+.ap-modal-body-section {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	flex: 1 1 auto;
+}
+
+.ap-modal-footer-section {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-top-style: solid;
+	box-sizing: border-box;
+	flex-shrink: 0;
+}
+
+/* modal_banner from Figma -- the warning-style alert box dropped into
+   modal_body_section (see Modal.jsx's <ModalBanner>). */
+.ap-modal-banner {
+	box-sizing: border-box;
+	border-style: solid;
+}
+
+/* Matches Figma's "Dark Overlay" usage example -- the modal card centered
+   over a full-viewport dark scrim. Figma's own reference swatch uses a
+   flat mid-gray fill at less than full opacity; scoped here to a
+   semi-transparent black instead so it reads correctly over any page
+   content behind it (the Figma swatch's flat gray only works because
+   it's sitting on that one frame's own gray canvas background, not real
+   page content). `position: absolute` (not `fixed`) on purpose: mounted
+   at the document root with no positioned ancestor, it still covers the
+   full initial containing block (viewport-sized) same as `fixed` would
+   for the common real-usage case -- but unlike `fixed`, it stays
+   containable inside a positioned demo frame, which is what
+   ModalVariations.jsx's "Overlay" section relies on to preview this
+   without covering the whole Storybook page. See Modal.jsx's `overlay`
+   prop doc comment for why this wrapper is opt-in rather than
+   always-on. */
+.ap-modal-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Variations page layout -- same visual language as Button.css's
+   own ap-button-section-* rules ---- */
+
+.ap-modal-section {
+	margin-bottom: 3rem;
+}
+
+/* Page-level header (the component's own name, "Modal") -- same
+   class/attributes as Foundations/Color/Color.css's .ap-color-section__title,
+   copied here rather than imported cross-tier (same one-CSS-file-per-
+   component convention as every other rule in this file). Deliberately a
+   bigger Tier 2 Title style, distinct from .ap-modal-section-title below
+   (a smaller Label style used for each Section's own heading, e.g.
+   "Anatomy"). */
+.ap-color-section__title {
+	font: var(--ap-tier-2-typography-title-default);
+	margin: 0 0 1rem;
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-modal-section-title {
+	font: var(--ap-tier-2-typography-label-xs);
+}
+
+.ap-modal-section-body {
+	display: flex;
+	gap: 2.5rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-modal-section-copy {
+	flex: 0 1 40%;
+	max-width: 450px;
+	font: var(--ap-tier-2-typography-body-sm);
+}
+
+.ap-modal-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-modal-section-example {
+	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ap-modal-swatch-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+@media (max-width: 991px) {
+	.ap-modal-section-copy,
+	.ap-modal-section-example {
+		flex: 1 1 100%;
+		max-width: none;
+	}
+}
+
+.ap-modal-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.75rem;
+	min-width: 0;
+}
+
+.ap-modal-swatch-example {
+	display: flex;
+	/* Figma's own reference swatches sit on a mid-gray canvas so the
+	   white modal card reads as a distinct surface -- mirrored here so
+	   the Storybook doc page shows the same contrast Figma documents,
+	   rather than a white card invisible against a white page. */
+	background: #b6b9bf;
+	padding: 2rem;
+	border-radius: 8px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.ap-modal-swatch-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* ---- Token readout (label / var name / value), same visual language as
+   Button's ap-button-readout rules ---- */
+
+.ap-modal-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font: var(--ap-font2-body-text-xs-regular);
+}
+
+.ap-modal-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-modal-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
+.ap-modal-readout-label {
+	color: var(--ap-tier-2-color-content-default);
+	min-width: 3.5rem;
+}
+
+.ap-modal-readout-var {
+	color: var(--ap-tier-2-color-content-subtle);
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
+
+.ap-modal-readout-sep {
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-modal-readout-value {
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-default);
+	/* Multi-layer box-shadow values (e.g. --ap-modal-box-shadow's two
+	   comma-separated dropShadow layers) run far wider than the readout
+	   row -- same overflow the var name span already handles below, just
+	   applied to the value span too. .ap-modal-readout-row (an ancestor)
+	   sets white-space: nowrap, inherited here, so it has to be undone
+	   before wrapping can happen at all; min-width: 0 is what actually
+	   lets it shrink below its unbroken text width inside the flex row
+	   (see .ap-modal-readout-var's identical fix above for the full
+	   reasoning). */
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
