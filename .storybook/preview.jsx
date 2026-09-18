@@ -123,11 +123,31 @@ const preview = {
 						// Color, Typography), which is why Border used to show up first.
 						"Tier 1 - Core",
 						["Color", "Typography", "Border"],
-						"Tier 1 - Green Theme",
-						"Tier 1 - Gold Theme",
+						// Green/Gold live under a "Themes" subgroup, sibling to Core
+						// (and to Storybook DS - Internal, unpinned below) -- keeps the
+						// two theme variants visually grouped instead of loose peers of
+						// Core. Names here must match each story's actual title segment
+						// exactly (underscore, not space -- "Green_Theme"/"Gold_Theme")
+						// or storySort silently falls back to alphabetical for that node.
+						"Themes",
+						[
+							"Tier 1 - Green_Theme",
+							["Color", "Typography"],
+							"Tier 1 - Gold_Theme",
+							["Color", "Typography"],
+						],
 					],
 					"Tier 2: Semantic Tokens",
-					["Tier 2 - Core", "Tier 2 - Green Theme", "Tier 2 - Gold Theme"],
+					[
+						"Tier 2 - Core",
+						"Themes",
+						[
+							"Tier 2 - Green_Theme",
+							["Color", "Typography"],
+							"Tier 2 - Gold_Theme",
+							["Color", "Typography"],
+						],
+					],
 					// Tier 3: real, usable components (not token-definition pages) --
 					// see Button.stories.jsx. Previously nested under a shared
 					// "Components" group; now its own top-level entry with Button
