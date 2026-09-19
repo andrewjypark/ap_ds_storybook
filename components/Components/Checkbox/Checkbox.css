@@ -1,0 +1,171 @@
+/* The outer element is the full click/tap target (--ap-checkbox-size,
+   20px) -- the visual box (--ap-checkbox-box-size, 14px) is centered
+   inside it via flex, matching the 3px inset Figma's real "Checkbox"
+   component uses around its own visible glyph (see checkboxTokens.js). */
+.ap-checkbox {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ap-checkbox-size);
+	height: var(--ap-checkbox-size);
+	padding: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.ap-checkbox-box {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ap-checkbox-box-size);
+	height: var(--ap-checkbox-box-size);
+	box-sizing: border-box;
+	border-style: solid;
+	border-width: var(--ap-checkbox-border-width);
+	border-color: var(--ap-checkbox-color-border);
+	border-radius: var(--ap-checkbox-border-radius);
+	background: var(--ap-checkbox-color-background-unchecked);
+}
+
+.ap-checkbox[aria-checked="true"] .ap-checkbox-box {
+	border-color: transparent;
+	background: var(--ap-checkbox-color-background-checked);
+}
+
+.ap-checkbox[disabled] {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+/* A simple inline checkmark glyph, not run through the shared <Icon>
+   wrapper -- Icon's small/medium/large/xs scale is sized for icons
+   sitting next to text (see ../Icon/iconTokens.js); this glyph instead
+   has to fill a specific fraction of the 14px box it's centered in, a
+   sizing relationship Icon's scale doesn't model. Drawn as a plain
+   inline SVG (not a react-icons import) since it's a fixed, single-use
+   mark tightly coupled to this component's own box, same reasoning as
+   Dropdown's own component-local Icon.jsx chevrons. */
+.ap-checkbox-checkmark {
+	width: 65%;
+	height: 65%;
+	color: var(--ap-checkbox-color-checkmark);
+}
+
+/* ---- Variations page layout ----
+   Same copy/swatch-group pattern as every other Tier 3 component's own
+   Variations-page layout section (Button/Text Input/Segment Group/
+   Dropdown/Modal.css) -- kept as its own self-contained copy here,
+   matching this codebase's one-CSS-file-per-component convention. */
+
+.ap-checkbox-section {
+	margin-bottom: 3rem;
+}
+
+.ap-checkbox-section-title {
+	font: var(--ap-tier-2-typography-label-xs);
+}
+
+.ap-checkbox-section-body {
+	display: flex;
+	gap: 2.5rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-checkbox-section-copy {
+	flex: 0 1 40%;
+	max-width: 450px;
+	font: var(--ap-tier-2-typography-body-sm);
+}
+
+.ap-checkbox-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-checkbox-section-example {
+	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	gap: 0.75rem;
+}
+
+.ap-checkbox-swatch-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+@media (max-width: 991px) {
+	.ap-checkbox-section-copy,
+	.ap-checkbox-section-example {
+		flex: 1 1 100%;
+		max-width: none;
+	}
+}
+
+.ap-checkbox-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.ap-checkbox-swatch-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* ---- Token readout (label / var name / value) -- same visual language
+   as every other Tier 3 component's readout ---- */
+
+.ap-checkbox-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font: var(--ap-font2-body-text-xs-regular);
+}
+
+.ap-checkbox-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-checkbox-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
+.ap-checkbox-readout-label {
+	color: var(--ap-tier-2-color-content-default);
+	min-width: 3.5rem;
+}
+
+.ap-checkbox-readout-var {
+	color: var(--ap-tier-2-color-content-subtle);
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
+
+.ap-checkbox-readout-sep {
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-checkbox-readout-value {
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-default);
+}

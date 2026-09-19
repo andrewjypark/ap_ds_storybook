@@ -1,0 +1,254 @@
+/* table_row_072426 -- a real row: full-width, its cells laid out
+   horizontally, background driven by the `Type` variant. Figma draws
+   exactly ONE divider line, between the header row and the first body
+   row -- not a border under every row -- so the divider lives on
+   `.ap-table-row--header` only (see tableTokens.js on why it's a
+   border here rather than Figma's separate line node). */
+.ap-table-row {
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+	box-sizing: border-box;
+	background: var(--ap-table-row-color-background-default);
+}
+
+.ap-table-row--header {
+	border-bottom-style: solid;
+	border-bottom-width: var(--ap-table-row-border-width);
+	border-bottom-color: var(--ap-table-row-color-border);
+}
+
+.ap-table-row--alt {
+	background: var(--ap-table-row-color-background-alt);
+}
+
+/* table_row_cell (the padded wrapper every table_row_cell_container
+   variant shares) -- flexes evenly by default so a row of cells splits
+   the row's width; pass a `style`/`className` override (e.g.
+   `flex: "0 0 200px"`) for a fixed-width column, same passthrough
+   convention as every other Tier 3 component. */
+.ap-table-cell {
+	display: flex;
+	align-items: center;
+	flex: 1 1 0%;
+	min-width: 0;
+	gap: var(--ap-table-cell-gap);
+	padding: var(--ap-table-cell-padding);
+	box-sizing: border-box;
+}
+
+/* Type=table_header_row_title -- bold label text, icon optional
+   (sort/filter caret) trailing the text. */
+.ap-table-cell--header {
+	font: var(--ap-table-cell-header-text);
+	color: var(--ap-table-cell-color-header-text);
+}
+
+/* Type=table_body_row_text -- the wrapper itself lays out VERTICALLY in
+   Figma (up to two stacked text rows, e.g. "Email Internal Name" /
+   "Subj: Subject Line"), each an optional icon + text pair. */
+.ap-table-cell--body {
+	justify-content: center;
+	flex-direction: column;
+	align-items: flex-start;
+	font: var(--ap-table-cell-body-text);
+	color: var(--ap-table-cell-color-body-text);
+}
+
+.ap-table-cell-body-line {
+	display: flex;
+	align-items: center;
+	gap: var(--ap-table-cell-gap);
+	min-width: 0;
+	/* `.ap-table-cell--body`'s `align-items: flex-start` (needed so a
+	   short first line and a short second line each hug their own
+	   content instead of stretching full-width) also means this column
+	   flex container no longer constrains its children's cross-axis
+	   size to its own width -- each line would otherwise size to its
+	   own content's natural (max-content) width and silently overflow
+	   into the NEXT cell rather than being clipped by the ellipsis rule
+	   below, since overflow/text-overflow only clip once a box actually
+	   has a bounded width. `max-width: 100%` puts that bound back. */
+	max-width: 100%;
+}
+
+.ap-table-cell-body-line--secondary {
+	color: var(--ap-table-cell-color-body-text-secondary);
+}
+
+.ap-table-cell-icon {
+	display: inline-flex;
+	flex-shrink: 0;
+}
+
+.ap-table-cell-text {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Type=slot -- arbitrary content (Figma's own default example: two
+   icon-only action buttons). Same horizontal layout/gap as every other
+   cell, no extra styling of its own beyond the shared .ap-table-cell
+   rule above. */
+
+/* Type=empty slot -- literally nothing beyond the padded cell itself;
+   no dedicated class needed beyond .ap-table-cell. */
+
+/* Type=checkbox -- centers the <Checkbox> inside the padded cell.
+   Fixed 50px selection column -- doesn't grow/shrink with the rest of
+   the row (`flex: 0 0 50px` overrides the shared .ap-table-cell's
+   `flex: 1 1 0%`). */
+.ap-table-cell--checkbox {
+	flex: 0 0 50px;
+	justify-content: center;
+}
+
+/* Combo class -- stack alongside a cell's own type class (e.g.
+   `className="ap-table-cell--actions"` on a `type="slot"` or
+   `type="empty"` cell) for a table's trailing column: a fixed 100px
+   width with its content right-aligned, so row actions (or the
+   header's matching empty spacer) hug the row's right edge instead of
+   splitting the leftover width evenly like a middle cell would.
+   Middle cells need no override at all -- .ap-table-cell's own
+   `flex: 1 1 0%` (flex-grow: 1) is what makes them fill whatever width
+   the fixed-width checkbox/actions columns don't take, splitting it
+   evenly among however many middle cells there are. */
+.ap-table-cell--actions {
+	flex: 0 0 100px;
+	justify-content: flex-end;
+}
+
+/* ---- Variations page layout ----
+   Same copy/swatch-group pattern as every other Tier 3 component's own
+   Variations-page layout section -- kept as its own self-contained copy
+   here, matching this codebase's one-CSS-file-per-component convention. */
+
+.ap-table-section {
+	margin-bottom: 3rem;
+}
+
+.ap-table-section-title {
+	font: var(--ap-tier-2-typography-label-xs);
+}
+
+.ap-table-section-body {
+	display: flex;
+	gap: 2.5rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-table-section-copy {
+	flex: 0 1 40%;
+	max-width: 450px;
+	font: var(--ap-tier-2-typography-body-sm);
+}
+
+.ap-table-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-table-section-copy ul {
+	margin: 0.5rem 0 0;
+	padding-left: 1.1rem;
+}
+
+.ap-table-section-copy li {
+	margin-bottom: 0.5rem;
+}
+
+.ap-table-section-example {
+	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	gap: 0.75rem;
+}
+
+.ap-table-swatch-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+@media (max-width: 991px) {
+	.ap-table-section-copy,
+	.ap-table-section-example {
+		flex: 1 1 100%;
+		max-width: none;
+	}
+}
+
+.ap-table-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	width: 100%;
+}
+
+.ap-table-swatch-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-table-demo {
+	width: 100%;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+/* ---- Token readout (label / var name / value) -- same visual language
+   as every other Tier 3 component's readout ---- */
+
+.ap-table-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font: var(--ap-font2-body-text-xs-regular);
+}
+
+.ap-table-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-table-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
+.ap-table-readout-label {
+	color: var(--ap-tier-2-color-content-default);
+	min-width: 3.5rem;
+}
+
+.ap-table-readout-var {
+	color: var(--ap-tier-2-color-content-subtle);
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
+
+.ap-table-readout-sep {
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-table-readout-value {
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-default);
+}

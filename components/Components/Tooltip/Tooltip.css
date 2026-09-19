@@ -1,0 +1,309 @@
+/* The real "Tooltip" component: an arrow + a text bubble, stacked
+   vertically (top/bottom) or horizontally (left/right) with no gap
+   between them (Figma's own auto-layout uses itemSpacing: 0 here).
+   display: inline-flex so a Tooltip sizes to its own content and can
+   sit inline next to whatever it's labeling. */
+.ap-tooltip {
+	display: inline-flex;
+	align-items: center;
+}
+
+.ap-tooltip--bottom,
+.ap-tooltip--top {
+	flex-direction: column;
+}
+
+.ap-tooltip--left,
+.ap-tooltip--right {
+	flex-direction: row;
+}
+
+.ap-tooltip-bubble {
+	display: inline-block;
+	padding: var(--ap-tooltip-padding-vertical) var(--ap-tooltip-padding-horizontal);
+	border-radius: var(--ap-tooltip-border-radius);
+	font: var(--ap-tooltip-text);
+	white-space: nowrap;
+}
+
+.ap-tooltip--dark .ap-tooltip-bubble {
+	background: var(--ap-tooltip-color-background-dark);
+	color: var(--ap-tooltip-color-text-dark);
+}
+
+.ap-tooltip--light .ap-tooltip-bubble {
+	background: var(--ap-tooltip-color-background-light);
+	color: var(--ap-tooltip-color-text-light);
+}
+
+/* The arrow is a CSS border-triangle, not an SVG -- Figma's own arrow is
+   a plain solid-fill polygon with no stroke, so the border trick
+   reproduces it exactly with one element. `color` here is used purely
+   as a `currentColor` carrier for whichever border side is the "solid"
+   one below -- it has nothing to do with text color, it's just the
+   fill for this one shape. Each `--dark`/`--light` rule sets it to the
+   SAME token the matching bubble's `background` uses, so the arrow is
+   always the same solid color as the bubble it's attached to. */
+.ap-tooltip-arrow {
+	width: 0;
+	height: 0;
+	flex-shrink: 0;
+	border-style: solid;
+	border-color: transparent;
+	border-width: 0;
+}
+
+.ap-tooltip--dark .ap-tooltip-arrow {
+	color: var(--ap-tooltip-color-background-dark);
+}
+
+.ap-tooltip--light .ap-tooltip-arrow {
+	color: var(--ap-tooltip-color-background-light);
+}
+
+/* Position=Bottom -- tooltip sits below its target, so the arrow's flat
+   base runs along the top of the bubble and its point faces up (toward
+   the target). A "pointing up" border-triangle puts the solid color on
+   border-bottom, transparent on left/right. */
+.ap-tooltip--bottom .ap-tooltip-arrow {
+	border-left-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-right-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-bottom-width: var(--ap-tooltip-arrow-height);
+	border-bottom-color: currentColor;
+}
+
+/* Position=Top -- tooltip sits above its target, arrow points down. */
+.ap-tooltip--top .ap-tooltip-arrow {
+	border-left-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-right-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-top-width: var(--ap-tooltip-arrow-height);
+	border-top-color: currentColor;
+}
+
+/* Position=Left -- tooltip sits to the left of its target, arrow points
+   right (solid color on border-left). */
+.ap-tooltip--left .ap-tooltip-arrow {
+	border-top-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-bottom-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-left-width: var(--ap-tooltip-arrow-height);
+	border-left-color: currentColor;
+}
+
+/* Position=Right -- tooltip sits to the right of its target, arrow
+   points left (solid color on border-right). */
+.ap-tooltip--right .ap-tooltip-arrow {
+	border-top-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-bottom-width: calc(var(--ap-tooltip-arrow-width) / 2);
+	border-right-width: var(--ap-tooltip-arrow-height);
+	border-right-color: currentColor;
+}
+
+/* ---- Variations page layout ----
+   Same copy/swatch-group pattern as every other Tier 3 component's own
+   Variations-page layout section -- kept as its own self-contained copy
+   here, matching this codebase's one-CSS-file-per-component convention. */
+
+.ap-tooltip-section {
+	margin-bottom: 3rem;
+}
+
+.ap-tooltip-section-title {
+	font: var(--ap-tier-2-typography-label-xs);
+}
+
+.ap-tooltip-section-body {
+	display: flex;
+	gap: 2.5rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-tooltip-section-copy {
+	flex: 0 1 40%;
+	max-width: 450px;
+	font: var(--ap-tier-2-typography-body-sm);
+}
+
+.ap-tooltip-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-tooltip-section-copy ul {
+	margin: 0.5rem 0 0;
+	padding-left: 1.1rem;
+}
+
+.ap-tooltip-section-copy li {
+	margin-bottom: 0.5rem;
+}
+
+.ap-tooltip-section-example {
+	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	gap: 0.75rem;
+}
+
+.ap-tooltip-swatch-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+/* Content section: dark tooltips stacked above light tooltips, each row its own
+   wrapping flex group (rather than one mixed row) -- see .ap-tooltip-color-group. */
+.ap-tooltip-swatch-group--stacked {
+	flex-direction: column;
+}
+
+.ap-tooltip-color-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+}
+
+/* Fixed-height wrapper so every tooltip swatch occupies the same footprint
+   regardless of its actual rendered size (position variants render at
+   different heights -- e.g. side-arrow tooltips are wider/shorter than
+   top/bottom ones), keeping the grid visually aligned. */
+.ap-tooltip_container {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+/* Light-color-variant swatches need a non-white backdrop to stay legible --
+   Figma's own Light tooltip background is near-white, so without this the
+   bubble nearly disappears against the page's white surface. */
+.ap-tooltip_container--light {
+	background: var(--ap-tier-2-color-background-surface-tertiary);
+}
+
+@media (max-width: 991px) {
+	.ap-tooltip-section-copy,
+	.ap-tooltip-section-example {
+		flex: 1 1 100%;
+		max-width: none;
+	}
+}
+
+.ap-tooltip-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.ap-tooltip-swatch-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* ---- Interactive hover demo ----
+   A real hover-triggered example: a small trigger square, with the real
+   <Tooltip> shown/hidden by React state on mouseEnter/mouseLeave, laid
+   out absolutely relative to this wrapper -- no extra positioning
+   component was built for this since Figma's own "Tooltip" component
+   doesn't define one either (see Tooltip.jsx's own doc comment). */
+.ap-tooltip-demo-anchor {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: var(--ap-border-radius-4);
+	background: var(--ap-tier-2-color-background-surface-tertiary);
+	color: var(--ap-tier-2-color-content-default);
+	font: var(--ap-tier-2-typography-body-sm);
+	cursor: default;
+}
+
+.ap-tooltip-demo-popup {
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.ap-tooltip-demo-popup--bottom {
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 4px;
+}
+
+.ap-tooltip-demo-popup--top {
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 4px;
+}
+
+.ap-tooltip-demo-popup--left {
+	right: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-right: 4px;
+}
+
+.ap-tooltip-demo-popup--right {
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 4px;
+}
+
+/* ---- Token readout (label / var name / value) -- same visual language
+   as every other Tier 3 component's readout ---- */
+
+.ap-tooltip-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font: var(--ap-font2-body-text-xs-regular);
+}
+
+.ap-tooltip-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-tooltip-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
+.ap-tooltip-readout-label {
+	color: var(--ap-tier-2-color-content-default);
+	min-width: 3.5rem;
+}
+
+.ap-tooltip-readout-var {
+	color: var(--ap-tier-2-color-content-subtle);
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
+
+.ap-tooltip-readout-sep {
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-tooltip-readout-value {
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-default);
+}

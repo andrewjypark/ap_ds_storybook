@@ -1368,7 +1368,7 @@
   --ap-dropdown-menu-color-background: #f6f7f9;
   --ap-dropdown-menu-border-radius: 8px;
   --ap-dropdown-menu-padding-vertical: 5px;
-  --ap-dropdown-menu-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --ap-dropdown-menu-box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
   --ap-dropdown-field-color-background: #ffffff;
   --ap-dropdown-field-color-border-default: #23272b;
   --ap-dropdown-field-color-border-active: #2c1a73;
@@ -1409,6 +1409,35 @@
   --ap-modal-banner-padding: 16px;
   --ap-modal-banner-gap: 10px;
   --ap-modal-banner-text: 400 14px/20px Nudica;
+  --ap-checkbox-size: 20px;
+  --ap-checkbox-box-size: 14px;
+  --ap-checkbox-border-radius: 2px;
+  --ap-checkbox-border-width: 2px;
+  --ap-checkbox-color-border: #101214;
+  --ap-checkbox-color-background-unchecked: #ffffff;
+  --ap-checkbox-color-background-checked: #8c622e;
+  --ap-checkbox-color-checkmark: #ffffff;
+  --ap-table-row-color-background-default: #f6f7f9;
+  --ap-table-row-color-background-alt: #e1e4e7;
+  --ap-table-row-color-border: #bfc4c8;
+  --ap-table-row-border-width: 1px;
+  --ap-table-cell-padding: 10px;
+  --ap-table-cell-gap: 4px;
+  --ap-table-cell-color-header-text: #23272b;
+  --ap-table-cell-color-body-text: #23272b;
+  --ap-table-cell-color-body-text-secondary: #64696f;
+  --ap-table-cell-header-text: 500 14px/20px Nudica;
+  --ap-table-cell-body-text: 400 14px/20px Nudica;
+  --ap-tooltip-padding-horizontal: 8px;
+  --ap-tooltip-padding-vertical: 4px;
+  --ap-tooltip-border-radius: 2px;
+  --ap-tooltip-arrow-width: 10px;
+  --ap-tooltip-arrow-height: 5px;
+  --ap-tooltip-text: 400 14px/20px Nudica;
+  --ap-tooltip-color-background-dark: #3d4247;
+  --ap-tooltip-color-background-light: #ffffff;
+  --ap-tooltip-color-text-dark: #ffffff;
+  --ap-tooltip-color-text-light: #23272b;
 }
 
 :root {

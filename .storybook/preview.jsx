@@ -186,7 +186,7 @@ const preview = {
 					"Tier 3: Components",
 					[
 						"Components",
-						["Button", "Icon", "Segment Group", "Dropdown", "Text Input", "Modal"],
+						["Button", "Icon", "Segment Group", "Dropdown", "Text Input", "Modal", "Checkbox", "Table", "Tooltip"],
 					],
 				],
 			},

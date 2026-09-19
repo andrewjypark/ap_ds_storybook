@@ -254,6 +254,16 @@ const BASE_SOURCE = [
 	// reasoning as buttons/text-input/segment-group/dropdown above) --
 	// belongs in every build.
 	writeSet("tier_3/modal"),
+	// Checkbox has no Core/Green/Gold theming yet either (single mode, same
+	// reasoning as the rest of tier_3 above) -- belongs in every build.
+	writeSet("tier_3/checkbox"),
+	// Table (table_row_072426 + table_row_cell_container from Figma) has no
+	// Core/Green/Gold theming yet either (single mode, same reasoning as
+	// the rest of tier_3 above) -- belongs in every build.
+	writeSet("tier_3/table"),
+	// Tooltip has no Core/Green/Gold theming yet either (single mode, same
+	// reasoning as the rest of tier_3 above) -- belongs in every build.
+	writeSet("tier_3/tooltip"),
 ];
 
 /**
