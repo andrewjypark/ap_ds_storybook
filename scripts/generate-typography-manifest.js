@@ -122,6 +122,10 @@
  * same pattern as FontSizeScale/LineHeightScale/FontFamilyScale, just
  * pinned to the theme global.
  *
+ * TIER 1 COMPOSITE STYLES (`tier1CompositeStyles`): the large per-font,
+ * per-weight set under tier_1_core's font1/font2/font3 roots that Tier 2's
+ * composite styles are chosen from -- see buildTier1CompositeStyles below.
+ *
  * ---------------------------------------------------------------------
  * GREEN TIER 1 / GOLD TIER 1: tokens.json's tier_1_green/tier_1_gold
  * override fontSize, lineHeights, fontFamilies, and font_weights_font_1/
@@ -307,6 +311,64 @@ function buildCompositeStyles(allNames) {
 		}));
 }
 
+// Tier 1 Core composite styles -- the LARGE set that Tier 2's composite
+// styles (above) are chosen from; rendered by Tier1CompositeStyles.jsx.
+// They're `$type: "typography"` composite tokens under tier_1_core's
+// font1/font2/font3 roots (heading_1, heading_2_sm/heading_2/heading_2_lg,
+// ... heading_6_*, body_text_lg/default/small/xs/xxs), each in four
+// weights (light/regular/semibold/bold), and build-tokens.js's same
+// `typography/css/shorthand` transform collapses each into one CSS `font`
+// shorthand custom property, e.g.
+//   --ap-font1-heading-4-sm-bold: 600 18px/26px 'Basier Circle';
+// Unlike Tier 2's composites they have NO companion letter-spacing/
+// text-transform/text-decoration custom properties.
+//
+// Names only, never values -- same rule as everything else here. The
+// manifest is grouped font -> style family (heading-1 ... heading-6,
+// body-text) -> size variant (sm/default/lg for headings, lg/default/
+// small/xs/xxs for body text) -> one cssVar per weight. Group/item order
+// is the order the vars appear in the built CSS, which follows
+// tokens.json (and the Tokens Studio panel): heading_1, heading_2_sm,
+// heading_2, heading_2_lg, ... body_text_lg, ... body_text_xxs.
+const TIER1_COMPOSITE_RE = /^--ap-(font[123])-([a-z0-9-]+)-(light|regular|semibold|bold)$/;
+const TIER1_WEIGHT_ORDER = ["light", "regular", "semibold", "bold"];
+
+function splitTier1CompositeStyle(style) {
+	// "heading-4-sm" -> heading-4 / sm, "heading-2" -> heading-2 / default,
+	// "body-text-lg" -> body-text / lg
+	let m = style.match(/^(heading-\d)(?:-(sm|lg))?$/);
+	if (m) return { group: m[1], key: m[2] || "default" };
+	m = style.match(/^(body-text)-(.+)$/);
+	if (m) return { group: m[1], key: m[2] };
+	return { group: style, key: "default" };
+}
+
+function buildTier1CompositeStyles(allNames) {
+	const byFont = new Map(); // font -> Map(group -> Map(key -> { weight: cssVar }))
+	const weightsSeen = new Set();
+	for (const cssVar of allNames) {
+		const match = cssVar.match(TIER1_COMPOSITE_RE);
+		if (!match) continue;
+		const [, font, style, weight] = match;
+		const { group, key } = splitTier1CompositeStyle(style);
+		if (!byFont.has(font)) byFont.set(font, new Map());
+		const groups = byFont.get(font);
+		if (!groups.has(group)) groups.set(group, new Map());
+		const items = groups.get(group);
+		if (!items.has(key)) items.set(key, {});
+		items.get(key)[weight] = cssVar;
+		weightsSeen.add(weight);
+	}
+	const fonts = {};
+	for (const font of Array.from(byFont.keys()).sort()) {
+		fonts[font] = Array.from(byFont.get(font).entries()).map(([groupName, items]) => ({
+			groupName,
+			items: Array.from(items.entries()).map(([key, cssVars]) => ({ key, cssVars })),
+		}));
+	}
+	return { weights: TIER1_WEIGHT_ORDER.filter((w) => weightsSeen.has(w)), fonts };
+}
+
 const allNames = parseCssVarNames(fs.readFileSync(CORE_CSS_PATH, "utf-8"));
 const coreValues = parseCssVarValues(fs.readFileSync(CORE_CSS_PATH, "utf-8"));
 
@@ -331,6 +393,7 @@ const manifest = {
 		storybook_ds: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.storybook_ds),
 	},
 	compositeStyles: buildCompositeStyles(allNames),
+	tier1CompositeStyles: buildTier1CompositeStyles(allNames),
 };
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -345,5 +408,8 @@ console.log(
 		`font-weight groups -- ${manifest.fontWeight.map((g) => `${g.groupName}: ${g.items.length}`).join(", ")}; ` +
 		`font-family steps: ${manifest.fontFamily.length}; ` +
 		`font-weight theme diffs: ${fontWeightDiffCounts}; ` +
-		`composite styles -- ${manifest.compositeStyles.map((g) => `${g.groupName}: ${g.items.length}`).join(", ")})`,
+		`composite styles -- ${manifest.compositeStyles.map((g) => `${g.groupName}: ${g.items.length}`).join(", ")}; ` +
+		`tier 1 composite styles -- ${Object.entries(manifest.tier1CompositeStyles.fonts)
+			.map(([font, groups]) => `${font}: ${groups.reduce((n, g) => n + g.items.length, 0)} styles x ${manifest.tier1CompositeStyles.weights.length} weights`)
+			.join(", ")})`,
 );

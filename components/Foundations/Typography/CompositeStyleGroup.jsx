@@ -20,7 +20,7 @@ function titleCase(name) {
  * Title, Label, Body, Meta) -- same collapsible pattern as
  * FontSizeFontGroup.jsx, one card per size variant. Expanded by default.
  */
-export function CompositeStyleGroup({ groupName, items }) {
+export function CompositeStyleGroup({ groupName, title, items, withCompanions = true }) {
 	const [expanded, setExpanded] = useState(true);
 
 	return (
@@ -38,7 +38,7 @@ export function CompositeStyleGroup({ groupName, items }) {
 				onClick={() => setExpanded((prev) => !prev)}
 				aria-expanded={expanded}
 			>
-				<span className="ap-type-font-group-title">{titleCase(groupName)}</span>
+				<span className="ap-type-font-group-title">{title || titleCase(groupName)}</span>
 				<span
 					className={`ap-type-font-group-chevron${expanded ? "" : " ap-type-font-group-chevron--collapsed"}`}
 				>
@@ -48,7 +48,12 @@ export function CompositeStyleGroup({ groupName, items }) {
 			{expanded && (
 				<div className="ap-type-composite-group">
 					{items.map((item) => (
-						<CompositeStyleCard key={item.cssVar} itemKey={item.key} cssVar={item.cssVar} />
+						<CompositeStyleCard
+							key={item.cssVar}
+							itemKey={item.key}
+							cssVar={item.cssVar}
+							withCompanions={withCompanions}
+						/>
 					))}
 				</div>
 			)}

@@ -29,7 +29,7 @@ const SAMPLE_TEXT = "The quick brown fox jumps over the lazy dog";
  * point of the composite-styles feature, so it's retained rather than
  * trading it away to match ds's simpler single-property readout.
  */
-export function CompositeStyleCard({ itemKey, cssVar }) {
+export function CompositeStyleCard({ itemKey, cssVar, withCompanions = true }) {
 	const letterSpacingVar = `${cssVar}-letter-spacing`;
 	const textTransformVar = `${cssVar}-text-transform`;
 	const textDecorationVar = `${cssVar}-text-decoration`;
@@ -48,9 +48,16 @@ export function CompositeStyleCard({ itemKey, cssVar }) {
 				className="ap-type-composite-sample"
 				style={{
 					font: `var(${cssVar})`,
-					letterSpacing: `var(${letterSpacingVar})`,
-					textTransform: `var(${textTransformVar})`,
-					textDecoration: `var(${textDecorationVar})`,
+					// Tier 2 composites have three companion custom properties
+					// (letter-spacing/text-transform/text-decoration); Tier 1 composites
+					// do not, so Tier 1 passes withCompanions={false} and skips them.
+					...(withCompanions
+						? {
+								letterSpacing: `var(${letterSpacingVar})`,
+								textTransform: `var(${textTransformVar})`,
+								textDecoration: `var(${textDecorationVar})`,
+							}
+						: {}),
 				}}
 			>
 				{SAMPLE_TEXT}
