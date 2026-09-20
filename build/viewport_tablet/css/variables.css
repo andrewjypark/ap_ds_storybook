@@ -1203,10 +1203,10 @@
   --ap-tier-2-border-radius-md: 8px;
   --ap-tier-2-border-radius-large: 16px;
   --ap-tier-2-border-radius-round: 999px;
-  --ap-tier-2-border-width-small: 1px none;
-  --ap-tier-2-border-width-medium: 2px none;
-  --ap-tier-2-border-width-large: 4px none;
-  --ap-tier-2-border-width-xl: 8px none;
+  --ap-tier-2-border-width-small: 1px;
+  --ap-tier-2-border-width-medium: 2px;
+  --ap-tier-2-border-width-large: 4px;
+  --ap-tier-2-border-width-xl: 8px;
   --ap-tier-2-typography-display-default: 300 38px/45px 'TWK Lausanne';
   --ap-tier-2-typography-display-sm: 300 34px/42px 'TWK Lausanne';
   --ap-tier-2-typography-headline-lg: 500 34px/42px 'TWK Lausanne';

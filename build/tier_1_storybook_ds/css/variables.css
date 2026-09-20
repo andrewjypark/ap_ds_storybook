@@ -1239,10 +1239,10 @@
   --ap-tier-2-border-radius-md: 8px;
   --ap-tier-2-border-radius-large: 16px;
   --ap-tier-2-border-radius-round: 999px;
-  --ap-tier-2-border-width-small: 1px none;
-  --ap-tier-2-border-width-medium: 2px none;
-  --ap-tier-2-border-width-large: 4px none;
-  --ap-tier-2-border-width-xl: 8px none;
+  --ap-tier-2-border-width-small: 1px;
+  --ap-tier-2-border-width-medium: 2px;
+  --ap-tier-2-border-width-large: 4px;
+  --ap-tier-2-border-width-xl: 8px;
   --ap-tier-2-typography-display-default: 300 61px/73px Inter;
   --ap-tier-2-typography-display-sm: 300 52px/63px Inter;
   --ap-tier-2-typography-headline-lg: 400 52px/63px Inter;
