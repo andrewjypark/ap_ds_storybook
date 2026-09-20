@@ -4,6 +4,7 @@ import { FontSizeScale } from "./FontSizeScale.jsx";
 import { LineHeightScale } from "./LineHeightScale.jsx";
 import { FontWeightScale } from "./FontWeightScale.jsx";
 import { FontFamilyScale } from "./FontFamilyScale.jsx";
+import { Tier1CompositeStyles } from "./Tier1CompositeStyles.jsx";
 
 /**
  * Core contains the complete set of Tier 1 typography tokens. Green
@@ -15,7 +16,7 @@ export default {
 		docs: {
 			description: {
 				component:
-					"Font Size and Line Height are responsive: their values change per breakpoint. Each of those two pages has its own Mobile / Tablet / Desktop toggle to preview them for this theme. Font Weight and Font Family are not affected by viewport at all.",
+					"Font Size and Line Height are responsive: their values change per breakpoint. Each of those two pages has its own Mobile / Tablet / Desktop toggle to preview them for this theme. Font Weight and Font Family are not affected by viewport at all. Composite Styles bundles family, weight, size, and line height into one CSS font shorthand per style; every one of them differs from Core in this theme, so that page shows the full set (Desktop values) rather than a diff.",
 			},
 		},
 	},
@@ -39,4 +40,9 @@ export const FontWeight = {
 export const FontFamily = {
 	globals: { theme: "green" },
 	render: () => <FontFamilyScale />,
+};
+
+export const CompositeStyles = {
+	globals: { theme: "green" },
+	render: () => <Tier1CompositeStyles />,
 };
