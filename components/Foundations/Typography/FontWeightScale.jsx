@@ -1,6 +1,7 @@
 import React from "react";
 import manifest from "../../../tokens/generated/typography-manifest.json";
 import { FontWeightGroup } from "./FontWeightGroup.jsx";
+import { PageTitle } from "./PageTitle.jsx";
 import "./Typography.css";
 
 /**
@@ -19,10 +20,13 @@ import "./Typography.css";
  */
 export function FontWeightScale({ groups = manifest.fontWeight }) {
 	return (
-		<div className="ap-type-font-groups">
-			{groups.map((group) => (
-				<FontWeightGroup key={group.groupName} groupName={group.groupName} items={group.items} />
-			))}
-		</div>
+		<>
+			<PageTitle>Font Weight</PageTitle>
+			<div className="ap-type-font-groups">
+				{groups.map((group) => (
+					<FontWeightGroup key={group.groupName} groupName={group.groupName} items={group.items} />
+				))}
+			</div>
+		</>
 	);
 }

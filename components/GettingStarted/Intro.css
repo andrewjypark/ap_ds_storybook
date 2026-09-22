@@ -1,0 +1,131 @@
+/* ============================================================================
+ * Getting Started -- the storybook's landing page. Reuses the same class
+ * names/patterns every other Foundations/Components page already
+ * establishes (one-CSS-file-per-folder convention -- .ap-section__title is
+ * redefined here identically rather than imported cross-folder, same as
+ * Color.css/Typography.css/Icon.css all do).
+ * ============================================================================
+ */
+
+.ap-intro {
+	max-width: 46rem;
+	font-family: -apple-system, system-ui, sans-serif;
+}
+
+/* Page-level header -- same class/attributes convention as every other
+   page's own title (Border/Color/Typography/Icon all use this exact
+   class), driven by the Tier 2 Title composite style. data-theme/
+   data-viewport are pinned on .ap-intro itself (see Intro.jsx), so no
+   per-element override is needed here the way PageTitle.jsx/
+   ColorScaleSection.jsx need it -- there's no ambient-theme specimen
+   content on this page to protect from being swept up by the pin. */
+.ap-section__title {
+	font: var(--ap-tier-2-typography-title-default);
+	margin: 0 0 1rem;
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-intro-lede {
+	font: var(--ap-tier-2-typography-body-lg);
+	color: var(--ap-tier-2-color-content-subtle);
+	margin: 0 0 3rem;
+	max-width: 40rem;
+}
+
+.ap-intro-section {
+	margin-bottom: 3rem;
+}
+
+.ap-intro-section:last-child {
+	margin-bottom: 0;
+}
+
+/* Section headers ("How this storybook is organized", ...) -- same style
+   as the collapsible font-group headers in Typography.css
+   (.ap-type-font-group-title), reused here as the section-heading weight
+   for a content page rather than a token-group label. */
+.ap-intro-section-title {
+	font: var(--ap-tier-2-typography-label-default);
+	color: var(--ap-tier-2-color-content-default);
+	margin: 0 0 1rem;
+}
+
+.ap-intro-section-body {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-intro-section-body p {
+	margin: 0 0 1rem;
+}
+
+.ap-intro-section-body p:last-child {
+	margin-bottom: 0;
+}
+
+.ap-intro-section-body ul {
+	margin: 0 0 1rem;
+	padding-left: 1.1rem;
+}
+
+.ap-intro-section-body li {
+	margin-bottom: 0.6rem;
+}
+
+.ap-intro-section-body li:last-child {
+	margin-bottom: 0;
+}
+
+.ap-intro-section-body strong {
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* Aside/caveat copy -- same italic-subtle treatment as Icon.css's
+   .ap-icon-note. */
+.ap-intro-note {
+	font-style: italic;
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+/* "Where to find things" -- a simple term/description row list, styled
+   like Border's token rows: a bold key above a lighter value, here laid
+   out side by side instead of stacked since the term is short and the
+   description is a full sentence. */
+.ap-intro-find-row {
+	display: flex;
+	gap: 1.5rem;
+	padding: 0.85rem 0;
+	border-bottom: 1px solid var(--ap-tier-2-color-border-subtle);
+}
+
+.ap-intro-find-row:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.ap-intro-find-row:first-child {
+	padding-top: 0;
+}
+
+.ap-intro-find-term {
+	flex: 0 0 14rem;
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-intro-find-desc {
+	flex: 1 1 auto;
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+@media (max-width: 640px) {
+	.ap-intro-find-row {
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.ap-intro-find-term {
+		flex: none;
+	}
+}

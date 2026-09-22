@@ -58,7 +58,7 @@ export function DropdownVariations() {
 
 	return (
 		<div>
-			<h3 className="ap-color-section__title" data-theme="storybook_ds" data-viewport="desktop">
+			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
 				Dropdown
 			</h3>
 			<Section title="Content">

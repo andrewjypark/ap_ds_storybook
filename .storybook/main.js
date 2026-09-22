@@ -25,7 +25,23 @@ if (!isPublicBuild) {
 
 const config = {
 	stories,
-	addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
+	// addon-a11y is deliberately not listed: its Accessibility tab was the
+	// only bottom-panel tab left with any content, and the whole panel is
+	// hidden now (see manager.js). @storybook/addon-a11y is still installed
+	// in package.json -- add it back here (and drop the showPanel override
+	// in manager.js) to bring the panel back.
+	addons: ["@storybook/addon-docs"],
+	// Storybook 10's built-in Controls/Actions/Interactions panels are
+	// switched off: every story here is a plain render() with no args,
+	// argTypes, fn() actions, or play functions, so those tabs were always
+	// empty ("This story has no controls"). If the Button Playground page
+	// (argTypes + Controls) gets built later, flip `controls` back to true
+	// and re-enable the panel in manager.js.
+	features: {
+		controls: false,
+		actions: false,
+		interactions: false,
+	},
 	framework: {
 		name: "@storybook/react-vite",
 		options: {},

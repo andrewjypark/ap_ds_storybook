@@ -1,6 +1,7 @@
 import React from "react";
 import manifest from "../../../tokens/generated/typography-manifest.json";
 import { FontFamilyCard } from "./FontFamilyCard.jsx";
+import { PageTitle } from "./PageTitle.jsx";
 import "./Typography.css";
 
 /**
@@ -9,10 +10,13 @@ import "./Typography.css";
  */
 export function FontFamilyScale() {
 	return (
-		<div className="ap-type-token-group">
-			{manifest.fontFamily.map((item) => (
-				<FontFamilyCard key={item.cssVar} font={item.key} cssVar={item.cssVar} />
-			))}
-		</div>
+		<>
+			<PageTitle>Font Family</PageTitle>
+			<div className="ap-type-token-group">
+				{manifest.fontFamily.map((item) => (
+					<FontFamilyCard key={item.cssVar} font={item.key} cssVar={item.cssVar} />
+				))}
+			</div>
+		</>
 	);
 }

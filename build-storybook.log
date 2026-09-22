@@ -1,0 +1,479 @@
+
+> ap-ds-storybook@1.0.0 build-storybook
+> npm run build && storybook build
+
+
+> ap-ds-storybook@1.0.0 build
+> node build-tokens.js && node scripts/generate-color-manifest.js && node scripts/generate-border-manifest.js && node scripts/generate-typography-manifest.js
+
+
+=== Building theme: tier_1_core ===
+
+css
+- build/tier_1_core/css/variables.css
+- build/tier_1_core/css
+- build/tier_1_core
+
+css
+
+css
+! build/tier_1_core/css/_companion-variables.css, does not exist
+
+css
+
+=== Building theme: tier_1_green ===
+
+css
+- build/tier_1_green/css/variables.css
+- build/tier_1_green/css
+- build/tier_1_green
+
+css
+
+css
+! build/tier_1_green/css/_companion-variables.css, does not exist
+
+css
+
+=== Building theme: tier_1_gold ===
+
+css
+- build/tier_1_gold/css/variables.css
+- build/tier_1_gold/css
+- build/tier_1_gold
+
+css
+
+css
+! build/tier_1_gold/css/_companion-variables.css, does not exist
+
+css
+
+=== Building theme: tier_1_storybook_ds ===
+
+css
+- build/tier_1_storybook_ds/css/variables.css
+- build/tier_1_storybook_ds/css
+- build/tier_1_storybook_ds
+
+css
+
+css
+! build/tier_1_storybook_ds/css/_companion-variables.css, does not exist
+
+css
+
+=== Building viewport: viewport_mobile ===
+
+css
+- build/viewport_mobile/css/variables.css
+- build/viewport_mobile/css
+- build/viewport_mobile
+
+css
+
+css
+! build/viewport_mobile/css/_companion-variables.css, does not exist
+
+css
+
+=== Building viewport: viewport_tablet ===
+
+css
+- build/viewport_tablet/css/variables.css
+- build/viewport_tablet/css
+- build/viewport_tablet
+
+css
+
+css
+! build/viewport_tablet/css/_companion-variables.css, does not exist
+
+css
+
+=== Building viewport: viewport_desktop ===
+
+css
+- build/viewport_desktop/css/variables.css
+- build/viewport_desktop/css
+- build/viewport_desktop
+
+css
+
+css
+! build/viewport_desktop/css/_companion-variables.css, does not exist
+
+css
+
+=== Building bundle: all-combinations ===
+
+css
+! build/all-combinations/css/_temp-tier_1_core-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_core-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_core-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_core-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_core-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_core-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_green-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_green-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_green-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_green-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_green-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_green-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_gold-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_gold-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_gold-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_gold-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_gold-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_gold-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_storybook_ds-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_storybook_ds-viewport_mobile.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_storybook_ds-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_storybook_ds-viewport_tablet.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_temp-tier_1_storybook_ds-viewport_desktop.css, does not exist
+
+css
+
+css
+! build/all-combinations/css/_companion-_temp-tier_1_storybook_ds-viewport_desktop.css, does not exist
+
+css
+✔︎ build/all-combinations/css/variables.css (combined, [data-theme][data-viewport]-scoped, 4x3=12 combinations)
+
+Build complete.
+✔︎ tokens/generated/color-manifest.json (261 color tokens; Color Palettes families: 8, Data Viz families: 4; tier_2 full grids -- Content: 12, Background: 40, Border: 11; tier_2 diffs: green=15, gold=15, storybook_ds=15)
+✔︎ tokens/generated/border-manifest.json (5 width tokens, 7 radius tokens)
+✔︎ tokens/generated/typography-manifest.json (font-size steps -- font1: 21, font2: 21, font3: 21; line-height steps -- font1: 21, font2: 21, font3: 21; letter-spacing steps: 8; font-weight groups -- fontWeights_choices_text: 17, fontWeights_choices_numbers: 9, font_weights_font_1: 4, font_weights_font_2: 4, font_weights_font_3: 4; font-family steps: 3; font-weight theme diffs: green=8, gold=8, storybook_ds=9; composite styles -- display: 2, headline: 3, title: 3, label: 5, body: 8, meta: 2; tier 1 composite styles -- font1: 21 styles x 4 weights, font2: 21 styles x 4 weights, font3: 21 styles x 4 weights)
+
+┌  Building storybook v10.6.0
+│
+◇  Cleaning outputDir: storybook-static
+│
+◇  Loading presets
+│
+◇  Building manager..
+│
+●  Building open services..
+│
+●  Building preview..
+│
+●  Copying static files: build at storybook-static
+│  Vite vite v6.4.3 building for production...
+│  Vite transforming...
+│  Vite ✓ 314 modules transformed.
+│  Vite rendering chunks...
+│  Vite computing gzip size...
+│  Vite storybook-static/assets/BasierSquareMono-Regular-BYRXVgNg.woff2
+│  18.79 kB
+│  Vite storybook-static/iframe.html
+│  18.84 kB │ gzip:   5.28 kB
+│  Vite storybook-static/assets/BasierCircle-Bold-ur1LXeV9.woff2
+│  20.24 kB
+│  Vite storybook-static/assets/BasierSquare-Bold-CgreKSn3.woff2
+│  20.27 kB
+│  Vite storybook-static/assets/BasierSquare-Regular-Cot63QiB.woff2
+│  20.33 kB
+│  Vite storybook-static/assets/BasierCircle-Regular-Bssb0XVW.woff2
+│  20.45 kB
+│  Vite storybook-static/assets/BasierSquare-SemiBold-NbTKU8nk.woff2
+│  20.57 kB
+│  Vite storybook-static/assets/BasierCircle-SemiBold-BjVJ5oHf.woff2
+│  20.77 kB
+│  Vite storybook-static/assets/BasierSquare-Medium-cIyMTbUK.woff2
+│  20.86 kB
+│  Vite storybook-static/assets/BasierCircle-Medium-DtsUNDkw.woff2
+│  21.10 kB
+│  Vite storybook-static/assets/Quablo-Regular-DJZ5w-GZ.woff2
+│  21.96 kB
+│  Vite storybook-static/assets/Quablo-Light-Djf3p5tK.woff2
+│  22.36 kB
+│  Vite storybook-static/assets/Quablo-SemiBold-hiKlCDQE.woff2
+│  22.98 kB
+│  Vite storybook-static/assets/Quablo-Medium-BJVHI3xw.woff2
+│  23.02 kB
+│  Vite storybook-static/assets/Nudica-Regular-CUvQ5Tua.woff2
+│  23.07 kB
+│  Vite storybook-static/assets/Nudica-Light-BPuR3HGy.woff2
+│  23.18 kB
+│  Vite storybook-static/assets/Nudica-Bold-CcNB2dvl.woff2
+│  23.42 kB
+│  Vite storybook-static/assets/Nudica-Medium-BhNMANBm.woff2
+│  23.86 kB
+│  Vite storybook-static/assets/Archivo_SemiExpanded-Thin-CCbLE-bj.woff2
+│  29.36 kB
+│  Vite storybook-static/assets/TWKLausanne-300-CIHPzv93.woff2
+│  30.14 kB
+│  Vite storybook-static/assets/Archivo_SemiExpanded-Light-DcEedsXB.woff2
+│  30.22 kB
+│  Vite
+│  storybook-static/assets/Archivo_SemiExpanded-Regular-DYgOQJ7s.woff2
+│  30.50 kB
+│  Vite
+│  storybook-static/assets/Archivo_SemiExpanded-Medium-Cb6OCWfY.woff2
+│  30.63 kB
+│  Vite storybook-static/assets/TWKLausanne-500-BV4B5fgh.woff2
+│  31.00 kB
+│  Vite storybook-static/assets/TWKLausanne-700-NWgBiim4.woff2
+│  31.06 kB
+│  Vite storybook-static/assets/TWKLausanne-100-CvQvl0kP.woff2
+│  31.60 kB
+│  Vite
+│  storybook-static/assets/BricolageGrotesque-ExtraLight-Ce_-6E5-.woff2
+│  37.24 kB
+│  Vite storybook-static/assets/BricolageGrotesque-Light-DODjxVqL.woff2
+│  37.73 kB
+│  Vite storybook-static/assets/BricolageGrotesque-Regular-CR1QRyJV.woff2
+│  38.06 kB
+│  Vite storybook-static/assets/BricolageGrotesque-Medium-B85L4AKP.woff2
+│  38.07 kB
+│  Vite storybook-static/assets/IBMPlexMono-Regular-B_o2WZ8r.woff2
+│  39.17 kB
+│  Vite storybook-static/assets/IBMPlexMono-Light-CUE1JANS.woff2
+│  39.30 kB
+│  Vite storybook-static/assets/IBMPlexMono-Medium-DCseLyGy.woff2
+│  40.17 kB
+│  Vite storybook-static/assets/IBMPlexMono-SemiBold-CFBM5XBF.woff2
+│  41.06 kB
+│  Vite storybook-static/assets/Novela-Regular-CiMn0ose.woff2
+│  42.15 kB
+│  Vite storybook-static/assets/Novela-DisplayRegular-BtlshfxZ.woff2
+│  43.12 kB
+│  Vite storybook-static/assets/Novela-Black-B4iFiYcu.woff2
+│  44.96 kB
+│  Vite storybook-static/assets/Novela-Bold-DyPQ0ODE.woff2
+│  45.80 kB
+│  Vite storybook-static/assets/Novela-Semibold-Bpn1oD7-.woff2
+│  46.00 kB
+│  Vite storybook-static/assets/Inter-Regular-COLGFB3M.woff2
+│  111.27 kB
+│  Vite storybook-static/assets/Inter-Light-14LG-y7V.woff2
+│  112.59 kB
+│  Vite storybook-static/assets/Inter-ExtraLight-7kXoOaX_.woff2
+│  112.73 kB
+│  Vite storybook-static/assets/Inter-Medium-CDhBSFyE.woff2
+│  114.35 kB
+│  Vite storybook-static/assets/TWKContinental-Light-BpVLRFba.woff2
+│  122.58 kB
+│  Vite storybook-static/assets/TWKContinental-Book-BzS0lwCh.woff2
+│  126.68 kB
+│  Vite storybook-static/assets/TWKContinental-Regular-53jZeT5-.woff2
+│  127.21 kB
+│  Vite storybook-static/assets/TWKContinental-Bold-C1SG1RXN.woff2
+│  134.91 kB
+│  Vite storybook-static/assets/Border-DzqbKXCu.css
+│  1.14 kB │ gzip:   0.41 kB
+│  Vite storybook-static/assets/tier2SemanticStories-vUsQ8FQS.css
+│  1.44 kB │ gzip:   0.48 kB
+│  Vite storybook-static/assets/Color-cIdCUPv0.css
+│  1.62 kB │ gzip:   0.54 kB
+│  Vite storybook-static/assets/GettingStarted-CxaogBck.css
+│  1.65 kB │ gzip:   0.46 kB
+│  Vite storybook-static/assets/Checkbox-D3xx3NLq.css
+│  2.51 kB │ gzip:   0.75 kB
+│  Vite storybook-static/assets/Modal-B-rmSKAF.css
+│  2.65 kB │ gzip:   0.77 kB
+│  Vite storybook-static/assets/Icon-CBiqtswk.css
+│  2.87 kB │ gzip:   0.86 kB
+│  Vite storybook-static/assets/Table-BE51akCm.css
+│  3.08 kB │ gzip:   0.86 kB
+│  Vite storybook-static/assets/SegmentGroup-tFxBcCkJ.css
+│  3.35 kB │ gzip:   0.88 kB
+│  Vite storybook-static/assets/CompositeStyleGroup-D6FUEXbJ.css
+│  3.91 kB │ gzip:   0.97 kB
+│  Vite storybook-static/assets/CodeBlock-CG_Vf1um.css
+│  4.43 kB │ gzip:   1.24 kB
+│  Vite storybook-static/assets/Tooltip-D0NPepu8.css
+│  4.67 kB │ gzip:   1.12 kB
+│  Vite storybook-static/assets/TextInput-z5YUnP0p.css
+│  4.91 kB │ gzip:   1.16 kB
+│  Vite storybook-static/assets/Dropdown-r9xkBG4V.css
+│  5.08 kB │ gzip:   1.19 kB
+│  Vite storybook-static/assets/iframe-CywS-gVS.css
+│  839.25 kB │ gzip:  94.71 kB
+│  Vite storybook-static/assets/formatter-L2YTDE3Q-DAn2XJB0.js
+│  0.26 kB │ gzip:   0.22 kB
+│  Vite storybook-static/assets/useLiveCssValue-BxTMc4LO.js
+│  0.56 kB │ gzip:   0.41 kB
+│  Vite storybook-static/assets/ColorGold.stories-CMc6yM4-.js
+│  0.74 kB │ gzip:   0.45 kB
+│  Vite storybook-static/assets/ColorGreen.stories-DxBjztIe.js
+│  0.74 kB │ gzip:   0.45 kB
+│  Vite storybook-static/assets/CompositeStyles-6rmt1i3h.js
+│  1.07 kB │ gzip:   0.64 kB
+│  Vite storybook-static/assets/Tier2Typography.stories-zor2CH2P.js
+│  1.20 kB │ gzip:   0.67 kB
+│  Vite storybook-static/assets/Semantic.stories-C1HHjoac.js
+│  1.22 kB │ gzip:   0.55 kB
+│  Vite storybook-static/assets/SemanticGold.stories-DWVKsbPA.js
+│  1.23 kB │ gzip:   0.56 kB
+│  Vite storybook-static/assets/SemanticGreen.stories-DzJcRrl4.js
+│  1.23 kB │ gzip:   0.56 kB
+│  Vite storybook-static/assets/preload-helper-Dp1pzeXC.js
+│  1.27 kB │ gzip:   0.73 kB
+│  Vite storybook-static/assets/Tier2TypographyGold.stories-CSclRwiq.js
+│  1.27 kB │ gzip:   0.71 kB
+│  Vite storybook-static/assets/Tier2TypographyGreen.stories-BHTb85mL.js
+│  1.27 kB │ gzip:   0.71 kB
+│  Vite storybook-static/assets/Color.stories-DkGz5N42.js
+│  1.92 kB │ gzip:   0.70 kB
+│  Vite storybook-static/assets/Checkbox-pn2LStNL.js
+│  2.23 kB │ gzip:   1.18 kB
+│  Vite storybook-static/assets/TypographyGold.stories-BjFobePH.js
+│  2.71 kB │ gzip:   0.98 kB
+│  Vite storybook-static/assets/TypographyGreen.stories-BZyfNEnx.js
+│  2.73 kB │ gzip:   0.98 kB
+│  Vite storybook-static/assets/tier2SemanticStories-Bn93-qJ7.js
+│  3.13 kB │ gzip:   1.25 kB
+│  Vite storybook-static/assets/Border.stories-CL3AVlvL.js
+│  3.33 kB │ gzip:   1.26 kB
+│  Vite storybook-static/assets/tier1ColorStories-DIwlffO8.js
+│  3.46 kB │ gzip:   1.34 kB
+│  Vite storybook-static/assets/Icon-C80dsMec.js
+│  3.74 kB │ gzip:   1.94 kB
+│  Vite storybook-static/assets/Typography.stories-B32i6MMq.js
+│  5.00 kB │ gzip:   1.99 kB
+│  Vite storybook-static/assets/GettingStarted.stories-BRmfKAWr.js
+│  5.08 kB │ gzip:   2.06 kB
+│  Vite storybook-static/assets/Checkbox.stories-gm_5iCuy.js
+│  5.62 kB │ gzip:   1.93 kB
+│  Vite storybook-static/assets/Tooltip.stories-CTYLzyyu.js
+│  10.12 kB │ gzip:   3.38 kB
+│  Vite storybook-static/assets/Modal.stories-CQQ26VYR.js
+│  11.99 kB │ gzip:   3.82 kB
+│  Vite storybook-static/assets/Button.stories-CC_JqI1i.js
+│  12.26 kB │ gzip:   3.66 kB
+│  Vite storybook-static/assets/Tier1CompositeStyles-B1JQPXmk.js
+│  13.67 kB │ gzip:   3.99 kB
+│  Vite storybook-static/assets/Icon.stories-D5BT8Wf8.js
+│  13.99 kB │ gzip:   4.31 kB
+│  Vite storybook-static/assets/SegmentGroup.stories-BcH7g5DK.js
+│  14.10 kB │ gzip:   4.13 kB
+│  Vite storybook-static/assets/Table.stories-DoFShMIo.js
+│  17.51 kB │ gzip:   4.58 kB
+│  Vite storybook-static/assets/TextInput.stories-BnPfUTD0.js
+│  19.05 kB │ gzip:   5.65 kB
+│  Vite storybook-static/assets/Color-CrjDks_n.js
+│  22.44 kB │ gzip:   1.90 kB
+│  Vite storybook-static/assets/Dropdown.stories-Daq8gvko.js
+│  24.73 kB │ gzip:   6.58 kB
+│  Vite storybook-static/vite-inject-mocker-entry.js
+│  28.53 kB │ gzip:   9.94 kB
+│  Vite storybook-static/assets/Color-6AOWCN3U-b53K0JBX.js
+│  30.38 kB │ gzip:  11.51 kB
+│  Vite storybook-static/assets/CompositeStyleGroup-DXtnwSiE.js
+│  32.96 kB │ gzip:   5.52 kB
+│  Vite storybook-static/assets/WithTooltip-CDUNV5IS-Bvr--Pu7.js
+│  33.21 kB │ gzip:  11.68 kB
+│  Vite storybook-static/assets/CodeBlock-CzbrVGfV.js
+│  35.50 kB │ gzip:  11.54 kB
+│  Vite storybook-static/assets/syntaxhighlighter-4REYKNEV-Dmwg5den.js
+│  77.96 kB │ gzip:  27.28 kB
+│  Vite storybook-static/assets/react-18-C4doBa3K.js
+│  214.71 kB │ gzip:  66.74 kB
+│  Vite storybook-static/assets/DocsRenderer-JROSPFPF-CSNByp-C.js
+│  853.62 kB │ gzip: 272.81 kB
+│  Vite storybook-static/assets/iframe-BJoMUl2_.js
+│  1,158.97 kB │ gzip: 331.67 kB
+│
+▲  Vite
+│  (!) Some chunks are larger than 500 kB after minification. Consider:
+│  - Using dynamic import() to code-split the application
+│  - Use build.rollupOptions.output.manualChunks to improve chunking:
+│  ]8;;https://rollupjs.org/configuration-options/#output-manualchunkshttps://rollupjs.org/configuration-options/#output-manualchunks]8;;
+│  - Adjust chunk size limit for this warning via
+│  build.chunkSizeWarningLimit.
+│  Vite ✓ built in 12.08s
+│
+◇  Output directory: /Users/andrewpark/Github
+│  Repositories/ap_ds_storybook/storybook-static
+│
+└  Storybook build completed successfully
+

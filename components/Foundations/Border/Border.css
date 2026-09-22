@@ -5,6 +5,18 @@
  * ============================================================================
  */
 
+/* Page-level header (the page's own name, "Border") -- same
+   class/attributes as Foundations/Color/Color.css's .ap-section__title,
+   copied here rather than imported across folders (same one-CSS-file-per-
+   folder convention as every other rule in this file). Deliberately bigger
+   than .ap-foundation-section-title below, which labels each of this
+   page's own sections ("border width", "border radius"). */
+.ap-section__title {
+	font: var(--ap-tier-2-typography-title-default);
+	margin: 0 0 1rem;
+	color: var(--ap-tier-2-color-content-default);
+}
+
 .ap-border-sections {
 	display: flex;
 	flex-direction: column;

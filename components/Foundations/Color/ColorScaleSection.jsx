@@ -21,7 +21,7 @@ export function ColorScaleSection({ scale }) {
 			    this title switches to storybook_ds; the color swatches
 			    below still correctly show the ambient page's own theme. */}
 			<h3
-				className="ap-color-section__title"
+				className="ap-section__title"
 				data-theme="storybook_ds"
 				data-viewport="desktop"
 			>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import manifest from "../../../tokens/generated/typography-manifest.json";
 import { CompositeStyleGroup } from "./CompositeStyleGroup.jsx";
+import { PageTitle } from "./PageTitle.jsx";
 import "./Typography.css";
 
 const { weights, fonts } = manifest.tier1CompositeStyles;
@@ -64,6 +65,7 @@ export function Tier1CompositeStyles() {
 
 	return (
 		<div>
+			<PageTitle>Composite Styles</PageTitle>
 			<div className="ap-type-viewport-panel">
 				<p className="ap-type-responsive-note">
 					Every composite style below bundles font family, weight, size, and line height into one CSS{" "}

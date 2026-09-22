@@ -1,6 +1,7 @@
 import React from "react";
 import manifest from "../../../tokens/generated/typography-manifest.json";
 import { CompositeStyleGroup } from "./CompositeStyleGroup.jsx";
+import { PageTitle } from "./PageTitle.jsx";
 import { ViewportPreviewPanel } from "./ViewportPreviewPanel.jsx";
 import "./Typography.css";
 
@@ -17,12 +18,15 @@ import "./Typography.css";
  */
 export function CompositeStyles() {
 	return (
-		<ViewportPreviewPanel>
-			<div className="ap-type-font-groups">
-				{manifest.compositeStyles.map((group) => (
-					<CompositeStyleGroup key={group.groupName} groupName={group.groupName} items={group.items} />
-				))}
-			</div>
-		</ViewportPreviewPanel>
+		<>
+			<PageTitle>Composite Styles</PageTitle>
+			<ViewportPreviewPanel>
+				<div className="ap-type-font-groups">
+					{manifest.compositeStyles.map((group) => (
+						<CompositeStyleGroup key={group.groupName} groupName={group.groupName} items={group.items} />
+					))}
+				</div>
+			</ViewportPreviewPanel>
+		</>
 	);
 }

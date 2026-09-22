@@ -35,7 +35,7 @@ export function CheckboxVariations() {
 
 	return (
 		<div>
-			<h3 className="ap-color-section__title" data-theme="storybook_ds" data-viewport="desktop">
+			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
 				Checkbox
 			</h3>
 			<Section title="Content">

@@ -3,7 +3,7 @@
 	font-family: -apple-system, system-ui, sans-serif;
 }
 
-.ap-color-section__title {
+.ap-section__title {
 	/* Test run: driven by the real Tier 2 composite typography token
 	   instead of hand-typed font-size/font-weight -- see the project doc
 	   for context. font-size/font-weight are dropped since the `font`

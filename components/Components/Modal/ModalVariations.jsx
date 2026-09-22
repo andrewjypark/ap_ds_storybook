@@ -51,7 +51,7 @@ function Section({ title, children }) {
 export function ModalVariations() {
 	return (
 		<div>
-			<h3 className="ap-color-section__title" data-theme="storybook_ds" data-viewport="desktop">
+			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
 				Modal
 			</h3>
 			<Section title="Anatomy">

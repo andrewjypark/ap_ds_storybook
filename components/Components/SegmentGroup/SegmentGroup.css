@@ -74,13 +74,13 @@
 }
 
 /* Page-level header (the component's own name, "Segment Group") -- same
-   class/attributes as Foundations/Color/Color.css's .ap-color-section__title,
+   class/attributes as Foundations/Color/Color.css's .ap-section__title,
    copied here rather than imported cross-tier (same one-CSS-file-per-
    component convention as every other rule in this file). Deliberately a
    bigger Tier 2 Title style, distinct from .ap-segment-group-section-title
    below (a smaller Label style used for each Section's own heading, e.g.
    "Content"). */
-.ap-color-section__title {
+.ap-section__title {
 	font: var(--ap-tier-2-typography-title-default);
 	margin: 0 0 1rem;
 	color: var(--ap-tier-2-color-content-default);

@@ -2,20 +2,25 @@ import React from "react";
 import { ColorSwatchCardGroup } from "./ColorSwatchCardGroup.jsx";
 
 /**
- * Tier 2 semantic page body. ap_ds_storybook's equivalent (ContentColors.jsx
- * etc.) renders nothing but a <ColorSwatchCardGroup label="content" .../> --
- * no separate big section title -- so this mirrors that instead of the
- * larger .ap-color-section__title heading Tier 1 pages use.
+ * Tier 2 semantic page body. The page's own name ("Content", "Background",
+ * "Border") is rendered as the shared .ap-section__title page header --
+ * previously a small .ap-color-swatch-card-label above the card list.
+ * data-theme/data-viewport are pinned on the heading itself so it always
+ * resolves storybook_ds's Tier 2 Title composite, regardless of the theme
+ * this story is otherwise pinned to -- same pattern as ColorScaleSection.
  */
 export function ColorGridSection({ grid }) {
 	if (!grid) return null;
-	if (grid.items.length === 0) {
-		return (
-			<div className="ap-color-swatch-card-group">
-				<div className="ap-color-swatch-card-label">{grid.title}</div>
+	return (
+		<>
+			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
+				{grid.title}
+			</h3>
+			{grid.items.length === 0 ? (
 				<p className="ap-color-section__empty">No tokens in this category differ from Core.</p>
-			</div>
-		);
-	}
-	return <ColorSwatchCardGroup label={grid.title} items={grid.items} />;
+			) : (
+				<ColorSwatchCardGroup items={grid.items} />
+			)}
+		</>
+	);
 }

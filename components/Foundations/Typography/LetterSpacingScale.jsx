@@ -1,6 +1,7 @@
 import React from "react";
 import manifest from "../../../tokens/generated/typography-manifest.json";
 import { LetterSpacingCard } from "./LetterSpacingCard.jsx";
+import { PageTitle } from "./PageTitle.jsx";
 import "./Typography.css";
 
 /**
@@ -15,10 +16,13 @@ import "./Typography.css";
  */
 export function LetterSpacingScale() {
 	return (
-		<div className="ap-type-token-group">
-			{manifest.letterSpacing.map((item) => (
-				<LetterSpacingCard key={item.cssVar} label={item.key} cssVar={item.cssVar} />
-			))}
-		</div>
+		<>
+			<PageTitle>Letter Spacing</PageTitle>
+			<div className="ap-type-token-group">
+				{manifest.letterSpacing.map((item) => (
+					<LetterSpacingCard key={item.cssVar} label={item.key} cssVar={item.cssVar} />
+				))}
+			</div>
+		</>
 	);
 }

@@ -20,21 +20,30 @@ const BorderTokenRow = ({ tokens }) => (
  */
 export function BorderScale() {
 	return (
-		<div className="ap-border-sections">
-			<section className="ap-border-section">
-				<h3 className="ap-foundation-section-title">
-					<span className="ap-foundation-title-muted">border</span>{" "}
-					<span className="ap-foundation-title-bold">width</span>
-				</h3>
-				<BorderTokenRow tokens={manifest.width} />
-			</section>
-			<section className="ap-border-section">
-				<h3 className="ap-foundation-section-title">
-					<span className="ap-foundation-title-muted">border</span>{" "}
-					<span className="ap-foundation-title-bold">radius</span>
-				</h3>
-				<BorderTokenRow tokens={manifest.radius} />
-			</section>
-		</div>
+		<>
+			{/* Page title: data-theme/data-viewport pinned on the heading itself
+			    so it always resolves storybook_ds's Tier 2 Title composite,
+			    regardless of the theme this story is otherwise pinned to --
+			    same pattern as Foundations/Color/ColorScaleSection.jsx. */}
+			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
+				Border
+			</h3>
+			<div className="ap-border-sections">
+				<section className="ap-border-section">
+					<h3 className="ap-foundation-section-title">
+						<span className="ap-foundation-title-muted">border</span>{" "}
+						<span className="ap-foundation-title-bold">width</span>
+					</h3>
+					<BorderTokenRow tokens={manifest.width} />
+				</section>
+				<section className="ap-border-section">
+					<h3 className="ap-foundation-section-title">
+						<span className="ap-foundation-title-muted">border</span>{" "}
+						<span className="ap-foundation-title-bold">radius</span>
+					</h3>
+					<BorderTokenRow tokens={manifest.radius} />
+				</section>
+			</div>
+		</>
 	);
 }

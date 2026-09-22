@@ -56,7 +56,7 @@ function Section({ title, children }) {
 export function ButtonVariations() {
 	return (
 		<div>
-			<h3 className="ap-color-section__title" data-theme="storybook_ds" data-viewport="desktop">
+			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
 				Button
 			</h3>
 			<Section title="Size">
