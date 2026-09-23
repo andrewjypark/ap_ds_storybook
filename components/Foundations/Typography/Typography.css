@@ -53,6 +53,48 @@
 	font-weight: 700;
 }
 
+/* Font Size's "how the scale works" guide (see FontSizeScale.jsx) -- a
+   longer explainer note that sits above the viewport panel. Built only
+   from Storybook DS (tier 2) variables. */
+.ap-type-scale-guide {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-bottom: 1.5rem;
+	padding: 0.75rem 1rem;
+	background: var(--ap-tier-2-color-background-surface-primary);
+	border-left: var(--ap-tier-2-border-width-large) solid var(--ap-tier-2-color-border-default);
+	border-radius: 0 var(--ap-tier-2-border-radius-small) var(--ap-tier-2-border-radius-small) 0;
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-type-scale-guide p,
+.ap-type-scale-guide ul {
+	margin: 0;
+}
+
+.ap-type-scale-guide ul {
+	padding-left: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.ap-type-scale-guide strong {
+	color: var(--ap-tier-2-color-content-default);
+	font-weight: 600;
+}
+
+.ap-type-scale-guide code {
+	padding: 0.05rem 0.3rem;
+	background: var(--ap-tier-2-color-background-surface-secondary);
+	border-radius: var(--ap-tier-2-border-radius-small);
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+	font-size: 0.9em;
+	color: var(--ap-tier-2-color-content-default);
+}
+
 .ap-type-viewport-toggle {
 	display: inline-flex;
 	align-self: flex-start;
