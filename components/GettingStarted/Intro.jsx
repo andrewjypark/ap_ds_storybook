@@ -33,15 +33,16 @@ function FindRow({ term, children }) {
  * same convention every other page's headings/docs-copy already uses
  * (PageTitle.jsx, Icon's ap-icon-section-copy, Color's ColorScaleSection),
  * since there's no token-driven "live specimen" content here that needs to
- * track the ambient Core/Green/Gold theme.
+ * track the ambient Core/Basil/Molasses theme.
  */
 export function Intro() {
 	return (
 		<div className="ap-intro" data-theme="storybook_ds" data-viewport="desktop">
-			<h3 className="ap-section__title">Getting Started</h3>
+			<h3 className="ap-section__title">AP Design System</h3>
 			<p className="ap-intro-lede">
-				This storybook documents this project's design tokens and the components built on top of them —
-				from raw values in Figma down to what actually ships in code. Start here if you're new.
+				Welcome to the boilerplate for AP Design System! This storybook documents this project's design tokens and the
+				components built on top of them — from raw values in Figma down to what actually ships in code.
+				If you're new, this is a good page to start.
 			</p>
 
 			<Section title="How this storybook is organized">
@@ -49,7 +50,7 @@ export function Intro() {
 				<ul>
 					<li>
 						<strong>Tier 1: Global Tokens</strong> — the raw values: color, typography, and border scales.
-						Each theme — Core, Green, Gold — has its own complete set.
+						Each theme — Core, Basil, Molasses — has its own complete set.
 					</li>
 					<li>
 						<strong>Tier 2: Semantic Tokens</strong> — Tier 1 values given a purpose: content color,
@@ -63,7 +64,7 @@ export function Intro() {
 					</li>
 				</ul>
 				<p className="ap-intro-note">
-					Use the Theme control in the toolbar to preview Core, Green, or Gold anywhere in the storybook.
+					Use the Theme control in the toolbar to preview Core, Basil, or Molasses anywhere in the storybook.
 					Font Size and Line Height are the one exception — they have their own Desktop / Tablet / Mobile
 					toggle on the page itself, since viewport only ever affects those two token types.
 				</p>
@@ -77,6 +78,31 @@ export function Intro() {
 					Every swatch and component example has a small readout underneath it — label, variable name, and
 					live value.
 				</FindRow>
+			</Section>
+
+			<Section title="Resources">
+				<p>These resources can give you more context on how this design system was built.</p>
+				<ul>
+					<li>
+						<a href="https://medium.com/@andrewjypark" target="_blank" rel="noreferrer">
+							My Blog
+						</a>
+					</li>
+					<li>
+						<a
+							href="https://www.figma.com/design/Shl6BS7R7y9HqvjLAsPQlQ/AP-Design-System?node-id=64-91"
+							target="_blank"
+							rel="noreferrer"
+						>
+							AP Design System Figma file
+						</a>
+					</li>
+					<li>
+						<a href="https://www.andrewjypark.com/" target="_blank" rel="noreferrer">
+							My Portfolio
+						</a>
+					</li>
+				</ul>
 			</Section>
 		</div>
 	);
