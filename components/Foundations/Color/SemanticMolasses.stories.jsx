@@ -5,11 +5,11 @@ import { makeTier2SemanticStories } from "./tier2SemanticStories.jsx";
  * Tier 2 and Molasses Tier 2 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tier 2: Semantic Tokens/Tier 2 - Core/Color",
+	title: "Tier 2: Semantic Tokens/Themes/Tier 2 - Molasses_Theme/Color",
 	parameters: { layout: "padded" },
 };
 
-const stories = makeTier2SemanticStories("core");
+const stories = makeTier2SemanticStories("molasses");
 
 export const Content = stories.Content;
 export const Background = stories.Background;

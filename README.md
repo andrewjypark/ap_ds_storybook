@@ -18,7 +18,7 @@ Unlike `ap_ds_storybook` (theme only), this repo has **two** dimensions that can
 
 | Dimension | Options | Build folders | Runtime attribute |
 |---|---|---|---|
-| **Theme** | core / green / gold | `build/tier_1_core`, `build/tier_1_green`, `build/tier_1_gold` | `data-theme="green"` / `"gold"` (core = default, no attribute needed) |
+| **Theme** | core / basil / molasses | `build/tier_1_core`, `build/tier_1_basil`, `build/tier_1_molasses` | `data-theme="basil"` / `"molasses"` (core = default, no attribute needed) |
 | **Viewport** | mobile / tablet / desktop | `build/viewport_mobile`, `build/viewport_tablet`, `build/viewport_desktop` | `data-viewport="tablet"` / `"desktop"` (mobile = default) |
 
 Each dimension also gets a combined, selector-scoped bundle for actually switching at runtime:
@@ -27,9 +27,9 @@ Each dimension also gets a combined, selector-scoped bundle for actually switchi
 
 Build folder names intentionally match Token Studio's own set names, so the output is recognizable against the sets list in Token Studio.
 
-**Confirmed this session:** `tier_1_green.json` / `tier_1_gold.json`'s `color` key only ever contains `brand` — Color Palettes, Utility, Neutral, and Transparent are defined once in Core and never overridden per-theme. Within the tier_2 semantic layer (Content/Background/Border), only the entries that ultimately reference `color.brand.*` actually resolve differently per theme (confirmed by diffing built CSS, not by reading references — see `generate-color-manifest.js`'s `tier2ThemeDiffs`). This directly shaped the Storybook sidebar structure below.
+**Confirmed this session:** `tier_1_basil.json` / `tier_1_molasses.json`'s `color` key only ever contains `brand` — Color Palettes, Utility, Neutral, and Transparent are defined once in Core and never overridden per-theme. Within the tier_2 semantic layer (Content/Background/Border), only the entries that ultimately reference `color.brand.*` actually resolve differently per theme (confirmed by diffing built CSS, not by reading references — see `generate-color-manifest.js`'s `tier2ThemeDiffs`). This directly shaped the Storybook sidebar structure below.
 
-**Known caveat (not yet resolved):** `tier_1_green`/`tier_1_gold` each carry their own copy of the per-viewport font-size/line-height scale constants, so theme and viewport aren't fully independent at the data level. Each dimension alone is correct; a theme AND a non-mobile viewport active on the *same element* at the same time isn't guaranteed to combine correctly yet (equal CSS specificity, last rule wins entirely rather than merging per-property). Doesn't affect Color (color never varies by viewport) — will matter once Typography Foundations pages are built.
+**Known caveat (not yet resolved):** `tier_1_basil`/`tier_1_molasses` each carry their own copy of the per-viewport font-size/line-height scale constants, so theme and viewport aren't fully independent at the data level. Each dimension alone is correct; a theme AND a non-mobile viewport active on the *same element* at the same time isn't guaranteed to combine correctly yet (equal CSS specificity, last rule wins entirely rather than merging per-property). Doesn't affect Color (color never varies by viewport) — will matter once Typography Foundations pages are built.
 
 ### Pipeline note
 
@@ -40,7 +40,7 @@ Build folder names intentionally match Token Studio's own set names, so the outp
 Modeled on `ap_ds_storybook`'s Storybook setup, with two deliberate differences:
 
 1. **Live-computed values, not hand-typed.** `ap_ds_storybook`'s Foundations pages hand-type every token's hex value into a JS array. Here, `ColorSwatch.jsx` only ever knows a CSS variable's *name* (from `color-manifest.json`) and reads its real, currently-resolved value via `getComputedStyle` at render time — so it can never drift from the actual tokens, and never needs manual updating.
-2. **Two toolbar dropdowns, not one.** Theme and Viewport are independent `globalTypes` in `.storybook/preview.jsx`, both applied to a wrapper div via one decorator, matching the `all-themes`/`all-viewports` bundles. This toolbar exists on *every* page, including Core — so Core's page can already preview green/gold by itself; the pinned per-theme pages below are purely additive, for direct navigation.
+2. **Two toolbar dropdowns, not one.** Theme and Viewport are independent `globalTypes` in `.storybook/preview.jsx`, both applied to a wrapper div via one decorator, matching the `all-themes`/`all-viewports` bundles. This toolbar exists on *every* page, including Core — so Core's page can already preview basil/molasses by itself; the pinned per-theme pages below are purely additive, for direct navigation.
 
 ### Sidebar structure
 
@@ -50,20 +50,20 @@ Mirrors `ap_ds_storybook`'s nav tree (`Tokens > Tier 1: Definitions > 1. Core > 
 Tokens
   Tier 1: Definitions
     1. Core            -> Color (all 5: Color Palettes, Utility, Brand, Neutral, Transparent)
-    2. Green Tier 1     -> Color (Brand only -- the only thing that differs, see above)
-    3. Gold Tier 1      -> Color (Brand only)
+    2. Basil Tier 1     -> Color (Brand only -- the only thing that differs, see above)
+    3. Molasses Tier 1      -> Color (Brand only)
   Tier 2: Semantic
-    Green Tier 2        -> Content, Background, Border (only entries that differ from Core)
-    Gold Tier 2         -> Content, Background, Border (only entries that differ from Core)
+    Basil Tier 2        -> Content, Background, Border (only entries that differ from Core)
+    Molasses Tier 2         -> Content, Background, Border (only entries that differ from Core)
 ```
 
 Design decisions made explicitly (Andrew's call, both times over the "just use the toolbar dropdown, no extra pages" alternative):
-- Green/Gold Tier 1 and Tier 2 each get their **own sidebar pages**, not just the shared toolbar dropdown on Core's page.
+- Basil/Molasses Tier 1 and Tier 2 each get their **own sidebar pages**, not just the shared toolbar dropdown on Core's page.
 - Those pages are **trimmed to only what's actually different from Core** — full Color Palettes/Utility/Neutral/Transparent duplication would just repeat Core's page for no reason, since those categories never vary by theme.
 
-None of this duplicates any component or value: `tier1ColorStories.jsx` and `tier2SemanticStories.jsx` are factory functions that take a theme name and return story objects with `globals: { theme }` set (so e.g. "2. Green Tier 1 / Color" always renders pinned to green regardless of the toolbar's current selection), reading from the exact same live-computed `ColorSwatch`/manifest as Core. `Color.stories.jsx` / `ColorGreen.stories.jsx` / `ColorGold.stories.jsx` (Tier 1) and `SemanticGreen.stories.jsx` / `SemanticGold.stories.jsx` (Tier 2) are thin per-theme wrappers around those factories. The Tier 2 "differs from Core" filtering is computed once at build time in `generate-color-manifest.js` (`tier2ThemeDiffs`) by diffing built CSS values, not by parsing token references — correct regardless of how many levels of `{alias}` indirection a token goes through. There's no separate "Core" entry under Tier 2, matching `ap_ds_storybook`.
+None of this duplicates any component or value: `tier1ColorStories.jsx` and `tier2SemanticStories.jsx` are factory functions that take a theme name and return story objects with `globals: { theme }` set (so e.g. "2. Basil Tier 1 / Color" always renders pinned to basil regardless of the toolbar's current selection), reading from the exact same live-computed `ColorSwatch`/manifest as Core. `Color.stories.jsx` / `ColorBasil.stories.jsx` / `ColorMolasses.stories.jsx` (Tier 1) and `SemanticBasil.stories.jsx` / `SemanticMolasses.stories.jsx` (Tier 2) are thin per-theme wrappers around those factories. The Tier 2 "differs from Core" filtering is computed once at build time in `generate-color-manifest.js` (`tier2ThemeDiffs`) by diffing built CSS values, not by parsing token references — correct regardless of how many levels of `{alias}` indirection a token goes through. There's no separate "Core" entry under Tier 2, matching `ap_ds_storybook`.
 
-`.storybook/preview.jsx`'s `parameters.options.storySort.order` pins this exact ordering (Storybook's default alphabetical sort wouldn't otherwise put "1. Core" before "2. Green Tier 1" reliably as more categories get added).
+`.storybook/preview.jsx`'s `parameters.options.storySort.order` pins this exact ordering (Storybook's default alphabetical sort wouldn't otherwise put "1. Core" before "2. Basil Tier 1" reliably as more categories get added).
 
 Current scope: Color is complete. Border (width + radius) and Typography's Font Size (font1 only) are now underway too -- see the Progress log below for each. Typography's remaining primitives (Line Height, Letter Spacing, Text Case, Font Family, Font Weight, and font2/font3 for Font Size) and Spacing/Elevation Foundations pages are the natural next passes, following the same pattern (a `generate-<category>-manifest.js`, a component reading live values, and the same per-theme-factory + diff-only approach where a category actually varies by theme).
 

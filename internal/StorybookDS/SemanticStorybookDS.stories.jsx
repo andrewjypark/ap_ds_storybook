@@ -4,7 +4,7 @@ import { makeTier2SemanticStories } from "../../components/Foundations/Color/tie
  * INTERNAL / NOT PUBLISHED -- see .storybook/main.js's isPublicBuild gate.
  * Tier 2 semantic color tokens (Content/Background/Border) resolved
  * against the storybook_ds theme -- reuses tier2SemanticStories.jsx
- * exactly like SemanticGreen.stories.jsx/SemanticGold.stories.jsx do, so
+ * exactly like SemanticBasil.stories.jsx/SemanticMolasses.stories.jsx do, so
  * only the items whose value actually differs from Core are shown (most
  * of Content/Background/Border reference color.neutral/color_palettes/
  * utility, which never changes per theme -- only entries referencing

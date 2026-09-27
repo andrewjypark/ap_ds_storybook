@@ -2,15 +2,15 @@ import React from "react";
 import { CompositeStyles } from "./CompositeStyles.jsx";
 
 /**
- * Green reuses Core's exact same composite-style component -- every
+ * Basil reuses Core's exact same composite-style component -- every
  * style's font-family and font-weight differ from Core in every theme
  * (confirmed against the built CSS), so unlike Font Weight there's no
  * per-item diff to compute; the whole scale is simply re-rendered under
- * the "green" theme global, same pattern as FontSizeScale/LineHeightScale/
+ * the "basil" theme global, same pattern as FontSizeScale/LineHeightScale/
  * FontFamilyScale.
  */
 export default {
-	title: "Tier 2: Semantic Tokens/Themes/Tier 2 - Green_Theme/Typography",
+	title: "Tier 2: Semantic Tokens/Themes/Tier 2 - Basil_Theme/Typography",
 	parameters: {
 		layout: "padded",
 		docs: {
@@ -24,6 +24,6 @@ export default {
 
 export const CompositeStyles_ = {
 	name: "Composite Styles",
-	globals: { theme: "green" },
+	globals: { theme: "basil" },
 	render: () => <CompositeStyles />,
 };

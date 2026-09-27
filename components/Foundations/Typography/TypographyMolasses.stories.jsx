@@ -7,11 +7,11 @@ import { FontFamilyScale } from "./FontFamilyScale.jsx";
 import { Tier1CompositeStyles } from "./Tier1CompositeStyles.jsx";
 
 /**
- * Core contains the complete set of Tier 1 typography tokens. Green
- * Tier 1 and Gold Tier 1 only contain the tokens that differ from Core.
+ * Core contains the complete set of Tier 1 typography tokens. Basil
+ * Tier 1 and Molasses Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tier 1: Global Tokens/Themes/Tier 1 - Gold_Theme/Typography",
+	title: "Tier 1: Global Tokens/Themes/Tier 1 - Molasses_Theme/Typography",
 	parameters: {
 		docs: {
 			description: {
@@ -23,26 +23,26 @@ export default {
 };
 
 export const FontSize = {
-	globals: { theme: "gold" },
+	globals: { theme: "molasses" },
 	render: () => <FontSizeScale />,
 };
 
 export const LineHeight = {
-	globals: { theme: "gold" },
+	globals: { theme: "molasses" },
 	render: () => <LineHeightScale />,
 };
 
 export const FontWeight = {
-	globals: { theme: "gold" },
-	render: () => <FontWeightScale groups={manifest.fontWeightThemeDiffs.gold} />,
+	globals: { theme: "molasses" },
+	render: () => <FontWeightScale groups={manifest.fontWeightThemeDiffs.molasses} />,
 };
 
 export const FontFamily = {
-	globals: { theme: "gold" },
+	globals: { theme: "molasses" },
 	render: () => <FontFamilyScale />,
 };
 
 export const CompositeStyles = {
-	globals: { theme: "gold" },
+	globals: { theme: "molasses" },
 	render: () => <Tier1CompositeStyles />,
 };

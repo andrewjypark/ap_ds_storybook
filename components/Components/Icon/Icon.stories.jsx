@@ -2,7 +2,7 @@ import React from "react";
 import { IconVariations } from "./IconVariations.jsx";
 
 /**
- * Icons have no Core/Green/Gold theming yet (single mode, same as
+ * Icons have no Core/Basil/Molasses theming yet (single mode, same as
  * Button/Text Input) -- one page covers every theme.
  *
  * See Button.stories.jsx's comment on the shared bare

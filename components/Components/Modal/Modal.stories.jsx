@@ -2,7 +2,7 @@ import React from "react";
 import { ModalVariations } from "./ModalVariations.jsx";
 
 /**
- * Modal colors have no Core/Green/Gold theming yet (see modalTokens.js's
+ * Modal colors have no Core/Basil/Molasses theming yet (see modalTokens.js's
  * token-mapping doc comment) -- one page covers every theme, same as
  * Button/Button.stories.jsx.
  *

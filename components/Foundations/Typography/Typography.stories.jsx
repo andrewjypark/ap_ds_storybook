@@ -7,8 +7,8 @@ import { FontFamilyScale } from "./FontFamilyScale.jsx";
 import { Tier1CompositeStyles } from "./Tier1CompositeStyles.jsx";
 
 /**
- * Core contains the complete set of Tier 1 typography tokens. Green
- * Tier 1 and Gold Tier 1 only contain the tokens that differ from Core.
+ * Core contains the complete set of Tier 1 typography tokens. Basil
+ * Tier 1 and Molasses Tier 1 only contain the tokens that differ from Core.
  */
 export default {
 	title: "Tier 1: Global Tokens/Tier 1 - Core/Typography",

@@ -6,8 +6,8 @@ import { CompositeStyles } from "./CompositeStyles.jsx";
  * Title, Label, Body, and Meta -- each collapsing font-family/weight/
  * size/line-height into one CSS `font` shorthand custom property, with
  * letter-spacing/text-transform/text-decoration as separate companion
- * custom properties alongside it (see build-tokens.js for why). Green
- * and Gold reuse this exact same page, pinned to their own theme.
+ * custom properties alongside it (see build-tokens.js for why). Basil
+ * and Molasses reuse this exact same page, pinned to their own theme.
  */
 export default {
 	title: "Tier 2: Semantic Tokens/Tier 2 - Core/Typography",

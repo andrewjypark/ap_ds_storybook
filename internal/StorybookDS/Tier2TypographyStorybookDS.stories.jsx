@@ -5,7 +5,7 @@ import { CompositeStyles } from "../../components/Foundations/Typography/Composi
  * INTERNAL / NOT PUBLISHED -- see .storybook/main.js's isPublicBuild gate.
  * Tier 2 composite typography styles (Display/Headline/Title/Label/Body/
  * Meta) resolved against the storybook_ds theme. Reuses CompositeStyles
- * unchanged, same as Tier2TypographyGreen/Gold.stories.jsx -- every
+ * unchanged, same as Tier2TypographyBasil/Molasses.stories.jsx -- every
  * style's font-family/font-weight differ from Core for this theme too
  * (Inter/IBM Plex Mono/Archivo SemiExpanded vs. Core's fonts), so there's
  * no per-item diff to compute, just the whole scale re-rendered under

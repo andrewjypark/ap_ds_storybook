@@ -45,7 +45,7 @@ function Section({ title, children }) {
  * ButtonVariations.jsx -- each section's swatch group is followed by a
  * CodeBlock showing the exact usage snippet.
  *
- * Modal has no Core/Green/Gold theming yet (single mode, same as Button/
+ * Modal has no Core/Basil/Molasses theming yet (single mode, same as Button/
  * Text Input/Dropdown) -- one page covers every theme.
  */
 export function ModalVariations() {

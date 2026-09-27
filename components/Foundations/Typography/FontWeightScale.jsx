@@ -12,8 +12,8 @@ import "./Typography.css";
  * manifest, which mirrors Tokens Studio's own panel order.
  *
  * `groups` defaults to the full Core list (manifest.fontWeight) but can
- * be overridden -- the Green/Gold Tier 1 pages pass
- * manifest.fontWeightThemeDiffs.{green,gold} instead, which is already
+ * be overridden -- the Basil/Molasses Tier 1 pages pass
+ * manifest.fontWeightThemeDiffs.{basil,molasses} instead, which is already
  * pre-filtered down to just the items whose value actually differs from
  * Core (see generate-typography-manifest.js). Same component, same
  * classes, just a different (smaller) data set -- nothing else changes.

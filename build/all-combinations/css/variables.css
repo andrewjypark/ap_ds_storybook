@@ -4493,7 +4493,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-theme="green"][data-viewport="mobile"] {
+[data-theme="basil"][data-viewport="mobile"] {
   --ap-font-families-font1: 'Basier Circle';
   --ap-font-families-font2: 'Basier Square';
   --ap-font-families-font3: 'Basier Square Mono';
@@ -5913,7 +5913,7 @@
   --ap-tooltip-color-text-light: #23272b;
 }
 
-[data-theme="green"][data-viewport="mobile"] {
+[data-theme="basil"][data-viewport="mobile"] {
   --ap-tier-2-typography-display-default-letter-spacing: 0em;
   --ap-tier-2-typography-display-default-text-transform: none;
   --ap-tier-2-typography-display-default-text-decoration: none;
@@ -5990,7 +5990,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-theme="green"][data-viewport="tablet"] {
+[data-theme="basil"][data-viewport="tablet"] {
   --ap-font-families-font1: 'Basier Circle';
   --ap-font-families-font2: 'Basier Square';
   --ap-font-families-font3: 'Basier Square Mono';
@@ -7410,7 +7410,7 @@
   --ap-tooltip-color-text-light: #23272b;
 }
 
-[data-theme="green"][data-viewport="tablet"] {
+[data-theme="basil"][data-viewport="tablet"] {
   --ap-tier-2-typography-display-default-letter-spacing: 0em;
   --ap-tier-2-typography-display-default-text-transform: none;
   --ap-tier-2-typography-display-default-text-decoration: none;
@@ -7487,7 +7487,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-theme="green"][data-viewport="desktop"] {
+[data-theme="basil"][data-viewport="desktop"] {
   --ap-font-families-font1: 'Basier Circle';
   --ap-font-families-font2: 'Basier Square';
   --ap-font-families-font3: 'Basier Square Mono';
@@ -8907,7 +8907,7 @@
   --ap-tooltip-color-text-light: #23272b;
 }
 
-[data-theme="green"][data-viewport="desktop"] {
+[data-theme="basil"][data-viewport="desktop"] {
   --ap-tier-2-typography-display-default-letter-spacing: 0em;
   --ap-tier-2-typography-display-default-text-transform: none;
   --ap-tier-2-typography-display-default-text-decoration: none;
@@ -8984,7 +8984,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-theme="gold"][data-viewport="mobile"] {
+[data-theme="molasses"][data-viewport="mobile"] {
   --ap-font-families-font1: Nudica;
   --ap-font-families-font2: Quablo;
   --ap-font-families-font3: 'Bricolage Grotesque';
@@ -10458,7 +10458,7 @@
   --ap-tooltip-color-text-light: #23272b;
 }
 
-[data-theme="gold"][data-viewport="mobile"] {
+[data-theme="molasses"][data-viewport="mobile"] {
   --ap-tier-2-typography-display-default-letter-spacing: 0em;
   --ap-tier-2-typography-display-default-text-transform: none;
   --ap-tier-2-typography-display-default-text-decoration: none;
@@ -10535,7 +10535,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-theme="gold"][data-viewport="tablet"] {
+[data-theme="molasses"][data-viewport="tablet"] {
   --ap-font-families-font1: Nudica;
   --ap-font-families-font2: Quablo;
   --ap-font-families-font3: 'Bricolage Grotesque';
@@ -12009,7 +12009,7 @@
   --ap-tooltip-color-text-light: #23272b;
 }
 
-[data-theme="gold"][data-viewport="tablet"] {
+[data-theme="molasses"][data-viewport="tablet"] {
   --ap-tier-2-typography-display-default-letter-spacing: 0em;
   --ap-tier-2-typography-display-default-text-transform: none;
   --ap-tier-2-typography-display-default-text-decoration: none;
@@ -12086,7 +12086,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-theme="gold"][data-viewport="desktop"] {
+[data-theme="molasses"][data-viewport="desktop"] {
   --ap-font-families-font1: Nudica;
   --ap-font-families-font2: Quablo;
   --ap-font-families-font3: 'Bricolage Grotesque';
@@ -13560,7 +13560,7 @@
   --ap-tooltip-color-text-light: #23272b;
 }
 
-[data-theme="gold"][data-viewport="desktop"] {
+[data-theme="molasses"][data-viewport="desktop"] {
   --ap-tier-2-typography-display-default-letter-spacing: 0em;
   --ap-tier-2-typography-display-default-text-transform: none;
   --ap-tier-2-typography-display-default-text-decoration: none;

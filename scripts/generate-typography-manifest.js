@@ -111,14 +111,14 @@
  * (`${cssVar}-letter-spacing` etc.) rather than this manifest storing
  * them separately, since they're always a fixed suffix away.
  *
- * Like fontSize/lineHeight/fontFamily (and unlike Font Weight), Green/
- * Gold's composite styles are a full-scale replacement, not a per-item
- * diff: confirmed against the built CSS that tier_1_green/tier_1_gold's
+ * Like fontSize/lineHeight/fontFamily (and unlike Font Weight), Basil/
+ * Molasses's composite styles are a full-scale replacement, not a per-item
+ * diff: confirmed against the built CSS that tier_1_basil/tier_1_molasses's
  * font_weights_font_1 AND fontFamilies both differ from Core for every
  * composite style that references them (which is all of them), so no
  * composite-style item ever coincidentally matches Core the way some
  * individual Font Weight values do. That means there's nothing to filter
- * -- CompositeStyles.jsx is reused completely unchanged for Green/Gold,
+ * -- CompositeStyles.jsx is reused completely unchanged for Basil/Molasses,
  * same pattern as FontSizeScale/LineHeightScale/FontFamilyScale, just
  * pinned to the theme global.
  *
@@ -127,34 +127,34 @@
  * composite styles are chosen from -- see buildTier1CompositeStyles below.
  *
  * ---------------------------------------------------------------------
- * GREEN TIER 1 / GOLD TIER 1: tokens.json's tier_1_green/tier_1_gold
+ * BASIL TIER 1 / MOLASSES TIER 1: tokens.json's tier_1_basil/tier_1_molasses
  * override fontSize, lineHeights, fontFamilies, and font_weights_font_1/
  * 2/3 (confirmed: NOT fontWeights_choices_text/_numbers, letterSpacing,
  * or textCase/textDecoration -- those are identical to Core in every
- * theme, so they get no Green/Gold page at all). But the SHAPE of each
+ * theme, so they get no Basil/Molasses page at all). But the SHAPE of each
  * override differs, which is why some properties reuse the Core scale
  * outright while Font Weight needs actual per-item diffing:
  *
- *  - fontSize/lineHeight: green/gold only override each font's
+ *  - fontSize/lineHeight: basil/molasses only override each font's
  *    headingScale/bodyTextScale (plus a redundant h1) -- but every
  *    step's formula is base * scale^n, so that cascades to change EVERY
  *    step. Confirmed against the built CSS: full-scale difference, no
- *    step left unchanged. So TypographyGreen/Gold.stories.jsx just
+ *    step left unchanged. So TypographyBasil/Molasses.stories.jsx just
  *    reuse FontSizeScale/LineHeightScale completely unchanged, pinned
  *    to the theme global -- there's nothing to filter, the "diff" IS
  *    the whole scale.
  *  - fontFamilies: only 3 tokens total, and all 3 differ in every
- *    theme (core: TWK Lausanne/TWK Continental/Novela; green AND gold:
+ *    theme (core: TWK Lausanne/TWK Continental/Novela; basil AND molasses:
  *    both resolve to Basier Circle/Basier Square/Basier Square Mono) --
  *    same "full replacement" shape as fontSize/lineHeight, so
  *    FontFamilyScale is reused unchanged too.
  *  - font_weights_font_1/2/3: NOT a formula scale -- each key is an
  *    independent literal value, so unlike the above, some values
  *    coincidentally match Core (e.g. font_1/font_2's "bold" is 700 in
- *    every theme) while others don't, AND green/gold each add three
+ *    every theme) while others don't, AND basil/molasses each add three
  *    brand-new keys Core doesn't have at all (medium/thin/heavy).
  *    That's a real per-item diff, so this manifest computes
- *    fontWeightThemeDiffs.{green,gold} the same way generate-color-
+ *    fontWeightThemeDiffs.{basil,molasses} the same way generate-color-
  *    manifest.js's buildTier2ThemeDiff does: diff each theme's built CSS
  *    value against Core's for every font_weights_font_* var (not the
  *    two choice pools, which never change), keep only the ones that
@@ -162,7 +162,7 @@
  *    to compare against), and drop any group left with zero items
  *    (fontWeights_choices_text/_numbers always end up empty this way,
  *    since nothing in them ever changes). FontWeightScale.jsx takes an
- *    optional `groups` prop so the Green/Gold pages can pass this
+ *    optional `groups` prop so the Basil/Molasses pages can pass this
  *    filtered list through the exact same component instead of the
  *    full manifest.fontWeight.
  * ============================================================================
@@ -172,8 +172,8 @@ import fs from "node:fs";
 
 const CORE_CSS_PATH = "build/tier_1_core/css/variables.css";
 const THEME_CSS_PATHS = {
-	green: "build/tier_1_green/css/variables.css",
-	gold: "build/tier_1_gold/css/variables.css",
+	basil: "build/tier_1_basil/css/variables.css",
+	molasses: "build/tier_1_molasses/css/variables.css",
 	// Internal-only Storybook chrome theme -- see build-tokens.js's THEMES
 	// entry and internal/StorybookDS/*.stories.jsx.
 	storybook_ds: "build/tier_1_storybook_ds/css/variables.css",
@@ -388,8 +388,8 @@ const manifest = {
 	fontWeight: buildFontWeightGroups(allNames),
 	fontFamily: buildFontFamilyScale(allNames),
 	fontWeightThemeDiffs: {
-		green: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.green),
-		gold: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.gold),
+		basil: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.basil),
+		molasses: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.molasses),
 		storybook_ds: buildFontWeightThemeDiff(coreValues, THEME_CSS_PATHS.storybook_ds),
 	},
 	compositeStyles: buildCompositeStyles(allNames),

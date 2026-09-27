@@ -6,7 +6,7 @@
  * Font: a fixed system monospace stack, not one of the project's own
  * "--ap-font-families-*" tokens. Code panels conventionally use a plain
  * monospace regardless of the active brand theme (this is true of the
- * Wix reference itself) -- tying it to Core/Green/Gold's own font3
+ * Wix reference itself) -- tying it to Core/Basil/Molasses's own font3
  * would mean the CODE SAMPLE'S typeface changes when someone switches
  * themes, which has nothing to do with what the sample is demonstrating.
  *

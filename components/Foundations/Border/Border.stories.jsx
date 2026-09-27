@@ -3,7 +3,7 @@ import { BorderScale } from "./BorderScale.jsx";
 
 /**
  * Border tokens are the same across every theme, so there's no
- * separate Green or Gold Tier 1 page -- this Core page covers all three.
+ * separate Basil or Molasses Tier 1 page -- this Core page covers all three.
  */
 export default {
 	title: "Tier 1: Global Tokens/Tier 1 - Core/Border",

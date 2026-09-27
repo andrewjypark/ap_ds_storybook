@@ -23,17 +23,17 @@ import { TokenPreviewContext } from "../components/TokenPreviewContext.jsx";
  * ap_ui_kit has TWO independent toggleable dimensions (ap_ds_storybook only
  * has one, Theme) -- see build-tokens.js. build/all-combinations/css/
  * variables.css has one block per (theme, viewport) pair -- 9 total --
- * each scoped by a COMPOUND selector (`[data-theme="green"][data-viewport
+ * each scoped by a COMPOUND selector (`[data-theme="basil"][data-viewport
  * ="mobile"]`, etc.), so an element matches exactly one block whenever
  * BOTH attributes are present on it. Every token in the project (color,
  * border, typography, everything) lives inside one of these 9 blocks now
- * -- there's no more single-axis `[data-theme="green"]`-only or
+ * -- there's no more single-axis `[data-theme="basil"]`-only or
  * `[data-viewport="mobile"]`-only fallback -- so `data-viewport` must
  * always be present wherever `data-theme` is, or NOTHING resolves there.
  *
  * NOTE: Theme's toolbar dropdown is deliberately NOT exposed -- its
- * Green/Gold options are redundant with the dedicated "Tier 1 - Green"/
- * "Tier 1 - Gold"/"Tier 2 - Green"/"Tier 2 - Gold" sidebar pages (each pins
+ * Basil/Molasses options are redundant with the dedicated "Tier 1 - Basil"/
+ * "Tier 1 - Molasses"/"Tier 2 - Basil"/"Tier 2 - Molasses" sidebar pages (each pins
  * its own `globals: {theme}` on the story object, which works with or
  * without a toolbar UI for it).
  *
@@ -85,7 +85,7 @@ const preview = {
 	globalTypes: {
 		theme: {
 			name: "Theme",
-			description: "Color theme (tier_1_core / tier_1_green / tier_1_gold)",
+			description: "Color theme (tier_1_core / tier_1_basil / tier_1_molasses)",
 		},
 	},
 	initialGlobals: {
@@ -125,7 +125,7 @@ const preview = {
 				// wrapper group. Mirrors Tier 1's own tree: Core first, then
 				// the two themes as their own pinned-theme pages -- for BOTH
 				// Tier 1: Global Tokens and Tier 2: Semantic Tokens. Tier 2
-				// originally had no "Core" entry (only Green Tier 2/Gold Tier 2
+				// originally had no "Core" entry (only Basil Tier 2/Molasses Tier 2
 				// existed, mirroring ap_ds_storybook not having a "Core Tier
 				// 2"), but that left the full, undiffed semantic list with
 				// nowhere to render -- Core is the base every theme diffs
@@ -138,17 +138,17 @@ const preview = {
 						// Color, Typography), which is why Border used to show up first.
 						"Tier 1 - Core",
 						["Color", "Typography", "Border"],
-						// Green/Gold live under a "Themes" subgroup, sibling to Core
+						// Basil/Molasses live under a "Themes" subgroup, sibling to Core
 						// (and to Storybook DS - Internal, unpinned below) -- keeps the
 						// two theme variants visually grouped instead of loose peers of
 						// Core. Names here must match each story's actual title segment
-						// exactly (underscore, not space -- "Green_Theme"/"Gold_Theme")
+						// exactly (underscore, not space -- "Basil_Theme"/"Molasses_Theme")
 						// or storySort silently falls back to alphabetical for that node.
 						"Themes",
 						[
-							"Tier 1 - Green_Theme",
+							"Tier 1 - Basil_Theme",
 							["Color", "Typography"],
-							"Tier 1 - Gold_Theme",
+							"Tier 1 - Molasses_Theme",
 							["Color", "Typography"],
 						],
 					],
@@ -157,9 +157,9 @@ const preview = {
 						"Tier 2 - Core",
 						"Themes",
 						[
-							"Tier 2 - Green_Theme",
+							"Tier 2 - Basil_Theme",
 							["Color", "Typography"],
-							"Tier 2 - Gold_Theme",
+							"Tier 2 - Molasses_Theme",
 							["Color", "Typography"],
 						],
 					],

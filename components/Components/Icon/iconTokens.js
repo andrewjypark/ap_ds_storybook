@@ -24,7 +24,7 @@
  * width/height rather than growing it, and the child svg's own
  * width:100%/height:100% resolves against the padding box automatically).
  *
- * Icons have no Core/Green/Gold theming (single mode, same reasoning as
+ * Icons have no Core/Basil/Molasses theming (single mode, same reasoning as
  * tier_3/buttons and tier_3/text-input) -- see build-tokens.js's
  * BASE_SOURCE.
  */

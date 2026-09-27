@@ -7,11 +7,11 @@ import { FontFamilyScale } from "./FontFamilyScale.jsx";
 import { Tier1CompositeStyles } from "./Tier1CompositeStyles.jsx";
 
 /**
- * Core contains the complete set of Tier 1 typography tokens. Green
- * Tier 1 and Gold Tier 1 only contain the tokens that differ from Core.
+ * Core contains the complete set of Tier 1 typography tokens. Basil
+ * Tier 1 and Molasses Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tier 1: Global Tokens/Themes/Tier 1 - Green_Theme/Typography",
+	title: "Tier 1: Global Tokens/Themes/Tier 1 - Basil_Theme/Typography",
 	parameters: {
 		docs: {
 			description: {
@@ -23,26 +23,26 @@ export default {
 };
 
 export const FontSize = {
-	globals: { theme: "green" },
+	globals: { theme: "basil" },
 	render: () => <FontSizeScale />,
 };
 
 export const LineHeight = {
-	globals: { theme: "green" },
+	globals: { theme: "basil" },
 	render: () => <LineHeightScale />,
 };
 
 export const FontWeight = {
-	globals: { theme: "green" },
-	render: () => <FontWeightScale groups={manifest.fontWeightThemeDiffs.green} />,
+	globals: { theme: "basil" },
+	render: () => <FontWeightScale groups={manifest.fontWeightThemeDiffs.basil} />,
 };
 
 export const FontFamily = {
-	globals: { theme: "green" },
+	globals: { theme: "basil" },
 	render: () => <FontFamilyScale />,
 };
 
 export const CompositeStyles = {
-	globals: { theme: "green" },
+	globals: { theme: "basil" },
 	render: () => <Tier1CompositeStyles />,
 };

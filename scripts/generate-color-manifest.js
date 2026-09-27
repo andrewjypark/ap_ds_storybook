@@ -32,7 +32,7 @@
  * Border, all 63 tokens) -- this is what the Core Tier 2 Color page
  * (Semantic.stories.jsx) renders.
  *
- * manifest.tier2ThemeDiffs.{green,gold} is the subset of those same tier_2
+ * manifest.tier2ThemeDiffs.{basil,molasses} is the subset of those same tier_2
  * semantic vars whose RESOLVED VALUE actually differs from core for that
  * theme. Most of Content/Background/Border only ever reference
  * color.neutral / color_palettes / utility, which never change per theme
@@ -40,11 +40,11 @@
  * computed by diffing the already-built CSS for each theme against core's,
  * rather than static reference-path parsing, since a value diff is correct
  * regardless of how many levels of {alias} indirection a token goes
- * through. Used by the "Green Tier 2"/"Gold Tier 2" sidebar pages so they
+ * through. Used by the "Basil Tier 2"/"Molasses Tier 2" sidebar pages so they
  * only show what's actually theme-specific instead of duplicating Core's
  * full semantic list (mirrors the same reasoning already applied to Tier 1,
- * where Green/Gold only show "Brand" -- confirmed via tokens/sets/
- * tier_1_green.json / tier_1_gold.json that "brand" is the only key their
+ * where Basil/Molasses only show "Brand" -- confirmed via tokens/sets/
+ * tier_1_basil.json / tier_1_molasses.json that "brand" is the only key their
  * `color` object overrides at all).
  *
  * grids and tier2ThemeDiffs share the exact same TIER2_PREFIXES list (and
@@ -64,8 +64,8 @@ import fs from "node:fs";
 
 const CORE_CSS_PATH = "build/tier_1_core/css/variables.css";
 const THEME_CSS_PATHS = {
-	green: "build/tier_1_green/css/variables.css",
-	gold: "build/tier_1_gold/css/variables.css",
+	basil: "build/tier_1_basil/css/variables.css",
+	molasses: "build/tier_1_molasses/css/variables.css",
 	// Internal-only Storybook chrome theme -- see build-tokens.js's THEMES
 	// entry and internal/StorybookDS/*.stories.jsx.
 	storybook_ds: "build/tier_1_storybook_ds/css/variables.css",
@@ -215,10 +215,10 @@ function buildTier2ThemeDiff(themeCssPath) {
 // rendering path (ColorScaleSection -> ColorPalette), just a different
 // `scales` entry. Family names come out of buildFamilyScale already
 // title-cased ("Dataviz Orange", ...), so the split matches on that
-// prefix. Confirmed identical across all three themes (core/green/gold),
+// prefix. Confirmed identical across all three themes (core/basil/molasses),
 // same as everything else "Color Palettes" carries -- so, like Utility/
 // Neutral/Transparent, this only needs to appear on the Core Color page,
-// not duplicated onto Green/Gold Tier 1's pages.
+// not duplicated onto Basil/Molasses Tier 1's pages.
 const colorPalettesScale = buildFamilyScale("--ap-color-color-palettes-", "Color Palettes");
 const dataVizFamilies = colorPalettesScale.families.filter((f) => f.name.startsWith("Dataviz"));
 colorPalettesScale.families = colorPalettesScale.families.filter((f) => !f.name.startsWith("Dataviz"));
@@ -238,8 +238,8 @@ const manifest = {
 	],
 	grids: TIER2_PREFIXES.map(([prefix, label]) => buildGrid(prefix, label)),
 	tier2ThemeDiffs: {
-		green: buildTier2ThemeDiff(THEME_CSS_PATHS.green),
-		gold: buildTier2ThemeDiff(THEME_CSS_PATHS.gold),
+		basil: buildTier2ThemeDiff(THEME_CSS_PATHS.basil),
+		molasses: buildTier2ThemeDiff(THEME_CSS_PATHS.molasses),
 		storybook_ds: buildTier2ThemeDiff(THEME_CSS_PATHS.storybook_ds),
 	},
 };

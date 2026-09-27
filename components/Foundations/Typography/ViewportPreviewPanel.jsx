@@ -18,7 +18,7 @@ const VIEWPORTS = [
  *
  * Mechanism: re-provides TokenPreviewContext with this component's own
  * local `viewport` state (theme still comes through unchanged from the
- * real outer context, which is pinned per Core/Green/Gold story same as
+ * real outer context, which is pinned per Core/Basil/Molasses story same as
  * every other Foundations page). Every descendant card's useLiveCssValue
  * call already reads `viewport` from that same context via
  * useTokenPreview(), so this toggle works with ZERO changes to

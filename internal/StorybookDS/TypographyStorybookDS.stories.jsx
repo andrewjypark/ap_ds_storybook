@@ -9,11 +9,11 @@ import { FontFamilyScale } from "../../components/Foundations/Typography/FontFam
  * INTERNAL / NOT PUBLISHED -- see .storybook/main.js's isPublicBuild gate.
  * Same reuse pattern as ColorStorybookDS.stories.jsx: FontSizeScale /
  * LineHeightScale / FontWeightScale / FontFamilyScale are the exact same
- * components Tier 1 - Core/Green/Gold's Typography pages use, just pinned
+ * components Tier 1 - Core/Basil/Molasses's Typography pages use, just pinned
  * to `theme: "storybook_ds"` -- every value below is real and
  * live-computed. No Letter Spacing page here because tier_1_storybook_ds
  * doesn't override letterSpacing at all (inherits Core's unchanged, same
- * reasoning as Green/Gold not getting one either).
+ * reasoning as Basil/Molasses not getting one either).
  */
 export default {
 	title: "Tier 1: Global Tokens/Tier 1 - Storybook DS - Internal/Typography",

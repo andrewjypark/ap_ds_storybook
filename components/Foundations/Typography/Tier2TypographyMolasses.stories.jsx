@@ -2,12 +2,12 @@ import React from "react";
 import { CompositeStyles } from "./CompositeStyles.jsx";
 
 /**
- * Gold reuses Core's exact same composite-style component -- see
- * Tier2TypographyGreen.stories.jsx for why there's no per-item diff to
+ * Molasses reuses Core's exact same composite-style component -- see
+ * Tier2TypographyBasil.stories.jsx for why there's no per-item diff to
  * compute here.
  */
 export default {
-	title: "Tier 2: Semantic Tokens/Themes/Tier 2 - Gold_Theme/Typography",
+	title: "Tier 2: Semantic Tokens/Themes/Tier 2 - Molasses_Theme/Typography",
 	parameters: {
 		layout: "padded",
 		docs: {
@@ -21,6 +21,6 @@ export default {
 
 export const CompositeStyles_ = {
 	name: "Composite Styles",
-	globals: { theme: "gold" },
+	globals: { theme: "molasses" },
 	render: () => <CompositeStyles />,
 };
