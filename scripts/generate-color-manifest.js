@@ -54,6 +54,23 @@
  * same component, same label, just a different, possibly-filtered items
  * array.
  *
+ * manifest.tier1DarkDiffs.{core,basil,molasses} is the Tier 1 (primitive)
+ * equivalent, but diffing along the LIGHT/DARK axis instead of the
+ * theme axis: for each of Core/Basil/Molasses, it diffs that theme's own
+ * dark build (tier_1_<theme>_dark) against that SAME theme's own light
+ * build (tier_1_<theme>) -- never against Core -- since dark mode is a
+ * per-theme override (see build-tokens.js's THEMES cascade comment: each
+ * `_dark` build layers tier_1_core_dark, then the theme's own light set,
+ * then the theme's own dark set on top). Reuses the exact same `scales`
+ * shape (Color Palettes/Data Viz/Utility/Brand/Neutral/Transparent) as
+ * manifest.scales -- the swatch NAMES never change between light and
+ * dark (or between themes), only which named swatches actually resolve
+ * to a different value -- so one shared scales-shaped template, filtered
+ * down per diff, is all three needs. Powers the "Color - Dark" sidebar
+ * pages (sibling to "Color - Default" under Tier 1 - Core, and under each
+ * theme's own Tier 1 page) via makeTier1ColorDarkStories(theme) in
+ * tier1ColorStories.jsx.
+ *
  * Run after build-tokens.js (see package.json's "build" script). Output is
  * regenerated every time, same as tokens/sets/ and build/ -- not tracked in
  * git (see .gitignore).
@@ -63,12 +80,17 @@
 import fs from "node:fs";
 
 const CORE_CSS_PATH = "build/tier_1_core/css/variables.css";
+const CORE_DARK_CSS_PATH = "build/tier_1_core_dark/css/variables.css";
 const THEME_CSS_PATHS = {
 	basil: "build/tier_1_basil/css/variables.css",
 	molasses: "build/tier_1_molasses/css/variables.css",
 	// Internal-only Storybook chrome theme -- see build-tokens.js's THEMES
 	// entry and internal/StorybookDS/*.stories.jsx.
 	storybook_ds: "build/tier_1_storybook_ds/css/variables.css",
+};
+const THEME_DARK_CSS_PATHS = {
+	basil: "build/tier_1_basil_dark/css/variables.css",
+	molasses: "build/tier_1_molasses_dark/css/variables.css",
 };
 const OUT_DIR = "tokens/generated";
 const OUT_PATH = `${OUT_DIR}/color-manifest.json`;
@@ -207,6 +229,48 @@ function buildTier2ThemeDiff(themeCssPath) {
 	);
 }
 
+// Tier 1 dark-mode diff: same `scales` shape as manifest.scales (families
+// of {step, cssVar} items), filtered down to only the items whose value
+// actually changed. Keeps every family/scale TITLE even when it ends up
+// empty (rather than dropping it) so the sidebar page still exists and can
+// show ColorScaleSection's "no differences" message -- same precedent as
+// ColorGridSection's tier_2 empty state.
+function filterScaleByDiff(scale, changedVars) {
+	return {
+		title: scale.title,
+		families: scale.families
+			.map((family) => ({
+				name: family.name,
+				items: family.items.filter((item) => changedVars.has(item.cssVar)),
+			}))
+			.filter((family) => family.items.length > 0),
+	};
+}
+
+// Diffs `darkCssPath` against `lightCssPath` (that SAME theme's own light
+// build -- Core dark vs Core light, Basil dark vs Basil light, etc., never
+// against a different theme) and applies filterScaleByDiff to every scale
+// in `scalesTemplate`. Returns null (with a console warning, same as
+// buildTier2ThemeDiff) if the dark build doesn't exist yet.
+function buildTier1DarkDiff(lightCssPath, darkCssPath, scalesTemplate) {
+	if (!fs.existsSync(darkCssPath)) {
+		console.warn(`  (skipping Tier 1 dark diff -- ${darkCssPath} not found)`);
+		return null;
+	}
+	const lightVarsMap = lightCssPath === CORE_CSS_PATH ? coreVarsMap : parseCssVars(fs.readFileSync(lightCssPath, "utf-8"));
+	const darkVarsMap = parseCssVars(fs.readFileSync(darkCssPath, "utf-8"));
+	const changedVars = new Set();
+	for (const [cssVar, value] of darkVarsMap) {
+		if (
+			(cssVar.startsWith("--ap-color-") || cssVar.startsWith("--ap-tier-2-color-")) &&
+			lightVarsMap.get(cssVar) !== value
+		) {
+			changedVars.add(cssVar);
+		}
+	}
+	return scalesTemplate.map((scale) => filterScaleByDiff(scale, changedVars));
+}
+
 // "Data Viz" used to live inside "Color Palettes" as a handful of
 // single-swatch families (Dataviz Orange/Purple/Pale Red Subtle/Pale Red
 // -- no numeric step, so buildFamilyScale already treats each as its own
@@ -224,23 +288,34 @@ const dataVizFamilies = colorPalettesScale.families.filter((f) => f.name.startsW
 colorPalettesScale.families = colorPalettesScale.families.filter((f) => !f.name.startsWith("Dataviz"));
 const dataVizScale = { title: "Data Viz", families: dataVizFamilies };
 
+// Shared by manifest.scales AND every Tier 1 dark diff below -- swatch
+// NAMES never change between light/dark or between themes, only which
+// ones resolve to a different value, so one scales-shaped template
+// suffices as the diff input for Core/Basil/Molasses alike.
+const scales = [
+	colorPalettesScale,
+	dataVizScale,
+	buildFamilyScale("--ap-color-utility-", "Utility"),
+	buildFamilyScale("--ap-color-brand-", "Brand"),
+	buildFlatScale("--ap-color-neutral-", "Neutral"),
+	// Renders as a ColorPalette (tile column + label column), same as
+	// ap_ds_storybook's TransparentColors.jsx -- not a "grid" card.
+	buildFlatScale("--ap-color-transparent-", "Transparent"),
+];
+
 const manifest = {
 	generatedFrom: CORE_CSS_PATH,
-	scales: [
-		colorPalettesScale,
-		dataVizScale,
-		buildFamilyScale("--ap-color-utility-", "Utility"),
-		buildFamilyScale("--ap-color-brand-", "Brand"),
-		buildFlatScale("--ap-color-neutral-", "Neutral"),
-		// Renders as a ColorPalette (tile column + label column), same as
-		// ap_ds_storybook's TransparentColors.jsx -- not a "grid" card.
-		buildFlatScale("--ap-color-transparent-", "Transparent"),
-	],
+	scales,
 	grids: TIER2_PREFIXES.map(([prefix, label]) => buildGrid(prefix, label)),
 	tier2ThemeDiffs: {
 		basil: buildTier2ThemeDiff(THEME_CSS_PATHS.basil),
 		molasses: buildTier2ThemeDiff(THEME_CSS_PATHS.molasses),
 		storybook_ds: buildTier2ThemeDiff(THEME_CSS_PATHS.storybook_ds),
+	},
+	tier1DarkDiffs: {
+		core: buildTier1DarkDiff(CORE_CSS_PATH, CORE_DARK_CSS_PATH, scales),
+		basil: buildTier1DarkDiff(THEME_CSS_PATHS.basil, THEME_DARK_CSS_PATHS.basil, scales),
+		molasses: buildTier1DarkDiff(THEME_CSS_PATHS.molasses, THEME_DARK_CSS_PATHS.molasses, scales),
 	},
 };
 
@@ -249,8 +324,14 @@ fs.writeFileSync(OUT_PATH, JSON.stringify(manifest, null, 2) + "\n");
 const diffCounts = Object.entries(manifest.tier2ThemeDiffs)
 	.map(([theme, grids]) => `${theme}=${grids ? grids.reduce((n, g) => n + g.items.length, 0) : "n/a"}`)
 	.join(", ");
+const darkDiffCounts = Object.entries(manifest.tier1DarkDiffs)
+	.map(
+		([theme, scaleList]) =>
+			`${theme}=${scaleList ? scaleList.reduce((n, s) => n + s.families.reduce((m, f) => m + f.items.length, 0), 0) : "n/a"}`,
+	)
+	.join(", ");
 console.log(
 	`✔︎ ${OUT_PATH} (${colorVars.length} color tokens; Color Palettes families: ${colorPalettesScale.families.length}, Data Viz families: ${dataVizScale.families.length}; ` +
 		`tier_2 full grids -- ${manifest.grids.map((g) => `${g.title}: ${g.items.length}`).join(", ")}; ` +
-		`tier_2 diffs: ${diffCounts})`,
+		`tier_2 diffs: ${diffCounts}; tier_1 dark diffs: ${darkDiffCounts})`,
 );

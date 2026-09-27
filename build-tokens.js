@@ -282,10 +282,35 @@ const BASE_SOURCE = [
 // -- separate from `name` on purpose, change it too if you'd rather the
 // attribute values matched the set names. `selector` is only used for the
 // PASS 1 standalone (single-axis, `:root`-scoped) builds below.
+// DARK MODE: each `_dark` set (tier_1_core_dark/tier_1_basil_dark/
+// tier_1_molasses_dark) only overrides `color` -- same shape as basil/
+// molasses only overriding color.brand. Token Studio's own $metadata.
+// tokenSetOrder lists them in exactly this cascade order: tier_1_core,
+// tier_1_core_dark, tier_1_basil, tier_1_basil_dark, tier_1_molasses,
+// tier_1_molasses_dark -- so a `_dark` theme's `sets` array layers on top
+// of BASE_SOURCE (which already has tier_1_core) in that same order:
+// tier_1_core_dark first (dark values for every color category, applies
+// under any theme), then the theme's own light set (its brand override),
+// then the theme's own dark set (its brand override's dark value, which
+// wins since it's last). Core Dark skips the middle step since Core has
+// no separate "light-theme brand override" to layer.
 const THEMES = [
 	{ name: "tier_1_core", sets: [], attrValue: "core", selector: ":root" },
+	{ name: "tier_1_core_dark", sets: ["tier_1_core_dark"], attrValue: "core_dark", selector: '[data-theme="core_dark"]' },
 	{ name: "tier_1_basil", sets: ["tier_1_basil"], attrValue: "basil", selector: '[data-theme="basil"]' },
+	{
+		name: "tier_1_basil_dark",
+		sets: ["tier_1_core_dark", "tier_1_basil", "tier_1_basil_dark"],
+		attrValue: "basil_dark",
+		selector: '[data-theme="basil_dark"]',
+	},
 	{ name: "tier_1_molasses", sets: ["tier_1_molasses"], attrValue: "molasses", selector: '[data-theme="molasses"]' },
+	{
+		name: "tier_1_molasses_dark",
+		sets: ["tier_1_core_dark", "tier_1_molasses", "tier_1_molasses_dark"],
+		attrValue: "molasses_dark",
+		selector: '[data-theme="molasses_dark"]',
+	},
 	// Internal-only: styles Storybook's own manager chrome (sidebar,
 	// headings, toolbar), not a real product theme. Deliberately NOT
 	// referenced by any $themes entry in Token Studio and not part of the

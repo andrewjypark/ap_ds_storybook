@@ -60,3 +60,57 @@ export function makeTier1ColorStories(theme) {
 		},
 	};
 }
+
+/**
+ * Tier 1 dark-diff story bodies -- sibling to makeTier1ColorStories, one
+ * level down the LIGHT/DARK axis instead of the theme axis. `theme` here
+ * is still "core" / "basil" / "molasses" (matching manifest.tier1DarkDiffs'
+ * keys); the actual pinned Storybook theme global is `${theme}_dark`
+ * (e.g. "basil_dark") so each story renders under its own
+ * `[data-theme="basil_dark"]` block (see build-tokens.js's THEMES cascade)
+ * instead of the light theme.
+ *
+ * Reads manifest.tier1DarkDiffs[theme] instead of manifest.scales --
+ * already filtered down (see generate-color-manifest.js's
+ * buildTier1DarkDiff) to only the scales/families/items whose value
+ * actually differs from that SAME theme's own light build (Basil dark vs
+ * Basil light, never vs Core). A category with zero differences (e.g.
+ * Transparent -- confirmed identical light vs dark across all three
+ * themes) still gets its page: findDarkScale falls back to
+ * `{ title, families: [] }`, and ColorScaleSection renders its own
+ * "No tokens in this category differ between light and dark." message for
+ * that case -- same empty-state precedent as
+ * makeTier2SemanticStories/ColorGridSection use for tier_2 theme diffs.
+ */
+export function makeTier1ColorDarkStories(theme) {
+	const darkScales = manifest.tier1DarkDiffs?.[theme] ?? [];
+	const findDarkScale = (title) => darkScales.find((s) => s.title === title) ?? { title, families: [] };
+	const darkTheme = `${theme}_dark`;
+
+	return {
+		ColorPalettes: {
+			globals: { theme: darkTheme },
+			render: () => <ColorScaleSection scale={findDarkScale("Color Palettes")} />,
+		},
+		DataViz: {
+			globals: { theme: darkTheme },
+			render: () => <ColorScaleSection scale={findDarkScale("Data Viz")} />,
+		},
+		Utility: {
+			globals: { theme: darkTheme },
+			render: () => <ColorScaleSection scale={findDarkScale("Utility")} />,
+		},
+		Brand: {
+			globals: { theme: darkTheme },
+			render: () => <ColorScaleSection scale={findDarkScale("Brand")} />,
+		},
+		Neutral: {
+			globals: { theme: darkTheme },
+			render: () => <ColorScaleSection scale={findDarkScale("Neutral")} />,
+		},
+		Transparent: {
+			globals: { theme: darkTheme },
+			render: () => <ColorScaleSection scale={findDarkScale("Transparent")} />,
+		},
+	};
+}

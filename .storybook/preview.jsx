@@ -22,20 +22,24 @@ import { TokenPreviewContext } from "../components/TokenPreviewContext.jsx";
 /**
  * ap_ui_kit has TWO independent toggleable dimensions (ap_ds_storybook only
  * has one, Theme) -- see build-tokens.js. build/all-combinations/css/
- * variables.css has one block per (theme, viewport) pair -- 9 total --
- * each scoped by a COMPOUND selector (`[data-theme="basil"][data-viewport
- * ="mobile"]`, etc.), so an element matches exactly one block whenever
- * BOTH attributes are present on it. Every token in the project (color,
- * border, typography, everything) lives inside one of these 9 blocks now
- * -- there's no more single-axis `[data-theme="basil"]`-only or
- * `[data-viewport="mobile"]`-only fallback -- so `data-viewport` must
- * always be present wherever `data-theme` is, or NOTHING resolves there.
+ * variables.css has one block per (theme, viewport) pair -- 18 total (6
+ * themes -- core/basil/molasses, each with its own _dark variant -- x 3
+ * viewports) -- each scoped by a COMPOUND selector (`[data-theme="basil"]
+ * [data-viewport="mobile"]`, etc.), so an element matches exactly one
+ * block whenever BOTH attributes are present on it. Every token in the
+ * project (color, border, typography, everything) lives inside one of
+ * these 18 blocks now -- there's no more single-axis
+ * `[data-theme="basil"]`-only or `[data-viewport="mobile"]`-only fallback
+ * -- so `data-viewport` must always be present wherever `data-theme` is,
+ * or NOTHING resolves there.
  *
  * NOTE: Theme's toolbar dropdown is deliberately NOT exposed -- its
- * Basil/Molasses options are redundant with the dedicated "Tier 1 - Basil"/
- * "Tier 1 - Molasses"/"Tier 2 - Basil"/"Tier 2 - Molasses" sidebar pages (each pins
- * its own `globals: {theme}` on the story object, which works with or
- * without a toolbar UI for it).
+ * Basil/Molasses/*_dark options are redundant with the dedicated
+ * "Tier 1 - Basil"/"Tier 1 - Molasses"/"Tier 2 - Basil"/"Tier 2 - Molasses"
+ * sidebar pages (each pins its own `globals: {theme}` on the story
+ * object, which works with or without a toolbar UI for it) -- and with
+ * the "Color - Default"/"Color - Dark" sidebar pages under each of
+ * those, for the light/dark axis specifically.
  *
  * There is deliberately NO toolbar/global for viewport at all. An earlier
  * version of this file exposed one (as a `deviceScale` global, named to
@@ -85,7 +89,8 @@ const preview = {
 	globalTypes: {
 		theme: {
 			name: "Theme",
-			description: "Color theme (tier_1_core / tier_1_basil / tier_1_molasses)",
+			description:
+				"Color theme (tier_1_core / tier_1_basil / tier_1_molasses, each with its own _dark variant)",
 		},
 	},
 	initialGlobals: {
@@ -130,6 +135,16 @@ const preview = {
 				// 2"), but that left the full, undiffed semantic list with
 				// nowhere to render -- Core is the base every theme diffs
 				// against, so it needs a page here just like Tier 1's does.
+				//
+				// "Color" split into "Color - Default"/"Color - Dark" under
+				// every Tier 1 page (Core and both themes) -- Default is the
+				// existing light-mode swatch pages, Dark is the new sibling
+				// showing only what differs between that same theme's own
+				// light and dark builds (see tier1ColorStories.jsx's
+				// makeTier1ColorDarkStories / generate-color-manifest.js's
+				// buildTier1DarkDiff). Both live under the same "Color" tier
+				// as Typography/Border -- just two pinned-theme variants of
+				// it, same relationship as Core vs Basil/Molasses one level up.
 				order: [
 					"Tier 1: Global Tokens",
 					[
@@ -137,7 +152,7 @@ const preview = {
 						// Typography/Border fall back to alphabetical order (Border,
 						// Color, Typography), which is why Border used to show up first.
 						"Tier 1 - Core",
-						["Color", "Typography", "Border"],
+						["Color - Default", "Color - Dark", "Typography", "Border"],
 						// Basil/Molasses live under a "Themes" subgroup, sibling to Core
 						// (and to Storybook DS - Internal, unpinned below) -- keeps the
 						// two theme variants visually grouped instead of loose peers of
@@ -147,9 +162,9 @@ const preview = {
 						"Themes",
 						[
 							"Tier 1 - Basil_Theme",
-							["Color", "Typography"],
+							["Color - Default", "Color - Dark", "Typography"],
 							"Tier 1 - Molasses_Theme",
-							["Color", "Typography"],
+							["Color - Default", "Color - Dark", "Typography"],
 						],
 					],
 					"Tier 2: Semantic Tokens",

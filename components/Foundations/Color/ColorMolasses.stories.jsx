@@ -5,7 +5,7 @@ import { makeTier1ColorStories } from "./tier1ColorStories.jsx";
  * and Molasses Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tier 1: Global Tokens/Themes/Tier 1 - Molasses_Theme/Color",
+	title: "Tier 1: Global Tokens/Themes/Tier 1 - Molasses_Theme/Color - Default",
 	parameters: { layout: "padded" },
 };
 

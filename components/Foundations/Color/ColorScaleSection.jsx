@@ -27,11 +27,22 @@ export function ColorScaleSection({ scale }) {
 			>
 				{scale.title}
 			</h3>
-			<div className="ap-color-token-group">
-				{scale.families.map((family) => (
-					<ColorPalette key={family.name} label={family.name} items={family.items} />
-				))}
-			</div>
+			{/* Dark-diff pages (see tier1ColorStories.jsx's
+			    makeTier1ColorDarkStories) pass a scale that's already been
+			    filtered down to only the families/items whose value differs
+			    from that same theme's light build -- a category with zero
+			    differences (e.g. Transparent) still gets a page, it just has
+			    no families left. Same precedent as ColorGridSection's tier_2
+			    empty state: render the page, show a message, don't omit it. */}
+			{scale.families.length === 0 ? (
+				<p className="ap-color-section__empty">No tokens in this category differ between light and dark.</p>
+			) : (
+				<div className="ap-color-token-group">
+					{scale.families.map((family) => (
+						<ColorPalette key={family.name} label={family.name} items={family.items} />
+					))}
+				</div>
+			)}
 		</section>
 	);
 }

@@ -5,7 +5,7 @@ import { makeTier1ColorStories } from "./tier1ColorStories.jsx";
  * and Molasses Tier 1 only contain the tokens that differ from Core.
  */
 export default {
-	title: "Tier 1: Global Tokens/Tier 1 - Core/Color",
+	title: "Tier 1: Global Tokens/Tier 1 - Core/Color - Default",
 	// No explicit docs.description.component override here -- falls back to
 	// the leading JSDoc comment above, same as ColorBasil.stories.jsx and
 	// ColorMolasses.stories.jsx already do. Previously had its own override text
