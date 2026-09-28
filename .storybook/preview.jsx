@@ -169,7 +169,11 @@ const preview = {
 					],
 					"Tier 2: Semantic Tokens",
 					[
+						// Pin Tier 2 - Core's own children too, same reason as Tier 1
+						// - Core above: without this, "Color - Dark" would sort ahead
+						// of "Color - Default" alphabetically.
 						"Tier 2 - Core",
+						["Color - Default", "Color - Dark", "Typography"],
 						"Themes",
 						[
 							"Tier 2 - Basil_Theme",

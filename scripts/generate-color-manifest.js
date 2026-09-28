@@ -223,8 +223,14 @@ const TIER2_PREFIXES = [
 	["--ap-tier-2-color-border-", "Border"],
 ];
 
-// For each non-core theme, diff its build's tier_2 vars against core's and
-// keep only the ones whose value actually changed.
+// Diffs `compareCssPath`'s tier_2 vars against Core's (light) and keeps
+// only the ones whose value actually changed. Named for its original use
+// -- one non-core theme's light build against Core's light build (the
+// THEME axis, manifest.tier2ThemeDiffs) -- but it's equally correct
+// passed Core's own DARK build instead (the LIGHT/DARK axis,
+// manifest.tier2DarkDiffs.core): both are just "diff this CSS file's
+// tier_2 vars against coreVarsMap", regardless of which axis the compare
+// file varies along.
 function buildTier2ThemeDiff(themeCssPath) {
 	if (!fs.existsSync(themeCssPath)) {
 		console.warn(`  (skipping theme diff -- ${themeCssPath} not found)`);
@@ -333,6 +339,15 @@ const manifest = {
 		molasses: buildTier2ThemeDiff(THEME_CSS_PATHS.molasses),
 		storybook_ds: buildTier2ThemeDiff(THEME_CSS_PATHS.storybook_ds),
 	},
+	// Light/dark axis, Tier 2 -- currently just "core" (SemanticDark.
+	// stories.jsx), same scope as the request that added it. Basil/
+	// Molasses Tier 2 Dark can add their own entries here later the same
+	// way tier2ThemeDiffs already covers all three -- diffing that
+	// theme's own dark build against CORE's dark build (not against its
+	// own light build), mirroring tier1DarkDiffs' basil/molasses.
+	tier2DarkDiffs: {
+		core: buildTier2ThemeDiff(CORE_DARK_CSS_PATH),
+	},
 	tier1DarkDiffs: {
 		// Light/dark axis: what changes when Core itself goes dark.
 		core: buildTier1ScaleDiff(CORE_CSS_PATH, CORE_DARK_CSS_PATH, scales),
@@ -349,6 +364,9 @@ fs.writeFileSync(OUT_PATH, JSON.stringify(manifest, null, 2) + "\n");
 const diffCounts = Object.entries(manifest.tier2ThemeDiffs)
 	.map(([theme, grids]) => `${theme}=${grids ? grids.reduce((n, g) => n + g.items.length, 0) : "n/a"}`)
 	.join(", ");
+const tier2DarkDiffCounts = Object.entries(manifest.tier2DarkDiffs)
+	.map(([theme, grids]) => `${theme}=${grids ? grids.reduce((n, g) => n + g.items.length, 0) : "n/a"}`)
+	.join(", ");
 const darkDiffCounts = Object.entries(manifest.tier1DarkDiffs)
 	.map(
 		([theme, scaleList]) =>
@@ -358,5 +376,5 @@ const darkDiffCounts = Object.entries(manifest.tier1DarkDiffs)
 console.log(
 	`✔︎ ${OUT_PATH} (${colorVars.length} color tokens; Color Palettes families: ${colorPalettesScale.families.length}, Data Viz families: ${dataVizScale.families.length}; ` +
 		`tier_2 full grids -- ${manifest.grids.map((g) => `${g.title}: ${g.items.length}`).join(", ")}; ` +
-		`tier_2 diffs: ${diffCounts}; tier_1 dark diffs: ${darkDiffCounts})`,
+		`tier_2 diffs: ${diffCounts}; tier_2 dark diffs: ${tier2DarkDiffCounts}; tier_1 dark diffs: ${darkDiffCounts})`,
 );
