@@ -1,7 +1,0 @@
-import{a as p}from"./tier2SemanticStories-CYPzxH4P.js";import"./iframe-CYcxIYME.js";import"./preload-helper-Dp1pzeXC.js";import"./Color-DhDnmO4j.js";import"./useLiveCssValue-DLJ-ZHRj.js";const C={title:"Tier 2: Semantic Tokens/Themes/Tier 2 - Basil_Theme/Color - Dark",parameters:{layout:"padded",docs:{description:{component:`Sibling to SemanticBasil.stories.jsx ("Color - Default"), one axis
-over: Default diffs Basil's light build against Core's light build;
-Dark diffs Basil's DARK build against Core's DARK build -- same theme
-axis, just evaluated on the dark builds (see generate-color-
-manifest.js's buildTier2Diff / manifest.tier2DarkDiffs.basil). Mirrors
-ColorBasilDark.stories.jsx's relationship to ColorBasil.stories.jsx at
-Tier 1, one tier up.`}}}},o=p("basil"),e=o.Content,r=o.Background,s=o.Border,b=["Content","Background","Border"];var a,t,i;e.parameters={...e.parameters,docs:{...(a=e.parameters)==null?void 0:a.docs,source:{originalSource:"stories.Content",...(i=(t=e.parameters)==null?void 0:t.docs)==null?void 0:i.source}}};var n,c,d;r.parameters={...r.parameters,docs:{...(n=r.parameters)==null?void 0:n.docs,source:{originalSource:"stories.Background",...(d=(c=r.parameters)==null?void 0:c.docs)==null?void 0:d.source}}};var l,m,u;s.parameters={...s.parameters,docs:{...(l=s.parameters)==null?void 0:l.docs,source:{originalSource:"stories.Border",...(u=(m=s.parameters)==null?void 0:m.docs)==null?void 0:u.source}}};export{r as Background,s as Border,e as Content,b as __namedExportsOrder,C as default};
