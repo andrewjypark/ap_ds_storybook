@@ -1,5 +1,5 @@
 /**
- * Bricolage Grotesque (font3, Tier 1 Gold) -- self-hosted @font-face
+ * Bricolage Grotesque (font3, Tier 1 Molasses) -- self-hosted @font-face
  * declarations. Same fix as the other families in this project:
  * `url()`-only sources, no `local("Bricolage Grotesque")` fallback.
  *
@@ -12,7 +12,7 @@
  * Novela tofu-box shape, so the no-`local()`-fallback fix matters here
  * as much as anywhere else in this project.
  *
- * WEIGHTS: font_weights_font_3 (Gold) resolves light=200, regular=300,
+ * WEIGHTS: font_weights_font_3 (Molasses) resolves light=200, regular=300,
  * semibold=400, bold=500 (see build/tier_1_gold/css/variables.css's
  * --ap-font3-*-* vars) -- note this family's steps run a notch lighter
  * than font1/font2's (light=ExtraLight here, not Light) -- all four have

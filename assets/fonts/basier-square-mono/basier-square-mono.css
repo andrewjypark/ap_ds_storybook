@@ -1,5 +1,5 @@
 /**
- * Basier Square Mono (font3, Tier 1 Green/Gold) -- self-hosted @font-face
+ * Basier Square Mono (font3, Tier 1 Basil/Molasses) -- self-hosted @font-face
  * declaration. Same fix/reasoning as basier-circle.css/basier-square.css
  * -- ~/Library/Fonts has both the foundry original
  * (BasierSquareMono-Regular.otf) and a duplicate "-webfont" conversion
@@ -7,7 +7,7 @@
  * here with no `local()` fallback.
  *
  * WEIGHTS: only one real Basier Square Mono face exists at all (Regular).
- * font_weights_font_3 (Green/Gold) already reflects that -- light,
+ * font_weights_font_3 (Basil/Molasses) already reflects that -- light,
  * regular, semibold, AND bold all resolve to the same 400 (see
  * build/tier_1_green/css/variables.css's --ap-font-weights-font-3-* vars,
  * all "400") -- so a single @font-face at weight 400 covers every step

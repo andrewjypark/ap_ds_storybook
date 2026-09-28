@@ -1,5 +1,5 @@
 /**
- * Basier Square (font2, Tier 1 Green/Gold) -- self-hosted @font-face
+ * Basier Square (font2, Tier 1 Basil/Molasses) -- self-hosted @font-face
  * declarations. Same fix and reasoning as basier-circle.css: this
  * developer's ~/Library/Fonts has both the foundry originals
  * (BasierSquare-*.otf) and a duplicate "-webfont" conversion
@@ -7,7 +7,7 @@
  * originals are bundled here, with no `local()` fallback, so the page's
  * own font always wins regardless of which copy the OS resolves to.
  *
- * WEIGHTS: font_weights_font_2 (Green/Gold) resolves light=400,
+ * WEIGHTS: font_weights_font_2 (Basil/Molasses) resolves light=400,
  * regular=500, semibold=600, bold=700 (see build/tier_1_green/css/
  * variables.css's --ap-font-weights-font-2-* vars) -- all four have a
  * real Basier Square face and are bundled below.

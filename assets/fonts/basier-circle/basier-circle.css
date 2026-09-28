@@ -1,5 +1,5 @@
 /**
- * Basier Circle (font1, Tier 1 Green/Gold) -- self-hosted @font-face
+ * Basier Circle (font1, Tier 1 Basil/Molasses) -- self-hosted @font-face
  * declarations. Same fix as novela.css: `url()`-only sources, no
  * `local("Basier Circle")` fallback -- this developer's ~/Library/Fonts
  * has BOTH the foundry originals (BasierCircle-*.otf) and a second
@@ -9,7 +9,7 @@
  * declaring them with no `local()` fallback sidesteps that collision
  * entirely rather than relying on the OS to pick the right one.
  *
- * WEIGHTS: font_weights_font_1 (Green/Gold) resolves light=400,
+ * WEIGHTS: font_weights_font_1 (Basil/Molasses) resolves light=400,
  * regular=500, semibold=600, bold=700 (see build/tier_1_green/css/
  * variables.css's --ap-font-weights-font-1-* vars) -- all four have a
  * real Basier Circle face and are bundled below.

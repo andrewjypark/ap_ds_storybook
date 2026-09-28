@@ -1,10 +1,10 @@
 /**
- * Quablo (font2, Tier 1 Gold) -- self-hosted @font-face declarations.
+ * Quablo (font2, Tier 1 Molasses) -- self-hosted @font-face declarations.
  * Same fix as the other families in this project: `url()`-only sources,
  * no `local("Quablo")` fallback, so a page's own @font-face always wins
  * over anything the OS has installed under the same family name.
  *
- * WEIGHTS: font_weights_font_2 (Gold) resolves light=300, regular=400,
+ * WEIGHTS: font_weights_font_2 (Molasses) resolves light=300, regular=400,
  * semibold=500, bold=600 (see build/tier_1_gold/css/variables.css's
  * --ap-font2-*-* vars) -- all four have a real Quablo cut and are
  * bundled below.

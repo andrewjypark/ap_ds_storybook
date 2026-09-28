@@ -87,6 +87,19 @@
 	color: var(--ap-tier-2-color-content-subtle);
 }
 
+/* Folder-structure tree -- monospace, preserves whitespace. */
+.ap-intro-tree {
+	margin: 0.75rem 0 0;
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	color: var(--ap-tier-2-color-content-default);
+	background: var(--ap-tier-2-color-background-subtle, rgba(0, 0, 0, 0.04));
+	border-radius: 6px;
+}
+
 /* "Where to find things" -- a simple term/description row list, styled
    like Border's token rows: a bold key above a lighter value, here laid
    out side by side instead of stacked since the term is short and the

@@ -1,5 +1,5 @@
 /**
- * Nudica (font1, Tier 1 Gold) -- self-hosted @font-face declarations.
+ * Nudica (font1, Tier 1 Molasses) -- self-hosted @font-face declarations.
  * Same fix as novela.css/basier-circle.css: `url()`-only sources, no
  * `local("Nudica")` fallback. ~/Library/Fonts has BOTH the foundry
  * originals (Nudica-*.otf) and a second "-webfont" conversion of the
@@ -8,7 +8,7 @@
  * here (NOT the -webfont copies) and declaring them with no `local()`
  * fallback sidesteps that collision entirely.
  *
- * WEIGHTS: font_weights_font_1 (Gold) resolves light=300, regular=400,
+ * WEIGHTS: font_weights_font_1 (Molasses) resolves light=300, regular=400,
  * semibold=500, bold=700 (see build/tier_1_gold/css/variables.css's
  * --ap-font1-*-* vars) -- all four have a real Nudica cut and are
  * bundled below.

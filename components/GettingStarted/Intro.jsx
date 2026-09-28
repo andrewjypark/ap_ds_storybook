@@ -64,10 +64,41 @@ export function Intro() {
 					</li>
 				</ul>
 				<p className="ap-intro-note">
-					Use the Theme control in the toolbar to preview Core, Basil, or Molasses anywhere in the storybook.
-					Font Size and Line Height are the one exception — they have their own Desktop / Tablet / Mobile
-					toggle on the page itself, since viewport only ever affects those two token types.
+					Font Size and Line Height have their own Desktop / Tablet / Mobile toggle on the page itself,
+					since viewport only ever affects those two token types.
 				</p>
+			</Section>
+
+			<Section title="Core vs. theme folders">
+				<p>
+					Tiers 1 and 2 share the same folder layout. <strong>Core</strong> holds the complete base set;
+					each theme (Basil, Molasses) sits under <strong>Themes</strong> with its own pages. An abridged
+					example:
+				</p>
+				<pre className="ap-intro-tree">{`Tier 1: Global Tokens
+├── Tier 1 - Core
+│   ├── Color - Default
+│   ├── Color - Dark
+│   ├── Typography
+│   └── Border
+└── Themes
+    ├── Tier 1 - Basil_Theme
+    │   ├── Color - Default
+    │   ├── Color - Dark
+    │   └── Typography
+    └── Tier 1 - Molasses_Theme
+        └── …
+
+Tier 2: Semantic Tokens
+├── Tier 2 - Core
+│   ├── Color - Default
+│   ├── Color - Dark
+│   └── Typography
+└── Themes
+    ├── Tier 2 - Basil_Theme
+    │   └── …
+    └── Tier 2 - Molasses_Theme
+        └── …`}</pre>
 			</Section>
 
 			<Section title="Where to find things">
