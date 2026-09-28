@@ -177,9 +177,9 @@ const preview = {
 						"Themes",
 						[
 							"Tier 2 - Basil_Theme",
-							["Color", "Typography"],
+							["Color - Default", "Color - Dark", "Typography"],
 							"Tier 2 - Molasses_Theme",
-							["Color", "Typography"],
+							["Color - Default", "Color - Dark", "Typography"],
 						],
 					],
 					// Tier 3: real, usable components (not token-definition pages) --

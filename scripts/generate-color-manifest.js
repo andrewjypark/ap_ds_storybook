@@ -54,6 +54,17 @@
  * same component, same label, just a different, possibly-filtered items
  * array.
  *
+ * manifest.tier2DarkDiffs.{core,basil,molasses} is the Tier 2 (semantic)
+ * light/dark equivalent, one tier up from tier1DarkDiffs but following the
+ * exact same two-axis split (see buildTier2Diff's doc comment):
+ *   - core: Core's own dark build diffed against Core's own light build
+ *     (the LIGHT/DARK axis -- Core has no other theme to diff against).
+ *   - basil/molasses: that theme's own DARK build diffed against CORE's
+ *     DARK build (the THEME axis, same as tier2ThemeDiffs -- just
+ *     evaluated on the dark builds instead of the light ones).
+ * Powers Tier 2 - Core/Basil_Theme/Molasses_Theme's "Color - Dark" sidebar
+ * pages via makeTier2SemanticDarkStories(theme) in tier2SemanticStories.jsx.
+ *
  * manifest.tier1DarkDiffs.{core,basil,molasses} is the Tier 1 (primitive)
  * dark-mode equivalent, but it diffs along TWO DIFFERENT axes depending on
  * the theme, mirroring how manifest.scales (Core, full list) vs
@@ -127,6 +138,13 @@ function parseCssVars(cssText) {
 }
 
 const coreVarsMap = parseCssVars(fs.readFileSync(CORE_CSS_PATH, "utf-8"));
+// Baseline for Basil/Molasses's Tier 2 DARK diffs (see buildTier2Diff/
+// tier2DarkDiffs below) -- the dark-axis equivalent of coreVarsMap. Parsed
+// once up front, same as coreVarsMap, since it's reused for both the
+// basil and molasses dark diffs.
+const coreDarkVarsMap = fs.existsSync(CORE_DARK_CSS_PATH)
+	? parseCssVars(fs.readFileSync(CORE_DARK_CSS_PATH, "utf-8"))
+	: null;
 const all = Array.from(coreVarsMap.entries()).map(([cssVar, value]) => ({ cssVar, value }));
 
 const colorVars = all.filter(
@@ -223,23 +241,34 @@ const TIER2_PREFIXES = [
 	["--ap-tier-2-color-border-", "Border"],
 ];
 
-// Diffs `compareCssPath`'s tier_2 vars against Core's (light) and keeps
-// only the ones whose value actually changed. Named for its original use
-// -- one non-core theme's light build against Core's light build (the
-// THEME axis, manifest.tier2ThemeDiffs) -- but it's equally correct
-// passed Core's own DARK build instead (the LIGHT/DARK axis,
-// manifest.tier2DarkDiffs.core): both are just "diff this CSS file's
-// tier_2 vars against coreVarsMap", regardless of which axis the compare
-// file varies along.
-function buildTier2ThemeDiff(themeCssPath) {
-	if (!fs.existsSync(themeCssPath)) {
-		console.warn(`  (skipping theme diff -- ${themeCssPath} not found)`);
+// Diffs `compareCssPath`'s tier_2 vars against an already-parsed
+// `baselineVarsMap` and keeps only the ones whose value actually changed.
+// Takes an explicit baseline (rather than always assuming Core light) so
+// the same function covers every tier_2 diff in this file, on whichever
+// axis:
+//   - manifest.tier2ThemeDiffs.{basil,molasses,storybook_ds}: baseline =
+//     coreVarsMap (Core light), compare = that theme's own light build --
+//     the THEME axis.
+//   - manifest.tier2DarkDiffs.core: baseline = coreVarsMap (Core light),
+//     compare = Core's own DARK build -- the LIGHT/DARK axis (Core has no
+//     other theme to diff against, same as tier1DarkDiffs.core).
+//   - manifest.tier2DarkDiffs.{basil,molasses}: baseline = coreDarkVarsMap
+//     (Core DARK, not Core light), compare = that theme's own dark build
+//     -- the THEME axis again, just evaluated on the dark builds, mirroring
+//     tier1DarkDiffs' own basil/molasses (buildTier1ScaleDiff).
+function buildTier2Diff(baselineVarsMap, compareCssPath) {
+	if (!baselineVarsMap) {
+		console.warn(`  (skipping tier_2 diff -- baseline not available for ${compareCssPath})`);
 		return null;
 	}
-	const themeVarsMap = parseCssVars(fs.readFileSync(themeCssPath, "utf-8"));
+	if (!fs.existsSync(compareCssPath)) {
+		console.warn(`  (skipping tier_2 diff -- ${compareCssPath} not found)`);
+		return null;
+	}
+	const compareVarsMap = parseCssVars(fs.readFileSync(compareCssPath, "utf-8"));
 	const changedVars = new Set();
-	for (const [cssVar, value] of themeVarsMap) {
-		if (cssVar.startsWith("--ap-tier-2-color-") && coreVarsMap.get(cssVar) !== value) {
+	for (const [cssVar, value] of compareVarsMap) {
+		if (cssVar.startsWith("--ap-tier-2-color-") && baselineVarsMap.get(cssVar) !== value) {
 			changedVars.add(cssVar);
 		}
 	}
@@ -274,10 +303,10 @@ function filterScaleByDiff(scale, changedVars) {
 //     (the light/dark axis -- what changes when Core itself goes dark).
 //   - Basil/Molasses's dark diff: baseline = Core dark, compare = that
 //     theme's own dark build (the theme axis, same shape as
-//     buildTier2ThemeDiff -- what's specific to this theme, evaluated on
-//     the dark builds instead of the light ones).
-// Returns null (with a console warning, same as buildTier2ThemeDiff) if
-// the compare build doesn't exist yet.
+//     buildTier2Diff -- what's specific to this theme, evaluated on the
+//     dark builds instead of the light ones).
+// Returns null (with a console warning, same as buildTier2Diff) if the
+// compare build doesn't exist yet.
 function buildTier1ScaleDiff(baselineCssPath, compareCssPath, scalesTemplate) {
 	if (!fs.existsSync(compareCssPath)) {
 		console.warn(`  (skipping Tier 1 dark diff -- ${compareCssPath} not found)`);
@@ -335,18 +364,17 @@ const manifest = {
 	scales,
 	grids: TIER2_PREFIXES.map(([prefix, label]) => buildGrid(prefix, label)),
 	tier2ThemeDiffs: {
-		basil: buildTier2ThemeDiff(THEME_CSS_PATHS.basil),
-		molasses: buildTier2ThemeDiff(THEME_CSS_PATHS.molasses),
-		storybook_ds: buildTier2ThemeDiff(THEME_CSS_PATHS.storybook_ds),
+		basil: buildTier2Diff(coreVarsMap, THEME_CSS_PATHS.basil),
+		molasses: buildTier2Diff(coreVarsMap, THEME_CSS_PATHS.molasses),
+		storybook_ds: buildTier2Diff(coreVarsMap, THEME_CSS_PATHS.storybook_ds),
 	},
-	// Light/dark axis, Tier 2 -- currently just "core" (SemanticDark.
-	// stories.jsx), same scope as the request that added it. Basil/
-	// Molasses Tier 2 Dark can add their own entries here later the same
-	// way tier2ThemeDiffs already covers all three -- diffing that
-	// theme's own dark build against CORE's dark build (not against its
-	// own light build), mirroring tier1DarkDiffs' basil/molasses.
 	tier2DarkDiffs: {
-		core: buildTier2ThemeDiff(CORE_DARK_CSS_PATH),
+		// Light/dark axis: what changes when Core itself goes dark.
+		core: buildTier2Diff(coreVarsMap, CORE_DARK_CSS_PATH),
+		// Theme axis (against Core DARK, not against their own light
+		// build): what's specific to this theme's dark build.
+		basil: buildTier2Diff(coreDarkVarsMap, THEME_DARK_CSS_PATHS.basil),
+		molasses: buildTier2Diff(coreDarkVarsMap, THEME_DARK_CSS_PATHS.molasses),
 	},
 	tier1DarkDiffs: {
 		// Light/dark axis: what changes when Core itself goes dark.

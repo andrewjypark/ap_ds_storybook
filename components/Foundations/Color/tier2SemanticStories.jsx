@@ -44,26 +44,29 @@ export function makeTier2SemanticStories(theme) {
 
 /**
  * Tier 2 dark-diff story bodies -- sibling to makeTier2SemanticStories,
- * one level down the LIGHT/DARK axis instead of the theme axis. Currently
- * only wired up for "core" (SemanticDark.stories.jsx), same scope as the
- * user's ask -- Basil/Molasses Tier 2 Dark can reuse this exact factory
- * later the same way makeTier2SemanticStories already handles all three
- * themes, once manifest.tier2DarkDiffs grows a "basil"/"molasses" entry.
+ * one level down the LIGHT/DARK axis for Core, and along the THEME axis
+ * (same as makeTier2SemanticStories's own Basil/Molasses usage) for
+ * Basil/Molasses. Used by SemanticDark.stories.jsx / SemanticBasilDark.
+ * stories.jsx / SemanticMolassesDark.stories.jsx.
  *
  * Reads manifest.tier2DarkDiffs[theme] instead of manifest.grids/
- * tier2ThemeDiffs -- for "core" this is Core's own dark build diffed
- * against Core's own light build (generate-color-manifest.js reuses
- * buildTier2ThemeDiff for this -- passing Core's dark CSS path in place
- * of a different theme's light CSS path diffs it against coreVarsMap
- * exactly the same way). `theme` is still "core" (matching manifest.
+ * tier2ThemeDiffs:
+ *   - "core" is diffed against Core's own LIGHT build (light/dark axis)
+ *     -- the "what does dark mode change at all" reference, so all three
+ *     categories carry real content (Content/Background/Border all
+ *     change some tokens going dark).
+ *   - "basil"/"molasses" are diffed against CORE'S DARK build instead of
+ *     their own light build (theme axis, same as manifest.tier2ThemeDiffs
+ *     and makeTier2SemanticStories's own Basil/Molasses pages) -- what's
+ *     specific to that theme's dark build, evaluated the same way
+ *     tier1DarkDiffs' basil/molasses are for Tier 1 (buildTier1ScaleDiff).
+ * `theme` is still "core"/"basil"/"molasses" (matching manifest.
  * tier2DarkDiffs' keys); the pinned Storybook theme global is
- * `${theme}_dark` so the story renders under `[data-theme="core_dark"]`.
- * A category with zero differences falls back to `{ title, items: [] }`
- * via findGrid, same as makeTier2SemanticStories, and ColorGridSection
- * renders its own "No tokens in this category differ from Core." message
- * for that case -- reused as-is even though this diff isn't against Core,
- * it's against this same theme's own light build; still accurate in
- * spirit ("no differences from the light version of this page").
+ * `${theme}_dark` so each story renders under its own
+ * `[data-theme="basil_dark"]`-style block. A category with zero
+ * differences falls back to `{ title, items: [] }` via findGrid, and
+ * ColorGridSection renders its own "No tokens in this category differ
+ * from Core." message for that case -- same as makeTier2SemanticStories.
  */
 export function makeTier2SemanticDarkStories(theme) {
 	const grids = manifest.tier2DarkDiffs?.[theme] ?? [];
