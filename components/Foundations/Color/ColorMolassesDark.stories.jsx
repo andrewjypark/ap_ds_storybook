@@ -1,16 +1,18 @@
 import { makeTier1ColorDarkStories } from "./tier1ColorStories.jsx";
 
 /**
- * Sibling to ColorMolasses.stories.jsx ("Color - Default"), one level
- * down the light/dark axis instead of the theme axis -- Molasses Dark
- * contains only the Tier 1 color tokens whose value actually differs
- * from Molasses's own light build (Neutral and Transparent turn out
- * identical, so those two pages show ColorScaleSection's "no differences"
- * message instead of swatches). Unlike ColorMolasses.stories.jsx (which
- * only exports "Brand", since that's the only category Molasses's light
- * theme ever touches), Molasses Dark exports all six -- Color
- * Palettes/Data Viz/Utility/Brand all turn out to differ from light along
- * the dark axis, not just Brand.
+ * Sibling to ColorMolasses.stories.jsx ("Color - Default"), one axis
+ * over: Default diffs Molasses's light build against Core's light build
+ * (Brand only); Dark diffs Molasses's DARK build against Core's DARK
+ * build -- same theme axis, just evaluated on the dark builds. Comes out
+ * to Brand only here too, for the same underlying reason (Color
+ * Palettes/Data Viz/Utility/Neutral/Transparent are never touched by any
+ * theme's own token set, light or dark -- only Core's own _dark set is,
+ * and every theme's _dark build layers that same set in) -- see
+ * generate-color-manifest.js's buildTier1ScaleDiff. Only exporting
+ * "Brand" (not all six, unlike ColorDark.stories.jsx) mirrors
+ * ColorMolasses.stories.jsx's own Brand-only pattern rather than padding
+ * the sidebar with five pages that are never expected to differ.
  */
 export default {
 	title: "Tier 1: Global Tokens/Themes/Tier 1 - Molasses_Theme/Color - Dark",
@@ -19,9 +21,4 @@ export default {
 
 const stories = makeTier1ColorDarkStories("molasses");
 
-export const ColorPalettes = stories.ColorPalettes;
-export const DataViz = stories.DataViz;
-export const Utility = stories.Utility;
 export const Brand = stories.Brand;
-export const Neutral = stories.Neutral;
-export const Transparent = stories.Transparent;

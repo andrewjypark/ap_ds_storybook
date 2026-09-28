@@ -55,21 +55,34 @@
  * array.
  *
  * manifest.tier1DarkDiffs.{core,basil,molasses} is the Tier 1 (primitive)
- * equivalent, but diffing along the LIGHT/DARK axis instead of the
- * theme axis: for each of Core/Basil/Molasses, it diffs that theme's own
- * dark build (tier_1_<theme>_dark) against that SAME theme's own light
- * build (tier_1_<theme>) -- never against Core -- since dark mode is a
- * per-theme override (see build-tokens.js's THEMES cascade comment: each
- * `_dark` build layers tier_1_core_dark, then the theme's own light set,
- * then the theme's own dark set on top). Reuses the exact same `scales`
- * shape (Color Palettes/Data Viz/Utility/Brand/Neutral/Transparent) as
- * manifest.scales -- the swatch NAMES never change between light and
- * dark (or between themes), only which named swatches actually resolve
- * to a different value -- so one shared scales-shaped template, filtered
- * down per diff, is all three needs. Powers the "Color - Dark" sidebar
- * pages (sibling to "Color - Default" under Tier 1 - Core, and under each
- * theme's own Tier 1 page) via makeTier1ColorDarkStories(theme) in
- * tier1ColorStories.jsx.
+ * dark-mode equivalent, but it diffs along TWO DIFFERENT axes depending on
+ * the theme, mirroring how manifest.scales (Core, full list) vs
+ * tier2ThemeDiffs (Basil/Molasses, diffed against Core) already relate:
+ *   - core: diffed along the LIGHT/DARK axis -- Core's own dark build
+ *     against Core's own light build. This is the "what does dark mode
+ *     change at all" reference page; Core has no other theme to diff
+ *     against here.
+ *   - basil / molasses: diffed along the THEME axis, same as
+ *     tier2ThemeDiffs -- that theme's DARK build against CORE's DARK
+ *     build (never against its own light build). Color Palettes/Data
+ *     Viz/Utility/Neutral/Transparent are never touched by any theme's
+ *     own token set (light or dark) -- only tier_1_core_dark overrides
+ *     them, and every `_dark` build layers that same set on top (see
+ *     build-tokens.js's THEMES cascade) -- so Basil Dark and Molasses
+ *     Dark resolve those categories IDENTICALLY to Core Dark, and only
+ *     "Brand" (the one category each theme's own _dark set overrides)
+ *     ever shows up as a diff. Confirmed empirically. This is exactly
+ *     the same reasoning that already limits Basil/Molasses's light
+ *     "Color - Default" page to Brand only -- Color - Dark mirrors it
+ *     one axis over instead of inventing a different rule.
+ * Reuses the exact same `scales` shape (Color Palettes/Data Viz/Utility/
+ * Brand/Neutral/Transparent) as manifest.scales -- the swatch NAMES never
+ * change between light and dark or between themes, only which named
+ * swatches actually resolve to a different value -- so one shared
+ * scales-shaped template, filtered per diff, serves all three. Powers the
+ * "Color - Dark" sidebar pages (sibling to "Color - Default" under Tier 1
+ * - Core, and under each theme's own Tier 1 page) via
+ * makeTier1ColorDarkStories(theme) in tier1ColorStories.jsx.
  *
  * Run after build-tokens.js (see package.json's "build" script). Output is
  * regenerated every time, same as tokens/sets/ and build/ -- not tracked in
@@ -247,23 +260,31 @@ function filterScaleByDiff(scale, changedVars) {
 	};
 }
 
-// Diffs `darkCssPath` against `lightCssPath` (that SAME theme's own light
-// build -- Core dark vs Core light, Basil dark vs Basil light, etc., never
-// against a different theme) and applies filterScaleByDiff to every scale
-// in `scalesTemplate`. Returns null (with a console warning, same as
-// buildTier2ThemeDiff) if the dark build doesn't exist yet.
-function buildTier1DarkDiff(lightCssPath, darkCssPath, scalesTemplate) {
-	if (!fs.existsSync(darkCssPath)) {
-		console.warn(`  (skipping Tier 1 dark diff -- ${darkCssPath} not found)`);
+// Diffs `compareCssPath` against `baselineCssPath` and applies
+// filterScaleByDiff to every scale in `scalesTemplate`. Which two builds
+// to pass depends on which axis this diff is along (see the
+// tier1DarkDiffs doc comment up top):
+//   - Core's own dark diff: baseline = Core light, compare = Core dark
+//     (the light/dark axis -- what changes when Core itself goes dark).
+//   - Basil/Molasses's dark diff: baseline = Core dark, compare = that
+//     theme's own dark build (the theme axis, same shape as
+//     buildTier2ThemeDiff -- what's specific to this theme, evaluated on
+//     the dark builds instead of the light ones).
+// Returns null (with a console warning, same as buildTier2ThemeDiff) if
+// the compare build doesn't exist yet.
+function buildTier1ScaleDiff(baselineCssPath, compareCssPath, scalesTemplate) {
+	if (!fs.existsSync(compareCssPath)) {
+		console.warn(`  (skipping Tier 1 dark diff -- ${compareCssPath} not found)`);
 		return null;
 	}
-	const lightVarsMap = lightCssPath === CORE_CSS_PATH ? coreVarsMap : parseCssVars(fs.readFileSync(lightCssPath, "utf-8"));
-	const darkVarsMap = parseCssVars(fs.readFileSync(darkCssPath, "utf-8"));
+	const baselineVarsMap =
+		baselineCssPath === CORE_CSS_PATH ? coreVarsMap : parseCssVars(fs.readFileSync(baselineCssPath, "utf-8"));
+	const compareVarsMap = parseCssVars(fs.readFileSync(compareCssPath, "utf-8"));
 	const changedVars = new Set();
-	for (const [cssVar, value] of darkVarsMap) {
+	for (const [cssVar, value] of compareVarsMap) {
 		if (
 			(cssVar.startsWith("--ap-color-") || cssVar.startsWith("--ap-tier-2-color-")) &&
-			lightVarsMap.get(cssVar) !== value
+			baselineVarsMap.get(cssVar) !== value
 		) {
 			changedVars.add(cssVar);
 		}
@@ -313,9 +334,13 @@ const manifest = {
 		storybook_ds: buildTier2ThemeDiff(THEME_CSS_PATHS.storybook_ds),
 	},
 	tier1DarkDiffs: {
-		core: buildTier1DarkDiff(CORE_CSS_PATH, CORE_DARK_CSS_PATH, scales),
-		basil: buildTier1DarkDiff(THEME_CSS_PATHS.basil, THEME_DARK_CSS_PATHS.basil, scales),
-		molasses: buildTier1DarkDiff(THEME_CSS_PATHS.molasses, THEME_DARK_CSS_PATHS.molasses, scales),
+		// Light/dark axis: what changes when Core itself goes dark.
+		core: buildTier1ScaleDiff(CORE_CSS_PATH, CORE_DARK_CSS_PATH, scales),
+		// Theme axis (against Core DARK, not against their own light
+		// build): what's specific to this theme's dark build. Comes out to
+		// Brand only, in practice -- same as their light Color - Default.
+		basil: buildTier1ScaleDiff(CORE_DARK_CSS_PATH, THEME_DARK_CSS_PATHS.basil, scales),
+		molasses: buildTier1ScaleDiff(CORE_DARK_CSS_PATH, THEME_DARK_CSS_PATHS.molasses, scales),
 	},
 };
 

@@ -63,24 +63,37 @@ export function makeTier1ColorStories(theme) {
 
 /**
  * Tier 1 dark-diff story bodies -- sibling to makeTier1ColorStories, one
- * level down the LIGHT/DARK axis instead of the theme axis. `theme` here
- * is still "core" / "basil" / "molasses" (matching manifest.tier1DarkDiffs'
- * keys); the actual pinned Storybook theme global is `${theme}_dark`
- * (e.g. "basil_dark") so each story renders under its own
+ * level down the LIGHT/DARK axis for Core, and along the THEME axis (same
+ * as makeTier1ColorStories's own Basil/Molasses usage) for Basil/Molasses.
+ * `theme` here is still "core" / "basil" / "molasses" (matching manifest.
+ * tier1DarkDiffs' keys); the actual pinned Storybook theme global is
+ * `${theme}_dark` (e.g. "basil_dark") so each story renders under its own
  * `[data-theme="basil_dark"]` block (see build-tokens.js's THEMES cascade)
  * instead of the light theme.
  *
- * Reads manifest.tier1DarkDiffs[theme] instead of manifest.scales --
- * already filtered down (see generate-color-manifest.js's
- * buildTier1DarkDiff) to only the scales/families/items whose value
- * actually differs from that SAME theme's own light build (Basil dark vs
- * Basil light, never vs Core). A category with zero differences (e.g.
- * Transparent -- confirmed identical light vs dark across all three
- * themes) still gets its page: findDarkScale falls back to
- * `{ title, families: [] }`, and ColorScaleSection renders its own
- * "No tokens in this category differ between light and dark." message for
- * that case -- same empty-state precedent as
- * makeTier2SemanticStories/ColorGridSection use for tier_2 theme diffs.
+ * Reads manifest.tier1DarkDiffs[theme] instead of manifest.scales:
+ *   - "core" is diffed against Core's own LIGHT build (light/dark axis) --
+ *     it's the "what does dark mode change at all" reference, so it's the
+ *     only one with real content across multiple categories (Color
+ *     Palettes/Data Viz/Utility/Brand); Neutral/Transparent turn out
+ *     unchanged.
+ *   - "basil"/"molasses" are diffed against CORE'S DARK build instead of
+ *     their own light build (theme axis, same as manifest.tier2ThemeDiffs
+ *     and makeTier1ColorStories's own Basil/Molasses pages) -- since
+ *     Color Palettes/Data Viz/Utility/Neutral/Transparent are only ever
+ *     touched by tier_1_core_dark (layered identically into every theme's
+ *     _dark build), Basil Dark and Molasses Dark resolve those
+ *     categories IDENTICALLY to Core Dark, and only "Brand" (the one
+ *     category each theme's own _dark set overrides) ever shows up as a
+ *     diff -- see generate-color-manifest.js's buildTier1ScaleDiff.
+ * ColorBasilDark.stories.jsx / ColorMolassesDark.stories.jsx only export
+ * "Brand" from this factory (mirroring ColorBasil.stories.jsx /
+ * ColorMolasses.stories.jsx's own Brand-only light pages) rather than
+ * exporting all six -- there's no "no differences" page to show for the
+ * other five here, since they're never expected to differ, structurally,
+ * the same reason those five never appear on Basil/Molasses's light
+ * Color - Default page either. ColorDark.stories.jsx (Core) still exports
+ * all six, since Core's diff genuinely can and does vary by category.
  */
 export function makeTier1ColorDarkStories(theme) {
 	const darkScales = manifest.tier1DarkDiffs?.[theme] ?? [];
