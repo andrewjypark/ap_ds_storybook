@@ -1,0 +1,57 @@
+/* Outer element is the full click/tap target (--ap-radio-size, 20px) --
+   the visual ring (18px) is centered inside it via flex, matching the 1px
+   inset Figma's own radio_container uses around the ring (see
+   radioTokens.js). */
+.ap-radio {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ap-radio-size);
+	height: var(--ap-radio-size);
+	padding: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.ap-radio-circle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(var(--ap-radio-size) - 2px);
+	height: calc(var(--ap-radio-size) - 2px);
+	box-sizing: border-box;
+	border-style: solid;
+	border-width: var(--ap-radio-border-width);
+	border-color: var(--ap-radio-color-border-default);
+	border-radius: 50%;
+	background: var(--ap-radio-color-background);
+}
+
+.ap-radio:hover:not(:disabled) .ap-radio-circle {
+	border-color: var(--ap-radio-color-border-hover);
+}
+
+/* Checked ring is drawn thicker (border-width-checked) as well as
+   recolored -- matches the real Figma Checked variant, see
+   radioTokens.js. */
+.ap-radio[aria-checked="true"] .ap-radio-circle {
+	border-width: var(--ap-radio-border-width-checked);
+	border-color: var(--ap-radio-color-border-checked);
+}
+
+.ap-radio-dot {
+	width: var(--ap-radio-dot-size);
+	height: var(--ap-radio-dot-size);
+	border-radius: 50%;
+	background: var(--ap-radio-color-dot);
+}
+
+/* Same flat-opacity treatment as Checkbox.css's own [disabled] rule,
+   rather than a second set of disabled-specific color tokens -- see
+   radioTokens.js. */
+.ap-radio:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}

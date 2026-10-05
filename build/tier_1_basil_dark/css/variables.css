@@ -1397,6 +1397,15 @@
   --ap-checkbox-color-background-unchecked: #000000;
   --ap-checkbox-color-background-checked: #6196a0;
   --ap-checkbox-color-checkmark: #000000;
+  --ap-radio-size: 20px;
+  --ap-radio-dot-size: 6px;
+  --ap-radio-border-width: 2px;
+  --ap-radio-border-width-checked: 4px;
+  --ap-radio-color-background: #000000;
+  --ap-radio-color-border-default: #9ac2cc;
+  --ap-radio-color-border-hover: #3d4247;
+  --ap-radio-color-border-checked: #6196a0;
+  --ap-radio-color-dot: #6196a0;
   --ap-table-row-color-background-default: #031515;
   --ap-table-row-color-background-alt: #072627;
   --ap-table-row-color-border: #9ac2cc;

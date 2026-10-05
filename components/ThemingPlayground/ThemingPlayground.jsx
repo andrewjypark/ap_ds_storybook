@@ -1,40 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../Components/Button/Button.jsx";
+import { ThemingPlaygroundControls } from "./ThemingPlaygroundControls.jsx";
 import "./ThemingPlayground.css";
 
 /**
- * Step one of Andrew's theming playground (see the Figma "Storybook
- * Planning" file's playground_options_container frame, and the project's
- * ap-design-system-figma notes on the planned brand / light-dark /
- * background-style controls): a page with a canvas where a component
- * renders live under a chosen theme.
+ * A page with a canvas where a component renders live under whichever
+ * theme the card's radio controls pick (see the Figma "Storybook
+ * Planning" file's playground_options_container frame, which Andrew
+ * pointed at directly for this build -- and ThemingPlaygroundControls.jsx
+ * for the controls themselves).
  *
- * Not built yet, coming in follow-ups:
- *   - The card of radio controls (Theme: Core/Basil/Molasses; Light/Dark
- *     Mode; and, only enabled once Dark is selected, Neutral BG / Branded
- *     BG, defaulting to Neutral BG the moment Dark is first picked).
- *   - Wiring the canvas's data-theme/data-viewport to those controls
- *     instead of the hardcoded "core" below.
- *   - Swapping the single Button for whatever component(s) the finished
- *     card ends up letting you preview.
+ * Defaults: Theme=Core, Mode=Light, matching Andrew's stated default.
+ * data-theme/data-bg-style on the canvas follow build-tokens.js's own
+ * attribute scheme exactly (its THEMES/BG_STYLES arrays): a dark mode is
+ * "<theme>_dark", and [data-bg-style="neutral"] is only ever set for a
+ * dark theme on the neutral sub-choice -- "brand" (the default) omits the
+ * attribute entirely, same as the generated CSS expects.
  *
- * The hardcoded Core / Light pinning below matches the eventual controls'
- * own default state, so nothing will visually jump once they're wired up.
+ * Not built yet: a Card wrapper around the canvas's own content (today
+ * it's just a bare Button) and swapping in other components to preview.
  */
 export function ThemingPlayground() {
+	const [theme, setTheme] = useState("core");
+	const [mode, setMode] = useState("light");
+	const [bgStyle, setBgStyle] = useState("neutral");
+
+	const isDark = mode === "dark";
+	const canvasTheme = isDark ? `${theme}_dark` : theme;
+	const canvasBgStyle = isDark && bgStyle === "neutral" ? "neutral" : undefined;
+
 	return (
 		<div>
 			<h3 className="ap-section__title" data-theme="storybook_ds" data-viewport="desktop">
 				Theming Playground
 			</h3>
 			<p className="ap-theming-playground-intro" data-theme="storybook_ds" data-viewport="desktop">
-				A live canvas for previewing components across the design system's themes. Theme-switching controls
-				are coming next -- for now the canvas below just renders a Button pinned to Core / Light.
+				Pick a Theme, a Light/Dark Mode, and -- once Dark is selected -- a background style. The canvas below
+				updates live to match.
 			</p>
-			<div className="ap-theming-playground-canvas" data-theme="core" data-viewport="desktop">
-				<Button priority="primary" size="medium" radius="sm">
-					Button
-				</Button>
+			<div className="ap-theming-playground-layout">
+				<div
+					className="ap-theming-playground-canvas"
+					data-theme={canvasTheme}
+					data-viewport="desktop"
+					data-bg-style={canvasBgStyle}
+				>
+					<Button priority="primary" size="medium" radius="sm">
+						Button
+					</Button>
+				</div>
+				<ThemingPlaygroundControls
+					theme={theme}
+					mode={mode}
+					bgStyle={bgStyle}
+					onThemeChange={setTheme}
+					onModeChange={setMode}
+					onBgStyleChange={setBgStyle}
+				/>
 			</div>
 		</div>
 	);

@@ -257,6 +257,9 @@ const BASE_SOURCE = [
 	// Checkbox has no Core/Basil/Molasses theming yet either (single mode, same
 	// reasoning as the rest of tier_3 above) -- belongs in every build.
 	writeSet("tier_3/checkbox"),
+	// Radio has no Core/Basil/Molasses theming yet either (single mode, same
+	// reasoning as the rest of tier_3 above) -- belongs in every build.
+	writeSet("tier_3/radio"),
 	// Table (table_row_072426 + table_row_cell_container from Figma) has no
 	// Core/Basil/Molasses theming yet either (single mode, same reasoning as
 	// the rest of tier_3 above) -- belongs in every build.

@@ -1,10 +1,7 @@
 /*
  * "Canvas" preview surface for the Theming Playground -- the live area
- * where a component renders under whichever theme the page's controls
- * pick. This is step one (see the project's Figma "Storybook Planning"
- * file, playground_options_container frame, and the related project
- * docs): a plain canvas with a single Button in it, no theme-switching
- * controls yet, no Card wrapper around those controls yet.
+ * where a component renders under whichever theme the card's radio
+ * controls pick (see ThemingPlaygroundControls.jsx).
  *
  * Deliberately matches Button.css's .ap-button-swatch-group border/
  * radius language (1px solid rgba(127,127,127,0.25), 8px radius) rather
@@ -15,6 +12,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex: 1 1 0%;
+	min-width: 0;
 	min-height: 320px;
 	padding: 2rem;
 	border: 1px solid rgba(127, 127, 127, 0.25);
@@ -31,4 +30,110 @@
 	color: var(--ap-tier-2-color-content-default);
 	margin: 0 0 1.5rem;
 	max-width: 650px;
+}
+
+/* Canvas + control card side by side, matching the Altitude inspiration
+   page's preview/controls split. Stacks on narrower viewports, same
+   991px tablet cutoff Button.css's own section layout uses. */
+.ap-theming-playground-layout {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 991px) {
+	.ap-theming-playground-layout {
+		flex-direction: column;
+	}
+	.ap-theming-playground-canvas {
+		width: 100%;
+	}
+}
+
+/*
+ * The control card itself -- mirrors the Figma playground_options_
+ * container frame's own measured width (331px) and vertical rhythm
+ * (30px between the Theme/Mode groups, 10px between a group's title and
+ * its option list, 6px between option rows).
+ */
+.ap-theming-playground-card {
+	flex: 0 0 331px;
+	width: 331px;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+	box-sizing: border-box;
+}
+
+@media (max-width: 991px) {
+	.ap-theming-playground-card {
+		flex: 1 1 100%;
+		width: 100%;
+	}
+}
+
+.ap-theming-playground-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* "THEME" / "LIGHT/DARK MODE" -- Figma types these labels as literal
+   uppercase characters (textCase: ORIGINAL, not a CSS transform) using
+   the same tier2/body/sm text style as every other label in this card,
+   bound to tier2_color/content/subtle. The uppercase rendering comes
+   from the literal JSX text in ThemingPlaygroundControls.jsx, not from
+   text-transform here. */
+.ap-theming-playground-group-title {
+	margin: 0;
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-theming-playground-option-list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.ap-theming-playground-option-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+}
+
+.ap-theming-playground-option-row--disabled {
+	cursor: not-allowed;
+}
+
+.ap-theming-playground-option-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* Neutral BG / Branded BG labels -- Figma binds these two labels to
+   tier2_color/content/disabled permanently, regardless of whether their
+   radio is interactively enabled or disabled (that's a separate, radio-
+   only dimming via opacity on the control itself). Applied unconditionally
+   via the `sub` prop on RadioRow, not tied to the disabled row state. */
+.ap-theming-playground-option-label--sub {
+	color: var(--ap-tier-2-color-content-disabled);
+}
+
+/* Neutral BG / Branded BG, nested under the Dark row -- indented to align
+   under DARK's own label text (20px radio + 6px gap = 26px), matching
+   the Figma frame's sub_bg_options_container offset exactly. Figma's
+   container also carries 4px of padding on both top AND bottom (no
+   fill/stroke -- it's not a visible box, just vertical breathing room). */
+.ap-theming-playground-sub-option-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 4px 0;
+	margin: 0 0 0 26px;
 }
