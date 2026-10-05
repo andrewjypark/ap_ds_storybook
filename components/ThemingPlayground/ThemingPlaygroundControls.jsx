@@ -19,7 +19,57 @@ const BG_STYLES = [
 	{ key: "brand", label: "Branded BG" },
 ];
 
-function RadioRow({ name, option, checked, disabled, sub, onSelect }) {
+const BUTTON_TYPES = [
+	{ key: "primary", label: "Primary" },
+	{ key: "secondary", label: "Secondary" },
+	{ key: "ghost", label: "Ghost" },
+];
+
+// Every theme shares the same font family (tier_1_core's fontFamilies.font1
+// -- tier_1_basil/tier_1_molasses only override color, never fontFamilies,
+// so this is a literal constant, not per-theme data) and the same Tier 2
+// token drives each theme's brand color -- only what that token RESOLVES
+// TO differs per theme. Per Andrew: show the Tier 2 var the swatch is
+// actually tied to rather than a hard-coded hex, and let the swatch itself
+// (scoped to that row's own theme via data-theme) render the real,
+// per-theme resolved color.
+const THEME_DESCRIPTION_FONT_FAMILY = "TWK Lausanne";
+const THEME_DESCRIPTION_BRAND_VAR = "--ap-tier-2-color-content-brand";
+
+/**
+ * "Font Family: ... / Brand Color: --ap-tier-2-color-content-brand [swatch]"
+ * -- mirrors the Figma frame's playground_option_description_container,
+ * shown only under the Theme row's three options (its
+ * "theme description container" boolean component property is true for
+ * Core/Basil/Molasses, false for Light/Dark). Figma's own copy was still
+ * the unfilled "{name of font family 1}" / "{name of brand color...}"
+ * placeholder text; these are the real values.
+ *
+ * data-theme is hard-coded to the ROW's own theme (not the globally
+ * selected theme) so e.g. Basil's swatch always shows Basil's brand color,
+ * regardless of which theme is currently active on the canvas -- same
+ * attribute-scoping convention the canvas itself uses.
+ */
+function ThemeDescription({ themeKey }) {
+	return (
+		<div className="ap-theming-playground-option-description" data-theme={themeKey} data-viewport="desktop">
+			<span className="ap-theming-playground-option-description-line">
+				Font Family: {THEME_DESCRIPTION_FONT_FAMILY}
+			</span>
+			<span className="ap-theming-playground-option-description-line ap-theming-playground-option-description-brand">
+				<span className="ap-theming-playground-option-description-brand-text">
+					Brand Color: {THEME_DESCRIPTION_BRAND_VAR}
+				</span>
+				<span
+					className="ap-theming-playground-brand-swatch"
+					style={{ background: `var(${THEME_DESCRIPTION_BRAND_VAR})` }}
+				/>
+			</span>
+		</div>
+	);
+}
+
+function RadioRow({ name, option, checked, disabled, sub, extra, onSelect }) {
 	return (
 		<label
 			className={
@@ -29,14 +79,17 @@ function RadioRow({ name, option, checked, disabled, sub, onSelect }) {
 			}
 		>
 			<Radio name={name} checked={checked} disabled={disabled} onChange={() => onSelect(option.key)} />
-			<span
-				className={
-					sub
-						? "ap-theming-playground-option-label ap-theming-playground-option-label--sub"
-						: "ap-theming-playground-option-label"
-				}
-			>
-				{option.label}
+			<span className="ap-theming-playground-option-row-content">
+				<span
+					className={
+						sub
+							? "ap-theming-playground-option-label ap-theming-playground-option-label--sub"
+							: "ap-theming-playground-option-label"
+					}
+				>
+					{option.label}
+				</span>
+				{extra}
 			</span>
 		</label>
 	);
@@ -46,7 +99,9 @@ function RadioRow({ name, option, checked, disabled, sub, onSelect }) {
  * The Theming Playground's control card -- mirrors the Figma "Storybook
  * Planning" file's playground_options_container frame (THEME /
  * LIGHT/DARK MODE radio groups, Button Type=Radio variants) which Andrew
- * pointed at directly for this build.
+ * pointed at directly for this build. Button Type (Primary/Secondary/
+ * Ghost) is a third group added on top of the Figma selection, wired
+ * straight to Button.jsx's own `priority` prop values.
  *
  * Theme and Light/Dark Mode are two independent radio groups. Neutral BG /
  * Branded BG is a THIRD choice nested directly under the Dark row (not a
@@ -58,7 +113,16 @@ function RadioRow({ name, option, checked, disabled, sub, onSelect }) {
  * invisible/inert while Light is selected, so there's no "remembered"
  * prior choice to preserve).
  */
-export function ThemingPlaygroundControls({ theme, mode, bgStyle, onThemeChange, onModeChange, onBgStyleChange }) {
+export function ThemingPlaygroundControls({
+	theme,
+	mode,
+	bgStyle,
+	buttonType,
+	onThemeChange,
+	onModeChange,
+	onBgStyleChange,
+	onButtonTypeChange,
+}) {
 	const isDark = mode === "dark";
 
 	function handleModeChange(nextMode) {
@@ -83,6 +147,7 @@ export function ThemingPlaygroundControls({ theme, mode, bgStyle, onThemeChange,
 							option={option}
 							checked={theme === option.key}
 							disabled={false}
+							extra={<ThemeDescription themeKey={option.key} />}
 							onSelect={onThemeChange}
 						/>
 					))}
@@ -121,6 +186,22 @@ export function ThemingPlaygroundControls({ theme, mode, bgStyle, onThemeChange,
 							))}
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div className="ap-theming-playground-group">
+				<h4 className="ap-theming-playground-group-title">BUTTON TYPE</h4>
+				<div className="ap-theming-playground-option-list">
+					{BUTTON_TYPES.map((option) => (
+						<RadioRow
+							key={option.key}
+							name="theming-playground-button-type"
+							option={option}
+							checked={buttonType === option.key}
+							disabled={false}
+							onSelect={onButtonTypeChange}
+						/>
+					))}
 				</div>
 			</div>
 		</div>

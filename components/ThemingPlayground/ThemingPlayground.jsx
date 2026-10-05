@@ -10,12 +10,13 @@ import "./ThemingPlayground.css";
  * pointed at directly for this build -- and ThemingPlaygroundControls.jsx
  * for the controls themselves).
  *
- * Defaults: Theme=Core, Mode=Light, matching Andrew's stated default.
- * data-theme/data-bg-style on the canvas follow build-tokens.js's own
- * attribute scheme exactly (its THEMES/BG_STYLES arrays): a dark mode is
- * "<theme>_dark", and [data-bg-style="neutral"] is only ever set for a
- * dark theme on the neutral sub-choice -- "brand" (the default) omits the
- * attribute entirely, same as the generated CSS expects.
+ * Defaults: Theme=Core, Mode=Light, Button Type=Primary, matching
+ * Andrew's stated defaults. data-theme/data-bg-style on the canvas follow
+ * build-tokens.js's own attribute scheme exactly (its THEMES/BG_STYLES
+ * arrays): a dark mode is "<theme>_dark", and [data-bg-style="neutral"]
+ * is only ever set for a dark theme on the neutral sub-choice -- "brand"
+ * (the default) omits the attribute entirely, same as the generated CSS
+ * expects.
  *
  * Not built yet: a Card wrapper around the canvas's own content (today
  * it's just a bare Button) and swapping in other components to preview.
@@ -24,6 +25,7 @@ export function ThemingPlayground() {
 	const [theme, setTheme] = useState("core");
 	const [mode, setMode] = useState("light");
 	const [bgStyle, setBgStyle] = useState("neutral");
+	const [buttonType, setButtonType] = useState("primary");
 
 	const isDark = mode === "dark";
 	const canvasTheme = isDark ? `${theme}_dark` : theme;
@@ -45,7 +47,7 @@ export function ThemingPlayground() {
 					data-viewport="desktop"
 					data-bg-style={canvasBgStyle}
 				>
-					<Button priority="primary" size="medium" radius="sm">
+					<Button priority={buttonType} size="medium" radius="sm">
 						Button
 					</Button>
 				</div>
@@ -53,9 +55,11 @@ export function ThemingPlayground() {
 					theme={theme}
 					mode={mode}
 					bgStyle={bgStyle}
+					buttonType={buttonType}
 					onThemeChange={setTheme}
 					onModeChange={setMode}
 					onBgStyleChange={setBgStyle}
+					onButtonTypeChange={setButtonType}
 				/>
 			</div>
 		</div>

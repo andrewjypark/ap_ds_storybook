@@ -82,12 +82,12 @@
 	gap: 10px;
 }
 
-/* "THEME" / "LIGHT/DARK MODE" -- Figma types these labels as literal
-   uppercase characters (textCase: ORIGINAL, not a CSS transform) using
-   the same tier2/body/sm text style as every other label in this card,
-   bound to tier2_color/content/subtle. The uppercase rendering comes
-   from the literal JSX text in ThemingPlaygroundControls.jsx, not from
-   text-transform here. */
+/* "THEME" / "LIGHT/DARK MODE" / "BUTTON TYPE" -- Figma types these labels
+   as literal uppercase characters (textCase: ORIGINAL, not a CSS
+   transform) using the same tier2/body/sm text style as every other
+   label in this card, bound to tier2_color/content/subtle. The uppercase
+   rendering comes from the literal JSX text in
+   ThemingPlaygroundControls.jsx, not from text-transform here. */
 .ap-theming-playground-group-title {
 	margin: 0;
 	font: var(--ap-tier-2-typography-body-sm);
@@ -100,15 +100,28 @@
 	gap: 6px;
 }
 
+/* align-items: flex-start (not center) so the Theme row's description
+   block below the label doesn't pull the radio glyph down to the
+   vertical center of the whole (taller) row -- the radio should stay
+   pinned to the top, next to the label's own line, exactly like Figma's
+   radio_container + playground_option_container siblings. */
 .ap-theming-playground-option-row {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: 6px;
 	cursor: pointer;
 }
 
 .ap-theming-playground-option-row--disabled {
 	cursor: not-allowed;
+}
+
+/* Label (+ the Theme row's optional description) stacked in a column,
+   matching Figma's playground_option_container (itemSpacing: 0 -- the
+   description sits flush against the label, no extra gap). */
+.ap-theming-playground-option-row-content {
+	display: flex;
+	flex-direction: column;
 }
 
 .ap-theming-playground-option-label {
@@ -136,4 +149,40 @@
 	gap: 2px;
 	padding: 4px 0;
 	margin: 0 0 0 26px;
+}
+
+/*
+ * "Font Family: TWK Lausanne" / "Brand Color: --ap-tier-2-color-content-
+ * brand [swatch]" -- shown under each Theme option (Core/Basil/Molasses
+ * only). Matches Figma's playground_option_description_container exactly:
+ * tier2/meta/small text (10px/14px, weight 300) in content.subtle, 2px
+ * between the two lines, a 12x12 square (no corner radius) swatch
+ * right-aligned at the end of the Brand Color line via the sibling text's
+ * flex: 1.
+ */
+.ap-theming-playground-option-description {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.ap-theming-playground-option-description-line {
+	font: var(--ap-tier-2-typography-meta-small);
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-theming-playground-option-description-brand {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.ap-theming-playground-option-description-brand-text {
+	flex: 1 1 auto;
+}
+
+.ap-theming-playground-brand-swatch {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
 }
