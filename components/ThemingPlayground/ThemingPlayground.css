@@ -140,14 +140,14 @@
 
 /* Neutral BG / Branded BG, nested under the Dark row -- indented to align
    under DARK's own label text (20px radio + 6px gap = 26px), matching
-   the Figma frame's sub_bg_options_container offset exactly. Figma's
-   container also carries 4px of padding on both top AND bottom (no
-   fill/stroke -- it's not a visible box, just vertical breathing room). */
+   the Figma frame's sub_bg_options_container offset. Per Andrew: 6px top/
+   bottom padding (not a visible box -- no fill/stroke, just vertical
+   breathing room) and 4px gap between the two rows. */
 .ap-theming-playground-sub-option-list {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
-	padding: 4px 0;
+	gap: 4px;
+	padding: 6px 0;
 	margin: 0 0 0 26px;
 }
 
@@ -156,8 +156,16 @@
  * brand [swatch]" -- shown under each Theme option (Core/Basil/Molasses
  * only). 2px between the two lines, a 12x12 square (no corner radius)
  * swatch right-aligned at the end of the Brand Color line via the
- * sibling text's flex: 1. Uses tier2/body/xs (12px/17px, weight 300) per
- * Andrew, rather than Figma's own tier2/meta/small text style.
+ * sibling text's flex: 1.
+ *
+ * Font is --ap-font2-body-text-xs-regular, not the Tier 2 product
+ * typography scale -- this is dev-facing readout text (token names), so
+ * it uses the same monospace "--ap-font2-*" readout convention Checkbox's
+ * own TokenReadout.jsx already uses for showing var names. That token
+ * resolves per-theme (TWK Continental for core, Basier Square for basil,
+ * Quablo for molasses, Menlo for storybook_ds) -- this block is pinned to
+ * storybook_ds (see ThemingPlaygroundControls.jsx), which is what makes
+ * it render in storybook_ds's own monospace font, Menlo, per Andrew.
  */
 .ap-theming-playground-option-description {
 	display: flex;
@@ -166,7 +174,7 @@
 }
 
 .ap-theming-playground-option-description-line {
-	font: var(--ap-tier-2-typography-body-xs);
+	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-subtle);
 }
 

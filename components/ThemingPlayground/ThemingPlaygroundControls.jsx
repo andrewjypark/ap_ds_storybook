@@ -45,14 +45,19 @@ const THEME_DESCRIPTION_BRAND_VAR = "--ap-tier-2-color-content-brand";
  * the unfilled "{name of font family 1}" / "{name of brand color...}"
  * placeholder text; these are the real values.
  *
- * data-theme is hard-coded to the ROW's own theme (not the globally
- * selected theme) so e.g. Basil's swatch always shows Basil's brand color,
- * regardless of which theme is currently active on the canvas -- same
- * attribute-scoping convention the canvas itself uses.
+ * This is dev-facing readout text (token names, not product content), so
+ * it's pinned to the storybook_ds theme -- same as the page's own
+ * heading/intro copy -- rather than re-theming per row; that's also what
+ * makes --ap-font2-body-text-xs-regular resolve to storybook_ds's own
+ * monospace font (Menlo), the same "--ap-font2-*" readout convention
+ * Checkbox's own TokenReadout.jsx already uses for showing var names, per
+ * Andrew. Only the swatch itself re-scopes to the ROW's own theme (a
+ * nested data-theme override) so e.g. Basil's swatch still shows Basil's
+ * real brand color regardless of the text around it.
  */
 function ThemeDescription({ themeKey }) {
 	return (
-		<div className="ap-theming-playground-option-description" data-theme={themeKey} data-viewport="desktop">
+		<div className="ap-theming-playground-option-description" data-theme="storybook_ds" data-viewport="desktop">
 			<span className="ap-theming-playground-option-description-line">
 				Font Family: {THEME_DESCRIPTION_FONT_FAMILY}
 			</span>
@@ -62,6 +67,8 @@ function ThemeDescription({ themeKey }) {
 				</span>
 				<span
 					className="ap-theming-playground-brand-swatch"
+					data-theme={themeKey}
+					data-viewport="desktop"
 					style={{ background: `var(${THEME_DESCRIPTION_BRAND_VAR})` }}
 				/>
 			</span>
