@@ -297,13 +297,34 @@ const BASE_SOURCE = [
 // then the theme's own dark set (its brand override's dark value, which
 // wins since it's last). Core Dark skips the middle step since Core has
 // no separate "light-theme brand override" to layer.
+//
+// BUTTON COLORS: every `_dark` theme's `sets` also ends with
+// `tier_3/buttons_color_palette_dark` -- an alternate button.color Tier 3
+// set (Primary/Secondary/Ghost x default/hover/active/disabled) that was
+// already fully defined in tokens.json but, until now, was never read by
+// this script (BASE_SOURCE's `tier_3/buttons` is the only button set it
+// wrote, unconditionally, for every build). Since it's listed last in
+// each dark theme's `sets`, its button.color.* paths win over
+// BASE_SOURCE's `tier_3/buttons` for that build only -- everything else
+// tier_3/buttons defines (padding, sizing, border-radius, typography, ...)
+// is untouched, since this set only contains button.color. Per Andrew:
+// this is the correct, as-authored-in-Figma dark palette (confirmed its
+// Ghost/Secondary `color.neutral.black` text/border references are
+// intentional -- the dark Tier 1 neutral ramp is reversed, so `black`
+// resolves light there, not literally #000).
 const THEMES = [
 	{ name: "tier_1_core", sets: [], attrValue: "core", selector: ":root" },
-	{ name: "tier_1_core_dark", sets: ["tier_1_core_dark"], attrValue: "core_dark", selector: '[data-theme="core_dark"]', dark: true },
+	{
+		name: "tier_1_core_dark",
+		sets: ["tier_1_core_dark", "tier_3/buttons_color_palette_dark"],
+		attrValue: "core_dark",
+		selector: '[data-theme="core_dark"]',
+		dark: true,
+	},
 	{ name: "tier_1_basil", sets: ["tier_1_basil"], attrValue: "basil", selector: '[data-theme="basil"]' },
 	{
 		name: "tier_1_basil_dark",
-		sets: ["tier_1_core_dark", "tier_1_basil", "tier_1_basil_dark"],
+		sets: ["tier_1_core_dark", "tier_1_basil", "tier_1_basil_dark", "tier_3/buttons_color_palette_dark"],
 		attrValue: "basil_dark",
 		selector: '[data-theme="basil_dark"]',
 		dark: true,
@@ -311,7 +332,7 @@ const THEMES = [
 	{ name: "tier_1_molasses", sets: ["tier_1_molasses"], attrValue: "molasses", selector: '[data-theme="molasses"]' },
 	{
 		name: "tier_1_molasses_dark",
-		sets: ["tier_1_core_dark", "tier_1_molasses", "tier_1_molasses_dark"],
+		sets: ["tier_1_core_dark", "tier_1_molasses", "tier_1_molasses_dark", "tier_3/buttons_color_palette_dark"],
 		attrValue: "molasses_dark",
 		selector: '[data-theme="molasses_dark"]',
 		dark: true,
