@@ -296,13 +296,14 @@ const BASE_SOURCE = [
 // no separate "light-theme brand override" to layer.
 const THEMES = [
 	{ name: "tier_1_core", sets: [], attrValue: "core", selector: ":root" },
-	{ name: "tier_1_core_dark", sets: ["tier_1_core_dark"], attrValue: "core_dark", selector: '[data-theme="core_dark"]' },
+	{ name: "tier_1_core_dark", sets: ["tier_1_core_dark"], attrValue: "core_dark", selector: '[data-theme="core_dark"]', dark: true },
 	{ name: "tier_1_basil", sets: ["tier_1_basil"], attrValue: "basil", selector: '[data-theme="basil"]' },
 	{
 		name: "tier_1_basil_dark",
 		sets: ["tier_1_core_dark", "tier_1_basil", "tier_1_basil_dark"],
 		attrValue: "basil_dark",
 		selector: '[data-theme="basil_dark"]',
+		dark: true,
 	},
 	{ name: "tier_1_molasses", sets: ["tier_1_molasses"], attrValue: "molasses", selector: '[data-theme="molasses"]' },
 	{
@@ -310,6 +311,7 @@ const THEMES = [
 		sets: ["tier_1_core_dark", "tier_1_molasses", "tier_1_molasses_dark"],
 		attrValue: "molasses_dark",
 		selector: '[data-theme="molasses_dark"]',
+		dark: true,
 	},
 	// Internal-only: styles Storybook's own manager chrome (sidebar,
 	// headings, toolbar), not a real product theme. Deliberately NOT
@@ -331,6 +333,29 @@ const VIEWPORTS = [
 	{ name: "viewport_mobile", sets: ["viewport_mobile"], attrValue: "mobile", selector: ":root" },
 	{ name: "viewport_tablet", sets: ["viewport_tablet"], attrValue: "tablet", selector: '[data-viewport="tablet"]' },
 	{ name: "viewport_desktop", sets: ["viewport_desktop"], attrValue: "desktop", selector: '[data-viewport="desktop"]' },
+];
+
+/**
+ * BACKGROUND STYLE -- a THIRD independent axis, but unlike THEMES/VIEWPORTS
+ * it only applies to `dark: true` themes (core_dark/basil_dark/
+ * molasses_dark); light themes have no background-style choice. Token
+ * Studio's `tier_2_color_palette_dark_bg_brand` set (brand-tinted
+ * background/surface/border colors) and `tier_2_color_palette_dark_bg_
+ * neutral` set (the same slots on the neutral scale instead) are full
+ * parallel 73-token sets -- see project doc for the rest of the design --
+ * so, like a theme's or viewport's `sets`, swapping one in for the other
+ * is a straight source-file swap, not a partial patch.
+ *
+ * "brand" is the default: its selector omits `[data-bg-style]` entirely
+ * (same convention as VIEWPORTS' "mobile", the implicit :root default
+ * among viewports), so a dark page that never sets the attribute still
+ * gets correct brand-tinted colors. "neutral" adds the extra attribute
+ * selector, which -- being strictly more specific -- always wins once
+ * it's set, with no ordering dependence between the two rules.
+ */
+const BG_STYLES = [
+	{ name: "tier_2_color_palette_dark_bg_brand", sets: ["tier_2_color_palette_dark_bg_brand"], attrValue: "brand" },
+	{ name: "tier_2_color_palette_dark_bg_neutral", sets: ["tier_2_color_palette_dark_bg_neutral"], attrValue: "neutral" },
 ];
 
 /**
@@ -418,9 +443,22 @@ async function build(sourceFiles, buildPath, destination, selector) {
 // cross-product (see COMBINATIONS below for that).
 // ============================================================================
 for (const theme of THEMES) {
-	const sources = [...BASE_SOURCE, ...theme.sets.map(writeSet)];
-	console.log(`\n=== Building theme: ${theme.name} ===`);
-	await build(sources, `build/${theme.name}/css/`, "variables.css", ":root");
+	if (theme.dark) {
+		// One standalone build per background style. "brand" keeps the same
+		// `build/<theme.name>/...` folder every other theme uses (it's the
+		// default); "neutral" gets its own `_bg_neutral`-suffixed folder
+		// alongside it, so both are importable completely standalone.
+		for (const bg of BG_STYLES) {
+			const sources = [...BASE_SOURCE, ...theme.sets.map(writeSet), ...bg.sets.map(writeSet)];
+			const folder = bg.attrValue === "brand" ? theme.name : `${theme.name}_bg_${bg.attrValue}`;
+			console.log(`\n=== Building theme: ${theme.name} (bg: ${bg.attrValue}) ===`);
+			await build(sources, `build/${folder}/css/`, "variables.css", ":root");
+		}
+	} else {
+		const sources = [...BASE_SOURCE, ...theme.sets.map(writeSet)];
+		console.log(`\n=== Building theme: ${theme.name} ===`);
+		await build(sources, `build/${theme.name}/css/`, "variables.css", ":root");
+	}
 }
 
 for (const vp of VIEWPORTS) {
@@ -446,21 +484,51 @@ async function buildCombinationsBundle() {
 	fs.mkdirSync(bundleDir, { recursive: true });
 
 	const chunks = [];
+	let combinationCount = 0;
 	for (const theme of THEMES) {
 		for (const vp of VIEWPORTS) {
-			const sources = [...BASE_SOURCE, ...theme.sets.map(writeSet), ...vp.sets.map(writeSet)];
-			const selector = `[data-theme="${theme.attrValue}"][data-viewport="${vp.attrValue}"]`;
-			const tempDestination = `_temp-${theme.name}-${vp.name}.css`;
-			await build(sources, `${bundleDir}/`, tempDestination, selector);
-			const tempPath = `${bundleDir}/${tempDestination}`;
-			chunks.push(fs.readFileSync(tempPath, "utf-8"));
-			fs.rmSync(tempPath);
+			if (theme.dark) {
+				// Cross with BG_STYLES too. "brand" is scoped by the same plain
+				// [data-theme][data-viewport] pair every other combination uses
+				// (no [data-bg-style] attribute required), so it's what a dark
+				// page gets by default; "neutral" adds the extra attribute
+				// selector, which -- being strictly more specific -- wins
+				// whenever it's actually set, with no ordering dependence
+				// between the two rules.
+				for (const bg of BG_STYLES) {
+					const sources = [
+						...BASE_SOURCE,
+						...theme.sets.map(writeSet),
+						...vp.sets.map(writeSet),
+						...bg.sets.map(writeSet),
+					];
+					const selector =
+						bg.attrValue === "brand"
+							? `[data-theme="${theme.attrValue}"][data-viewport="${vp.attrValue}"]`
+							: `[data-theme="${theme.attrValue}"][data-viewport="${vp.attrValue}"][data-bg-style="${bg.attrValue}"]`;
+					const tempDestination = `_temp-${theme.name}-${vp.name}-${bg.attrValue}.css`;
+					await build(sources, `${bundleDir}/`, tempDestination, selector);
+					const tempPath = `${bundleDir}/${tempDestination}`;
+					chunks.push(fs.readFileSync(tempPath, "utf-8"));
+					fs.rmSync(tempPath);
+					combinationCount++;
+				}
+			} else {
+				const sources = [...BASE_SOURCE, ...theme.sets.map(writeSet), ...vp.sets.map(writeSet)];
+				const selector = `[data-theme="${theme.attrValue}"][data-viewport="${vp.attrValue}"]`;
+				const tempDestination = `_temp-${theme.name}-${vp.name}.css`;
+				await build(sources, `${bundleDir}/`, tempDestination, selector);
+				const tempPath = `${bundleDir}/${tempDestination}`;
+				chunks.push(fs.readFileSync(tempPath, "utf-8"));
+				fs.rmSync(tempPath);
+				combinationCount++;
+			}
 		}
 	}
 
 	fs.writeFileSync(`${bundleDir}/variables.css`, chunks.join("\n\n"));
 	console.log(
-		`✔︎ ${bundleDir}/variables.css (combined, [data-theme][data-viewport]-scoped, ${THEMES.length}x${VIEWPORTS.length}=${THEMES.length * VIEWPORTS.length} combinations)`,
+		`✔︎ ${bundleDir}/variables.css (combined, [data-theme][data-viewport] + [data-bg-style] for dark, ${combinationCount} combinations)`,
 	);
 }
 

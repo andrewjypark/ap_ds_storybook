@@ -938,9 +938,12 @@
   --ap-line-heights-mobile-font3-x-small: 17px;
   --ap-line-heights-mobile-font3-small: 20px;
   --ap-line-heights-mobile-font3-default: 24px;
-  --ap-color-transparent-transparent-1: rgba(255, 255, 255, 0);
-  --ap-color-transparent-transparent-2: rgba(255, 255, 255, 0.15);
-  --ap-color-transparent-transparent-3: rgba(255, 255, 255, 0.25);
+  --ap-color-transparent-light-transparent-1: rgba(255, 255, 255, 0);
+  --ap-color-transparent-light-transparent-2: rgba(255, 255, 255, 0.15);
+  --ap-color-transparent-light-transparent-3: rgba(255, 255, 255, 0.25);
+  --ap-color-transparent-dark-transparent-1: rgba(0, 0, 0, 0);
+  --ap-color-transparent-dark-transparent-2: rgba(0, 0, 0, 0.15);
+  --ap-color-transparent-dark-transparent-3: rgba(0, 0, 0, 0.25);
   --ap-color-color-palettes-pale-red-0: #fff5f5;
   --ap-color-color-palettes-pale-red-100: #fdeded;
   --ap-color-color-palettes-pale-red-200: #f7dcdc;
@@ -1174,7 +1177,7 @@
   --ap-tier-2-color-content-default: #23272b;
   --ap-tier-2-color-content-default-hover: #101214;
   --ap-tier-2-color-content-subtle: #64696f;
-  --ap-tier-2-color-content-knockout: #edd0b5;
+  --ap-tier-2-color-content-knockout: #000000;
   --ap-tier-2-color-content-brand: #8c622e;
   --ap-tier-2-color-content-brand-hover: #4f341a;
   --ap-tier-2-color-content-disabled: #64696f;
@@ -1236,7 +1239,7 @@
   --ap-tier-2-color-border-default-hover: #64696f;
   --ap-tier-2-color-border-subtle: #e1e4e7;
   --ap-tier-2-color-border-strong: #101214;
-  --ap-tier-2-color-border-knockout: #93989e;
+  --ap-tier-2-color-border-knockout: #ffffff;
   --ap-tier-2-color-border-brand: #6d4a24;
   --ap-tier-2-color-border-disabled: #e1e4e7;
   --ap-tier-2-color-border-utility-error: #660a00;
@@ -1298,9 +1301,9 @@
   --ap-button-color-secondary-active-border: #6d4a24;
   --ap-button-color-secondary-active-text: #6d4a24;
   --ap-button-color-secondary-active-background: #dbb07d;
-  --ap-button-color-secondary-disabled-border: #64696f;
-  --ap-button-color-secondary-disabled-text: #64696f;
-  --ap-button-color-secondary-disabled-background: rgba(255, 255, 255, 0);
+  --ap-button-color-secondary-disabled-border: #93989e;
+  --ap-button-color-secondary-disabled-text: #ffffff;
+  --ap-button-color-secondary-disabled-background: #93989e;
   --ap-button-color-ghost-default-border: rgba(255, 255, 255, 0);
   --ap-button-color-ghost-default-text: #23272b;
   --ap-button-color-ghost-default-background: rgba(255, 255, 255, 0);
