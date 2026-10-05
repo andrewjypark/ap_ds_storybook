@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "../Components/Button/Button.jsx";
+import { ExampleCard } from "./ExampleCard.jsx";
 import { ThemingPlaygroundControls } from "./ThemingPlaygroundControls.jsx";
 import "./ThemingPlayground.css";
 
@@ -18,8 +18,14 @@ import "./ThemingPlayground.css";
  * (the default) omits the attribute entirely, same as the generated CSS
  * expects.
  *
- * Not built yet: a Card wrapper around the canvas's own content (today
- * it's just a bare Button) and swapping in other components to preview.
+ * The canvas renders Figma's "example card" component (node 131:8169 in
+ * the "Storybook Planning" file, which Andrew pointed at directly). Per
+ * Andrew, that component's OUTER wrapper (fill tier2_color/background/
+ * base) is conceptually the canvas itself -- see the canvas's own
+ * background-color in ThemingPlayground.css -- so only the INNER "Card"
+ * is built as a component (ExampleCard.jsx); the card's own Button is
+ * the same real <Button priority={buttonType}>, so picking a Button Type
+ * below updates the button rendered inside the card.
  */
 export function ThemingPlayground() {
 	const [theme, setTheme] = useState("core");
@@ -47,9 +53,7 @@ export function ThemingPlayground() {
 					data-viewport="desktop"
 					data-bg-style={canvasBgStyle}
 				>
-					<Button priority={buttonType} size="medium" radius="sm">
-						Button
-					</Button>
+					<ExampleCard buttonType={buttonType} />
 				</div>
 				<ThemingPlaygroundControls
 					theme={theme}

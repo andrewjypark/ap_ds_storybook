@@ -3,10 +3,15 @@
  * where a component renders under whichever theme the card's radio
  * controls pick (see ThemingPlaygroundControls.jsx).
  *
- * Deliberately matches Button.css's .ap-button-swatch-group border/
- * radius language (1px solid rgba(127,127,127,0.25), 8px radius) rather
- * than inventing a new box style -- same "bordered preview box" pattern
- * already used elsewhere in the project.
+ * background-color is tier2_color/background/base -- per Andrew, the
+ * Figma "example card" component's OUTER wrapper (node 131:8169 in the
+ * "Storybook Planning" file) is filled with that token and conceptually
+ * represents the canvas itself, so the canvas picks up that fill
+ * directly. The dot grid stays layered on top of it (background-image
+ * doesn't need a separate background-color to coexist -- both paint in
+ * the same background, image over color), echoing the "PREVIEW" canvas
+ * grid on the Altitude docs button page Andrew linked as inspiration
+ * (https://altitude.pages.dev/docs/components/button/).
  */
 .ap-theming-playground-canvas {
 	display: flex;
@@ -18,9 +23,7 @@
 	padding: 2rem;
 	border: 1px solid rgba(127, 127, 127, 0.25);
 	border-radius: 8px;
-	/* Faint dot grid, purely decorative -- echoes the "PREVIEW" canvas
-	   grid on the Altitude docs button page Andrew linked as inspiration
-	   (https://altitude.pages.dev/docs/components/button/). */
+	background-color: var(--ap-tier-2-color-background-base);
 	background-image: radial-gradient(rgba(127, 127, 127, 0.18) 1px, transparent 1px);
 	background-size: 16px 16px;
 }
@@ -193,4 +196,82 @@
 	width: 14px;
 	height: 14px;
 	flex-shrink: 0;
+}
+
+/*
+ * The card rendered inside the canvas -- mirrors the Figma "example
+ * card" component's INNER "Card" frame (node 131:8169's own child, in
+ * the "Storybook Planning" file, 350x387: layoutMode VERTICAL, padding
+ * 40px top/bottom + 24px left/right, itemSpacing 30, counterAxisAlign
+ * CENTER, cornerRadius 16). The OUTER wrapper's fill (tier2_color/
+ * background/base) is the canvas's own background-color above, per
+ * Andrew -- only this inner Card is built as markup (see
+ * ExampleCard.jsx).
+ */
+.ap-theming-playground-example-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 350px;
+	max-width: 100%;
+	box-sizing: border-box;
+	padding: 40px 24px;
+	gap: 30px;
+	border-radius: 16px;
+	background-color: var(--ap-tier-2-color-background-surface-primary);
+	border: 1px solid var(--ap-tier-2-color-border-default);
+}
+
+/* card_icon_container -- 55px tall, centered; color is tier2_color/
+   content/brand so the Icon's currentColor (see Icon.jsx) picks it up
+   without each icon needing its own color prop. Figma's own glyph is a
+   custom decorative vector, not something meant to be pixel-matched --
+   per Andrew, substituted with a Font Awesome icon instead (see
+   ExampleCard.jsx for the fa-square-list / note-icon fallback). */
+.ap-theming-playground-example-card-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 55px;
+	color: var(--ap-tier-2-color-content-brand);
+}
+
+/* card_info_container -- 222px tall in Figma at the default copy length,
+   itemSpacing 20, centered; width left fluid (100% of the Card's own
+   302px content box) rather than hard-coded, so longer theme copy can
+   still wrap instead of overflowing. */
+.ap-theming-playground-example-card-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	gap: 20px;
+}
+
+/* card_title -- tier2/title/default type, tier2_color/content/default
+   fill, centered per Figma's textAlignHorizontal: CENTER. */
+.ap-theming-playground-example-card-title {
+	margin: 0;
+	font: var(--ap-tier-2-typography-title-default);
+	color: var(--ap-tier-2-color-content-default);
+	text-align: center;
+}
+
+/* card_description_and_button_container -- itemSpacing 30, centered. */
+.ap-theming-playground-example-card-description-and-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	gap: 30px;
+}
+
+/* card_description -- bound to the "tier2/body/default" Figma text
+   style, tier2_color/content/default fill, centered. */
+.ap-theming-playground-example-card-description {
+	margin: 0;
+	font: var(--ap-tier-2-typography-body-default);
+	color: var(--ap-tier-2-color-content-default);
+	text-align: center;
 }

@@ -25,15 +25,22 @@ const BUTTON_TYPES = [
 	{ key: "ghost", label: "Ghost" },
 ];
 
-// Every theme shares the same font family (tier_1_core's fontFamilies.font1
-// -- tier_1_basil/tier_1_molasses only override color, never fontFamilies,
-// so this is a literal constant, not per-theme data) and the same Tier 2
-// token drives each theme's brand color -- only what that token RESOLVES
-// TO differs per theme. Per Andrew: show the Tier 2 var the swatch is
-// actually tied to rather than a hard-coded hex, and let the swatch itself
-// (scoped to that row's own theme via data-theme) render the real,
-// per-theme resolved color.
-const THEME_DESCRIPTION_FONT_FAMILY = "TWK Lausanne";
+// Each theme actually defines its OWN primary font family (tier_1_basil
+// and tier_1_molasses do NOT inherit tier_1_core's fontFamilies.font1 --
+// confirmed directly against build/tier_1_*/css/variables.css's own
+// --ap-font-families-font1 / --ap-tier-2-typography-title-default vars),
+// so this is per-theme data, not a shared literal. Per Andrew's catch:
+// Basil is "Basier Circle", Molasses is "Nudica" -- only Core is actually
+// "TWK Lausanne". The same Tier 2 var drives each theme's brand color --
+// only what that token RESOLVES TO differs per theme. Per Andrew: show
+// the Tier 2 var the swatch is actually tied to rather than a hard-coded
+// hex, and let the swatch itself (scoped to that row's own theme via
+// data-theme) render the real, per-theme resolved color.
+const THEME_DESCRIPTION_FONT_FAMILIES = {
+	core: "TWK Lausanne",
+	basil: "Basier Circle",
+	molasses: "Nudica",
+};
 const THEME_DESCRIPTION_BRAND_VAR = "--ap-tier-2-color-content-brand";
 
 /**
@@ -59,7 +66,7 @@ function ThemeDescription({ themeKey }) {
 	return (
 		<div className="ap-theming-playground-option-description" data-theme="storybook_ds" data-viewport="desktop">
 			<span className="ap-theming-playground-option-description-line">
-				Font Family: {THEME_DESCRIPTION_FONT_FAMILY}
+				Font Family: {THEME_DESCRIPTION_FONT_FAMILIES[themeKey]}
 			</span>
 			<span className="ap-theming-playground-option-description-line ap-theming-playground-option-description-brand">
 				<span className="ap-theming-playground-option-description-brand-text">
