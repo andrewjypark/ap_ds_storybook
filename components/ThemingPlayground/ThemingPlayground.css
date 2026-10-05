@@ -154,11 +154,10 @@
 /*
  * "Font Family: TWK Lausanne" / "Brand Color: --ap-tier-2-color-content-
  * brand [swatch]" -- shown under each Theme option (Core/Basil/Molasses
- * only). Matches Figma's playground_option_description_container exactly:
- * tier2/meta/small text (10px/14px, weight 300) in content.subtle, 2px
- * between the two lines, a 12x12 square (no corner radius) swatch
- * right-aligned at the end of the Brand Color line via the sibling text's
- * flex: 1.
+ * only). 2px between the two lines, a 12x12 square (no corner radius)
+ * swatch right-aligned at the end of the Brand Color line via the
+ * sibling text's flex: 1. Uses tier2/body/xs (12px/17px, weight 300) per
+ * Andrew, rather than Figma's own tier2/meta/small text style.
  */
 .ap-theming-playground-option-description {
 	display: flex;
@@ -167,7 +166,7 @@
 }
 
 .ap-theming-playground-option-description-line {
-	font: var(--ap-tier-2-typography-meta-small);
+	font: var(--ap-tier-2-typography-body-xs);
 	color: var(--ap-tier-2-color-content-subtle);
 }
 

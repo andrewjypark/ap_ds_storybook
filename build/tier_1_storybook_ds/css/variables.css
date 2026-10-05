@@ -1450,10 +1450,8 @@
   --ap-radio-size: 20px;
   --ap-radio-dot-size: 6px;
   --ap-radio-border-width: 2px;
-  --ap-radio-border-width-checked: 4px;
   --ap-radio-color-background: #ffffff;
-  --ap-radio-color-border-default: #bfc4c8;
-  --ap-radio-color-border-hover: #93989e;
+  --ap-radio-color-border: #101214;
   --ap-radio-color-border-checked: #885332;
   --ap-radio-color-dot: #885332;
   --ap-table-row-color-background-default: #f6f7f9;
