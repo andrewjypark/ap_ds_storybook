@@ -17,17 +17,20 @@
 	/* Smooths the fill/border/text swap between default <-> hover <->
 	   active (no token for this -- tokens.json has no motion/duration
 	   set yet -- so it's a literal, matching Typography.css's own
-	   0.15s ease hover transition rather than CodeBlock.css's slower
-	   0.25s ease-out, which is for a structural expand/collapse, not a
-	   quick color fade). background-color specifically (not the
-	   `background` shorthand set above) -- some states are solid hex,
-	   others rgba() transparency overlays (see the dark-theme Ghost/
-	   Secondary palette), and both interpolate correctly as long-hand
+	   0.15s hover transition rather than CodeBlock.css's slower 0.25s
+	   ease-out, which is for a structural expand/collapse, not a quick
+	   color fade). ease-in-out rather than plain ease, per Andrew --
+	   same symmetric slow-start/slow-finish curve both entering AND
+	   leaving hover/active (plain `ease` is asymmetric: quick start,
+	   slow finish). background-color specifically (not the `background`
+	   shorthand set above) -- some states are solid hex, others rgba()
+	   transparency overlays (see the dark-theme Ghost/Secondary
+	   palette), and both interpolate correctly as long-hand
 	   background-color. */
 	transition:
-		background-color 0.15s ease,
-		border-color 0.15s ease,
-		color 0.15s ease;
+		background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out,
+		color 0.15s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
