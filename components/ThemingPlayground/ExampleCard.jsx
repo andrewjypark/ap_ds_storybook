@@ -23,6 +23,12 @@ import "./ThemingPlayground.css";
  * weight) -- falling back to a note icon, FaRegNoteSticky (Regular,
  * matching Icon.jsx's own "prefer Regular when it exists" convention).
  *
+ * Size is a one-off 30x30 override via the `style` prop (Icon.jsx merges
+ * `style` in after its default width/height), per Andrew -- 30px isn't
+ * one of the shared tier_3/icon scale's steps (xs/small/medium/large top
+ * out at 24px, see iconTokens.js) and isn't a generalizable step either,
+ * just what this one card wants, so it isn't added as a new named size.
+ *
  * The button is the SAME real <Button>, driven by the `buttonType` prop
  * the Theme Playground's own Button Type radio group already controls
  * (see ThemingPlaygroundControls.jsx) -- so picking Primary/Secondary/
@@ -35,7 +41,7 @@ export function ExampleCard({ buttonType }) {
 	return (
 		<div className="ap-theming-playground-example-card">
 			<div className="ap-theming-playground-example-card-icon">
-				<Icon icon={FaRegNoteSticky} size="large" />
+				<Icon icon={FaRegNoteSticky} style={{ width: "30px", height: "30px" }} />
 			</div>
 			<div className="ap-theming-playground-example-card-info">
 				<h3 className="ap-theming-playground-example-card-title">Card Title</h3>
