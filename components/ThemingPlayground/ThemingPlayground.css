@@ -154,9 +154,10 @@
 /*
  * "Font Family: TWK Lausanne" / "Brand Color: --ap-tier-2-color-content-
  * brand [swatch]" -- shown under each Theme option (Core/Basil/Molasses
- * only). 2px between the two lines, a 12x12 square (no corner radius)
+ * only). 2px between the two lines, a 14x14 square (no corner radius)
  * swatch right-aligned at the end of the Brand Color line via the
- * sibling text's flex: 1.
+ * sibling text's flex: 1, top-aligned with the text per Andrew (rather
+ * than vertically centered against it).
  *
  * Font is --ap-font2-body-text-xs-regular, not the Tier 2 product
  * typography scale -- this is dev-facing readout text (token names), so
@@ -178,9 +179,9 @@
 	color: var(--ap-tier-2-color-content-subtle);
 }
 
-.ap-theming-playground-option-description-brand {
+.ap-theming-playground-option-description-line.ap-theming-playground-option-description-brand {
 	display: flex;
-	align-items: center;
+	align-items: start;
 	gap: 6px;
 }
 
@@ -189,7 +190,7 @@
 }
 
 .ap-theming-playground-brand-swatch {
-	width: 12px;
-	height: 12px;
+	width: 14px;
+	height: 14px;
 	flex-shrink: 0;
 }
