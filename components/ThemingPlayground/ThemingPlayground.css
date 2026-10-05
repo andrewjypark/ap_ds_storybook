@@ -23,6 +23,16 @@
 	padding: 2rem;
 	border: 1px solid rgba(127, 127, 127, 0.25);
 	border-radius: 8px;
+	/* box-sizing: border-box -- needed once the 991px breakpoint below
+	   sets an explicit `width: 100%`: under the default content-box, that
+	   100% stops at the flex container's content edge and then this
+	   element's own padding+border get added OUTSIDE it, overflowing
+	   past the parent (and past .ap-storybook-canvas, the outer
+	   Storybook preview wrapper in .storybook/preview.css) by
+	   2*(32px padding + 1px border) = 66px. Same reasoning as
+	   .ap-theming-playground-card's own box-sizing: border-box below,
+	   which never had this bug because it already declared it. */
+	box-sizing: border-box;
 	background-color: var(--ap-tier-2-color-background-base);
 	background-image: radial-gradient(rgba(127, 127, 127, 0.18) 1px, transparent 1px);
 	background-size: 16px 16px;
@@ -51,6 +61,17 @@
 	}
 	.ap-theming-playground-canvas {
 		width: 100%;
+	}
+}
+
+/* Same 768px "mobile" cutoff as .storybook/preview.css's own
+   .ap-storybook-canvas rule (Andrew's established breakpoint) -- the
+   canvas's 2rem padding gets tight against a phone-width viewport once
+   .ap-storybook-canvas's own outer padding has already dropped to
+   0.5rem there, so this trims it down to 1rem to match. */
+@media (max-width: 768px) {
+	.ap-theming-playground-canvas {
+		padding: 1rem;
 	}
 }
 
