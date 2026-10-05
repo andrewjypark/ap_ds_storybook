@@ -1,0 +1,7 @@
+import{a as p}from"./tier2SemanticStories-CMkKcS-L.js";import"./iframe-ZXh55nCV.js";import"./preload-helper-Dp1pzeXC.js";import"./Color-Dr9XG6Hy.js";import"./useLiveCssValue-C6OXhRSM.js";const S={title:"Tier 2: Semantic Tokens/Themes/Tier 2 - Molasses_Theme/Color - Dark",parameters:{layout:"padded",docs:{description:{component:`Sibling to SemanticMolasses.stories.jsx ("Color - Default"), one axis
+over: Default diffs Molasses's light build against Core's light build;
+Dark diffs Molasses's DARK build against Core's DARK build -- same
+theme axis, just evaluated on the dark builds (see generate-color-
+manifest.js's buildTier2Diff / manifest.tier2DarkDiffs.molasses).
+Mirrors ColorMolassesDark.stories.jsx's relationship to ColorMolasses.
+stories.jsx at Tier 1, one tier up.`}}}},o=p("molasses"),s=o.Content,e=o.Background,r=o.Border,B=["Content","Background","Border"];var a,t,i;s.parameters={...s.parameters,docs:{...(a=s.parameters)==null?void 0:a.docs,source:{originalSource:"stories.Content",...(i=(t=s.parameters)==null?void 0:t.docs)==null?void 0:i.source}}};var n,c,d;e.parameters={...e.parameters,docs:{...(n=e.parameters)==null?void 0:n.docs,source:{originalSource:"stories.Background",...(d=(c=e.parameters)==null?void 0:c.docs)==null?void 0:d.source}}};var m,l,u;r.parameters={...r.parameters,docs:{...(m=r.parameters)==null?void 0:m.docs,source:{originalSource:"stories.Border",...(u=(l=r.parameters)==null?void 0:l.docs)==null?void 0:u.source}}};export{e as Background,r as Border,s as Content,B as __namedExportsOrder,S as default};
