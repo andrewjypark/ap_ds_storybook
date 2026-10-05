@@ -1,0 +1,34 @@
+/*
+ * "Canvas" preview surface for the Theming Playground -- the live area
+ * where a component renders under whichever theme the page's controls
+ * pick. This is step one (see the project's Figma "Storybook Planning"
+ * file, playground_options_container frame, and the related project
+ * docs): a plain canvas with a single Button in it, no theme-switching
+ * controls yet, no Card wrapper around those controls yet.
+ *
+ * Deliberately matches Button.css's .ap-button-swatch-group border/
+ * radius language (1px solid rgba(127,127,127,0.25), 8px radius) rather
+ * than inventing a new box style -- same "bordered preview box" pattern
+ * already used elsewhere in the project.
+ */
+.ap-theming-playground-canvas {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 320px;
+	padding: 2rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+	/* Faint dot grid, purely decorative -- echoes the "PREVIEW" canvas
+	   grid on the Altitude docs button page Andrew linked as inspiration
+	   (https://altitude.pages.dev/docs/components/button/). */
+	background-image: radial-gradient(rgba(127, 127, 127, 0.18) 1px, transparent 1px);
+	background-size: 16px 16px;
+}
+
+.ap-theming-playground-intro {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+	margin: 0 0 1.5rem;
+	max-width: 650px;
+}
