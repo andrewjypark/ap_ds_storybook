@@ -28,9 +28,9 @@
 	   palette), and both interpolate correctly as long-hand
 	   background-color. */
 	transition:
-		background-color 0.15s ease-in-out,
-		border-color 0.15s ease-in-out,
-		color 0.15s ease-in-out;
+		background-color 0.25s ease-in-out,
+		border-color 0.25s ease-in-out,
+		color 0.25s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
