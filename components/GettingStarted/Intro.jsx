@@ -53,7 +53,7 @@ export function Intro() {
 						Each theme — Core, Basil, Molasses — has its own complete set.
 					</li>
 					<li>
-						<strong>Tier 2: Semantic Tokens</strong> — Tier 1 values given a purpose: content color,
+						<strong>Tier 2: Semantic Tokens</strong> — Tier 2 values given a purpose: content color,
 						background, border, and composite type styles like Title or Body. Components should reference
 						this layer, not Tier 1 directly.
 					</li>
