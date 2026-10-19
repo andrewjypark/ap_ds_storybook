@@ -80,6 +80,12 @@ export const Button = React.forwardRef(function Button(
 			type="button"
 			className="ap-button"
 			disabled={disabled}
+			// Belt-and-suspenders accessible name: Chromium's accessibility
+			// tree doesn't reliably expose a disabled button's inner text to
+			// screen readers (axe's button-name rule caught this on the
+			// States/Disabled swatch), so the name is also set explicitly
+			// here rather than left to resolve from rendered text alone.
+			aria-label={typeof children === "string" ? children : undefined}
 			data-force-state={forceState}
 			style={{
 				...stateVars,

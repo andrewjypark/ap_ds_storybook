@@ -85,7 +85,7 @@ export const Dropdown = forwardRef(function Dropdown(
 				onClick={() => !isControlled && setOpenState((o) => !o)}
 			/>
 			{open && (
-				<DropdownMenu>
+				<DropdownMenu aria-label={fieldTitleText}>
 					{options.map((opt) => (
 						<DropdownMenuRow
 							key={opt.value}

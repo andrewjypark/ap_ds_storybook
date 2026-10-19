@@ -80,6 +80,11 @@ export const TextInput = React.forwardRef(function TextInput(
 		className: "ap-text-input-field",
 		"aria-invalid": error || undefined,
 		"aria-describedby": showDescriptionBelowInput ? descriptionId : undefined,
+		// Field Title Text is a real visible <label> below when shown; when
+		// it's hidden there's no visible label at all, so fall back to
+		// aria-label rather than leaving the field with only a placeholder
+		// (axe: label-title-only / no accessible name from a real label).
+		"aria-label": showFieldTitleSection ? undefined : fieldTitleText,
 		...rest,
 	};
 
@@ -87,14 +92,17 @@ export const TextInput = React.forwardRef(function TextInput(
 		<div className="ap-text-input" data-error={error || undefined} data-force-state={forceState}>
 			{showFieldTitleSection && (
 				<div className="ap-text-input-title-row">
-					<span className="ap-text-input-title">
+					{/* A real <label>, not a <span> -- previously just visible
+					    text with no programmatic association to the field
+					    (axe: label-title-only). */}
+					<label htmlFor={inputId} className="ap-text-input-title">
 						{fieldTitleText}
 						{showFieldTitleLeftIcon && (
 							<span className="ap-text-input-title-icon">
 								<InfoIcon />
 							</span>
 						)}
-					</span>
+					</label>
 					{showFieldTitleRightSlot && <span className="ap-text-input-title-slot">{fieldTitleRightSlot}</span>}
 				</div>
 			)}

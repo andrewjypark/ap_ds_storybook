@@ -14,6 +14,14 @@
 }
 
 .ap-color-section__empty {
+	/* Paired with its own background-base token, not left to inherit the
+	   ambient page background -- content-subtle's dark-mode value is only
+	   accessible against a dark background, and the Storybook canvas
+	   itself never paints one (see .ap-storybook-canvas in
+	   .storybook/preview.css). Without this, "Color - Dark" pages with no
+	   diffs (e.g. Transparent) render light gray on white. */
+	background: var(--ap-tier-2-color-background-base);
+	padding: 0.5rem 0.75rem;
 	font-size: 13px;
 	color: var(--ap-tier-2-color-content-subtle);
 	font-style: italic;

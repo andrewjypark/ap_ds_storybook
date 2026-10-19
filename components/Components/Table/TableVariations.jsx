@@ -71,7 +71,7 @@ export function TableVariations() {
 					<div className="ap-table-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
 						{ROW_VARIANTS.map((v) => (
 							<div className="ap-table-swatch" key={v.key}>
-								<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+								<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 									<TableRow
 										variant={v.key}
 										ref={v.key === "body" ? defaultRowRef : v.key === "body-alt" ? altRowRef : undefined}
@@ -118,7 +118,7 @@ export function TableVariations() {
 				<div className="ap-table-section-example">
 					<div className="ap-table-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
 						<div className="ap-table-swatch">
-							<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+							<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 								<TableRow variant="header">
 									<TableCell
 										ref={headerCellRef}
@@ -133,7 +133,7 @@ export function TableVariations() {
 							<TokenReadout targetRef={headerCellRef} rows={[{ label: "text", cssVar: tableCellVar.headerFont() }]} />
 						</div>
 						<div className="ap-table-swatch">
-							<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+							<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 								<TableRow>
 									<TableCell
 										ref={bodyCellRef}
@@ -147,7 +147,7 @@ export function TableVariations() {
 							<TokenReadout targetRef={bodyCellRef} rows={[{ label: "text", cssVar: tableCellVar.bodyFont() }]} />
 						</div>
 						<div className="ap-table-swatch">
-							<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+							<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 								<TableRow>
 									<TableCell type="slot">
 										<Button
@@ -174,7 +174,7 @@ export function TableVariations() {
 							<div className="ap-table-swatch-label">Slot (actions)</div>
 						</div>
 						<div className="ap-table-swatch">
-							<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+							<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 								<TableRow>
 									<TableCell type="empty" />
 								</TableRow>
@@ -182,7 +182,7 @@ export function TableVariations() {
 							<div className="ap-table-swatch-label">Empty Slot</div>
 						</div>
 						<div className="ap-table-swatch">
-							<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+							<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 								<TableRow>
 									<TableCell
 										type="checkbox"
@@ -224,7 +224,7 @@ export function TableVariations() {
 					</p>
 				</div>
 				<div className="ap-table-section-example">
-					<div className="ap-table-demo" data-theme="core" data-viewport="desktop">
+					<div className="ap-table-demo" role="table" data-theme="core" data-viewport="desktop">
 						<TableRow variant="header">
 							<TableCell type="checkbox" checked={false} />
 							<TableCell type="header" text="Name" showIcon icon={<Icon icon={FaSort} size="xs" />} />

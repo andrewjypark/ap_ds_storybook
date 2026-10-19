@@ -183,8 +183,11 @@
 }
 
 .ap-icon-gallery-cell-solid {
+	/* No opacity here -- the parent's content-subtle color is already the
+	   intentionally-muted token, chosen to still clear 4.5:1 against the
+	   page background. Layering opacity on top of it was dimming an
+	   already-compliant color below that threshold (axe: color-contrast). */
 	font-style: italic;
-	opacity: 0.7;
 }
 
 /* ---- Token readout (label / var name / value) -- same visual language

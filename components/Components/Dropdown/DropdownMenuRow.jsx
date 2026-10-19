@@ -28,8 +28,13 @@ export const DropdownMenuRow = forwardRef(function DropdownMenuRow(
 	ref,
 ) {
 	if (content === "divider") {
+		// role="separator" is valid inside menu/toolbar, but listbox only
+		// permits option/group children -- axe's aria-required-children
+		// rule (rightly) flags it here. The divider carries no information
+		// a screen reader needs, so it's hidden from the accessibility tree
+		// instead of given a role listbox doesn't allow.
 		return (
-			<div className="ap-dropdown-menu-row ap-dropdown-menu-row--divider" role="separator" ref={ref} {...rest}>
+			<div className="ap-dropdown-menu-row ap-dropdown-menu-row--divider" aria-hidden="true" ref={ref} {...rest}>
 				<span className="ap-dropdown-menu-row-divider-line" />
 			</div>
 		);

@@ -9,9 +9,16 @@ import React, { forwardRef } from "react";
  * live-resolved CSS custom properties off the real DOM node (same
  * reasoning as Button/Text Input/Segment Group).
  */
-export const DropdownMenu = forwardRef(function DropdownMenu({ children, ...rest }, ref) {
+export const DropdownMenu = forwardRef(function DropdownMenu(
+	{ children, "aria-label": ariaLabel = "Dropdown menu", ...rest },
+	ref,
+) {
+	// role="listbox" makes this an ARIA input field, which axe's
+	// aria-input-field-name rule (rightly) requires a name for -- Dropdown.jsx
+	// passes its own fieldTitleText here; this default covers every other
+	// standalone usage (docs swatches, etc.) that doesn't.
 	return (
-		<div className="ap-dropdown-menu" role="listbox" ref={ref} {...rest}>
+		<div className="ap-dropdown-menu" role="listbox" aria-label={ariaLabel} ref={ref} {...rest}>
 			{children}
 		</div>
 	);
