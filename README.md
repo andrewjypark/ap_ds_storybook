@@ -98,21 +98,19 @@ any time you want to publish the latest version. Currently live at https://andre
 A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push to `main` and on every pull request:
 
 1. **Build check** — `npm run build-storybook` (tokens + manifests, then the static Storybook build). Catches a broken token edit or component change before it reaches `main`.
-2. **Accessibility check** — every story is visited headless and checked with `axe-playwright` (config in `.storybook/test-runner.js`, run via `npm run test-storybook:ci`). Fails the workflow if any story has an a11y violation.
+2. **Accessibility check** — `tests/a11y.spec.js` generates one Playwright test per story (read from `storybook-static/index.json`), visits each story's `iframe.html` directly, and scans it with `@axe-core/playwright`. Fails the workflow if any story has an a11y violation.
 
 Why this exists for this repo specifically: it's public, pushes go straight to `main` with no branch protection or PR review, and `@storybook/addon-a11y` is installed but switched off in `.storybook/main.js` (its panel was the only one left with content, so the whole bottom panel got hidden instead). CI is the automated gate standing in for both of those gaps — a build or an a11y regression gets caught on push instead of relying on remembering to check manually.
+
+**Why not `@storybook/test-runner`:** that was the first approach tried here, and it builds and discovers all stories fine, but every test suite fails in CI with `module.register() is not supported in Jest` — its Jest layer can't load this project's ESM Storybook config on Storybook 10. This isn't just the "support has ended" deprecation notice being noisy; it's a real, blocking incompatibility. `@axe-core/playwright` + `@playwright/test` sidestep it entirely by driving each story's `iframe.html` directly, with no Jest in the loop.
 
 ### Running the same checks locally
 
 ```bash
 npm run build-storybook                      # same build check CI runs
 npx playwright install --with-deps chromium  # one-time, needed for the a11y check
-npm run test-storybook:ci                    # serves storybook-static/ and runs the axe checks against it
+npm run test:a11y                             # starts storybook-static/ and runs the axe checks against it
 ```
-
-### Known caveat
-
-`@storybook/test-runner` logs "Official support for Test Runner has ended" on every run — Storybook's recommended path going forward is the Vitest-based `@storybook/addon-vitest`. Deliberately not used yet: as of this writing it pins `vitest`/`@vitest/browser` to `^3 || ^4`, and the latest release of both is already `5.x` — adopting it now would mean pinning a second, already-behind major version just to satisfy its peer deps. `@storybook/test-runner` still runs correctly against this Storybook 10.3.6 setup (confirmed: it discovers and runs all 34 story test suites); revisit once `@storybook/addon-vitest` catches up to current `vitest`.
 
 ## Known issues / open items
 
