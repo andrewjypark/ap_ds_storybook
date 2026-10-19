@@ -93,6 +93,27 @@ npm run build-storybook && npm run deploy-storybook
 
 any time you want to publish the latest version. Currently live at https://andrewjypark.github.io/ap_ds_storybook/ (this URL follows the GitHub username and repo name, so it'll change if either is ever renamed).
 
+## Continuous Integration (CI)
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push to `main` and on every pull request:
+
+1. **Build check** — `npm run build-storybook` (tokens + manifests, then the static Storybook build). Catches a broken token edit or component change before it reaches `main`.
+2. **Accessibility check** — every story is visited headless and checked with `axe-playwright` (config in `.storybook/test-runner.js`, run via `npm run test-storybook:ci`). Fails the workflow if any story has an a11y violation.
+
+Why this exists for this repo specifically: it's public, pushes go straight to `main` with no branch protection or PR review, and `@storybook/addon-a11y` is installed but switched off in `.storybook/main.js` (its panel was the only one left with content, so the whole bottom panel got hidden instead). CI is the automated gate standing in for both of those gaps — a build or an a11y regression gets caught on push instead of relying on remembering to check manually.
+
+### Running the same checks locally
+
+```bash
+npm run build-storybook                      # same build check CI runs
+npx playwright install --with-deps chromium  # one-time, needed for the a11y check
+npm run test-storybook:ci                    # serves storybook-static/ and runs the axe checks against it
+```
+
+### Known caveat
+
+`@storybook/test-runner` logs "Official support for Test Runner has ended" on every run — Storybook's recommended path going forward is the Vitest-based `@storybook/addon-vitest`. Deliberately not used yet: as of this writing it pins `vitest`/`@vitest/browser` to `^3 || ^4`, and the latest release of both is already `5.x` — adopting it now would mean pinning a second, already-behind major version just to satisfy its peer deps. `@storybook/test-runner` still runs correctly against this Storybook 10.3.6 setup (confirmed: it discovers and runs all 34 story test suites); revisit once `@storybook/addon-vitest` catches up to current `vitest`.
+
 ## Known issues / open items
 
 - **Theme + viewport combined simultaneously** — not yet built (see caveat above); needs a decision on whether to do a full cross-product build or change the underlying data.
