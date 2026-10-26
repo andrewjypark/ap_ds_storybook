@@ -1,9 +1,9 @@
 {
   "name": "ap-ds-storybook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run: ```bash style-dictionary build ```",
-  "main": "build-tokens.js",
+  "main": "index.js",
   "scripts": {
     "build": "node build-tokens.js && node scripts/generate-color-manifest.js && node scripts/generate-border-manifest.js && node scripts/generate-typography-manifest.js",
     "storybook": "npm run build && storybook dev -p 6006",
@@ -24,9 +24,6 @@
   },
   "homepage": "https://github.com/andrewjypark/ap_ds_storybook#readme",
   "dependencies": {
-    "@tokens-studio/sd-transforms": "^2.0.3",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
     "react-icons": "^5.7.0"
   },
   "devDependencies": {
@@ -39,6 +36,17 @@
     "http-server": "^14.1.1",
     "storybook": "^10.3.6",
     "style-dictionary": "^5.4.0",
-    "vite": "^6.0.0"
+    "vite": "^6.0.0",
+    "@tokens-studio/sd-transforms": "^2.0.3"
+  },
+  "files": [
+    "index.js",
+    "components/Components",
+    "build/all-combinations/css/variables.css",
+    "assets/fonts",
+    "build/tier_1_core/css/variables.css"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0"
   }
 }
