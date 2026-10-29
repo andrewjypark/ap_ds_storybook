@@ -4,6 +4,9 @@
   "type": "module",
   "description": "This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run: ```bash style-dictionary build ```",
   "main": "index.js",
+  "bin": {
+    "ap-ds-storybook-snippets": "./scripts/generate-vscode-snippets.js"
+  },
   "scripts": {
     "build": "node build-tokens.js && node scripts/generate-color-manifest.js && node scripts/generate-border-manifest.js && node scripts/generate-typography-manifest.js",
     "storybook": "npm run build && storybook dev -p 6006",
@@ -44,7 +47,8 @@
     "components/Components",
     "build/all-combinations/css/variables.css",
     "assets/fonts",
-    "build/tier_1_core/css/variables.css"
+    "build/tier_1_core/css/variables.css",
+    "scripts/generate-vscode-snippets.js"
   ],
   "peerDependencies": {
     "react": ">=18.0.0"

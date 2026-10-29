@@ -2,6 +2,14 @@
 
 Agent-access notes for this repo. Read this before touching Figma or composing components, so you start from what a previous session already learned instead of re-deriving it.
 
+## VS Code autocomplete for --ap-* tokens in a consuming project
+
+Installing `ap-ds-storybook` does not give consumers `var(--ap-*)` autocomplete for free -- see "Set up autocomplete" in the `install-ap-design-system` skill for the full install flow. Two things that actually matter once that's wired up:
+
+1. **No third-party extension works for this.** `vunguyentuan.vscode-css-variables` and VS Code's built-in `css.customData` were both tried and dropped -- the extension has an unreliable caching bug, and `css.customData` doesn't support `var(...)` completions at all. The only approach that's worked reliably is generating a native VS Code snippets file from `node_modules/ap-ds-storybook/build/tier_1_core/css/variables.css`. As of 2026-10-28, this is shipped as `scripts/generate-vscode-snippets.js`, runnable from a consuming project via `npx ap-ds-storybook-snippets`.
+
+2. **The generated `.vscode/*.code-snippets` file must sit at the VS Code WORKSPACE ROOT, not wherever `node_modules`/`package.json` happen to live.** Hit this directly in a multi-folder repo where the open VS Code workspace root was one level above the actual Next.js app folder (`codevolution_next_js_15/hello-world`): the snippets file wasn't picked up at all -- no suggestions, no error -- until it was moved up to `codevolution_next_js_15/.vscode/`. If a consumer reports autocomplete "just doesn't work" after following every other step correctly, check this before suspecting a word-separator or caching issue.
+
 ## Connecting to Figma
 
 There is no dedicated MCP server for this design system — what's available is a generic Figma bridge that reads whatever file happens to be open in Figma Desktop, not a curated surface scoped to this repo's components/tokens.
