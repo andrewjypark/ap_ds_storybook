@@ -48,7 +48,7 @@ function ScaleGuide() {
 			</ul>
 			<p>
 				Because they&apos;re built from the same Tier 1 sizes and line heights, these styles are
-				responsive too. Use the toggle to preview each breakpoint.
+				responsive too. Use the button to preview each breakpoint.
 			</p>
 		</div>
 	);

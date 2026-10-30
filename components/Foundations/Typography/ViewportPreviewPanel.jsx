@@ -42,7 +42,7 @@ export function ViewportPreviewPanel({ children }) {
 				<div className="ap-type-viewport-panel">
 					<p className="ap-type-responsive-note">
 						Font size and line height are responsive — every value below
-						changes across breakpoints. Use the toggle to preview{" "}
+						changes across breakpoints. Use the button to preview{" "}
 						<strong>Mobile</strong>, <strong>Tablet</strong>, or{" "}
 						<strong>Desktop</strong> for this theme.
 					</p>

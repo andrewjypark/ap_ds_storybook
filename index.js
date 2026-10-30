@@ -20,3 +20,4 @@ export { TableCell } from "./components/Components/Table/TableCell.jsx";
 export { TableRow } from "./components/Components/Table/TableRow.jsx";
 export { TextInput } from "./components/Components/TextInput/TextInput.jsx";
 export { Tooltip } from "./components/Components/Tooltip/Tooltip.jsx";
+export { ViewportSync } from "./components/Components/ViewportSync/ViewportSync.jsx";
