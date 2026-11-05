@@ -1,6 +1,6 @@
 {
   "name": "ap-ds-storybook",
-  "version": "1.1.1",
+  "version": "1.2.3",
   "type": "module",
   "description": "This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run: ```bash style-dictionary build ```",
   "main": "index.js",
@@ -48,7 +48,8 @@
     "build/all-combinations/css/variables.css",
     "assets/fonts",
     "build/tier_1_core/css/variables.css",
-    "scripts/generate-vscode-snippets.js"
+    "scripts/generate-vscode-snippets.js",
+    "styles"
   ],
   "peerDependencies": {
     "react": ">=18.0.0"

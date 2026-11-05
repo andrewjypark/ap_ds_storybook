@@ -1,0 +1,139 @@
+/* ==========================================================================
+   ap-ds-storybook base.css — DRAFT v0.1
+   ==========================================================================
+   Shared, project-agnostic defaults and layout primitives, extracted from
+   hello-world/app/globals.css and cleaned of anything specific to that one
+   tutorial project (page-specific classes like .ap_home_body_container_*,
+   .ap_header_text/.ap_footer_text demo labels, and the (auth) nav-link
+   active/inactive classes were intentionally left out - see the chat note
+   for the full list of what got cut and why).
+
+   This is a first draft for you to edit before publishing - nothing here
+   has shipped to npm yet, and it isn't in package.json's `files` whitelist
+   yet either.
+
+   Import this AFTER the token stylesheet, since several rules below
+   reference var(--ap-...) tokens that have to already be defined first:
+
+     import "ap-ds-storybook/build/all-combinations/css/variables.css";
+     import "ap-ds-storybook/styles/base.css";
+   ========================================================================== */
+
+/* A spacing knob the section-padding classes below use. Not one of the
+   design tokens from tokens.json - it's a project-level default a
+   consumer can override by redefining it after importing this file:
+     :root { --section_padding_top_bottom: 80px; }                        */
+:root {
+  /* --section_padding_top_bottom: 50px; */
+}
+
+/* ---- Page defaults ------------------------------------------------------ */
+
+body {
+  /* background: var(--ap-tier-2-color-background-base);
+  color: var(--ap-tier-2-color-content-default);
+  font: var(--ap-tier-2-typography-body-default); */
+}
+
+/* Default link styling for every <a>. If the consumer project uses
+   Tailwind, this un-layered rule automatically wins over Tailwind's
+   Preflight reset (`a { color: inherit; text-decoration: inherit; }`,
+   which lives inside Tailwind's own `@layer base`) no matter where this
+   file sits in the import order - CSS cascade layers give any un-layered
+   rule priority over every @layer rule, regardless of source order. */
+a {
+  /* color: var(--ap-color-color-palettes-blue-600);
+  text-decoration: underline;
+  text-underline-offset: 2px; */
+}
+
+a:hover {
+  /* color: var(--ap-color-color-palettes-blue-500); */
+}
+
+a:active {
+  /* color: var(--ap-color-color-palettes-blue-700); */
+}
+
+/* ---- Grid system --------------------------------------------------------
+   A 12-column responsive grid with 0.5fr gutters on each side, collapsing
+   to a simpler column count at tablet/mobile widths. Usage:
+
+     <div className="ap_grid_container">
+       <div className="ap_grid_1">
+         <div style={{ gridColumn: "2 / 14" }}>...</div>
+       </div>
+     </div>
+   -------------------------------------------------------------------------- */
+
+.ap_grid_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.ap_grid_1 {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 1440px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-columns: minmax(0px, 0.5fr) repeat(12, 1fr) minmax(0px, 0.5fr);
+  grid-template-rows: auto;
+  background-color: transparent;
+}
+
+/* Tablet */
+@media screen and (max-width: 991px) {
+  .ap_grid_1 {
+    grid-template-columns: minmax(0px, 0.5fr) 1fr 1fr 1fr 1fr 1fr 1fr minmax(0px, 0.5fr);
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .ap_grid_1 {
+    grid-template-columns: minmax(0px, 0.5fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(0px, 0.5fr);
+  }
+}
+
+/* Combo class - stack onto .ap_grid_container alongside the grid classes
+   above, e.g. className="ap_grid_container banner_1" */
+.banner_1 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/* ---- Section padding helpers --------------------------------------------
+   Generic top/bottom padding for a header or footer band, driven by the
+   --section_padding_top_bottom variable defined above. */
+
+.ap_header_section {
+  padding: var(--section_padding_top_bottom) 0px;
+}
+
+.ap_footer_section {
+  padding: var(--section_padding_top_bottom) 0px;
+}
+
+
+/* Grid-child class — nested inside an .ap_grid_1 container to get its
+   column placement, e.g.
+   <div className="ap_grid_1"><div className="ap_header_container">...</div></div> */
+.ap_example_container {
+  grid-column: 2 / 14;
+  background-color: var(--ap-tier-2-color-background-surface-secondary);
+}
+
+@media screen and (max-width: 992px) {
+  .ap_example_container {
+    grid-column: 2 / 8;
+  }
+}
