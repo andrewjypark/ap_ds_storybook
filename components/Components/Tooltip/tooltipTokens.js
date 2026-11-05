@@ -99,12 +99,12 @@ export const POSITIONS = [
 ];
 
 export const tooltipVar = {
-	paddingHorizontal: () => `--ap-tooltip-padding-horizontal`,
-	paddingVertical: () => `--ap-tooltip-padding-vertical`,
-	borderRadius: () => `--ap-tooltip-border-radius`,
-	arrowWidth: () => `--ap-tooltip-arrow-width`,
-	arrowHeight: () => `--ap-tooltip-arrow-height`,
-	text: () => `--ap-tooltip-text`,
-	background: (color) => `--ap-tooltip-color-background-${color}`, // dark | light
-	textColor: (color) => `--ap-tooltip-color-text-${color}`, // dark | light
+	paddingHorizontal: () => `--ap-tier-3-tooltip-padding-horizontal`,
+	paddingVertical: () => `--ap-tier-3-tooltip-padding-vertical`,
+	borderRadius: () => `--ap-tier-3-tooltip-border-radius`,
+	arrowWidth: () => `--ap-tier-3-tooltip-arrow-width`,
+	arrowHeight: () => `--ap-tier-3-tooltip-arrow-height`,
+	text: () => `--ap-tier-3-tooltip-text`,
+	background: (color) => `--ap-tier-3-tooltip-color-background-${color}`, // dark | light
+	textColor: (color) => `--ap-tier-3-tooltip-color-text-${color}`, // dark | light
 };

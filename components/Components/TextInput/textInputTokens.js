@@ -34,22 +34,22 @@ export const STATES = [
 ];
 
 export const textInputVar = {
-	background: () => `--ap-text-input-color-background`,
-	border: (state) => `--ap-text-input-color-border-${state}`, // default | active | filled | error
-	text: () => `--ap-text-input-color-text`,
-	label: () => `--ap-text-input-color-label`,
-	description: () => `--ap-text-input-color-description`,
+	background: () => `--ap-tier-3-text-input-color-background`,
+	border: (state) => `--ap-tier-3-text-input-color-border-${state}`, // default | active | filled | error
+	text: () => `--ap-tier-3-text-input-color-text`,
+	label: () => `--ap-tier-3-text-input-color-label`,
+	description: () => `--ap-tier-3-text-input-color-description`,
 	// Figma's Filled border reuses the same 0.5px hairline as Default
 	// (only Active/Error thicken to 1px) -- no separate "filled" border-
 	// width token, matching what build/tier_1_core/css/variables.css
 	// actually generated.
-	borderWidth: (state) => `--ap-text-input-border-width-${state === "filled" ? "default" : state}`,
-	borderRadius: () => `--ap-text-input-border-radius`,
-	paddingHorizontal: () => `--ap-text-input-padding-horizontal`,
-	paddingVertical: () => `--ap-text-input-padding-vertical`,
-	gap: () => `--ap-text-input-gap`,
-	font: () => `--ap-text-input-text`,
-	labelFont: () => `--ap-text-input-label-text`,
-	iconFieldTitle: (dim) => `--ap-text-input-icon-field-title-${dim}`, // width | height
-	iconSlot: (dim) => `--ap-text-input-icon-slot-${dim}`, // width | height
+	borderWidth: (state) => `--ap-tier-3-text-input-border-width-${state === "filled" ? "default" : state}`,
+	borderRadius: () => `--ap-tier-3-text-input-border-radius`,
+	paddingHorizontal: () => `--ap-tier-3-text-input-padding-horizontal`,
+	paddingVertical: () => `--ap-tier-3-text-input-padding-vertical`,
+	gap: () => `--ap-tier-3-text-input-gap`,
+	font: () => `--ap-tier-3-text-input-text`,
+	labelFont: () => `--ap-tier-3-text-input-label-text`,
+	iconFieldTitle: (dim) => `--ap-tier-3-text-input-icon-field-title-${dim}`, // width | height
+	iconSlot: (dim) => `--ap-tier-3-text-input-icon-slot-${dim}`, // width | height
 };

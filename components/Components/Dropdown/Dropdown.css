@@ -12,8 +12,8 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.5rem;
-	font: var(--ap-dropdown-field-label-text);
-	color: var(--ap-dropdown-field-color-label);
+	font: var(--ap-tier-3-dropdown-field-label-text);
+	color: var(--ap-tier-3-dropdown-field-color-label);
 }
 
 .ap-dropdown-field-title {
@@ -24,32 +24,32 @@
 
 .ap-dropdown-field-title-icon {
 	display: inline-flex;
-	color: var(--ap-dropdown-field-color-description);
+	color: var(--ap-tier-3-dropdown-field-color-description);
 }
 
 .ap-dropdown-field {
 	display: flex;
 	align-items: center;
-	gap: var(--ap-dropdown-field-gap);
-	padding: var(--ap-dropdown-field-padding-vertical) var(--ap-dropdown-field-padding-horizontal);
+	gap: var(--ap-tier-3-dropdown-field-gap);
+	padding: var(--ap-tier-3-dropdown-field-padding-vertical) var(--ap-tier-3-dropdown-field-padding-horizontal);
 	box-sizing: border-box;
 	border-style: solid;
-	border-width: var(--ap-dropdown-field-border-width);
-	border-color: var(--ap-dropdown-field-color-border-default);
-	border-radius: var(--ap-dropdown-field-border-radius);
-	background: var(--ap-dropdown-field-color-background);
+	border-width: var(--ap-tier-3-dropdown-field-border-width);
+	border-color: var(--ap-tier-3-dropdown-field-color-border-default);
+	border-radius: var(--ap-tier-3-dropdown-field-border-radius);
+	background: var(--ap-tier-3-dropdown-field-color-background);
 	cursor: pointer;
 }
 
 .ap-dropdown-field[data-active] {
-	border-color: var(--ap-dropdown-field-color-border-active);
+	border-color: var(--ap-tier-3-dropdown-field-color-border-active);
 }
 
 .ap-dropdown-field-value {
 	flex: 1 1 auto;
 	min-width: 0;
-	font: var(--ap-dropdown-field-text);
-	color: var(--ap-dropdown-field-color-text);
+	font: var(--ap-tier-3-dropdown-field-text);
+	color: var(--ap-tier-3-dropdown-field-color-text);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -60,12 +60,12 @@
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
-	color: var(--ap-dropdown-field-color-description);
+	color: var(--ap-tier-3-dropdown-field-color-description);
 }
 
 .ap-dropdown-field-description {
-	font: var(--ap-dropdown-field-label-text);
-	color: var(--ap-dropdown-field-color-description);
+	font: var(--ap-tier-3-dropdown-field-label-text);
+	color: var(--ap-tier-3-dropdown-field-color-description);
 }
 
 /* ---- Composed Dropdown + Menu ----
@@ -78,7 +78,7 @@
    (nothing else in this codebase layers content this way yet) -- flagged
    here as a one-off, same "closest real thing" treatment as other
    unmeasured values noted in dropdownTokens.js. The box-shadow
-   (--ap-dropdown-menu-box-shadow, tier_1_core's elevation-04 -- literally
+   (--ap-tier-3-dropdown-menu-box-shadow, tier_1_core's elevation-04 -- literally
    described as "Use for: Menus") is what visually lifts the now-floating
    menu off the page content it overlaps. */
 
@@ -98,10 +98,10 @@
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
-	background: var(--ap-dropdown-menu-color-background);
-	border-radius: var(--ap-dropdown-menu-border-radius);
-	box-shadow: var(--ap-dropdown-menu-box-shadow);
-	padding: var(--ap-dropdown-menu-padding-vertical) 0;
+	background: var(--ap-tier-3-dropdown-menu-color-background);
+	border-radius: var(--ap-tier-3-dropdown-menu-border-radius);
+	box-shadow: var(--ap-tier-3-dropdown-menu-box-shadow);
+	padding: var(--ap-tier-3-dropdown-menu-padding-vertical) 0;
 	margin-top: 0.25rem;
 	box-sizing: border-box;
 }
@@ -109,33 +109,33 @@
 .ap-dropdown-menu-row {
 	display: flex;
 	align-items: center;
-	gap: var(--ap-dropdown-menu-row-gap);
+	gap: var(--ap-tier-3-dropdown-menu-row-gap);
 	width: 100%;
-	padding: var(--ap-dropdown-menu-row-padding-vertical) var(--ap-dropdown-menu-row-padding-horizontal);
+	padding: var(--ap-tier-3-dropdown-menu-row-padding-vertical) var(--ap-tier-3-dropdown-menu-row-padding-horizontal);
 	border: none;
-	background: var(--ap-dropdown-menu-row-color-background-default);
-	color: var(--ap-dropdown-menu-row-color-text);
-	font: var(--ap-dropdown-menu-row-text);
+	background: var(--ap-tier-3-dropdown-menu-row-color-background-default);
+	color: var(--ap-tier-3-dropdown-menu-row-color-text);
+	font: var(--ap-tier-3-dropdown-menu-row-text);
 	text-align: left;
 	cursor: pointer;
 	box-sizing: border-box;
 }
 
 .ap-dropdown-menu-row:hover:not([data-selected]):not([data-force-state]) {
-	background: var(--ap-dropdown-menu-row-color-background-hover);
+	background: var(--ap-tier-3-dropdown-menu-row-color-background-hover);
 }
 
 .ap-dropdown-menu-row[data-force-state="hover"] {
-	background: var(--ap-dropdown-menu-row-color-background-hover);
+	background: var(--ap-tier-3-dropdown-menu-row-color-background-hover);
 }
 
 .ap-dropdown-menu-row[data-selected],
 .ap-dropdown-menu-row[data-force-state="selected"] {
-	background: var(--ap-dropdown-menu-row-color-background-selected);
+	background: var(--ap-tier-3-dropdown-menu-row-color-background-selected);
 }
 
 .ap-dropdown-menu-row--divider {
-	padding: 0.5rem var(--ap-dropdown-menu-row-padding-horizontal);
+	padding: 0.5rem var(--ap-tier-3-dropdown-menu-row-padding-horizontal);
 	cursor: default;
 }
 
@@ -143,7 +143,7 @@
 	display: block;
 	height: 1px;
 	width: 100%;
-	background: var(--ap-dropdown-menu-row-color-divider);
+	background: var(--ap-tier-3-dropdown-menu-row-color-divider);
 }
 
 .ap-dropdown-menu-row-icon {

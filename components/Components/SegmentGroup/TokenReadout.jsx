@@ -5,7 +5,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
  * Same pattern as Button/TokenReadout.jsx and TextInput/TokenReadout.jsx
  * (see either's doc comment for the full rationale) -- reads live
  * custom-property values off an externally supplied ref rather than off
- * its own wrapper, since the "--ap-segment-group-*"/"--ap-segment-*" vars
+ * its own wrapper, since the "--ap-tier-3-segment-group-*"/"--ap-tier-3-segment-*" vars
  * a swatch cares about are set on the real DOM node itself (see
  * SegmentGroup.jsx/Segment.jsx), not on this readout.
  */

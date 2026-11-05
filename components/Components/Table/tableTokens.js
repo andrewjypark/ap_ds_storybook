@@ -95,17 +95,17 @@ export const CELL_TYPES = [
 ];
 
 export const tableRowVar = {
-	background: (variant) => `--ap-table-row-color-background-${variant}`, // default | alt
-	border: () => `--ap-table-row-color-border`,
-	borderWidth: () => `--ap-table-row-border-width`,
+	background: (variant) => `--ap-tier-3-table-row-color-background-${variant}`, // default | alt
+	border: () => `--ap-tier-3-table-row-color-border`,
+	borderWidth: () => `--ap-tier-3-table-row-border-width`,
 };
 
 export const tableCellVar = {
-	padding: () => `--ap-table-cell-padding`,
-	gap: () => `--ap-table-cell-gap`,
-	headerText: () => `--ap-table-cell-color-header-text`,
-	bodyText: () => `--ap-table-cell-color-body-text`,
-	bodyTextSecondary: () => `--ap-table-cell-color-body-text-secondary`,
-	headerFont: () => `--ap-table-cell-header-text`,
-	bodyFont: () => `--ap-table-cell-body-text`,
+	padding: () => `--ap-tier-3-table-cell-padding`,
+	gap: () => `--ap-tier-3-table-cell-gap`,
+	headerText: () => `--ap-tier-3-table-cell-color-header-text`,
+	bodyText: () => `--ap-tier-3-table-cell-color-body-text`,
+	bodyTextSecondary: () => `--ap-tier-3-table-cell-color-body-text-secondary`,
+	headerFont: () => `--ap-tier-3-table-cell-header-text`,
+	bodyFont: () => `--ap-tier-3-table-cell-body-text`,
 };

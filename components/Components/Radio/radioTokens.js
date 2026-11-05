@@ -38,11 +38,11 @@ export const STATES = [
 ];
 
 export const radioVar = {
-	size: () => `--ap-radio-size`,
-	dotSize: () => `--ap-radio-dot-size`,
-	borderWidth: () => `--ap-radio-border-width`,
-	background: () => `--ap-radio-color-background`,
-	border: () => `--ap-radio-color-border`,
-	borderChecked: () => `--ap-radio-color-border-checked`,
-	dot: () => `--ap-radio-color-dot`,
+	size: () => `--ap-tier-3-radio-size`,
+	dotSize: () => `--ap-tier-3-radio-dot-size`,
+	borderWidth: () => `--ap-tier-3-radio-border-width`,
+	background: () => `--ap-tier-3-radio-color-background`,
+	border: () => `--ap-tier-3-radio-color-border`,
+	borderChecked: () => `--ap-tier-3-radio-color-border-checked`,
+	dot: () => `--ap-tier-3-radio-color-dot`,
 };

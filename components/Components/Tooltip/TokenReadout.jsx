@@ -5,7 +5,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
  * Same pattern as every other Tier 3 component's own TokenReadout.jsx
  * (see Button's/Checkbox's for the full rationale) -- reads live
  * custom-property values off an externally supplied ref, since the
- * "--ap-tooltip-*" vars a swatch cares about are set on the real DOM
+ * "--ap-tier-3-tooltip-*" vars a swatch cares about are set on the real DOM
  * node itself (see Tooltip.jsx), not on this readout.
  */
 function useLiveCssValuesFromRef(targetRef, cssVars) {

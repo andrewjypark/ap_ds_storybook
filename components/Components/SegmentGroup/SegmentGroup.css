@@ -1,20 +1,20 @@
 .ap-segment-group-wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: var(--ap-segment-group-field-title-gap);
+	gap: var(--ap-tier-3-segment-group-field-title-gap);
 }
 
 .ap-segment-group-field-title {
-	font: var(--ap-segment-group-field-title-text);
-	color: var(--ap-segment-group-color-field-title);
+	font: var(--ap-tier-3-segment-group-field-title-text);
+	color: var(--ap-tier-3-segment-group-color-field-title);
 }
 
 .ap-segment-group {
 	display: flex;
-	gap: var(--ap-segment-group-gap);
-	padding: var(--ap-segment-group-padding);
-	background: var(--ap-segment-group-color-background);
-	border-radius: var(--ap-segment-group-border-radius);
+	gap: var(--ap-tier-3-segment-group-gap);
+	padding: var(--ap-tier-3-segment-group-padding);
+	background: var(--ap-tier-3-segment-group-color-background);
+	border-radius: var(--ap-tier-3-segment-group-border-radius);
 	box-sizing: border-box;
 	width: fit-content;
 	max-width: 100%;
@@ -29,38 +29,38 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: var(--ap-segment-padding-vertical) var(--ap-segment-padding-horizontal);
+	padding: var(--ap-tier-3-segment-padding-vertical) var(--ap-tier-3-segment-padding-horizontal);
 	border: none;
 	background: transparent;
-	color: var(--ap-segment-color-text);
-	font: var(--ap-segment-text);
-	border-radius: calc(var(--ap-segment-group-border-radius) - 2px);
+	color: var(--ap-tier-3-segment-color-text);
+	font: var(--ap-tier-3-segment-text);
+	border-radius: calc(var(--ap-tier-3-segment-group-border-radius) - 2px);
 	cursor: pointer;
 	white-space: nowrap;
 }
 
 .ap-segment:hover:not([data-selected]):not([data-force-state]) {
-	background: var(--ap-segment-color-background-hover);
+	background: var(--ap-tier-3-segment-color-background-hover);
 }
 
 .ap-segment[data-force-state="hover"] {
-	background: var(--ap-segment-color-background-hover);
+	background: var(--ap-tier-3-segment-color-background-hover);
 }
 
 .ap-segment[data-selected],
 .ap-segment[data-force-state="selected"] {
-	background: var(--ap-segment-color-background-selected);
+	background: var(--ap-tier-3-segment-color-background-selected);
 }
 
 .ap-segment-icon-caption {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--ap-segment-icon-caption-gap);
+	gap: var(--ap-tier-3-segment-icon-caption-gap);
 }
 
 .ap-segment-caption {
-	font: var(--ap-segment-caption-text);
+	font: var(--ap-tier-3-segment-caption-text);
 }
 
 /* ---- Variations page layout ----

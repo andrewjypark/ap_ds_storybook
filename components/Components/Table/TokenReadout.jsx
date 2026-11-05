@@ -4,7 +4,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
 /**
  * Same pattern as every other Tier 3 component's own TokenReadout.jsx --
  * reads live custom-property values off an externally supplied ref,
- * since the "--ap-table-*" vars a swatch cares about are set on the real
+ * since the "--ap-tier-3-table-*" vars a swatch cares about are set on the real
  * DOM node itself (see TableRow.jsx/TableCell.jsx), not on this readout.
  */
 function useLiveCssValuesFromRef(targetRef, cssVars) {

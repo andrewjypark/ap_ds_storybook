@@ -1,7 +1,7 @@
 /* Fixed-size square box, same "container owns the size, not the glyph"
    technique as .ap-button-icon-container (Button.css) and
    .ap-text-input-slot-icon (TextInput.css). Sizing is set inline from
-   --ap-icon-size-{size} (see Icon.jsx) rather than here, since the size
+   --ap-tier-3-icon-size-{size} (see Icon.jsx) rather than here, since the size
    is chosen per-instance via a prop, not fixed per-component.
 
    2px padding on every step (xs/small/medium/large alike) insets the

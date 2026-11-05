@@ -20,20 +20,20 @@
 
 .ap-tooltip-bubble {
 	display: inline-block;
-	padding: var(--ap-tooltip-padding-vertical) var(--ap-tooltip-padding-horizontal);
-	border-radius: var(--ap-tooltip-border-radius);
-	font: var(--ap-tooltip-text);
+	padding: var(--ap-tier-3-tooltip-padding-vertical) var(--ap-tier-3-tooltip-padding-horizontal);
+	border-radius: var(--ap-tier-3-tooltip-border-radius);
+	font: var(--ap-tier-3-tooltip-text);
 	white-space: nowrap;
 }
 
 .ap-tooltip--dark .ap-tooltip-bubble {
-	background: var(--ap-tooltip-color-background-dark);
-	color: var(--ap-tooltip-color-text-dark);
+	background: var(--ap-tier-3-tooltip-color-background-dark);
+	color: var(--ap-tier-3-tooltip-color-text-dark);
 }
 
 .ap-tooltip--light .ap-tooltip-bubble {
-	background: var(--ap-tooltip-color-background-light);
-	color: var(--ap-tooltip-color-text-light);
+	background: var(--ap-tier-3-tooltip-color-background-light);
+	color: var(--ap-tier-3-tooltip-color-text-light);
 }
 
 /* The arrow is a CSS border-triangle, not an SVG -- Figma's own arrow is
@@ -54,11 +54,11 @@
 }
 
 .ap-tooltip--dark .ap-tooltip-arrow {
-	color: var(--ap-tooltip-color-background-dark);
+	color: var(--ap-tier-3-tooltip-color-background-dark);
 }
 
 .ap-tooltip--light .ap-tooltip-arrow {
-	color: var(--ap-tooltip-color-background-light);
+	color: var(--ap-tier-3-tooltip-color-background-light);
 }
 
 /* Position=Bottom -- tooltip sits below its target, so the arrow's flat
@@ -66,35 +66,35 @@
    the target). A "pointing up" border-triangle puts the solid color on
    border-bottom, transparent on left/right. */
 .ap-tooltip--bottom .ap-tooltip-arrow {
-	border-left-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-right-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-bottom-width: var(--ap-tooltip-arrow-height);
+	border-left-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-right-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-bottom-width: var(--ap-tier-3-tooltip-arrow-height);
 	border-bottom-color: currentColor;
 }
 
 /* Position=Top -- tooltip sits above its target, arrow points down. */
 .ap-tooltip--top .ap-tooltip-arrow {
-	border-left-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-right-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-top-width: var(--ap-tooltip-arrow-height);
+	border-left-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-right-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-top-width: var(--ap-tier-3-tooltip-arrow-height);
 	border-top-color: currentColor;
 }
 
 /* Position=Left -- tooltip sits to the left of its target, arrow points
    right (solid color on border-left). */
 .ap-tooltip--left .ap-tooltip-arrow {
-	border-top-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-bottom-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-left-width: var(--ap-tooltip-arrow-height);
+	border-top-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-bottom-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-left-width: var(--ap-tier-3-tooltip-arrow-height);
 	border-left-color: currentColor;
 }
 
 /* Position=Right -- tooltip sits to the right of its target, arrow
    points left (solid color on border-right). */
 .ap-tooltip--right .ap-tooltip-arrow {
-	border-top-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-bottom-width: calc(var(--ap-tooltip-arrow-width) / 2);
-	border-right-width: var(--ap-tooltip-arrow-height);
+	border-top-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-bottom-width: calc(var(--ap-tier-3-tooltip-arrow-width) / 2);
+	border-right-width: var(--ap-tier-3-tooltip-arrow-height);
 	border-right-color: currentColor;
 }
 

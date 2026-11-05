@@ -36,22 +36,22 @@ export const CONTENT_TYPES = [
 ];
 
 export const segmentGroupVar = {
-	background: () => "--ap-segment-group-color-background",
-	fieldTitleColor: () => "--ap-segment-group-color-field-title",
-	borderRadius: () => "--ap-segment-group-border-radius",
-	padding: () => "--ap-segment-group-padding",
-	gap: () => "--ap-segment-group-gap",
-	fieldTitleGap: () => "--ap-segment-group-field-title-gap",
-	fieldTitleText: () => "--ap-segment-group-field-title-text",
+	background: () => "--ap-tier-3-segment-group-color-background",
+	fieldTitleColor: () => "--ap-tier-3-segment-group-color-field-title",
+	borderRadius: () => "--ap-tier-3-segment-group-border-radius",
+	padding: () => "--ap-tier-3-segment-group-padding",
+	gap: () => "--ap-tier-3-segment-group-gap",
+	fieldTitleGap: () => "--ap-tier-3-segment-group-field-title-gap",
+	fieldTitleText: () => "--ap-tier-3-segment-group-field-title-text",
 };
 
 export const segmentVar = {
-	backgroundHover: () => "--ap-segment-color-background-hover",
-	backgroundSelected: () => "--ap-segment-color-background-selected",
-	text: () => "--ap-segment-color-text",
-	paddingHorizontal: () => "--ap-segment-padding-horizontal",
-	paddingVertical: () => "--ap-segment-padding-vertical",
-	font: () => "--ap-segment-text",
-	captionFont: () => "--ap-segment-caption-text",
-	iconCaptionGap: () => "--ap-segment-icon-caption-gap",
+	backgroundHover: () => "--ap-tier-3-segment-color-background-hover",
+	backgroundSelected: () => "--ap-tier-3-segment-color-background-selected",
+	text: () => "--ap-tier-3-segment-color-text",
+	paddingHorizontal: () => "--ap-tier-3-segment-padding-horizontal",
+	paddingVertical: () => "--ap-tier-3-segment-padding-vertical",
+	font: () => "--ap-tier-3-segment-text",
+	captionFont: () => "--ap-tier-3-segment-caption-text",
+	iconCaptionGap: () => "--ap-tier-3-segment-icon-caption-gap",
 };

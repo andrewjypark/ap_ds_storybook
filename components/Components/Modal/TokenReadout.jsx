@@ -4,7 +4,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
 /**
  * Same technique as Button/TokenReadout.jsx: reads the resolved custom-
  * property values straight off an externally supplied ref (the real
- * <Modal> DOM node -- see Modal.jsx, which sets --ap-modal-* directly on
+ * <Modal> DOM node -- see Modal.jsx, which sets --ap-tier-3-modal-* directly on
  * that node's own inline style) rather than off a separate wrapper.
  */
 function useLiveCssValuesFromRef(targetRef, cssVars) {

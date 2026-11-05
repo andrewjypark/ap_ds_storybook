@@ -37,5 +37,5 @@ export const SIZES = [
 ];
 
 export const iconVar = {
-	size: (size) => `--ap-icon-size-${size}`,
+	size: (size) => `--ap-tier-3-icon-size-${size}`,
 };

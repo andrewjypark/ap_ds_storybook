@@ -204,7 +204,7 @@
 .ap-modal-readout-value {
 	font: var(--ap-font2-body-text-xs-regular);
 	color: var(--ap-tier-2-color-content-default);
-	/* Multi-layer box-shadow values (e.g. --ap-modal-box-shadow's two
+	/* Multi-layer box-shadow values (e.g. --ap-tier-3-modal-box-shadow's two
 	   comma-separated dropShadow layers) run far wider than the readout
 	   row -- same overflow the var name span already handles below, just
 	   applied to the value span too. .ap-modal-readout-row (an ancestor)

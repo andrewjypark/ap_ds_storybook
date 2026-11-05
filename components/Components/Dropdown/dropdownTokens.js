@@ -59,34 +59,34 @@ export const FIELD_STATES = [
 ];
 
 export const dropdownMenuRowVar = {
-	background: (state) => `--ap-dropdown-menu-row-color-background-${state}`, // default | hover | selected
-	divider: () => `--ap-dropdown-menu-row-color-divider`,
-	text: () => `--ap-dropdown-menu-row-color-text`,
-	paddingHorizontal: () => `--ap-dropdown-menu-row-padding-horizontal`,
-	paddingVertical: () => `--ap-dropdown-menu-row-padding-vertical`,
-	gap: () => `--ap-dropdown-menu-row-gap`,
-	font: () => `--ap-dropdown-menu-row-text`,
+	background: (state) => `--ap-tier-3-dropdown-menu-row-color-background-${state}`, // default | hover | selected
+	divider: () => `--ap-tier-3-dropdown-menu-row-color-divider`,
+	text: () => `--ap-tier-3-dropdown-menu-row-color-text`,
+	paddingHorizontal: () => `--ap-tier-3-dropdown-menu-row-padding-horizontal`,
+	paddingVertical: () => `--ap-tier-3-dropdown-menu-row-padding-vertical`,
+	gap: () => `--ap-tier-3-dropdown-menu-row-gap`,
+	font: () => `--ap-tier-3-dropdown-menu-row-text`,
 };
 
 export const dropdownMenuVar = {
-	background: () => `--ap-dropdown-menu-color-background`,
-	borderRadius: () => `--ap-dropdown-menu-border-radius`,
-	paddingVertical: () => `--ap-dropdown-menu-padding-vertical`,
-	boxShadow: () => `--ap-dropdown-menu-box-shadow`,
+	background: () => `--ap-tier-3-dropdown-menu-color-background`,
+	borderRadius: () => `--ap-tier-3-dropdown-menu-border-radius`,
+	paddingVertical: () => `--ap-tier-3-dropdown-menu-padding-vertical`,
+	boxShadow: () => `--ap-tier-3-dropdown-menu-box-shadow`,
 };
 
 export const dropdownFieldVar = {
-	background: () => `--ap-dropdown-field-color-background`,
-	border: (state) => `--ap-dropdown-field-color-border-${state}`, // default | active
-	borderWidth: () => `--ap-dropdown-field-border-width`,
-	borderRadius: () => `--ap-dropdown-field-border-radius`,
-	text: () => `--ap-dropdown-field-color-text`,
-	label: () => `--ap-dropdown-field-color-label`,
-	description: () => `--ap-dropdown-field-color-description`,
-	paddingHorizontal: () => `--ap-dropdown-field-padding-horizontal`,
-	paddingVertical: () => `--ap-dropdown-field-padding-vertical`,
-	gap: () => `--ap-dropdown-field-gap`,
-	fieldTitleGap: () => `--ap-dropdown-field-field-title-gap`,
-	font: () => `--ap-dropdown-field-text`,
-	labelFont: () => `--ap-dropdown-field-label-text`,
+	background: () => `--ap-tier-3-dropdown-field-color-background`,
+	border: (state) => `--ap-tier-3-dropdown-field-color-border-${state}`, // default | active
+	borderWidth: () => `--ap-tier-3-dropdown-field-border-width`,
+	borderRadius: () => `--ap-tier-3-dropdown-field-border-radius`,
+	text: () => `--ap-tier-3-dropdown-field-color-text`,
+	label: () => `--ap-tier-3-dropdown-field-color-label`,
+	description: () => `--ap-tier-3-dropdown-field-color-description`,
+	paddingHorizontal: () => `--ap-tier-3-dropdown-field-padding-horizontal`,
+	paddingVertical: () => `--ap-tier-3-dropdown-field-padding-vertical`,
+	gap: () => `--ap-tier-3-dropdown-field-gap`,
+	fieldTitleGap: () => `--ap-tier-3-dropdown-field-field-title-gap`,
+	font: () => `--ap-tier-3-dropdown-field-text`,
+	labelFont: () => `--ap-tier-3-dropdown-field-label-text`,
 };

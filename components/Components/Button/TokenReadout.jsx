@@ -4,8 +4,8 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
 /**
  * Like Foundations/Color/useLiveCssValue.js's useLiveCssValues, but reads
  * off an EXTERNALLY supplied ref instead of creating its own. Needed here
- * because the vars a button swatch cares about (--ap-button-color-*,
- * --ap-button-padding-*, etc.) are set directly on the real <button> DOM
+ * because the vars a button swatch cares about (--ap-tier-3-button-color-*,
+ * --ap-tier-3-button-padding-*, etc.) are set directly on the real <button> DOM
  * node itself (see Button.jsx) -- the readout has to read off THAT exact
  * node, not a separate wrapper element, or the values would just be
  * whatever (nothing) happens to be set on the wrapper.

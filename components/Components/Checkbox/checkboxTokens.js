@@ -53,11 +53,11 @@ export const STATES = [
 ];
 
 export const checkboxVar = {
-	size: () => `--ap-checkbox-size`,
-	boxSize: () => `--ap-checkbox-box-size`,
-	borderRadius: () => `--ap-checkbox-border-radius`,
-	borderWidth: () => `--ap-checkbox-border-width`,
-	border: () => `--ap-checkbox-color-border`,
-	background: (state) => `--ap-checkbox-color-background-${state}`, // unchecked | checked
-	checkmark: () => `--ap-checkbox-color-checkmark`,
+	size: () => `--ap-tier-3-checkbox-size`,
+	boxSize: () => `--ap-tier-3-checkbox-box-size`,
+	borderRadius: () => `--ap-tier-3-checkbox-border-radius`,
+	borderWidth: () => `--ap-tier-3-checkbox-border-width`,
+	border: () => `--ap-tier-3-checkbox-color-border`,
+	background: (state) => `--ap-tier-3-checkbox-color-background-${state}`, // unchecked | checked
+	checkmark: () => `--ap-tier-3-checkbox-color-checkmark`,
 };

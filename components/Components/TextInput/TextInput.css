@@ -12,8 +12,8 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.5rem;
-	font: var(--ap-text-input-label-text);
-	color: var(--ap-text-input-color-label);
+	font: var(--ap-tier-3-text-input-label-text);
+	color: var(--ap-tier-3-text-input-color-label);
 }
 
 .ap-text-input-title {
@@ -24,25 +24,25 @@
 
 .ap-text-input-title-icon {
 	display: inline-flex;
-	color: var(--ap-text-input-color-description);
+	color: var(--ap-tier-3-text-input-color-description);
 }
 
 .ap-text-input-title-icon svg {
-	width: var(--ap-text-input-icon-field-title-width);
-	height: var(--ap-text-input-icon-field-title-height);
+	width: var(--ap-tier-3-text-input-icon-field-title-width);
+	height: var(--ap-tier-3-text-input-icon-field-title-height);
 }
 
 .ap-text-input-form-field {
 	display: flex;
 	align-items: center;
-	gap: var(--ap-text-input-gap);
-	padding: var(--ap-text-input-padding-vertical) var(--ap-text-input-padding-horizontal);
+	gap: var(--ap-tier-3-text-input-gap);
+	padding: var(--ap-tier-3-text-input-padding-vertical) var(--ap-tier-3-text-input-padding-horizontal);
 	box-sizing: border-box;
 	border-style: solid;
-	border-width: var(--ap-text-input-border-width-default);
-	border-color: var(--ap-text-input-color-border-default);
-	border-radius: var(--ap-text-input-border-radius);
-	background: var(--ap-text-input-color-background);
+	border-width: var(--ap-tier-3-text-input-border-width-default);
+	border-color: var(--ap-tier-3-text-input-color-border-default);
+	border-radius: var(--ap-tier-3-text-input-border-radius);
+	background: var(--ap-tier-3-text-input-color-background);
 }
 
 /* Text Area's Form Field aligns its slots/prefix to the top instead of
@@ -58,8 +58,8 @@
 	border: none;
 	outline: none;
 	background: transparent;
-	font: var(--ap-text-input-text);
-	color: var(--ap-text-input-color-text);
+	font: var(--ap-tier-3-text-input-text);
+	color: var(--ap-tier-3-text-input-color-text);
 	resize: none;
 }
 
@@ -72,13 +72,13 @@ textarea.ap-text-input-field {
 }
 
 .ap-text-input-field::placeholder {
-	color: var(--ap-text-input-color-description);
+	color: var(--ap-tier-3-text-input-color-description);
 	opacity: 1;
 }
 
 .ap-text-input-prefix {
-	font: var(--ap-text-input-text);
-	color: var(--ap-text-input-color-description);
+	font: var(--ap-tier-3-text-input-text);
+	color: var(--ap-tier-3-text-input-color-description);
 	white-space: nowrap;
 }
 
@@ -87,12 +87,12 @@ textarea.ap-text-input-field {
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
-	width: var(--ap-text-input-icon-slot-width);
-	height: var(--ap-text-input-icon-slot-height);
+	width: var(--ap-tier-3-text-input-icon-slot-width);
+	height: var(--ap-tier-3-text-input-icon-slot-height);
 	padding: 0;
 	border: none;
 	background: transparent;
-	color: var(--ap-text-input-color-description);
+	color: var(--ap-tier-3-text-input-color-description);
 	cursor: pointer;
 }
 
@@ -102,8 +102,8 @@ textarea.ap-text-input-field {
 }
 
 .ap-text-input-description {
-	font: var(--ap-text-input-label-text);
-	color: var(--ap-text-input-color-description);
+	font: var(--ap-tier-3-text-input-label-text);
+	color: var(--ap-tier-3-text-input-color-description);
 }
 
 /* ---- States ----
@@ -115,29 +115,29 @@ textarea.ap-text-input-field {
    still typing to fix them. */
 
 .ap-text-input:not([data-force-state]):not([data-error]) .ap-text-input-form-field:focus-within {
-	border-color: var(--ap-text-input-color-border-active);
-	border-width: var(--ap-text-input-border-width-active);
+	border-color: var(--ap-tier-3-text-input-color-border-active);
+	border-width: var(--ap-tier-3-text-input-border-width-active);
 }
 
 .ap-text-input:not([data-force-state]):not([data-error])
 	.ap-text-input-form-field:has(.ap-text-input-field:not(:placeholder-shown)):not(:focus-within) {
-	border-color: var(--ap-text-input-color-border-filled);
+	border-color: var(--ap-tier-3-text-input-color-border-filled);
 }
 
 /* Docs-only: render a static state swatch without needing real focus or a
    real value typed in (see TextInput.jsx's `forceState` prop doc comment). */
 .ap-text-input[data-force-state="active"] .ap-text-input-form-field {
-	border-color: var(--ap-text-input-color-border-active);
-	border-width: var(--ap-text-input-border-width-active);
+	border-color: var(--ap-tier-3-text-input-color-border-active);
+	border-width: var(--ap-tier-3-text-input-border-width-active);
 }
 .ap-text-input[data-force-state="filled"] .ap-text-input-form-field {
-	border-color: var(--ap-text-input-color-border-filled);
+	border-color: var(--ap-tier-3-text-input-color-border-filled);
 }
 
 .ap-text-input[data-force-state="error"] .ap-text-input-form-field,
 .ap-text-input[data-error] .ap-text-input-form-field {
-	border-color: var(--ap-text-input-color-border-error);
-	border-width: var(--ap-text-input-border-width-error);
+	border-color: var(--ap-tier-3-text-input-color-border-error);
+	border-width: var(--ap-tier-3-text-input-border-width-error);
 }
 
 /* ---- Variations page layout ----

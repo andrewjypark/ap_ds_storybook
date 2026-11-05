@@ -5,7 +5,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
  * Same pattern as Button/TextInput/SegmentGroup's own TokenReadout.jsx
  * (see any of their doc comments for the full rationale) -- reads live
  * custom-property values off an externally supplied ref rather than off
- * its own wrapper, since the "--ap-dropdown-*" vars a swatch cares about
+ * its own wrapper, since the "--ap-tier-3-dropdown-*" vars a swatch cares about
  * are set on the real DOM node itself (see DropdownField.jsx/
  * DropdownMenu.jsx/DropdownMenuRow.jsx), not on this readout.
  */

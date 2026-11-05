@@ -1,7 +1,7 @@
 /**
  * Central place for the Tier 3 Link's CSS custom property names
  * build-tokens.js generates from tokens.json's "tier_3/link" set (see
- * build/tier_1_core/css/variables.css) -- keeps every "--ap-link-..."
+ * build/tier_1_core/css/variables.css) -- keeps every "--ap-tier-3-link-..."
  * var name construction in one spot, same convention as Button's
  * buttonTokens.js.
  */
@@ -19,5 +19,5 @@ export const VARIANTS = [
 ];
 
 export const linkVar = {
-	color: (variant, state) => `--ap-link-color-${variant}-${state}`,
+	color: (variant, state) => `--ap-tier-3-link-color-${variant}-${state}`,
 };

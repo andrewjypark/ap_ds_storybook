@@ -1,4 +1,4 @@
-/* Outer element is the full click/tap target (--ap-radio-size, 20px) --
+/* Outer element is the full click/tap target (--ap-tier-3-radio-size, 20px) --
    the visual ring (18px) is centered inside it via flex, matching
    Checkbox's own 20px-target/smaller-visual-glyph split (see
    radioTokens.js). */
@@ -6,8 +6,8 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--ap-radio-size);
-	height: var(--ap-radio-size);
+	width: var(--ap-tier-3-radio-size);
+	height: var(--ap-tier-3-radio-size);
 	padding: 0;
 	border: none;
 	background: transparent;
@@ -19,27 +19,27 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: calc(var(--ap-radio-size) - 2px);
-	height: calc(var(--ap-radio-size) - 2px);
+	width: calc(var(--ap-tier-3-radio-size) - 2px);
+	height: calc(var(--ap-tier-3-radio-size) - 2px);
 	box-sizing: border-box;
 	border-style: solid;
-	border-width: var(--ap-radio-border-width);
-	border-color: var(--ap-radio-color-border);
+	border-width: var(--ap-tier-3-radio-border-width);
+	border-color: var(--ap-tier-3-radio-color-border);
 	border-radius: 50%;
-	background: var(--ap-radio-color-background);
+	background: var(--ap-tier-3-radio-color-background);
 }
 
 /* Exactly two interactive states, same as Checkbox -- no hover rule.
    See radioTokens.js for why. */
 .ap-radio[aria-checked="true"] .ap-radio-circle {
-	border-color: var(--ap-radio-color-border-checked);
+	border-color: var(--ap-tier-3-radio-color-border-checked);
 }
 
 .ap-radio-dot {
-	width: var(--ap-radio-dot-size);
-	height: var(--ap-radio-dot-size);
+	width: var(--ap-tier-3-radio-dot-size);
+	height: var(--ap-tier-3-radio-dot-size);
 	border-radius: 50%;
-	background: var(--ap-radio-color-dot);
+	background: var(--ap-tier-3-radio-color-dot);
 }
 
 /* Same flat-opacity treatment as Checkbox.css's own [disabled] rule,

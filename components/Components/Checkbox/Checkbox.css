@@ -1,13 +1,13 @@
-/* The outer element is the full click/tap target (--ap-checkbox-size,
-   20px) -- the visual box (--ap-checkbox-box-size, 14px) is centered
+/* The outer element is the full click/tap target (--ap-tier-3-checkbox-size,
+   20px) -- the visual box (--ap-tier-3-checkbox-box-size, 14px) is centered
    inside it via flex, matching the 3px inset Figma's real "Checkbox"
    component uses around its own visible glyph (see checkboxTokens.js). */
 .ap-checkbox {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--ap-checkbox-size);
-	height: var(--ap-checkbox-size);
+	width: var(--ap-tier-3-checkbox-size);
+	height: var(--ap-tier-3-checkbox-size);
 	padding: 0;
 	border: none;
 	background: transparent;
@@ -19,19 +19,19 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--ap-checkbox-box-size);
-	height: var(--ap-checkbox-box-size);
+	width: var(--ap-tier-3-checkbox-box-size);
+	height: var(--ap-tier-3-checkbox-box-size);
 	box-sizing: border-box;
 	border-style: solid;
-	border-width: var(--ap-checkbox-border-width);
-	border-color: var(--ap-checkbox-color-border);
-	border-radius: var(--ap-checkbox-border-radius);
-	background: var(--ap-checkbox-color-background-unchecked);
+	border-width: var(--ap-tier-3-checkbox-border-width);
+	border-color: var(--ap-tier-3-checkbox-color-border);
+	border-radius: var(--ap-tier-3-checkbox-border-radius);
+	background: var(--ap-tier-3-checkbox-color-background-unchecked);
 }
 
 .ap-checkbox[aria-checked="true"] .ap-checkbox-box {
 	border-color: transparent;
-	background: var(--ap-checkbox-color-background-checked);
+	background: var(--ap-tier-3-checkbox-color-background-checked);
 }
 
 .ap-checkbox[disabled] {
@@ -50,7 +50,7 @@
 .ap-checkbox-checkmark {
 	width: 65%;
 	height: 65%;
-	color: var(--ap-checkbox-color-checkmark);
+	color: var(--ap-tier-3-checkbox-color-checkmark);
 }
 
 /* ---- Variations page layout ----

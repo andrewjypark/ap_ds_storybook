@@ -2,7 +2,7 @@
  * Central place for the Tier 3 Modal's CSS custom property names build-
  * tokens.js generates from tokens.json's "tier_3/modal" set (see
  * tokens/sets/tier_3/modal.json and the generated build output) -- same
- * pattern as Button/buttonTokens.js: keeps every "--ap-modal-..." var
+ * pattern as Button/buttonTokens.js: keeps every "--ap-tier-3-modal-..." var
  * name construction in one spot instead of hand-typing strings across
  * Modal.jsx / ModalVariations.jsx / TokenReadout.jsx.
  *
@@ -30,12 +30,12 @@
  */
 
 export const modalVar = {
-	color: (part) => `--ap-modal-color-${part}`,
-	borderRadius: () => `--ap-modal-border-radius`,
-	boxShadow: () => `--ap-modal-box-shadow`,
-	width: () => `--ap-modal-width`,
-	header: (part) => `--ap-modal-header-section-${part}`,
-	body: (part) => `--ap-modal-body-section-${part}`,
-	footer: (part) => `--ap-modal-footer-section-${part}`,
-	banner: (part) => `--ap-modal-banner-${part}`,
+	color: (part) => `--ap-tier-3-modal-color-${part}`,
+	borderRadius: () => `--ap-tier-3-modal-border-radius`,
+	boxShadow: () => `--ap-tier-3-modal-box-shadow`,
+	width: () => `--ap-tier-3-modal-width`,
+	header: (part) => `--ap-tier-3-modal-header-section-${part}`,
+	body: (part) => `--ap-tier-3-modal-body-section-${part}`,
+	footer: (part) => `--ap-tier-3-modal-footer-section-${part}`,
+	banner: (part) => `--ap-tier-3-modal-banner-${part}`,
 };

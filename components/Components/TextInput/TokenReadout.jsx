@@ -5,7 +5,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
  * Same pattern as Button/TokenReadout.jsx (see that file's doc comment
  * for the full rationale) -- reads live custom-property values off an
  * externally supplied ref rather than off its own wrapper, since the
- * "--ap-text-input-*" vars a swatch cares about are set on the real
+ * "--ap-tier-3-text-input-*" vars a swatch cares about are set on the real
  * .ap-text-input DOM node itself (see TextInput.jsx), not on this readout.
  */
 function useLiveCssValuesFromRef(targetRef, cssVars) {

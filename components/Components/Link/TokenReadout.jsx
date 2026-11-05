@@ -3,7 +3,7 @@ import { useTokenPreview } from "../../TokenPreviewContext.jsx";
 
 /**
  * Same pattern as Button's TokenReadout.jsx -- reads the resolved
- * "--ap-link-color-*" custom property values straight off the real <a>
+ * "--ap-tier-3-link-color-*" custom property values straight off the real <a>
  * DOM node they're set on (see Link.jsx), not a separate wrapper.
  */
 function useLiveCssValuesFromRef(targetRef, cssVars) {

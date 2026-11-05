@@ -15,7 +15,7 @@ import "./Modal.css";
  * Figma's footer button container).
  *
  * Colors/padding/radius/shadow/typography all come from the real
- * "--ap-modal-*" custom properties build-tokens.js generates from
+ * "--ap-tier-3-modal-*" custom properties build-tokens.js generates from
  * tokens.json's "tier_3/modal" set -- nothing here is a hand-typed value
  * (see modalTokens.js for how each Figma value was mapped onto the
  * existing design-token scale).

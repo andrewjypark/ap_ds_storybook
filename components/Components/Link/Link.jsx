@@ -3,7 +3,7 @@ import { linkVar } from "./linkTokens.js";
 import "./Link.css";
 
 /**
- * Tier 3 Link. Colors come from the real "--ap-link-color-*" custom
+ * Tier 3 Link. Colors come from the real "--ap-tier-3-link-color-*" custom
  * properties build-tokens.js generates from tokens.json's "tier_3/link"
  * set -- default/hover/active map onto the real :hover/:active pseudo-
  * classes, and visited uses the browser-native :visited pseudo-class
@@ -13,7 +13,7 @@ import "./Link.css";
  * set on the instance, Link.css's selectors just pick the right one.
  *
  * knockout -> swap to the "knockout" variant's token set (the generated
- * "--ap-link-color-knockout-*" vars, meant for dark/image backgrounds)
+ * "--ap-tier-3-link-color-knockout-*" vars, meant for dark/image backgrounds)
  * instead of the default "content" variant. Andrew's call (2026-11-04):
  * visited currently resolves to the SAME value as default in both
  * variants -- tokens.json's tier_3/link set is the place to change that

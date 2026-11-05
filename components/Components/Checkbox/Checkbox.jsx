@@ -20,7 +20,7 @@ import "./Checkbox.css";
  *
  * See checkboxTokens.js for exactly how each Figma value (or its
  * closest existing token-system equivalent) maps onto this component's
- * "--ap-checkbox-*" custom properties. There is no `indeterminate` prop
+ * "--ap-tier-3-checkbox-*" custom properties. There is no `indeterminate` prop
  * -- Figma's real component only has two states (`Empty`/`Filled`), and
  * this only builds what's actually there.
  *

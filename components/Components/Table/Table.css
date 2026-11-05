@@ -9,17 +9,17 @@
 	align-items: stretch;
 	width: 100%;
 	box-sizing: border-box;
-	background: var(--ap-table-row-color-background-default);
+	background: var(--ap-tier-3-table-row-color-background-default);
 }
 
 .ap-table-row--header {
 	border-bottom-style: solid;
-	border-bottom-width: var(--ap-table-row-border-width);
-	border-bottom-color: var(--ap-table-row-color-border);
+	border-bottom-width: var(--ap-tier-3-table-row-border-width);
+	border-bottom-color: var(--ap-tier-3-table-row-color-border);
 }
 
 .ap-table-row--alt {
-	background: var(--ap-table-row-color-background-alt);
+	background: var(--ap-tier-3-table-row-color-background-alt);
 }
 
 /* table_row_cell (the padded wrapper every table_row_cell_container
@@ -32,16 +32,16 @@
 	align-items: center;
 	flex: 1 1 0%;
 	min-width: 0;
-	gap: var(--ap-table-cell-gap);
-	padding: var(--ap-table-cell-padding);
+	gap: var(--ap-tier-3-table-cell-gap);
+	padding: var(--ap-tier-3-table-cell-padding);
 	box-sizing: border-box;
 }
 
 /* Type=table_header_row_title -- bold label text, icon optional
    (sort/filter caret) trailing the text. */
 .ap-table-cell--header {
-	font: var(--ap-table-cell-header-text);
-	color: var(--ap-table-cell-color-header-text);
+	font: var(--ap-tier-3-table-cell-header-text);
+	color: var(--ap-tier-3-table-cell-color-header-text);
 }
 
 /* Type=table_body_row_text -- the wrapper itself lays out VERTICALLY in
@@ -51,14 +51,14 @@
 	justify-content: center;
 	flex-direction: column;
 	align-items: flex-start;
-	font: var(--ap-table-cell-body-text);
-	color: var(--ap-table-cell-color-body-text);
+	font: var(--ap-tier-3-table-cell-body-text);
+	color: var(--ap-tier-3-table-cell-color-body-text);
 }
 
 .ap-table-cell-body-line {
 	display: flex;
 	align-items: center;
-	gap: var(--ap-table-cell-gap);
+	gap: var(--ap-tier-3-table-cell-gap);
 	min-width: 0;
 	/* `.ap-table-cell--body`'s `align-items: flex-start` (needed so a
 	   short first line and a short second line each hug their own
@@ -73,7 +73,7 @@
 }
 
 .ap-table-cell-body-line--secondary {
-	color: var(--ap-table-cell-color-body-text-secondary);
+	color: var(--ap-tier-3-table-cell-color-body-text-secondary);
 }
 
 .ap-table-cell-icon {

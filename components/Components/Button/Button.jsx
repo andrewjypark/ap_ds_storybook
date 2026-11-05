@@ -37,7 +37,7 @@ import "./Button.css";
  *                                                already works without it.
  *
  * Colors/padding/radius/min-width/font all come from the real
- * "--ap-button-*" custom properties build-tokens.js generates from
+ * "--ap-tier-3-button-*" custom properties build-tokens.js generates from
  * tokens.json's "tier_3/buttons" set -- nothing here is a hand-typed
  * value. Each priority's four states are wired as CSS custom properties
  * on the instance itself (--btn-bg-default/-hover/-active/-disabled etc.)

@@ -260,7 +260,7 @@
 
 /* Wraps the var/sep/value trio as a unit, separate from the fixed-width
    label -- long custom property names (e.g.
-   --ap-button-color-secondary-default-background) plus their value can
+   --ap-tier-3-button-color-secondary-default-background) plus their value can
    run wider than the available row, so this lets that group drop the
    value (or sep+value) to a second line instead of overflowing. */
 .ap-button-readout-row-info {
