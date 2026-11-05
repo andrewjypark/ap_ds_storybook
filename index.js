@@ -13,6 +13,7 @@ export { Button } from "./components/Components/Button/Button.jsx";
 export { Checkbox } from "./components/Components/Checkbox/Checkbox.jsx";
 export { Dropdown } from "./components/Components/Dropdown/Dropdown.jsx";
 export { Icon } from "./components/Components/Icon/Icon.jsx";
+export { Link } from "./components/Components/Link/Link.jsx";
 export { Modal, ModalBanner } from "./components/Components/Modal/Modal.jsx";
 export { Radio } from "./components/Components/Radio/Radio.jsx";
 export { SegmentGroup } from "./components/Components/SegmentGroup/SegmentGroup.jsx";
