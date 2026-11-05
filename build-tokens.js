@@ -267,6 +267,9 @@ const BASE_SOURCE = [
 	// Tooltip has no Core/Basil/Molasses theming yet either (single mode, same
 	// reasoning as the rest of tier_3 above) -- belongs in every build.
 	writeSet("tier_3/tooltip"),
+	// Link has no Core/Basil/Molasses theming yet either (single mode, same
+	// reasoning as the rest of tier_3 above) -- belongs in every build.
+	writeSet("tier_3/link"),
 ];
 
 /**

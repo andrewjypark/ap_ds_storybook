@@ -1,0 +1,193 @@
+.ap-link {
+	color: var(--link-color-default);
+	cursor: pointer;
+	/* Not backed by a token yet -- tokens.json's tier_3/link set has no
+	   text-decoration token, so this is a plain CSS default rather than
+	   a var() reference like everything else in this file. Flagging so
+	   it's easy to find/change if Andrew wants to tokenize or drop it. */
+	text-decoration: underline;
+	transition: color 0.25s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ap-link {
+		transition: none;
+	}
+}
+
+/* Order matters -- LVHA (link/visited/hover/active) -- so a visited
+   link's :hover/:active still take effect; same reasoning Button.css
+   documents for its own state-selector ordering. Skipped whenever a
+   docs-only forceState is present (see Link.jsx), same convention as
+   Button.css. */
+.ap-link:visited:not([data-force-state]) {
+	color: var(--link-color-visited);
+}
+.ap-link:hover:not([data-force-state]) {
+	color: var(--link-color-hover);
+}
+.ap-link:active:not([data-force-state]) {
+	color: var(--link-color-active);
+}
+
+/* Docs-only state swatches -- same forceState escape hatch as
+   Button.css. */
+.ap-link[data-force-state="hover"] {
+	color: var(--link-color-hover);
+}
+.ap-link[data-force-state="active"] {
+	color: var(--link-color-active);
+}
+.ap-link[data-force-state="visited"] {
+	color: var(--link-color-visited);
+}
+
+/* ---- Variations page layout (copied per-component, not imported
+   cross-tier -- same convention as Button.css's own equivalent block,
+   including the shared .ap-section__title rule). ---- */
+
+.ap-section__title {
+	font: var(--ap-tier-2-typography-title-default);
+	margin: 0 0 1rem;
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-link-section {
+	margin-bottom: 3rem;
+}
+
+.ap-link-section-title {
+	font: var(--ap-tier-2-typography-label-xs);
+}
+
+.ap-link-section-body {
+	display: flex;
+	gap: 2.5rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.ap-link-section-copy {
+	flex: 0 1 40%;
+	max-width: 450px;
+	font: var(--ap-tier-2-typography-body-sm);
+}
+
+.ap-link-section-copy code {
+	background: rgba(127, 127, 127, 0.15);
+	padding: 0.05rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.85em;
+}
+
+.ap-link-section-copy .ap-link-note {
+	margin-top: 0.75rem;
+	font-style: italic;
+	opacity: 0.8;
+}
+
+.ap-link-section-example {
+	flex: 1 1 0%;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ap-link-swatch-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+}
+
+/* Knockout's swatch group needs an actual dark backdrop behind it --
+   the light-tinted knockout tokens are meant for a dark/image surface,
+   and without one they'd render near-invisible against Storybook's own
+   light docs background. Uses the existing semantic "inverse" surface
+   token (tier_2_color.background.surface_inverse_primary) rather than a
+   hand-picked dark color. */
+.ap-link-swatch-group--knockout {
+	background: var(--ap-tier-2-color-background-surface-inverse-primary);
+	border-color: transparent;
+}
+
+@media (max-width: 991px) {
+	.ap-link-section-copy,
+	.ap-link-section-example {
+		flex: 1 1 100%;
+		max-width: none;
+	}
+}
+
+.ap-link-swatch {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	min-width: 160px;
+}
+
+.ap-link-swatch-example {
+	display: flex;
+	align-items: center;
+	min-height: 2rem;
+}
+
+.ap-link-swatch-label {
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+/* Default label color is too dark to read against the knockout
+   backdrop above -- swap to the light brand-knockout content token. */
+.ap-link-swatch-label--knockout {
+	color: var(--ap-tier-2-color-content-brand-knockout);
+}
+
+/* ---- Token readout, same visual language/markup as Button.css's own
+   readout block (copied per-component, not imported cross-tier). ---- */
+
+.ap-link-readout {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	font: var(--ap-font2-body-text-xs-regular);
+}
+
+.ap-link-readout-row {
+	display: flex;
+	gap: 0.4rem;
+	align-items: baseline;
+	white-space: nowrap;
+}
+
+.ap-link-readout-row-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	align-items: baseline;
+}
+
+.ap-link-readout-label {
+	color: var(--ap-tier-2-color-content-default);
+	min-width: 3.5rem;
+}
+
+.ap-link-readout-var {
+	color: var(--ap-tier-2-color-content-subtle);
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	min-width: 0;
+}
+
+.ap-link-readout-sep {
+	color: var(--ap-tier-2-color-content-subtle);
+}
+
+.ap-link-readout-value {
+	font: var(--ap-font2-body-text-xs-regular);
+	color: var(--ap-tier-2-color-content-default);
+}

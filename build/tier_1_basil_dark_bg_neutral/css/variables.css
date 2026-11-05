@@ -1433,6 +1433,14 @@
   --ap-tooltip-color-background-light: #000000;
   --ap-tooltip-color-text-dark: #000000;
   --ap-tooltip-color-text-light: #bfc4c8;
+  --ap-link-color-content-default: #9ac2cc;
+  --ap-link-color-content-hover: #cde5ed;
+  --ap-link-color-content-active: #edf6fa;
+  --ap-link-color-content-visited: #9ac2cc;
+  --ap-link-color-knockout-default: #f6f7f9;
+  --ap-link-color-knockout-hover: #000000;
+  --ap-link-color-knockout-active: #000000;
+  --ap-link-color-knockout-visited: #f6f7f9;
 }
 
 :root {
