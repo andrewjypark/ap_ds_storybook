@@ -54,6 +54,38 @@ export default function ApLayout({ children }) {
 
 Available themes: `core`, `basil`, `molasses` (plus `_dark` and `_dark_bg_neutral` variants). Available viewports (set automatically, not by hand): `desktop`, `tablet`, `mobile`. Confirm current options against `node_modules/ap-ds-storybook/build/` if unsure — these grow as the design system does.
 
+### Load the theme's fonts
+
+The webfonts ship in the package under `assets/fonts/`, but **`variables.css` does not load them**: it only references family names (e.g. `'Basier Circle'`). Import the `@font-face` stylesheet for each family your theme uses, or the browser falls back to whatever is installed locally. On Andrew's Mac, the local Basier and Novela installs have duplicate copies that render as tofu boxes (squares with `?`).
+
+| Theme | font1 | font2 | font3 |
+| --- | --- | --- | --- |
+| `core` | `twk-lausanne` | `twk-continental` | `novela` |
+| `basil` | `basier-circle` | `basier-square` | `basier-square-mono` |
+| `molasses` | `nudica` | `quablo` | `bricolage-grotesque` |
+
+The `_dark` variants use the same fonts as their base theme.
+
+**With a bundler (Next.js, Vite):** import the CSS next to `variables.css`:
+
+```jsx
+import "ap-ds-storybook/build/all-combinations/css/variables.css";
+// basil:
+import "ap-ds-storybook/assets/fonts/basier-circle/basier-circle.css";
+import "ap-ds-storybook/assets/fonts/basier-square/basier-square.css";
+import "ap-ds-storybook/assets/fonts/basier-square-mono/basier-square-mono.css";
+```
+
+**Plain static HTML (no build step):** link the same files from jsDelivr, pinned to the installed version:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/basier-circle/basier-circle.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/basier-square/basier-square.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/basier-square-mono/basier-square-mono.css" />
+```
+
+If you switch themes at runtime, load the fonts for every theme you switch between.
+
 Import components from the package root:
 
 ```jsx
