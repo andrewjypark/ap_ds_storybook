@@ -29,6 +29,20 @@
 
 /* ---- Page defaults ------------------------------------------------------ */
 
+/* Underline offset for ALL text, tier 1/2/3 alike. text-underline-offset
+   is inherited, so setting it once where the theme lives (data-theme,
+   normally on <html>) reaches every descendant. It adds no underline by
+   itself; it only positions one if text-decoration: underline is applied.
+   The token is a percentage, which stays relative to each element's own
+   font size as it inherits, so larger text gets a proportionally larger
+   gap. Lives here, not in the typography composites: Token Studio's
+   typography type has no underline-offset field, and the composites
+   compile to the `font:` shorthand, which can't carry it. */
+[data-theme] {
+  text-underline-offset: var(--ap-text-underline-offset-percentage);
+}
+
+
 body {
   /* background: var(--ap-tier-2-color-background-base);
   color: var(--ap-tier-2-color-content-default);
