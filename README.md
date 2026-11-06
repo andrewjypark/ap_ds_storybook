@@ -34,21 +34,27 @@ export default nextConfig;
 
 For a non-Next.js project, just make sure your bundler processes JSX/ESM from `node_modules/ap-ds-storybook`.
 
-Import the compiled runtime CSS, set the theme via a data attribute, and mount `<ViewportSync />` once near the root of whatever layout uses the design system — every token is scoped to a `[data-theme][data-viewport]` selector block, not `:root`:
+Import the compiled runtime CSS, set `data-theme` on `<html>`, and mount `<ViewportSync />` once in the root layout. Every token is scoped to a compound `[data-theme][data-viewport]` selector, not `:root`:
 
 ```jsx
+// app/layout.js (Next.js App Router root layout)
 import "ap-ds-storybook/build/all-combinations/css/variables.css";
+import "ap-ds-storybook/styles/base.css";
 import { ViewportSync } from "ap-ds-storybook";
 
-export default function ApLayout({ children }) {
+export default function RootLayout({ children }) {
   return (
-    <div data-theme="core">
-      <ViewportSync />
-      {children}
-    </div>
+    <html lang="en" data-theme="core">
+      <body>
+        <ViewportSync />
+        {children}
+      </body>
+    </html>
   );
 }
 ```
+
+**`data-theme` must go on `<html>`, not a wrapper `<div>`.** The selectors are compound (`[data-theme="core"][data-viewport="desktop"]`), so both attributes have to sit on the *same* element, and `<ViewportSync />` always writes `data-viewport` onto `<html>`. A theme set on a `<div>` never matches, and every `--ap-*` token silently resolves to nothing.
 
 **Don't hardcode `data-viewport`.** Every responsive token switches on the `[data-theme][data-viewport]` attribute, not an `@media` query, so a hardcoded value never responds to the browser resizing. `<ViewportSync />` writes the correct `data-viewport` onto `<html>` on mount and on every resize — leave `data-viewport` off entirely and let it manage that attribute. Only `data-theme` is a deliberate per-app choice.
 

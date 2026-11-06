@@ -11,14 +11,14 @@ import "./Link.css";
  * this exact <a> DOM node (see TokenReadout.jsx), same reasoning as
  * Button's own ButtonSwatch.
  */
-function LinkSwatch({ swatchLabel, knockout, labelClassName, forceState }) {
+function LinkSwatch({ swatchLabel, knockout, underline = true, labelClassName, forceState }) {
 	const ref = useRef(null);
 	const variant = knockout ? "knockout" : "content";
 	const state = forceState || "default";
 	return (
 		<div className="ap-link-swatch">
 			<div className="ap-link-swatch-example">
-				<Link ref={ref} knockout={knockout} forceState={forceState} href="#" onClick={(e) => e.preventDefault()}>
+				<Link ref={ref} knockout={knockout} underline={underline} forceState={forceState} href="#" onClick={(e) => e.preventDefault()}>
 					Link text
 				</Link>
 			</div>
@@ -80,6 +80,35 @@ export function LinkVariations() {
 						))}
 					</div>
 					<CodeBlock code={'<Link href="/pricing">Link text</Link>'} />
+				</div>
+			</Section>
+
+			<Section title="Without underline">
+				<div className="ap-link-section-copy" data-theme="storybook_ds" data-viewport="desktop">
+					<p>
+						Pass <code>underline={"{false}"}</code> for a link with the same colors and states but no
+						underline, including on hover. Without the component, use the class directly:{" "}
+						<code>ap_link_without_underline</code> (or <code>ap_link_with_underline</code> for the
+						default).
+					</p>
+				</div>
+				<div className="ap-link-section-example">
+					<div className="ap-link-swatch-group" data-theme="storybook_ds" data-viewport="desktop">
+						{STATES.map((state) => (
+							<LinkSwatch
+								key={state.key}
+								swatchLabel={state.label}
+								underline={false}
+								forceState={state.key === "default" ? undefined : state.key}
+							/>
+						))}
+					</div>
+					<CodeBlock
+						code={
+							'<Link underline={false} href="/pricing">Link text</Link>\n\n' +
+							'<a class="ap_link_without_underline" href="/pricing">Link text</a>'
+						}
+					/>
 				</div>
 			</Section>
 

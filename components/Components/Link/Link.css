@@ -1,16 +1,57 @@
+/* ---- Link classes ---------------------------------------------------------
+   Two classes, identical except for the underline:
+
+     ap_link_with_underline     -> underlined link
+     ap_link_without_underline  -> same colors and states, no underline
+                                   (no underline on hover either)
+
+   Both work standalone on any <a> -- plain HTML, or a framework Link
+   component (e.g. next-transition-router's) via className -- because the
+   class itself sets the "content" variant's --link-color-* defaults. The
+   <Link> component still sets these vars inline, which overrides the
+   defaults (that's how its knockout prop swaps variants). For a knockout
+   link written by hand, add data-knockout to the <a>.
+
+   .ap-link is the pre-1.2.7 class name, kept as an alias of
+   ap_link_with_underline so existing markup keeps working. Prefer the new
+   names; the alias can be removed in a future major version. */
+.ap_link_with_underline,
+.ap_link_without_underline,
 .ap-link {
+	--link-color-default: var(--ap-tier-3-link-color-content-default);
+	--link-color-hover: var(--ap-tier-3-link-color-content-hover);
+	--link-color-active: var(--ap-tier-3-link-color-content-active);
+	--link-color-visited: var(--ap-tier-3-link-color-content-visited);
 	color: var(--link-color-default);
 	cursor: pointer;
-	/* Not backed by a token yet -- tokens.json's tier_3/link set has no
-	   text-decoration token, so this is a plain CSS default rather than
-	   a var() reference like everything else in this file. Flagging so
-	   it's easy to find/change if Andrew wants to tokenize or drop it. */
-	text-decoration: underline;
 	transition: color 0.25s ease-in-out;
 }
 
+.ap_link_with_underline[data-knockout],
+.ap_link_without_underline[data-knockout],
+.ap-link[data-knockout] {
+	--link-color-default: var(--ap-tier-3-link-color-knockout-default);
+	--link-color-hover: var(--ap-tier-3-link-color-knockout-hover);
+	--link-color-active: var(--ap-tier-3-link-color-knockout-active);
+	--link-color-visited: var(--ap-tier-3-link-color-knockout-visited);
+}
+
+/* Not backed by a token -- tokens.json's tier_3/link set has no
+   text-decoration token, so these are plain CSS values. The offset comes
+   from base.css's global [data-theme] text-underline-offset rule. */
+.ap_link_with_underline,
+.ap-link {
+	text-decoration: underline;
+}
+
+.ap_link_without_underline {
+	text-decoration: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-	.ap-link {
+.ap_link_with_underline,
+.ap_link_without_underline,
+.ap-link {
 		transition: none;
 	}
 }
@@ -20,24 +61,36 @@
    documents for its own state-selector ordering. Skipped whenever a
    docs-only forceState is present (see Link.jsx), same convention as
    Button.css. */
+.ap_link_with_underline:visited:not([data-force-state]),
+.ap_link_without_underline:visited:not([data-force-state]),
 .ap-link:visited:not([data-force-state]) {
 	color: var(--link-color-visited);
 }
+.ap_link_with_underline:hover:not([data-force-state]),
+.ap_link_without_underline:hover:not([data-force-state]),
 .ap-link:hover:not([data-force-state]) {
 	color: var(--link-color-hover);
 }
+.ap_link_with_underline:active:not([data-force-state]),
+.ap_link_without_underline:active:not([data-force-state]),
 .ap-link:active:not([data-force-state]) {
 	color: var(--link-color-active);
 }
 
 /* Docs-only state swatches -- same forceState escape hatch as
    Button.css. */
+.ap_link_with_underline[data-force-state="hover"],
+.ap_link_without_underline[data-force-state="hover"],
 .ap-link[data-force-state="hover"] {
 	color: var(--link-color-hover);
 }
+.ap_link_with_underline[data-force-state="active"],
+.ap_link_without_underline[data-force-state="active"],
 .ap-link[data-force-state="active"] {
 	color: var(--link-color-active);
 }
+.ap_link_with_underline[data-force-state="visited"],
+.ap_link_without_underline[data-force-state="visited"],
 .ap-link[data-force-state="visited"] {
 	color: var(--link-color-visited);
 }

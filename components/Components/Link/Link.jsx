@@ -19,6 +19,11 @@ import "./Link.css";
  * variants -- tokens.json's tier_3/link set is the place to change that
  * later if he wants visited links to look different.
  *
+ * underline -> true (default) renders class "ap_link_with_underline";
+ * false renders "ap_link_without_underline" -- same colors and states,
+ * no underline (including on hover). The same two classes can be used
+ * directly on any <a> without this component -- see Link.css.
+ *
  * forceState -> DOCS-ONLY escape hatch to render a static Hover/Active/
  * Visited swatch without a real mouse interaction or an actually-
  * visited href -- never pass this in real product usage (same
@@ -30,7 +35,7 @@ import "./Link.css";
  * still be SET via :visited, which is all this component's tokens do.
  */
 export const Link = React.forwardRef(function Link(
-	{ knockout = false, forceState, children, ...rest },
+	{ knockout = false, underline = true, forceState, children, ...rest },
 	ref,
 ) {
 	const variant = knockout ? "knockout" : "content";
@@ -42,7 +47,7 @@ export const Link = React.forwardRef(function Link(
 	return (
 		<a
 			ref={ref}
-			className="ap-link"
+			className={underline ? "ap_link_with_underline" : "ap_link_without_underline"}
 			data-knockout={knockout || undefined}
 			data-force-state={forceState}
 			style={stateVars}
