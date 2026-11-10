@@ -1,0 +1,162 @@
+/* ============================================================================
+ * Getting Started / Installing AP Design System. Builds on Intro.css's page
+ * and section classes (imported alongside this file in Installing.jsx);
+ * only the install-guide-specific pieces live here. Code panels use the
+ * same fixed monospace + neutral palette as CodeBlock.css, for the same
+ * reason: code samples shouldn't change typeface with the brand theme.
+ * ============================================================================
+ */
+
+.ap-install-inline-code {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.85em;
+	padding: 0.1em 0.35em;
+	border-radius: 4px;
+	background: rgba(127, 127, 127, 0.12);
+	overflow-wrap: anywhere;
+}
+
+/* ---- Steps -------------------------------------------------------------- */
+
+.ap-install-step {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
+.ap-install-step:last-child {
+	margin-bottom: 0;
+}
+
+.ap-install-step-num {
+	flex: 0 0 auto;
+	width: 1.75rem;
+	height: 1.75rem;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	color: var(--ap-tier-2-color-content-default);
+	border: 1px solid var(--ap-tier-2-color-border-subtle);
+}
+
+.ap-install-step-body {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.ap-install-step-title {
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	color: var(--ap-tier-2-color-content-default);
+	margin: 0.2rem 0 0.75rem;
+}
+
+.ap-install-step-body > p {
+	margin: 0.75rem 0;
+}
+
+.ap-install-visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+/* ---- Code snippets ------------------------------------------------------ */
+
+.ap-install-snippet {
+	margin: 0.75rem 0;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	border-radius: 8px;
+	background: #f6f8fa;
+	overflow: hidden;
+}
+
+.ap-install-snippet-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.25rem 0.5rem 0.25rem 1rem;
+	border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.ap-install-snippet-label {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.75rem;
+	color: #57606a;
+}
+
+.ap-install-snippet-pre {
+	margin: 0;
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+}
+
+.ap-install-snippet-pre code {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.8rem;
+	line-height: 1.6;
+	color: #24292f;
+	white-space: pre;
+}
+
+/* ---- Callouts ----------------------------------------------------------- */
+
+.ap-install-callout {
+	padding: 0.85rem 1rem;
+	margin-bottom: 0.75rem;
+	border-left: 3px solid var(--ap-tier-2-color-border-default, currentColor);
+	background: rgba(127, 127, 127, 0.06);
+	border-radius: 0 6px 6px 0;
+}
+
+.ap-install-callout:last-child {
+	margin-bottom: 0;
+}
+
+.ap-install-callout-title {
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	color: var(--ap-tier-2-color-content-default);
+	margin-bottom: 0.35rem;
+}
+
+/* ---- Tables ------------------------------------------------------------- */
+
+.ap-install-table-wrap {
+	overflow-x: auto;
+	margin: 0.75rem 0;
+}
+
+.ap-install-table {
+	width: 100%;
+	border-collapse: collapse;
+	font: var(--ap-tier-2-typography-body-sm);
+	color: var(--ap-tier-2-color-content-default);
+}
+
+.ap-install-table th {
+	text-align: left;
+	font: var(--ap-tier-2-typography-body-sm-strong);
+	padding: 0.5rem 0.75rem 0.5rem 0;
+	border-bottom: 1px solid var(--ap-tier-2-color-border-default, rgba(127, 127, 127, 0.4));
+}
+
+.ap-install-table td {
+	vertical-align: top;
+	padding: 0.6rem 0.75rem 0.6rem 0;
+	border-bottom: 1px solid var(--ap-tier-2-color-border-subtle);
+}
+
+.ap-install-table tr:last-child td {
+	border-bottom: none;
+}
+
+@media (max-width: 640px) {
+	.ap-install-step {
+		gap: 0.75rem;
+	}
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Intro } from "./Intro.jsx";
+import { Installing } from "./Installing.jsx";
 
 /**
  * Bare, single-segment title ("Getting Started", no "/") -- deliberately
@@ -20,3 +21,10 @@ export default {
 };
 
 export const Overview = { render: () => <Intro /> };
+
+// Listed after Overview so it sits directly below it in the sidebar --
+// "Getting Started" has no storySort entry, so its stories keep export order.
+export const InstallingAPDesignSystem = {
+	name: "Installing AP Design System",
+	render: () => <Installing />,
+};
