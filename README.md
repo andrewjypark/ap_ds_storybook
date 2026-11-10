@@ -92,6 +92,31 @@ import "ap-ds-storybook/assets/fonts/basier-square-mono/basier-square-mono.css";
 
 If you switch themes at runtime, load the fonts for every theme you switch between.
 
+### Import `base.css` into another CSS file
+
+To pull `styles/base.css` into one of your own stylesheets instead of a JS file, use `@import` as the **first line** of that file (only `@charset` may come before it). Your own rules then come after it and override it where they overlap. Make sure `variables.css` is loaded before this stylesheet, because `base.css` uses `var(--ap-...)` tokens.
+
+**With a bundler (Next.js, Vite):** use the package path. The bundler finds it in `node_modules` at build time:
+
+```css
+/* app/globals.css */
+@import "ap-ds-storybook/styles/base.css";
+```
+
+**Plain static HTML (no build step):** a browser can't read package names or `node_modules`, and a relative path into another project's `node_modules` won't exist once deployed. Import it from jsDelivr instead, which serves files from the same published npm package. Pin it to the same version as your other ap-ds links:
+
+```css
+/* styles.css */
+@import url("https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/styles/base.css");
+```
+
+In static HTML, a `<link>` placed before your own stylesheet is slightly faster than `@import`, because the browser downloads both files at the same time instead of one after the other:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/styles/base.css" />
+<link rel="stylesheet" href="styles.css" />
+```
+
 Import components from the package root:
 
 ```jsx
