@@ -127,9 +127,7 @@ export function Installing() {
 		<div className="ap-intro ap-install" data-theme="storybook_ds" data-viewport="desktop">
 			<h3 className="ap-section__title">Installing AP Design System</h3>
 			<p className="ap-intro-lede">
-				AP Design System is published on npm as <C>ap-ds-storybook</C>. This page walks
-				through adding it to a project, wiring it into your app, and the handful of gotchas that silently break
-				styling if they're missed.
+				AP Design System is published on npm as <C>ap-ds-storybook</C>. This page walks through adding it to a project, and wiring it into your app.
 			</p>
 
 			<Section title="Before you start">
