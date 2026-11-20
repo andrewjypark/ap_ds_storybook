@@ -12,7 +12,7 @@ import "./Installing.css";
  * preview.jsx's storySort list, so its stories keep file order).
  *
  * Reuses Intro.css's page/section classes so the two Getting Started pages
- * read as one set, pinned to the internal storybook_ds theme the same way
+ * read as one set, pinned to the internal storybook_ds theme the same waynpm 
  * Intro.jsx is. Code samples are always visible here (unlike CodeBlock.jsx's
  * collapsed "Show code" pattern on Variations pages) since on an install
  * guide the code IS the content.
@@ -127,7 +127,7 @@ export function Installing() {
 		<div className="ap-intro ap-install" data-theme="storybook_ds" data-viewport="desktop">
 			<h3 className="ap-section__title">Installing AP Design System</h3>
 			<p className="ap-intro-lede">
-				AP Design System is published on npm as <C>ap-ds-storybook</C>. This page walks through adding it to a project, and wiring it into your app.
+				AP Design System is published on npm as <C>ap-ds-storybook</C> (currently v{VERSION}). This page walks through adding it to a project, and wiring it into your app.
 			</p>
 
 			<Section title="Before you start">
@@ -152,7 +152,8 @@ export function Installing() {
 					<Snippet label="Terminal" code={`npm install ap-ds-storybook@latest`} />
 					<p>
 						This adds <C>ap-ds-storybook</C> to your <C>package.json</C> dependencies and downloads it into{" "}
-						<C>node_modules</C>.
+						<C>node_modules</C>. It also sets up <C>var(--ap-…)</C> autocomplete in VS Code for you (see{" "}
+						<a href="#autocomplete">Token autocomplete</a> below).
 					</p>
 				</Step>
 
@@ -177,58 +178,53 @@ export default nextConfig;`}
 					</p>
 				</Step>
 
-				<Step n={3} title="Import the styles and set a theme in your root layout">
+				<Step n={3} title="Wrap your app in ApProvider">
 					<p>
-						Import the token CSS once, put <C>data-theme</C> on <C>&lt;html&gt;</C>, and mount{" "}
-						<C>&lt;ViewportSync /&gt;</C> once. In the Next.js App Router that's <C>app/layout.js</C>:
+						Add <C>&lt;ApProvider&gt;</C> once, around everything in your root layout. In the Next.js App
+						Router that's <C>app/layout.js</C>:
 					</p>
 					<Snippet
 						label="app/layout.js"
-						code={`import "ap-ds-storybook/build/all-combinations/css/variables.css";
-import "ap-ds-storybook/styles/base.css";
-import { ViewportSync } from "ap-ds-storybook";
+						code={`import { ApProvider } from "ap-ds-storybook";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="core">
+    <html lang="en">
       <body>
-        <ViewportSync />
-        {children}
+        <ApProvider theme="core">{children}</ApProvider>
       </body>
     </html>
   );
 }`}
 					/>
+					<p>That one component:</p>
+					<ul>
+						<li>
+							loads the token CSS (<C>variables.css</C>) and the font files for every theme. Fonts only
+							download when your theme actually uses them;
+						</li>
+						<li>
+							sets <C>data-theme</C> on <C>&lt;html&gt;</C>;
+						</li>
+						<li>
+							keeps <C>data-viewport</C> on <C>&lt;html&gt;</C> set to <C>desktop</C>, <C>tablet</C> or{" "}
+							<C>mobile</C> as the window resizes.
+						</li>
+					</ul>
 					<p>
-						<C>variables.css</C> must load before <C>base.css</C>, because <C>base.css</C> uses the{" "}
-						<C>--ap-*</C> tokens it defines. <C>&lt;ViewportSync /&gt;</C> sets <C>data-viewport</C> on{" "}
-						<C>&lt;html&gt;</C> to <C>desktop</C>, <C>tablet</C> or <C>mobile</C> and updates it as the
-						window resizes.
+						To change breakpoints, pass <C>mobileMax</C> and <C>tabletMax</C> (in px, defaults 767 and 991).
 					</p>
 				</Step>
 
-				<Step n={4} title="Load the fonts for your theme">
+				<Step n={4} title="Optional: add the base styles">
 					<p>
-						<C>variables.css</C> names font families but doesn't load them. Import the <C>@font-face</C> file
-						for each family your theme uses, next to the other imports:
+						For the 12-column grid and section padding helpers, import <C>base.css</C> in your root layout
+						or global stylesheet:
 					</p>
-					<Table
-						head={["Theme", "Fonts to import"]}
-						rows={[
-							[<C>core</C>, "twk-lausanne, twk-continental, novela"],
-							[<C>basil</C>, "basier-circle, basier-square, basier-square-mono"],
-							[<C>molasses</C>, "nudica, quablo, bricolage-grotesque"],
-						]}
-					/>
-					<Snippet
-						label="app/layout.js (core theme)"
-						code={`import "ap-ds-storybook/assets/fonts/twk-lausanne/twk-lausanne.css";
-import "ap-ds-storybook/assets/fonts/twk-continental/twk-continental.css";
-import "ap-ds-storybook/assets/fonts/novela/novela.css";`}
-					/>
+					<Snippet label="app/layout.js" code={`import "ap-ds-storybook/styles/base.css";`} />
 					<p>
-						Dark variants use the same fonts as their base theme. If your app switches themes at runtime, load
-						the fonts for every theme it can switch to.
+						It isn't included in <C>ApProvider</C> on purpose, so it can't override your own global styles
+						unless you ask for it.
 					</p>
 				</Step>
 
@@ -276,22 +272,45 @@ export default function Page() {
 				</Step>
 			</Section>
 
+			<Section title="Token autocomplete" id="autocomplete">
+				<p>
+					Installing the package writes <C>.vscode/ap-ds-tokens.code-snippets</C> for you. Reload VS Code
+					(<C>Developer: Reload Window</C>), then type <C>var(--ap-</C> in a CSS file to see every token with
+					its value. It's refreshed automatically each time you install or upgrade the package.
+				</p>
+				<p>
+					VS Code only reads snippets from the <C>.vscode</C> folder of the folder it has open, so the file is
+					written to the root of your Git repository (or your project folder if there's no Git repo). If your
+					app lives in a subfolder of the repo, it still works.
+				</p>
+				<p>Run it by hand if it didn't happen automatically:</p>
+				<Snippet label="Terminal" code={`npx ap-ds-storybook-snippets`} />
+				<ul>
+					<li>
+						<strong>pnpm</strong> blocks install scripts from packages by default, and{" "}
+						<C>npm install --ignore-scripts</C> skips them.
+					</li>
+					<li>
+						It's skipped in CI. To turn it off anywhere else, set <C>AP_DS_SKIP_SNIPPETS=1</C>.
+					</li>
+					<li>
+						To write the file somewhere else, use <C>npx ap-ds-storybook-snippets --out &lt;folder&gt;</C>.
+					</li>
+				</ul>
+			</Section>
+
 			<Section title="Things to look out for">
-				<Callout title={<>Put <C>data-theme</C> on <C>&lt;html&gt;</C>, not a wrapper <C>&lt;div&gt;</C></>}>
-					Every token is scoped to a compound selector like <C>[data-theme="core"][data-viewport="desktop"]</C>,
-					so both attributes have to be on the same element. <C>&lt;ViewportSync /&gt;</C> always writes{" "}
-					<C>data-viewport</C> onto <C>&lt;html&gt;</C>, so a theme set anywhere else never matches. There's
-					no error: every <C>--ap-*</C> value just resolves to nothing and the page looks unstyled.
+				<Callout title={<>Setting it up by hand? Put <C>data-theme</C> on <C>&lt;html&gt;</C></>}>
+					<C>ApProvider</C> does this for you. If you wire things up yourself instead, every token is scoped to
+					a compound selector like <C>[data-theme="core"][data-viewport="desktop"]</C>, so both attributes
+					have to be on the same element. <C>&lt;ViewportSync /&gt;</C> always writes <C>data-viewport</C>{" "}
+					onto <C>&lt;html&gt;</C>, so a theme set on a wrapper <C>&lt;div&gt;</C> never matches. There's no
+					error: every <C>--ap-*</C> value just resolves to nothing and the page looks unstyled.
 				</Callout>
 				<Callout title={<>Don't hardcode <C>data-viewport</C></>}>
 					Responsive tokens (font sizes, line heights) switch on the <C>data-viewport</C> attribute, not on
 					media queries. A hardcoded <C>data-viewport="desktop"</C> never changes when the window resizes. Leave
-					it off and let <C>&lt;ViewportSync /&gt;</C> manage it.
-				</Callout>
-				<Callout title="Missing fonts fall back silently">
-					If you skip Step 4, the browser uses whatever copy of the font is installed locally, or a system
-					fallback. Locally installed copies can be broken and render as empty boxes, so always import the
-					package's own font files.
+					it off and let <C>ApProvider</C> manage it.
 				</Callout>
 				<Callout title={<>A plain <C>npm install</C> won't upgrade you</>}>
 					If <C>package-lock.json</C> already has a version that fits your range, <C>npm install</C> keeps it.
@@ -306,8 +325,8 @@ export default function Page() {
 				</Callout>
 				<Callout title="Next.js: interactive components need a client component">
 					Components with state or event handlers have to be used inside a file marked{" "}
-					<C>"use client"</C> (or a child of one). <C>&lt;ViewportSync /&gt;</C> already handles this
-					itself, so it's safe to drop into a server layout.
+					<C>"use client"</C> (or a child of one). <C>ApProvider</C> and <C>&lt;ViewportSync /&gt;</C>{" "}
+					already handle this themselves, so they're safe to drop into a server layout.
 				</Callout>
 			</Section>
 
@@ -318,19 +337,19 @@ export default function Page() {
 						[
 							"React components",
 							<C>ap-ds-storybook</C>,
-							"Button, Checkbox, Dropdown, Icon, Link, Modal / ModalBanner, Radio, SegmentGroup, TableCell / TableRow, TextInput, Tooltip, ViewportSync",
+							"ApProvider, Button, Checkbox, Dropdown, Icon, Link, Modal / ModalBanner, Radio, SegmentGroup, TableCell / TableRow, TextInput, Tooltip, ViewportSync",
 						],
 						[
 							"Design tokens (all themes)",
 							<C>build/all-combinations/css/variables.css</C>,
-							"Every Tier 1, 2 and 3 token as a CSS custom property, for every theme and viewport",
+							"Every Tier 1, 2 and 3 token as a CSS custom property, for every theme and viewport. Loaded by ApProvider",
 						],
 						[
 							"Base styles",
 							<C>styles/base.css</C>,
 							"A 12-column responsive grid (.ap_grid_container, .ap_grid_1), section padding helpers, and the global underline offset",
 						],
-						["Fonts", <C>assets/fonts/</C>, "Webfont files and @font-face CSS for every theme"],
+						["Fonts", <C>assets/fonts/</C>, "Webfont files and @font-face CSS for every theme. Loaded by ApProvider"],
 						[
 							"Viewport script (no React)",
 							<C>styles/viewport-sync.js</C>,
@@ -344,7 +363,7 @@ export default function Page() {
 						[
 							"Autocomplete generator",
 							<C>npx ap-ds-storybook-snippets</C>,
-							"Writes a VS Code snippets file so var(--ap-…) autocompletes",
+							"Writes a VS Code snippets file so var(--ap-…) autocompletes. Runs automatically on install",
 						],
 					]}
 				/>
@@ -369,10 +388,10 @@ export default function Page() {
 						each viewport.
 					</li>
 					<li>
-						<strong>Switch themes and dark mode at runtime.</strong> Change the <C>data-theme</C> value on{" "}
-						<C>&lt;html&gt;</C> (for example <C>document.documentElement.dataset.theme = "basil_dark"</C>).
-						In dark mode, add <C>data-bg-style="neutral"</C> to <C>&lt;html&gt;</C> for neutral gray
-						backgrounds instead of brand-tinted ones.
+						<strong>Switch themes and dark mode at runtime.</strong> Change the <C>theme</C> prop on{" "}
+						<C>ApProvider</C> (for example <C>theme="basil_dark"</C>) and the page updates. In dark mode, add{" "}
+						<C>data-bg-style="neutral"</C> to <C>&lt;html&gt;</C> for neutral gray backgrounds instead of
+						brand-tinted ones.
 					</li>
 					<li>
 						<strong>Style plain links without the component.</strong> Add <C>ap_link_with_underline</C> or{" "}
@@ -381,12 +400,6 @@ export default function Page() {
 					<li>
 						<strong>Lay out pages with the grid.</strong> Wrap content in <C>.ap_grid_container</C> &gt;{" "}
 						<C>.ap_grid_1</C>; it collapses from 12 columns to 6 on tablet and mobile.
-					</li>
-					<li>
-						<strong>Turn on token autocomplete.</strong> Run <C>npx ap-ds-storybook-snippets</C> from your
-						project root, then reload VS Code. Typing <C>var(--ap-</C> in a CSS file then lists every token
-						with its value. Re-run it after upgrading the package. The snippets file needs to sit in the{" "}
-						<C>.vscode</C> folder at the root of the folder VS Code has open.
 					</li>
 					<li>
 						<strong>Look up anything here first.</strong> Every swatch and component example in this
@@ -415,7 +428,9 @@ export default function Page() {
 				/>
 				<p>
 					The React components need a bundler, so on a static page you get the tokens, base styles, fonts and
-					link classes, but not the components.
+					link classes, but not the components. Load the font files for your theme by hand here:{" "}
+					<C>core</C> uses twk-lausanne, twk-continental and novela; <C>basil</C> uses basier-circle,
+					basier-square and basier-square-mono; <C>molasses</C> uses nudica, quablo and bricolage-grotesque.
 				</p>
 			</Section>
 		</div>

@@ -3,10 +3,9 @@
  * ============================================================================
  * scripts/generate-vscode-snippets.js
  * ============================================================================
- * Generates a project-level VS Code snippets file
- * (.vscode/ap-ds-tokens.code-snippets) from this package's tier_1_core
- * reference CSS, so every --ap-* custom property name shows up as an
- * autocomplete suggestion in VS Code.
+ * Generates a VS Code snippets file (.vscode/ap-ds-tokens.code-snippets)
+ * from this package's tier_1_core reference CSS, so every --ap-* custom
+ * property name shows up as an autocomplete suggestion in VS Code.
  *
  * WHY THIS EXISTS: VS Code has no built-in way to surface var(--ap-*)
  * completions from a file sitting inside node_modules, and the third-party
@@ -14,65 +13,122 @@
  * caching bug (see this repo's CLAUDE.md). A generated native snippets
  * file is the approach that actually works reliably.
  *
- * USAGE (run from the root of a project that has ap-ds-storybook installed):
- *   npx ap-ds-storybook-snippets
+ * TWO WAYS THIS RUNS:
  *
- * Re-run this any time you upgrade ap-ds-storybook, since token
- * names/values can change between versions.
+ *   1. Automatically, as this package's `postinstall` script (`--auto`).
+ *      `npm install ap-ds-storybook` generates the file with no extra step.
+ *      In this mode the script never fails the install: any problem is
+ *      printed and skipped, and it always exits 0. It also skips itself when:
+ *        - npm is installing THIS repo's own dependencies (developing the
+ *          package, not consuming it),
+ *        - running in CI (process.env.CI is set),
+ *        - the consumer opts out with AP_DS_SKIP_SNIPPETS=1.
+ *      Note: npm 7+ hides postinstall output unless the script fails, so
+ *      the "wrote N snippets" line usually won't appear in the terminal.
  *
- * IMPORTANT GOTCHA: the generated .vscode/*.code-snippets file only takes
- * effect if it sits at your VS Code WORKSPACE ROOT, not in a subfolder --
- * even if that subfolder is where your package.json/node_modules actually
- * live. This bit us in a multi-folder repo where the open VS Code
- * workspace root was one level ABOVE the actual Next.js app folder: the
- * snippets file wasn't picked up at all until it was moved up to sit
- * alongside the real workspace root's own .vscode/ folder. If autocomplete
- * doesn't show up after reloading the window, check this before anything
- * else -- it's not a word-separator or caching problem, it's just the
- * wrong folder.
+ *   2. Manually, any time: `npx ap-ds-storybook-snippets` from the project.
+ *      Useful if install scripts were skipped (pnpm blocks dependency
+ *      install scripts by default; `npm install --ignore-scripts` skips them).
+ *
+ * WHERE THE FILE GOES: VS Code only reads snippets from the .vscode folder
+ * at the WORKSPACE ROOT -- not wherever package.json/node_modules live.
+ * This bit us in multi-folder repos where the app lived a level or more
+ * below the folder open in VS Code. The script approximates the workspace
+ * root as the nearest folder (walking up from the project) that contains
+ * .git, and falls back to the project folder itself if there's no Git repo.
+ * Override with `--out <dir>` (manual mode only).
+ *
+ * Re-runs automatically on every install/upgrade, so token names/values
+ * stay current with the installed version.
  * ============================================================================
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const cwd = process.cwd();
-const src = path.resolve(
-  cwd,
-  "node_modules/ap-ds-storybook/build/tier_1_core/css/variables.css"
-);
-const outPath = path.resolve(cwd, ".vscode/ap-ds-tokens.code-snippets");
+const args = process.argv.slice(2);
+const auto = args.includes("--auto");
 
-if (!fs.existsSync(src)) {
-  console.error(
-    `Could not find ${src}\n` +
-      `Run this from the root of a project that has "ap-ds-storybook" installed in node_modules.`
-  );
+// This package's own root (scripts/ lives one level below it). Reading the
+// source CSS relative to the script, not the cwd, works the same whether
+// the script runs from npx, from postinstall, or from a nested zone.
+const pkgRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const src = path.join(pkgRoot, "build/tier_1_core/css/variables.css");
+
+// npm sets INIT_CWD to the folder `npm install` was run from -- the
+// consuming project. postinstall itself runs with cwd = this package's
+// folder inside node_modules, so cwd is useless in auto mode.
+const projectDir = auto ? process.env.INIT_CWD || process.cwd() : process.cwd();
+
+function log(msg) {
+  console.log(`[ap-ds-storybook] ${msg}`);
+}
+
+function stop(msg) {
+  if (auto) {
+    log(`skipped snippets: ${msg}`);
+    process.exit(0);
+  }
+  console.error(msg);
   process.exit(1);
 }
 
-const content = fs.readFileSync(src, "utf8");
-const pattern = /^\s*(--[a-zA-Z0-9-]+):\s*(.+?);\s*$/gm;
-
-const snippets = {};
-let match;
-while ((match = pattern.exec(content)) !== null) {
-  const [, name, value] = match;
-  snippets[name] = {
-    prefix: name,
-    body: `var(${name})`,
-    description: value.trim(),
-    scope: "css,scss,less,postcss",
-  };
+function realpath(p) {
+  try {
+    return fs.realpathSync(p);
+  } catch {
+    return path.resolve(p);
+  }
 }
 
-fs.mkdirSync(path.dirname(outPath), { recursive: true });
-fs.writeFileSync(outPath, JSON.stringify(snippets, null, 2));
+function findWorkspaceRoot(start) {
+  let dir = path.resolve(start);
+  while (true) {
+    if (fs.existsSync(path.join(dir, ".git"))) return dir;
+    const parent = path.dirname(dir);
+    if (parent === dir) return path.resolve(start);
+    dir = parent;
+  }
+}
 
-console.log(
-  `wrote ${Object.keys(snippets).length} snippets to ${path.relative(cwd, outPath)}`
-);
-console.log(
-  `Note: that file must live at your VS Code workspace ROOT to take effect -- move it up if your workspace root isn't this folder.`
-);
-console.log(`Reload VS Code ("Developer: Reload Window") to pick them up.`);
+try {
+  if (auto) {
+    if (process.env.AP_DS_SKIP_SNIPPETS) stop("AP_DS_SKIP_SNIPPETS is set");
+    if (process.env.CI) stop("running in CI");
+    // Installing this repo's own devDependencies, not consuming the package.
+    if (realpath(projectDir) === realpath(pkgRoot)) process.exit(0);
+  }
+
+  if (!fs.existsSync(src)) stop(`could not find ${src}`);
+
+  const outFlag = args.indexOf("--out");
+  const outRoot =
+    !auto && outFlag !== -1 && args[outFlag + 1]
+      ? path.resolve(args[outFlag + 1])
+      : findWorkspaceRoot(projectDir);
+  const outPath = path.join(outRoot, ".vscode/ap-ds-tokens.code-snippets");
+
+  const content = fs.readFileSync(src, "utf8");
+  const pattern = /^\s*(--[a-zA-Z0-9-]+):\s*(.+?);\s*$/gm;
+
+  const snippets = {};
+  let match;
+  while ((match = pattern.exec(content)) !== null) {
+    const [, name, value] = match;
+    snippets[name] = {
+      prefix: name,
+      body: `var(${name})`,
+      description: value.trim(),
+      scope: "css,scss,less,postcss",
+    };
+  }
+
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, JSON.stringify(snippets, null, 2));
+
+  log(`wrote ${Object.keys(snippets).length} snippets to ${outPath}`);
+  log(`Reload VS Code ("Developer: Reload Window") to pick them up.`);
+} catch (err) {
+  stop(err && err.message ? err.message : String(err));
+}
